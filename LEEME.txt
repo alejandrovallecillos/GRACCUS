@@ -1,28 +1,26 @@
-GRACCUS 0.12 — PWA para iPhone
+graccus 0.13 — PWA para iPhone
 
-CONTENIDO
-- index.html: página principal para publicar.
-- graccus-0.12.html: misma aplicación con nombre de versión.
-- manifest.json: configuración PWA.
-- service-worker.js: funcionamiento offline/caché.
-- iconos/: iconos para iPhone/PWA.
-
-IMPORTANTE
-GRACCUS necesita abrirse desde HTTPS (o localhost) para poder instalarse como PWA.
-El archivo file:///... del PC no se puede instalar directamente en el iPhone.
+CAMBIOS DE ESTA VERSIÓN
+- Nombre de la aplicación en minúsculas: graccus.
+- Mejor adaptación al iPhone: respeta la zona segura superior e inferior.
+- En móvil, la barra inferior muestra solo los iconos.
+- Las pestañas secundarias no muestran el encabezado general "Panel docente".
+- Se han eliminado las descripciones grises bajo los títulos de las pestañas.
+- Las faltas de hoy aparecen con una X roja junto al alumno en su clase.
+- Las anotaciones libres se guardan como observaciones; por ejemplo, "Nacho baño" queda registrada como anotación de baño.
+- En la lista de una clase se puede marcar/desmarcar directamente el delegado y el material mediante sus iconos.
+- La clasificación muestra el camello orientado hacia la meta y una línea de terreno/desierto.
 
 DATOS
 La aplicación usa localStorage. Los datos quedan guardados en el navegador/dispositivo y
-no se sincronizan automáticamente entre PC e iPhone. La primera vez que abras la versión
-publicada en el iPhone, será un almacenamiento nuevo.
+no se sincronizan automáticamente entre PC e iPhone.
 
-INSTALACIÓN EN IPHONE
-1. Publica esta carpeta en un sitio HTTPS.
-2. Abre la dirección en Safari del iPhone.
-3. Pulsa Compartir.
-4. Pulsa "Añadir a pantalla de inicio".
-5. Abre GRACCUS desde el icono de la pantalla de inicio.
+ACTUALIZACIÓN EN IPHONE
+Si ya tenías graccus instalado desde una versión anterior, después de publicar los nuevos
+archivos abre la versión web en Safari y vuelve a abrir la app instalada. Si el nombre del
+icono sigue apareciendo en mayúsculas, elimina el acceso anterior de la pantalla de inicio
+y vuelve a usar Safari → Compartir → Añadir a pantalla de inicio.
 
-USO PERSONAL
-No se ha añadido ningún sistema de usuarios, registro ni servidor de datos. Es una PWA
-personal; la privacidad real dependerá también del servicio donde publiques los archivos.
+PRIVACIDAD
+No se ha añadido ningún sistema de usuarios, registro ni servidor de datos. Publica solo
+los archivos de la aplicación y no subas archivos con datos personales de alumnado.

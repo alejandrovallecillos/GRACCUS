@@ -1,6 +1,6 @@
 {
-  "name": "GRACCUS",
-  "short_name": "GRACCUS",
+  "name": "graccus",
+  "short_name": "graccus",
   "description": "GRACCUS — registro docente mediante lenguaje natural",
   "lang": "es-ES",
   "start_url": "./",
