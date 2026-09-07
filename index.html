@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#12202d"><meta name="description" content="GRACCUS — registro docente mediante lenguaje natural">
+<title>GRACCUS 0.12</title>
+<style>
+:root{--ink:#12202d;--muted:#6c7883;--line:#e5e9ec;--paper:#f7f8f9;--card:#fff;--accent:#2d7d73;--accent-soft:#e5f2ef;--orange:#c97832;--orange-soft:#fbeee0;--danger:#b94b4b;--shadow:0 8px 28px #12202d0b}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0}.app{display:flex;min-height:100vh}.sidebar{width:244px;background:var(--ink);color:#fff;padding:26px 16px;display:flex;flex-direction:column;gap:28px;position:relative;z-index:2}.corner-ball{position:fixed;top:-42px;left:202px;width:84px;height:84px;display:flex;align-items:center;justify-content:center;font-size:60px;line-height:1;z-index:1;pointer-events:none;user-select:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.2))}.brand{padding:0 14px}.brand strong{font-size:25px;letter-spacing:.15em}.brand small{display:block;color:#9eabb5;margin-top:3px;font-size:11px;letter-spacing:.08em}.brand-subject{display:inline-block;margin-top:9px;background:#ffffff1a;color:#bfe8e0;border:1px solid #ffffff26;border-radius:20px;padding:3px 10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}.nav{display:grid;gap:6px}.nav button{background:transparent;color:#c2cbd0;text-align:left;padding:12px 14px;border-radius:9px;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#ffffff14;color:white}.nav b{font-size:17px;width:20px;text-align:center}.sidebar-footer{margin-top:auto;color:#86949d;font-size:12px;padding:0 14px}.main{flex:1;max-width:1200px;margin:auto;padding:28px 34px 60px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:10px;flex-wrap:wrap}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--muted);font-weight:700}.date{font-size:14px;color:var(--muted)}.topbar-actions{display:flex;gap:8px;align-items:center}.view{display:none}.view.active{display:block}h1{font-size:32px;letter-spacing:-.04em;margin:4px 0 6px}h2{font-size:20px;margin:0 0 16px;letter-spacing:-.02em}h3{font-size:16px;margin:0 0 4px}.sub{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:1.3fr .7fr;gap:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}.context{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}.pill{background:var(--accent-soft);color:var(--accent);border-radius:30px;padding:7px 11px;font-size:12px;font-weight:700}.pill.sim{background:var(--orange-soft);color:var(--orange)}.pill.muted{background:#f0f2f3;color:var(--muted)}.simbtn{background:#fff;border:1px solid var(--line);color:var(--ink);padding:9px 13px;border-radius:9px;font-size:12px;font-weight:700}.simbtn:hover{border-color:var(--accent);color:var(--accent)}.entry-card{margin-top:18px}.entry{display:flex;gap:10px}.entry input{flex:1;min-width:0;border:1px solid #cfd7dc;border-radius:10px;padding:15px 16px;outline:0}.entry input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #2d7d7317}.entry input:disabled{background:#f3f4f5;color:var(--muted)}.primary{background:var(--accent);color:#fff;padding:0 20px;border-radius:10px;font-weight:700}.primary:disabled{background:#a9c4c0;cursor:not-allowed}.voice{background:#eef1f3;color:var(--ink);width:64px;border-radius:10px;font-size:28px;position:relative;transition:background .1s,color .1s;touch-action:none;user-select:none;-webkit-user-select:none}.voice.listening{background:var(--danger);color:#fff;animation:pulse 1.1s ease-in-out infinite}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #b94b4b55}50%{box-shadow:0 0 0 8px #b94b4b00}}.hint{color:var(--muted);font-size:12px;margin-top:12px}.feedback{font-size:12px;margin-top:8px;min-height:15px;font-weight:600}.feedback.ok{color:var(--accent)}.feedback.warn{color:var(--orange)}.feedback.error{color:var(--danger)}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}.metric{padding:16px;background:#fbfcfc;border:1px solid var(--line);border-radius:10px}.metric strong{display:block;font-size:24px}.metric span{color:var(--muted);font-size:12px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:30px 0 13px}.link{background:transparent;color:var(--accent);font-weight:700;font-size:13px}.link:disabled{opacity:.35;cursor:not-allowed}.avatar-img{height:36px;width:36px;border-radius:50%;object-fit:cover;flex-shrink:0}.avatar-img.sm{height:30px;width:30px}.avatar-img.lg{height:64px;width:64px}.avatar.sm{height:30px;width:30px;font-size:12px}.avatar.lg{height:64px;width:64px;font-size:22px}.photo-upload{position:relative;cursor:pointer;display:inline-block;border-radius:50%}.photo-upload::after{content:'📷';position:absolute;right:-2px;bottom:-2px;background:var(--ink);color:#fff;border-radius:50%;width:20px;height:20px;font-size:11px;display:flex;align-items:center;justify-content:center}.photo-upload input{display:none}.record{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--line)}.record:last-child{border-bottom:0}.avatar{height:36px;width:36px;background:#e9eff0;color:var(--accent);border-radius:50%;display:grid;place-items:center;font-weight:700;flex-shrink:0}.record-main{flex:1;min-width:0}.record-meta{font-size:12px;color:var(--muted);margin-top:3px}.tag{font-size:11px;padding:4px 7px;border-radius:5px;background:#f0f2f3;color:var(--muted);height:max-content;white-space:nowrap}.positive{color:var(--accent);background:var(--accent-soft)}.absent{color:var(--danger);background:#fbecec}.incident{color:var(--orange);background:var(--orange-soft)}.list{display:grid;gap:10px}.row{display:flex;justify-content:space-between;align-items:center;padding:17px 18px;background:#fff;border:1px solid var(--line);border-radius:11px;gap:12px}.roster-row-encargado{background:#fffaf0;border-color:#f0d998}.row-info{display:flex;gap:13px;align-items:center;min-width:0}.row small{display:block;color:var(--muted);margin-top:2px}.score{font-weight:800;color:var(--accent);white-space:nowrap}.toolbar{display:flex;gap:10px;margin:20px 0}.toolbar input{border:1px solid var(--line);padding:11px 13px;border-radius:9px;flex:1}.empty{color:var(--muted);padding:20px 0}.toast{display:none}.modal{position:fixed;inset:0;background:#12202d66;display:none;place-items:center;padding:20px;z-index:3}.modal .card{max-width:min(680px,92vw);width:100%;max-height:86vh;overflow:auto}.close{float:right;background:none;font-size:20px;color:var(--muted)}.field{margin:14px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}.field select,.field input[type=time]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}.switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0;padding:12px 14px;background:#fbfcfc;border:1px solid var(--line);border-radius:10px}.switch-row input{width:18px;height:18px}.modal-actions{display:flex;gap:10px;margin-top:18px}.sched-table{width:100%;border-collapse:separate;border-spacing:6px;min-width:640px}.sched-table th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:4px 8px;text-align:left}.sched-time{font-size:12px;color:var(--muted);white-space:nowrap;font-weight:700;padding-right:6px}.sched-cell{border-radius:9px;padding:10px 11px;font-size:12px;font-weight:700;min-height:46px;display:flex;flex-direction:column;justify-content:center;gap:2px;line-height:1.25}.sched-cell.clase{background:var(--accent-soft);color:var(--accent)}.sched-cell.no-lectivo{background:var(--orange-soft);color:var(--orange)}.sched-cell.empty{background:transparent;border:1px dashed var(--line);color:var(--muted);font-weight:400}.sched-cell small{font-weight:400;opacity:.75;font-size:11px}.sched-cell.now{box-shadow:0 0 0 2px var(--ink) inset}.sched-cell.pabellon{border:2px solid #c97832}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal-head{font-size:11px;text-transform:uppercase;color:var(--muted);text-align:center;padding:4px 0;font-weight:700}.cal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:8px;border:1px solid var(--line);cursor:pointer;font-size:13px;position:relative}.cal-cell.empty{border-color:transparent;cursor:default}.cal-cell.today{border-color:var(--accent);font-weight:700;color:var(--accent)}.cal-cell.has-event{background:var(--accent-soft)}.cal-cell:hover:not(.empty){border-color:var(--accent)}.cal-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}.eval-wrap{overflow-x:auto;margin-top:8px}.eval-table{width:100%;border-collapse:collapse;min-width:620px;font-size:12px}.eval-table th{text-align:left;padding:6px 7px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}.eval-table td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:middle}.eval-table tr:last-child td{border-bottom:0}.eval-table input,.eval-table select{width:100%;border:1px solid var(--line);border-radius:6px;padding:5px 6px;font-size:12px;background:#fff;color:var(--ink)}.eval-table input[type=number]{width:52px}.eval-table td.eval-unit{font-weight:700;white-space:nowrap;padding-right:10px}.eval-table td.eval-puntos{font-weight:700;color:var(--accent);text-align:center}.race-lane{margin-bottom:16px}.race-line{position:relative;height:36px;background:repeating-linear-gradient(90deg,#f3ede0,#f3ede0 18px,#ece5d5 18px,#ece5d5 20px);border-radius:8px;border:1px solid var(--line);margin-bottom:5px}.race-camel{position:absolute;top:50%;transform:translate(-50%,-50%);font-size:24px;transition:left .4s ease}.race-flag{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:18px}.race-label{font-size:12px;color:var(--muted)}.race-label b{color:var(--ink)}@media(max-width:760px){.corner-ball{display:none}.app{display:block}.sidebar{position:fixed;bottom:0;left:0;right:0;width:auto;height:68px;padding:7px 8px;z-index:2;border-top:1px solid #ffffff18}.brand,.sidebar-footer{display:none}.nav{display:flex;justify-content:space-around;gap:2px}.nav button{padding:7px 9px;display:grid;gap:1px;justify-items:center;text-align:center;font-size:10px;border-radius:8px}.nav b{font-size:18px}.main{padding:22px 16px 92px}.topbar{margin-bottom:20px}.grid{display:block}.right-card{margin-top:18px}h1{font-size:28px}.entry{display:grid;grid-template-columns:1fr 64px}.metrics{grid-template-columns:repeat(3,1fr)}.card{padding:17px}.date{font-size:12px}}
+</style>
+<link rel="manifest" href="./manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GRACCUS">
+<link rel="apple-touch-icon" href="./iconos/icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./iconos/icon-192.png">
+<style>
+html,body{overscroll-behavior-y:none}
+body{-webkit-tap-highlight-color:transparent}
+@supports(padding:max(0px)){.main{padding-bottom:max(92px,calc(92px + env(safe-area-inset-bottom)))}.sidebar{padding-bottom:max(7px,env(safe-area-inset-bottom))}}
+</style>
+
+</head>
+<body><div class="app"><aside class="sidebar"><div class="brand"><strong>GRACCUS</strong><small>Registro docente inteligente</small><span class="brand-subject">Educación Física</span></div><nav class="nav"><button class="active" data-view="today"><b>⏱️</b>Hoy</button><button data-view="classes"><b>🎽</b>Grupos y alumnos</button><button data-view="race"><b>🐪</b>Clasificación</button><button data-view="schedule"><b>📅</b>Horario</button><button data-view="calendar"><b>🗓️</b>Calendario</button><button data-view="units"><b>📁</b>Unidades</button></nav><div class="sidebar-footer">GRACCUS 0.12<br>Datos guardados en este dispositivo</div></aside><main class="main">
+<div class="topbar"><div><div class="eyebrow">Panel docente</div><div class="date" id="date"></div></div><div class="topbar-actions"><span class="pill" id="statusPill">● —</span><span class="pill sim" id="simPill" style="display:none">SIMULACIÓN</span><button class="simbtn" id="openSim">🧪 Modo simulación</button></div></div>
+
+<section id="today" class="view active"><h1>Hoy</h1><p class="sub">Registra lo que ocurre, sin interrumpir la clase.</p><div class="context" id="contextPills"></div><div class="grid"><div><div class="card entry-card"><h2>¿Qué ha ocurrido?</h2><div class="entry"><input id="phrase" placeholder="Ej.: Luis 5 puntos o Daniela se esfuerza" autocomplete="off"><button class="voice" id="voiceBtn" title="Mantén pulsado para dictar">🎙</button></div><div class="hint" id="entryHint">Escribe una frase y pulsa Intro para registrar. GRACCUS reconocerá al alumno del grupo actual (o su nombre y apellido completos, aunque sea fuera de horario) y el tipo de registro.</div><div class="feedback" id="feedback"></div></div><div class="section-head"><h2>Registros recientes</h2><div style="display:flex;gap:6px"><button class="link" id="undoBtn" disabled>↺ Deshacer</button><button class="link" id="redoBtn" disabled>↻ Rehacer</button><button class="link" id="clearAll">Limpiar</button></div></div><div class="card" id="recent"></div></div><div class="right-card"><div class="card"><h2>Resumen del día</h2><div class="metrics"><div class="metric"><strong id="points">0</strong><span>Puntos</span></div><div class="metric"><strong id="absences">0</strong><span>Faltas</span></div><div class="metric"><strong id="observations">0</strong><span>Observaciones</span></div><div class="metric"><strong id="incidents">0</strong><span>Incidencias</span></div><div class="metric"><strong id="laps">0</strong><span>Vueltas</span></div></div></div><div class="card" style="margin-top:18px"><div class="eyebrow">Horario actual</div><h3 style="margin-top:8px" id="scheduleNow">—</h3><p class="sub" id="scheduleNowSub">—</p></div></div></div></section>
+
+<section id="classes" class="view"><h1>Grupos y alumnos</h1><p class="sub">Tus grupos, el progreso acumulado y quién lleva el material esta semana.</p><div class="list" id="classList"></div></section>
+<section id="race" class="view"><h1>Clasificación</h1><p class="sub">Los puntos de cada clase, con los camellos avanzando hacia la meta. Los empates avanzan juntos.</p><div class="card"><div style="display:flex;gap:12px;flex-wrap:wrap" id="raceControls"></div><div style="margin-top:18px" id="raceTrack"></div></div></section>
+<section id="schedule" class="view"><h1>Horario</h1><p class="sub">Asignación de grupos por día y hora, de un vistazo. El recuadro naranja marca la única sesión semanal en el <b>pabellón</b>; el resto son en pista exterior.</p><div class="card" style="overflow:auto"><div id="scheduleGrid"></div></div></section>
+<section id="calendar" class="view"><h1>Calendario</h1><p class="sub">Anota excursiones u otros eventos de todo el curso.</p><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><button class="simbtn" id="calPrev">←</button><h2 style="margin:0" id="calTitle">—</h2><button class="simbtn" id="calNext">→</button></div><div id="calGrid"></div></div><div class="section-head"><h2>Próximos eventos</h2></div><div class="card" id="calUpcoming"></div></section>
+<section id="units" class="view"><h1>Unidades</h1><p class="sub">Catálogo de contenidos por carpeta. Todavía sin asignar a una clase ni compartir con el alumnado.</p><div class="list" id="unitList"></div></section>
+</main></div>
+<div class="corner-ball">🏀</div>
+<div class="modal" id="modal"><div class="card"><button class="close" id="close">×</button><div id="modalContent"></div></div></div>
+<div class="modal" id="simModal"><div class="card"><button class="close" id="simClose">×</button><div id="simModalContent"></div></div></div>
+
+<script>
+/* ————————————————————————————————————————————
+   GRACCUS 0.2 — motor de contexto
+   Filosofía: ABRIR → ESCRIBIR/DECIR → CONTINUAR CON LA CLASE
+   ———————————————————————————————————————————— */
+
+const STORAGE_KEY = 'graccus-data';
+const DAY_KEYS = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
+const DAY_LABELS = {lunes:'Lunes',martes:'Martes',miercoles:'Miércoles',jueves:'Jueves',viernes:'Viernes',sabado:'Sábado',domingo:'Domingo'};
+
+// Un color propio por grupo, para reconocer cada clase de un vistazo (horario, pills, listados).
+const GROUP_COLORS = {
+  g1: { bg:'#e5f2ef', fg:'#2d7d73' }, // 3º ESO B — verde (color de acción de GRACCUS)
+  g2: { bg:'#e4edfb', fg:'#2f5fa8' }, // 4º ESO A — azul
+  g3: { bg:'#f0e6fb', fg:'#7c46b8' }, // 2º ESO — morado
+  g4: { bg:'#fbe6ef', fg:'#b83d70' }, // 4º ESO B — rosa
+  g5: { bg:'#dff6f3', fg:'#1a8a7a' }, // 1º ESO — turquesa
+  g6: { bg:'#e7e9fb', fg:'#4b52c4' }, // 3º ESO A — índigo
+  g7: { bg:'#f7e9e3', fg:'#9c4a2c' }  // 1º Bachillerato — marrón
+};
+const NO_LECTIVO_COLOR = { bg:'#fbeee0', fg:'#c97832' };
+const NEUTRAL_COLOR = { bg:'#f0f2f3', fg:'#6c7883' };
+function groupColor(grupoId){ return GROUP_COLORS[grupoId] || NEUTRAL_COLOR; }
+
+// Generador de listas de alumnos ficticias (25 por grupo) para poder probar
+// GRACCUS con clases de tamaño real. `base` fija los primeros alumnos (por
+// ejemplo, los distintos "Luis" usados para probar la desambiguación por grupo).
+const NOMBRES_POOL = ['Daniela','Marta','Nicolás','Ana','Esteban','Carmen','Blanca','Joaquín','Sofía','Pablo','Elena','Hugo','Valeria','Mario','Irene','Diego','Lucía','Adrián','Paula','Alba','Sergio','Claudia','Rubén','Marina','Álvaro','Noa','Iker','Julia','Óscar','Carla','Bruno','Vera','Mateo','Nerea','Gonzalo','Aitana','Rodrigo','Celia','Enzo','Martina','Leo','Zoe','Yeray','Ariadna','Samuel','Candela','Ismael','Alma','Gael','Nayara'];
+const APELLIDOS_POOL = ['García','Pérez','Martín','Ruiz','López','Fernández','Torres','Vidal','Soto','Molina','Ramos','Díaz','Vargas','Serrano','Núñez','Cano','Bravo','Salas','Peña','Cortés','Reyes','Ortega','Gil','Cabrera','Rojas','Navarro','Iglesias','Delgado','Moya','Bueno'];
+
+function generarRoster(grupoId, base, offset){
+  const roster = base.map(nombre => ({ nombre, grupoId }));
+  const usados = new Set(roster.map(a => a.nombre));
+  let ni = 0, ai = 0;
+  while(roster.length < 25){
+    const nombre = NOMBRES_POOL[(ni + offset) % NOMBRES_POOL.length];
+    const apellido = APELLIDOS_POOL[(ai + offset * 3) % APELLIDOS_POOL.length];
+    const full = nombre + ' ' + apellido;
+    ni++;
+    if(ni % NOMBRES_POOL.length === 0) ai++;
+    if(usados.has(full)) continue;
+    usados.add(full);
+    roster.push({ nombre: full, grupoId });
+  }
+  return roster.map((a, i) => ({ id: grupoId + '_a' + (i + 1), nombre: a.nombre, grupoId: a.grupoId }));
+}
+
+function marcarPabellon(horario){
+  // La primera clase de la semana con cada grupo es en el pabellón (solo hay
+  // uno para todo el profesorado); el resto de sesiones son en pista exterior.
+  const diasOrden = ['lunes','martes','miercoles','jueves','viernes'];
+  const primera = {};
+  horario.forEach(h => {
+    if(!h.lectivo || !h.grupoId) return;
+    const rango = diasOrden.indexOf(h.dia) * 10000 + parseInt(h.inicio.replace(':',''), 10);
+    if(!(h.grupoId in primera) || rango < primera[h.grupoId].rango) primera[h.grupoId] = { rango, entry:h };
+  });
+  Object.values(primera).forEach(({entry}) => { entry.pabellon = true; });
+  horario.forEach(h => { if(h.lectivo) h.aula = h.pabellon ? 'Pabellón' : 'Pista exterior'; });
+  return horario;
+}
+
+function defaultData(){
+  const alumnos = [
+    ...generarRoster('g1', ['Luis García'], 1),   // 3º ESO B
+    ...generarRoster('g2', ['Luis Pérez'], 2),    // 4º ESO A
+    ...generarRoster('g3', ['Luis Martín'], 3),   // 2º ESO
+    ...generarRoster('g4', [], 4),                // 4º ESO B
+    ...generarRoster('g5', [], 5),                // 1º ESO
+    ...generarRoster('g6', [], 6),                // 3º ESO A
+    ...generarRoster('g7', [], 7)                 // 1º Bachillerato
+  ];
+  const horarioReal = [
+    { dia:'lunes', inicio:'08:15', fin:'09:15', grupoId:'g4', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'martes', inicio:'08:15', fin:'09:15', grupoId:'g5', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'miercoles', inicio:'08:15', fin:'09:15', grupoId:'g4', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'jueves', inicio:'08:15', fin:'09:15', grupoId:'g7', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'viernes', inicio:'08:15', fin:'09:15', grupoId:'g3', materia:'Educación Física', aula:'', lectivo:true },
+
+      { dia:'lunes', inicio:'09:15', fin:'10:15', grupoId:'g7', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'martes', inicio:'09:15', fin:'10:15', grupoId:'g6', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'miercoles', inicio:'09:15', fin:'10:15', grupoId:'g5', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'jueves', inicio:'09:15', fin:'10:15', grupoId:'g1', materia:'Educación Física', aula:'', lectivo:true },
+
+      { dia:'lunes', inicio:'10:15', fin:'11:15', grupoId:'g1', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'martes', inicio:'10:15', fin:'11:15', grupoId:'g2', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'miercoles', inicio:'10:15', fin:'11:15', grupoId:null, materia:'Coordinación de área', aula:'', lectivo:false },
+      { dia:'jueves', inicio:'10:15', fin:'11:15', grupoId:null, materia:'Guardia', aula:'', lectivo:false },
+
+      { dia:'lunes', inicio:'11:45', fin:'12:45', grupoId:'g6', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'martes', inicio:'11:45', fin:'12:45', grupoId:null, materia:'Guardia', aula:'', lectivo:false },
+
+      { dia:'lunes', inicio:'12:45', fin:'13:45', grupoId:null, materia:'Guardia', aula:'', lectivo:false },
+      { dia:'martes', inicio:'12:45', fin:'13:45', grupoId:'g5', materia:'Educación Física', aula:'', lectivo:true },
+
+      { dia:'lunes', inicio:'13:45', fin:'14:45', grupoId:'g3', materia:'Educación Física', aula:'', lectivo:true },
+      { dia:'martes', inicio:'13:45', fin:'14:45', grupoId:'g2', materia:'Educación Física', aula:'', lectivo:true }
+  ];
+  marcarPabellon(horarioReal);
+
+  return {
+    profesor: { nombre: 'Profesor/a' },
+    grupos: [
+      { id:'g5', nombre:'1º ESO', curso:'1º ESO', materia:'Educación Física' },
+      { id:'g3', nombre:'2º ESO', curso:'2º ESO', materia:'Educación Física' },
+      { id:'g6', nombre:'3º ESO A', curso:'3º ESO', materia:'Educación Física' },
+      { id:'g1', nombre:'3º ESO B', curso:'3º ESO', materia:'Educación Física' },
+      { id:'g2', nombre:'4º ESO A', curso:'4º ESO', materia:'Educación Física' },
+      { id:'g4', nombre:'4º ESO B', curso:'4º ESO', materia:'Educación Física' },
+      { id:'g7', nombre:'1º Bachillerato', curso:'1º Bachillerato', materia:'Educación Física' }
+    ],
+    alumnos,
+    // Horario real de EF. Los tramos de GUARDIA y COORD. ÁREA no son grupos de
+    // alumnos: se marcan con lectivo:false y no permiten registrar alumnos,
+    // pero sí aparecen en el motor de contexto.
+    horario: horarioReal,
+    // Catálogo de contenidos (carpetas de unidades de EF). Por ahora son solo
+    // las carpetas de las asignaturas, sin asignar todavía a una clase ni
+    // fecha concreta — eso se podrá afinar más adelante.
+    unidades: [
+      { id:'u1', grupoId:null, nombre:'01_Ultimate', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u2', grupoId:null, nombre:'02_Balonmano', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u3', grupoId:null, nombre:'03_Orientación', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u4', grupoId:null, nombre:'04_Salsa', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u5', grupoId:null, nombre:'05_Malabares', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u6', grupoId:null, nombre:'06_Acrosport', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u7', grupoId:null, nombre:'07_Pinfuvote', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u8', grupoId:null, nombre:'08_Bádminton', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u9', grupoId:null, nombre:'09_Voleibol', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u10', grupoId:null, nombre:'10_Crossfit', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u11', grupoId:null, nombre:'11_Expresión corporal', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u12', grupoId:null, nombre:'12_Béisbol', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u13', grupoId:null, nombre:'13_Rugby tag', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u14', grupoId:null, nombre:'14_Hockey', descripcion:'', fechaInicio:'', fechaFin:'', activa:false }
+    ],
+    registros: [],
+    evaluaciones: {},
+    calendario: [],
+    simulacion: { activo:false, dia:'lunes', hora:'10:20' },
+    _v: 6
+  };
+}
+
+function loadData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return defaultData();
+    const parsed = JSON.parse(raw);
+    if(!parsed || !parsed.grupos || !parsed.alumnos) return defaultData();
+    // Si los datos guardados son de una versión anterior del horario/grupos,
+    // se sustituyen por los nuevos datos de demostración pero se conservan
+    // los registros ya guardados por el profesor.
+    if(parsed._v !== 6){
+      const fresh = defaultData();
+      fresh.registros = parsed.registros || [];
+      fresh.evaluaciones = parsed.evaluaciones || {};
+      fresh.calendario = parsed.calendario || [];
+      fresh.simulacion = parsed.simulacion || fresh.simulacion;
+      return fresh;
+    }
+    return parsed;
+  }catch(e){ return defaultData(); }
+}
+function saveData(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+
+let data = loadData();
+
+/* ———————————— utilidades de texto ———————————— */
+function stripAccents(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+function initials(n){ return n.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase(); }
+
+/* ———————————— MOTOR DE CONTEXTO ———————————— */
+// Referencia explícita a un grupo dentro de la frase (p. ej. "de 3B", "en 1 Bachillerato").
+// Si el profesor la indica, GRACCUS la usa siempre, aunque sea fuera de horario:
+// solo recurre al horario cuando NO se especifica el grupo en la frase.
+const GROUP_MENTION_PATTERNS = [
+  { id:'g1', re:/\b(?:(?:de|del|en|con)\s+)?3\s*(?:º|o)?\s*(?:eso)?\s*b\b/ },   // 3º ESO B
+  { id:'g4', re:/\b(?:(?:de|del|en|con)\s+)?4\s*(?:º|o)?\s*(?:eso)?\s*b\b/ },   // 4º ESO B
+  { id:'g2', re:/\b(?:(?:de|del|en|con)\s+)?4\s*(?:º|o)?\s*(?:eso)?\s*a\b/ },   // 4º ESO A
+  { id:'g6', re:/\b(?:(?:de|del|en|con)\s+)?3\s*(?:º|o)?\s*(?:eso)?\s*a\b/ },   // 3º ESO A
+  { id:'g3', re:/\b(?:(?:de|del|en|con)\s+)?2\s*(?:º|o)?\s*eso\b/ },           // 2º ESO
+  { id:'g5', re:/\b(?:(?:de|del|en|con)\s+)?1\s*(?:º|o)?\s*eso\b/ },           // 1º ESO
+  { id:'g7', re:/\b(?:(?:de|del|en|con)\s+)?1\s*(?:º|o)?\s*bach\w*\b/ }        // 1º Bachillerato
+];
+function findGroupMention(text){
+  const stripped = stripAccents(text.toLowerCase());
+  for(const p of GROUP_MENTION_PATTERNS){
+    const m = stripped.match(p.re);
+    if(m) return { groupId: p.id, start: m.index, end: m.index + m[0].length };
+  }
+  return null;
+}
+
+function getCurrentContext(){
+  let day, time;
+  if(data.simulacion && data.simulacion.activo){
+    day = data.simulacion.dia; time = data.simulacion.hora;
+  } else {
+    const now = new Date();
+    day = DAY_KEYS[now.getDay()];
+    time = now.toTimeString().slice(0,5);
+  }
+  const entry = data.horario.find(h => h.dia === day && time >= h.inicio && time < h.fin);
+  if(!entry){
+    return { day, time, kind:'libre', groupId:null, groupName:'Sin clase asignada', subject:null, classroom:null, unitId:null, unitName:null, entry:null };
+  }
+  if(entry.lectivo === false){
+    // Tramo real (guardia, coordinación de área…) pero sin grupo de alumnos.
+    return { day, time, kind:'no-lectivo', groupId:null, groupName:entry.materia, subject:entry.materia, classroom:entry.aula, unitId:null, unitName:null, entry };
+  }
+  const grupo = data.grupos.find(g => g.id === entry.grupoId);
+  const unidad = data.unidades.find(u => u.grupoId === entry.grupoId && u.activa);
+  return {
+    day, time, kind:'clase',
+    groupId: grupo ? grupo.id : null,
+    groupName: grupo ? grupo.nombre : 'Grupo desconocido',
+    subject: entry.materia,
+    classroom: entry.aula,
+    unitId: unidad ? unidad.id : null,
+    unitName: unidad ? unidad.nombre : 'Sin unidad activa',
+    entry
+  };
+}
+
+/* ———————————— cálculos derivados (el historial es la fuente de verdad) ———————————— */
+function alumnoHistorial(alumnoId){ return data.registros.filter(r => r.alumnoId === alumnoId); }
+function alumnoPuntos(alumnoId){ return data.registros.filter(r => r.alumnoId === alumnoId && r.tipo === 'puntos').reduce((a,r) => a + (r.puntos||0), 0); }
+function grupoPuntos(grupoId){ return data.registros.filter(r => r.grupoId === grupoId && r.tipo === 'puntos').reduce((a,r) => a + (r.puntos||0), 0); }
+function puntosPorUnidad(alumnoId, unidadId){ return data.registros.filter(r => r.alumnoId === alumnoId && r.unidadId === unidadId && r.tipo === 'puntos').reduce((a,r) => a + (r.puntos||0), 0); }
+
+/* ———————————— encargados de material (rotación automática semanal) ———————————— */
+// Se calcula solo a partir de la fecha real y del orden alfabético del grupo:
+// no hay que asignarlo a mano ni acordarse de nada, así que es difícil de evitar.
+// Cada semana avanza automáticamente "k" puestos (k = encargados por semana),
+// dando la vuelta a la lista completa antes de repetir a nadie.
+const SEMANA_MS = 7 * 24 * 3600 * 1000;
+const SEMANA_EPOCH = new Date(2020, 0, 1).getTime(); // referencia fija, cualquier fecha vale
+function semanaActual(){ return Math.floor((Date.now() - SEMANA_EPOCH) / SEMANA_MS); }
+
+function getEncargadosSemana(grupoId){
+  const g = data.grupos.find(x => x.id === grupoId);
+  const k = Math.max(1, Math.min(3, (g && g.encargadosPorSemana) || 2));
+  const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+  const n = roster.length;
+  if(n === 0) return [];
+  const inicio = (semanaActual() * k) % n;
+  const encargados = [];
+  for(let i = 0; i < k; i++) encargados.push(roster[(inicio + i) % n]);
+  return encargados;
+}
+function cambiarEncargadosPorSemana(grupoId, delta){
+  const g = data.grupos.find(x => x.id === grupoId);
+  if(!g) return;
+  const actual = g.encargadosPorSemana || 2;
+  g.encargadosPorSemana = Math.max(1, Math.min(3, actual + delta));
+  saveData();
+  openClassRoster(grupoId);
+}
+
+/* ———————————— evaluación por unidad (tabla genérica editable) ———————————— */
+function evalKey(alumnoId, unidadId){ return alumnoId + '|' + unidadId; }
+function getEval(alumnoId, unidadId){
+  return data.evaluaciones[evalKey(alumnoId, unidadId)] || { exposicion:'', retrasos:'', asistencia:'', actitud:'', notas:'' };
+}
+function setEval(alumnoId, unidadId, campo, valor){
+  const key = evalKey(alumnoId, unidadId);
+  if(!data.evaluaciones[key]) data.evaluaciones[key] = { exposicion:'', retrasos:'', asistencia:'', actitud:'', notas:'' };
+  data.evaluaciones[key][campo] = valor;
+  saveData();
+}
+
+/* ———————————— redacción algo más formal ———————————— */
+// Mejora ligera y determinista (sin IA externa: este archivo se abre suelto en
+// tu navegador, sin conexión autenticada a ningún modelo). Ablanda los verbos
+// de reporte más coloquiales y cuida mayúscula/punto final. No es una reescritura
+// completa — para un informe realmente pulido, la mejor vía sigue siendo pegar
+// las notas en una conversación conmigo cuando llegue ese momento.
+function ablandarVerbosReporte(t){
+  return t
+    .replace(/\bdice que\b/gi, 'comenta que')
+    .replace(/\bdicen que\b/gi, 'comentan que')
+    .replace(/\bha dicho que\b/gi, 'ha comentado que')
+    .replace(/\bdice:/gi, 'comenta:');
+}
+function formalizarNota(nombreCorto, remaining){
+  const cuerpo = ablandarVerbosReporte(remaining.trim());
+  if(!cuerpo) return `${nombreCorto}.`;
+  let frase = `${nombreCorto} ${cuerpo}`;
+  frase = frase.charAt(0).toUpperCase() + frase.slice(1);
+  if(!/[.!?…]$/.test(frase)) frase += '.';
+  return frase;
+}
+
+/* ———————————— intérprete de lenguaje natural ———————————— */
+// Clasifica el tipo de registro (puntos/falta/incidencia/observación) para un
+// alumno ya identificado, a partir del texto restante tras quitar su nombre.
+function classifyForAlumno(remaining, alumno){
+  const remainingNoAcc = stripAccents(remaining.toLowerCase());
+  const nombreCorto = alumno.nombre.split(' ')[0];
+  const hoy = new Date().toISOString().slice(0,10);
+
+  // Puntos: "5 puntos", "+5", "3"
+  const pm = remaining.match(/^([+-]?\d+)\s*(?:puntos?)?$/i);
+  if(pm){
+    const val = parseInt(pm[1], 10);
+    if(val > 5) return { error:'points-high' };
+    if(val < 0) return { error:'points-low' };
+    // Aviso automático: si ya se ha sentado 2 o más veces hoy, no puede sumar puntos hoy.
+    const vueltasHoy = data.registros.filter(r => r.alumnoId === alumno.id && r.tipo === 'vueltas' && r.fecha === hoy).length;
+    if(vueltasHoy >= 2) return { error:'points-blocked', nombre: nombreCorto };
+    return [{ alumno, tipo:'puntos', categoria:null, puntos: val, textoInterpretado:`${nombreCorto} recibe ${val} punto${val===1?'':'s'}` }];
+  }
+
+  // Vueltas de castigo por sentarse: "2 vueltas por sentarse" / "2 vueltas más"
+  const vm = remaining.match(/^(\d+)\s*vueltas?\b/i);
+  if(vm){
+    const cantidad = parseInt(vm[1], 10);
+    const vueltasPrevias = data.registros.filter(r => r.alumnoId === alumno.id && r.tipo === 'vueltas' && r.fecha === hoy).length;
+    const reincidencia = vueltasPrevias >= 1;
+    const trote = reincidencia;
+    const texto = `${nombreCorto} da ${cantidad} vuelta${cantidad===1?'':'s'} al campo${trote?' trotando':''} por sentarse${reincidencia?' (reincidencia)':''}.`;
+    return [{ alumno, tipo:'vueltas', categoria:'sentarse', puntos:null, vueltas:cantidad, trote, textoInterpretado: texto }];
+  }
+
+  // Falta singular
+  if(/\b(falta|ausente|no ha venido|no vino)\b/.test(remainingNoAcc)){
+    return [{ alumno, tipo:'falta', categoria:null, puntos:null, textoInterpretado:`Falta de ${nombreCorto}` }];
+  }
+
+  // Incidencia (por ahora solo la categoría "material")
+  if(['olvid','material'].some(k => remainingNoAcc.includes(k))){
+    return [{ alumno, tipo:'incidencia', categoria:'material', puntos:null, textoInterpretado: formalizarNota(nombreCorto, remaining) }];
+  }
+
+  // Observación, clasificada por palabras clave
+  const obsDict = {
+    'cooperación': ['ayuda','ayudar','companero','compañera','colabora','colaborar'],
+    'esfuerzo': ['esfuerza','esfuerzo','trabaja'],
+    'participación': ['participa'],
+    'atención': ['distraid'],
+    'comportamiento': ['comportamiento','conducta']
+  };
+  let categoria = 'general';
+  for(const [cat, keys] of Object.entries(obsDict)){
+    if(keys.some(k => remainingNoAcc.includes(stripAccents(k)))){ categoria = cat; break; }
+  }
+  return [{ alumno, tipo:'observación', categoria, puntos:null, textoInterpretado: formalizarNota(nombreCorto, remaining) }];
+}
+
+/* ———————————— eventos de calendario dictados desde la misma barra ———————————— */
+// Si la frase contiene una fecha reconocible ("23 de octubre"), se trata como
+// un evento de curso (excursión, etc.), no como un registro de alumno — así
+// quedan diferenciados: uno va al historial de la clase, el otro al calendario.
+const MESES_NOMBRE = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const RE_FECHA_EVENTO = /\b(?:el|del)?\s*(\d{1,2})\s*(?:de)?\s*(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\s*(?:de)?\s*(\d{4}))?\b/i;
+const RE_HORA_RANGO = /\bde\s*(\d{1,2}(?::\d{2})?)\s*a\s*(\d{1,2}(?::\d{2})?)\b/i;
+
+function parseCalendarEvent(text){
+  const fm = text.match(RE_FECHA_EVENTO);
+  if(!fm) return null; // sin fecha reconocible: no es un evento de calendario
+
+  const dia = parseInt(fm[1], 10);
+  const mesIdx = MESES_NOMBRE.indexOf(fm[2].toLowerCase());
+  if(mesIdx < 0 || dia < 1 || dia > 31) return null;
+  const anio = fm[3] ? parseInt(fm[3], 10) : new Date().getFullYear();
+  const fecha = `${anio}-${String(mesIdx+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+
+  const hm = text.match(RE_HORA_RANGO);
+  const norm = h => h.includes(':') ? h : h.padStart(2,'0') + ':00';
+  const hora = hm ? `${norm(hm[1])}–${norm(hm[2])}` : null;
+
+  const mention = findGroupMention(text);
+  const grupo = mention ? data.grupos.find(g => g.id === mention.groupId) : null;
+
+  // Construir un título limpio: quitamos el grupo (por índice), la fecha y la hora.
+  let limpio = text;
+  if(mention) limpio = limpio.slice(0, mention.start) + ' ' + limpio.slice(mention.end);
+  limpio = limpio.replace(RE_FECHA_EVENTO, ' ');
+  if(hm) limpio = limpio.replace(RE_HORA_RANGO, ' ');
+  limpio = limpio.replace(/\s+/g, ' ').trim();
+  limpio = limpio.replace(/^(el|con|de|del)\s+/i, '').replace(/\s+(el|con|de|del)$/i, '').trim();
+  if(limpio) limpio = limpio.charAt(0).toUpperCase() + limpio.slice(1);
+  const titulo = limpio || 'Evento';
+
+  return { fecha, hora, grupoId: grupo ? grupo.id : null, grupoNombre: grupo ? grupo.nombre : null, titulo };
+}
+
+// Referencia por NOMBRE Y APELLIDO completos: si es único en todo el centro,
+// identifica al alumno directamente, sin necesitar horario ni grupo — funciona
+// siempre, incluso fuera de horario lectivo.
+function findUniqueFullNameMatch(text){
+  const stripped = stripAccents(text.toLowerCase());
+  const nameCounts = {};
+  data.alumnos.forEach(a => {
+    const key = stripAccents(a.nombre.toLowerCase());
+    nameCounts[key] = (nameCounts[key] || 0) + 1;
+  });
+  let best = null;
+  for(const a of data.alumnos){
+    const key = stripAccents(a.nombre.toLowerCase());
+    if(nameCounts[key] !== 1) continue; // no es único en todo el centro: no arriesgamos
+    const re = new RegExp('\\b' + key.replace(/\s+/g,'\\s+') + '\\b');
+    const m = stripped.match(re);
+    if(m && (!best || m[0].length > best.len)){
+      best = { alumno:a, start:m.index, end:m.index + m[0].length, len:m[0].length };
+    }
+  }
+  return best;
+}
+
+function parseEntry(text, students, forcedAlumno){
+  if(forcedAlumno) return classifyForAlumno(text, forcedAlumno);
+
+  const aliasMap = new Map();
+  students.forEach(a => {
+    const alias = stripAccents(a.nombre.split(' ')[0].toLowerCase());
+    if(!aliasMap.has(alias)) aliasMap.set(alias, a);
+  });
+
+  const lowerNoAcc = stripAccents(text.toLowerCase());
+
+  // Faltas en plural: "Faltan X y Y", "Hoy no han venido X y Y"
+  if(/\bfaltan\b/.test(lowerNoAcc) || lowerNoAcc.includes('no han venido') || lowerNoAcc.includes('no vinieron')){
+    const found = [];
+    const re = /[\p{L}]+/gu; let m;
+    while((m = re.exec(text))){
+      const tok = stripAccents(m[0].toLowerCase());
+      if(aliasMap.has(tok)){
+        const alumno = aliasMap.get(tok);
+        if(!found.find(f => f.id === alumno.id)) found.push(alumno);
+      }
+    }
+    if(found.length){
+      return found.map(a => ({ alumno:a, tipo:'falta', categoria:null, puntos:null, textoInterpretado:`Falta de ${a.nombre.split(' ')[0]}` }));
+    }
+  }
+
+  // Localizar al alumno por su primer nombre (dentro del grupo del contexto actual)
+  const re = /[\p{L}]+/gu; let m; let match = null;
+  while((m = re.exec(text))){
+    const tok = stripAccents(m[0].toLowerCase());
+    if(aliasMap.has(tok)){ match = { alumno: aliasMap.get(tok), start: m.index, end: m.index + m[0].length }; break; }
+  }
+  if(!match) return { error:'not-found' };
+
+  const remaining = (text.slice(0, match.start) + ' ' + text.slice(match.end)).replace(/\s+/g,' ').trim();
+  return classifyForAlumno(remaining, match.alumno);
+}
+
+/* ———————————— registro de un nuevo hecho ———————————— */
+function handleAdd(){
+  const input = $('phrase');
+  const text = input.value;
+  if(!text.trim()) return;
+
+  // 0) ¿La frase lleva una fecha ("23 de octubre")? Entonces es un evento de
+  //    curso (excursión, etc.), no un registro de alumno: va directo al calendario.
+  const evento = parseCalendarEvent(text);
+  if(evento){
+    data.calendario.push({
+      id: 'c_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+      fecha: evento.fecha,
+      titulo: evento.titulo + (evento.grupoNombre ? ` — ${evento.grupoNombre}` : '') + (evento.hora ? ` (${evento.hora})` : '')
+    });
+    saveData();
+    input.value = '';
+    renderAll();
+    showFeedback(`Anotado en el calendario: ${evento.fecha}`, 'ok');
+    return;
+  }
+
+  // 1) ¿El nombre y apellido completos identifican a un único alumno de todo
+  //    el centro? En ese caso no hace falta ni horario ni grupo: se usa siempre.
+  // 2) Si no, ¿la frase indica el grupo explícitamente? ("Luis 5 puntos de 3B")
+  // 3) Si tampoco, se usa el grupo que marca el horario en este momento.
+  const fullNameMatch = findUniqueFullNameMatch(text);
+  const mention = fullNameMatch ? null : findGroupMention(text);
+  let targetGroupId, targetGroupName, unitId, textForParsing, manual = false, forcedAlumno = null;
+
+  if(fullNameMatch){
+    forcedAlumno = fullNameMatch.alumno;
+    const g = data.grupos.find(x => x.id === forcedAlumno.grupoId);
+    targetGroupId = g.id;
+    targetGroupName = g.nombre;
+    const unidad = data.unidades.find(u => u.grupoId === g.id && u.activa);
+    unitId = unidad ? unidad.id : null;
+    textForParsing = (text.slice(0, fullNameMatch.start) + ' ' + text.slice(fullNameMatch.end)).replace(/\s+/g,' ').trim();
+    manual = true;
+  } else if(mention){
+    const g = data.grupos.find(x => x.id === mention.groupId);
+    targetGroupId = g.id;
+    targetGroupName = g.nombre;
+    const unidad = data.unidades.find(u => u.grupoId === g.id && u.activa);
+    unitId = unidad ? unidad.id : null;
+    textForParsing = (text.slice(0, mention.start) + ' ' + text.slice(mention.end)).replace(/\s+/g,' ').trim();
+    manual = true;
+  } else {
+    const ctx = getCurrentContext();
+    if(!ctx.groupId){
+      showFeedback(ctx.kind === 'no-lectivo'
+        ? `Ahora mismo es «${ctx.groupName}», sin grupo de alumnos. Indica el nombre y apellido completos, o el grupo (p. ej. "de 3B"), para registrar igualmente.`
+        : 'Fuera de horario lectivo. Indica el nombre y apellido completos, o el grupo (p. ej. "de 3B"), o usa el modo simulación.', 'warn');
+      return;
+    }
+    targetGroupId = ctx.groupId;
+    targetGroupName = ctx.groupName;
+    unitId = ctx.unitId;
+    textForParsing = text;
+  }
+
+  const groupStudents = data.alumnos.filter(a => a.grupoId === targetGroupId);
+  const result = parseEntry(textForParsing, groupStudents, forcedAlumno);
+
+  if(result.error === 'not-found'){ showFeedback(`No he identificado a ningún alumno de ${targetGroupName} en la frase.`, 'error'); return; }
+  if(result.error === 'points-high'){ showFeedback('El máximo de puntos por registro es 5. No se ha guardado.', 'error'); return; }
+  if(result.error === 'points-low'){ showFeedback('Los puntos no pueden ser negativos. No se ha guardado.', 'error'); return; }
+  if(result.error === 'points-blocked'){ showFeedback(`⚠️ ${result.nombre} no puede sumar puntos hoy: se ha sentado más de una vez.`, 'error'); return; }
+
+  const now = new Date();
+  result.forEach(r => {
+    data.registros.unshift({
+      id: 'r_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+      timestamp: Date.now(),
+      fecha: now.toISOString().slice(0,10),
+      hora: now.toTimeString().slice(0,5),
+      grupoId: targetGroupId,
+      alumnoId: r.alumno.id,
+      unidadId: unitId,
+      tipo: r.tipo,
+      categoria: r.categoria,
+      puntos: r.puntos != null ? r.puntos : null,
+      vueltas: r.vueltas != null ? r.vueltas : null,
+      trote: r.trote || false,
+      textoOriginal: text,
+      textoInterpretado: r.textoInterpretado,
+      manual
+    });
+  });
+
+  const added = data.registros.slice(0, result.length);
+  undoStack.push({ action:'add', records: added });
+  redoStack = [];
+
+  saveData();
+  input.value = '';
+  renderAll();
+  const base = result.length > 1 ? `${result.length} registros guardados` : 'Registro guardado';
+  showFeedback(manual ? `${base} en ${targetGroupName}` : base, 'ok');
+}
+
+/* ———————————— dictado por voz (pulsar y mantener, como un walkie-talkie) ———————————— */
+const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognizer = null;
+let listening = false;
+
+function setupVoice(){
+  const btn = $('voiceBtn');
+  if(!SpeechRecognitionAPI){
+    btn.title = 'Tu navegador no soporta dictado por voz';
+    btn.onclick = () => showFeedback('Este navegador no soporta dictado por voz. Puedes escribir la frase directamente.', 'warn');
+    return;
+  }
+  recognizer = new SpeechRecognitionAPI();
+  recognizer.lang = 'es-ES';
+  recognizer.interimResults = false;
+  recognizer.maxAlternatives = 1;
+
+  recognizer.onresult = e => {
+    const texto = e.results[0][0].transcript;
+    $('phrase').value = texto;
+    $('phrase').focus();
+  };
+  recognizer.onerror = () => { showFeedback('No se ha podido escuchar el audio. Inténtalo de nuevo.', 'error'); };
+  recognizer.onend = () => { listening = false; btn.classList.remove('listening'); };
+
+  function start(){
+    if(listening) return;
+    try{ recognizer.start(); listening = true; btn.classList.add('listening'); }catch(e){ /* ya estaba iniciado */ }
+  }
+  function stop(){
+    if(!listening) return;
+    recognizer.stop();
+  }
+
+  // Ratón (escritorio)
+  btn.addEventListener('mousedown', start);
+  btn.addEventListener('mouseup', stop);
+  btn.addEventListener('mouseleave', stop);
+  // Táctil (móvil): evitamos el comportamiento por defecto (menú contextual, zoom)
+  btn.addEventListener('touchstart', e => { e.preventDefault(); start(); }, { passive:false });
+  btn.addEventListener('touchend', e => { e.preventDefault(); stop(); });
+  btn.addEventListener('touchcancel', stop);
+  btn.addEventListener('contextmenu', e => e.preventDefault());
+}
+
+/* ———————————— UI: helpers ———————————— */
+const $ = id => document.getElementById(id);
+let feedbackTimer = null;
+function showFeedback(msg, kind){
+  const el = $('feedback');
+  el.textContent = msg;
+  el.className = 'feedback ' + (kind || 'ok');
+  clearTimeout(feedbackTimer);
+  feedbackTimer = setTimeout(() => { el.textContent = ''; el.className = 'feedback'; }, 4500);
+}
+function tagClass(r){ if(r.tipo==='puntos') return 'positive'; if(r.tipo==='falta') return 'absent'; if(r.tipo==='incidencia' || r.tipo==='vueltas') return 'incident'; return ''; }
+function tagLabel(r){ if(r.tipo==='puntos') return (r.puntos>0?'+':'') + r.puntos + ' pts'; if(r.tipo==='falta') return 'Falta'; if(r.tipo==='vueltas') return `🏃 ${r.vueltas} vuelta${r.vueltas===1?'':'s'}${r.trote?' (trote)':''}`; if(r.tipo==='incidencia') return 'Incidencia · ' + r.categoria; return 'Observación · ' + r.categoria; }
+
+/* ———————————— avatar / foto del alumno ———————————— */
+// Si el alumno tiene foto (sincronizada o subida a mano) se muestra esa imagen;
+// si no, se usan las iniciales con el color del grupo, como hasta ahora.
+function avatarHtml(alumno, size){
+  const cls = size ? ' ' + size : '';
+  if(alumno && alumno.foto){
+    return `<img src="${alumno.foto}" class="avatar-img${cls}" alt="${alumno.nombre}">`;
+  }
+  const c = groupColor(alumno ? alumno.grupoId : null);
+  return `<div class="avatar${cls}" style="background:${c.bg};color:${c.fg}">${alumno ? initials(alumno.nombre) : '?'}</div>`;
+}
+
+function setAlumnoFoto(alumnoId, dataUrl){
+  const a = data.alumnos.find(x => x.id === alumnoId);
+  if(!a) return;
+  a.foto = dataUrl;
+  saveData();
+}
+function removeAlumnoFoto(alumnoId){
+  const a = data.alumnos.find(x => x.id === alumnoId);
+  if(!a) return;
+  delete a.foto;
+  saveData();
+  openStudentDetail(alumnoId);
+  renderClasses(); renderToday();
+}
+// Recorta la imagen a un cuadrado y la reduce de tamaño antes de guardarla,
+// para que 25 fotos por clase no llenen el almacenamiento del navegador.
+function handleFotoUpload(alumnoId, inputEl){
+  const file = inputEl.files && inputEl.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const size = 160;
+      const canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const s = Math.min(img.width, img.height);
+      const sx = (img.width - s) / 2, sy = (img.height - s) / 2;
+      ctx.drawImage(img, sx, sy, s, s, 0, 0, size, size);
+      setAlumnoFoto(alumnoId, canvas.toDataURL('image/jpeg', 0.85));
+      openStudentDetail(alumnoId);
+      renderClasses(); renderToday();
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ———————————— deshacer / rehacer ———————————— */
+// Historial en memoria (se reinicia al recargar la página, como es habitual
+// en deshacer/rehacer). Cada entrada guarda los registros afectados, así que
+// deshacer y rehacer son simétricos: mover la misma entrada entre las pilas.
+let undoStack = [];
+let modalRefresh = null; // si hay un modal (ficha de alumno/clase) abierto, esta función lo vuelve a pintar tras cada cambio
+let redoStack = [];
+function updateUndoRedoButtons(){
+  $('undoBtn').disabled = undoStack.length === 0;
+  $('redoBtn').disabled = redoStack.length === 0;
+}
+function performUndo(){
+  const entry = undoStack.pop();
+  if(!entry) return;
+  if(entry.action === 'add'){
+    const ids = new Set(entry.records.map(r => r.id));
+    data.registros = data.registros.filter(r => !ids.has(r.id));
+  } else if(entry.action === 'clear'){
+    data.registros = entry.records.slice();
+  }
+  redoStack.push(entry);
+  saveData(); renderAll();
+  showFeedback('Deshecho', 'ok');
+}
+function performRedo(){
+  const entry = redoStack.pop();
+  if(!entry) return;
+  if(entry.action === 'add'){
+    data.registros = [...entry.records, ...data.registros];
+  } else if(entry.action === 'clear'){
+    data.registros = [];
+  }
+  undoStack.push(entry);
+  saveData(); renderAll();
+  showFeedback('Rehecho', 'ok');
+}
+
+/* ———————————— render: contexto y "Hoy" ———————————— */
+function updateContextUI(){
+  const ctx = getCurrentContext();
+  const simActivo = data.simulacion && data.simulacion.activo;
+
+  $('simPill').style.display = simActivo ? 'inline-block' : 'none';
+  $('statusPill').textContent = ctx.kind === 'clase' ? '● En curso' : ctx.kind === 'no-lectivo' ? '● ' + ctx.groupName : '● Fuera de horario lectivo';
+  $('statusPill').className = 'pill' + (ctx.kind === 'clase' ? '' : ' muted');
+
+  $('contextPills').innerHTML = ctx.kind === 'clase'
+    ? (() => { const c = groupColor(ctx.groupId); return `<span class="pill" style="background:${c.bg};color:${c.fg}">${ctx.groupName}</span><span class="pill" style="background:${c.bg};color:${c.fg}">${ctx.unitName}</span>${ctx.classroom ? `<span class="pill muted">${ctx.classroom}</span>` : ''}`; })()
+    : ctx.kind === 'no-lectivo'
+      ? `<span class="pill" style="background:${NO_LECTIVO_COLOR.bg};color:${NO_LECTIVO_COLOR.fg}">${ctx.groupName} · sin grupo de alumnos</span>`
+      : `<span class="pill muted">Sin grupo · Fuera de horario lectivo</span>`;
+
+  $('scheduleNow').textContent = ctx.entry ? `${ctx.entry.inicio} – ${ctx.entry.fin}` : 'Fuera de horario lectivo';
+  $('scheduleNowSub').textContent = ctx.groupId ? `${ctx.groupName} · ${ctx.classroom || ''}` : `${DAY_LABELS[ctx.day] || ctx.day} · ${ctx.time}`;
+
+  // La barra de texto se mantiene siempre escribible: el aviso de "sin grupo"
+  // solo aparece al intentar registrar (handleAdd), no bloqueando la escritura.
+  $('entryHint').textContent = ctx.groupId
+    ? `Escribe una frase natural. GRACCUS reconocerá al alumno de ${ctx.groupName}, o indica otro grupo (p. ej. "de 3B") para registrar fuera de esta clase.`
+    : ctx.kind === 'no-lectivo'
+      ? `Ahora mismo tienes «${ctx.groupName}». Indica el grupo en la frase (p. ej. "Luis 5 puntos de 3B") para registrar igualmente.`
+      : 'Fuera de horario lectivo. Indica el grupo en la frase (p. ej. "Luis 5 puntos de 3B") o usa el modo simulación.';
+
+  return ctx;
+}
+
+function renderToday(){
+  const today = new Date().toISOString().slice(0,10);
+  const todays = data.registros.filter(r => r.fecha === today);
+  $('points').textContent = todays.filter(r => r.tipo==='puntos').reduce((a,r) => a + (r.puntos||0), 0);
+  $('absences').textContent = todays.filter(r => r.tipo==='falta').length;
+  $('observations').textContent = todays.filter(r => r.tipo==='observación').length;
+  $('incidents').textContent = todays.filter(r => r.tipo==='incidencia').length;
+  $('laps').textContent = todays.filter(r => r.tipo==='vueltas').reduce((a,r) => a + (r.vueltas||0), 0);
+
+  $('recent').innerHTML = data.registros.length ? data.registros.slice(0,8).map(r => {
+    const alumno = data.alumnos.find(a => a.id === r.alumnoId);
+    const grupo = data.grupos.find(g => g.id === r.grupoId);
+    const unidad = data.unidades.find(u => u.id === r.unidadId);
+    return `<div class="record">${avatarHtml(alumno)}<div class="record-main"><b>${alumno ? alumno.nombre : 'Alumno eliminado'}</b><div>${r.textoInterpretado || r.textoOriginal}</div>${r.textoInterpretado && r.textoInterpretado !== r.textoOriginal ? `<div class="record-meta" style="font-style:italic">Nota original: «${r.textoOriginal}»</div>` : ''}<div class="record-meta">${r.hora} · ${grupo ? grupo.nombre : ''} · ${unidad ? unidad.nombre : 'Sin unidad'}${r.manual ? ' · registrado manualmente' : ''}</div></div><span class="tag ${tagClass(r)}">${tagLabel(r)}</span></div>`;
+  }).join('') : '<div class="empty">Todavía no hay registros. Prueba con «Luis 5 puntos».</div>';
+}
+
+/* ———————————— render: Clases ———————————— */
+function renderClasses(){
+  $('classList').innerHTML = data.grupos.map(g => {
+    const n = data.alumnos.filter(a => a.grupoId === g.id).length;
+    const unidad = data.unidades.find(u => u.grupoId === g.id && u.activa);
+    const c = groupColor(g.id);
+    const encargados = getEncargadosSemana(g.id);
+    const encargadosLine = encargados.length ? `📦 ${encargados.map(a => a.nombre.split(' ')[0]).join(', ')}` : '';
+    return `<div class="row class-row" data-id="${g.id}" style="cursor:pointer"><div class="row-info"><div class="avatar" style="background:${c.bg};color:${c.fg}">${initials(g.nombre)}</div><div><b>${g.nombre}</b><small>${n} alumnos · ${unidad ? unidad.nombre : 'Sin unidad activa'}${encargadosLine ? ' · ' + encargadosLine : ''}</small></div></div><span class="score" style="color:${c.fg}">${grupoPuntos(g.id)} pts</span></div>`;
+  }).join('');
+  document.querySelectorAll('.class-row').forEach(el => el.onclick = () => openClassRoster(el.dataset.id));
+}
+
+function setDelegado(grupoId, alumnoId){
+  const g = data.grupos.find(x => x.id === grupoId);
+  if(!g) return;
+  g.delegadoId = alumnoId || null;
+  saveData();
+  openClassRoster(grupoId);
+}
+
+/* ———————————— render: Clasificación (puntos por clase, con empates agrupados) ———————————— */
+// Trimestres calculados sobre el curso actual (empieza en septiembre), para
+// poder ver el avance "de un vistazo" sin que 25 filas hagan la vista ilegible.
+function anioEscolarInicio(){
+  const now = new Date();
+  return now.getMonth() >= 8 ? now.getFullYear() : now.getFullYear() - 1;
+}
+function getTrimestres(){
+  const y = anioEscolarInicio();
+  return [
+    { id:'t1', nombre:'1er trimestre', inicio:`${y}-09-01`, fin:`${y}-12-22` },
+    { id:'t2', nombre:'2º trimestre', inicio:`${y+1}-01-08`, fin:`${y+1}-04-01` },
+    { id:'t3', nombre:'3er trimestre', inicio:`${y+1}-04-02`, fin:`${y+1}-06-22` }
+  ];
+}
+let raceGroupId = null;
+let raceTrimestre = 'todo';
+function renderRace(){
+  if(!raceGroupId || !data.grupos.find(g => g.id === raceGroupId)){
+    // Por defecto, la clase que tengas activa ahora mismo (horario/simulación);
+    // si no hay ninguna, la primera de la lista.
+    const ctx = getCurrentContext();
+    raceGroupId = (ctx.groupId && data.grupos.find(g => g.id === ctx.groupId)) ? ctx.groupId : (data.grupos[0] ? data.grupos[0].id : null);
+  }
+  if(!raceGroupId){ $('raceControls').innerHTML = ''; $('raceTrack').innerHTML = '<div class="empty">No hay grupos todavía.</div>'; return; }
+
+  const trimestres = getTrimestres();
+  $('raceControls').innerHTML = `
+    <div class="field" style="flex:1;min-width:160px"><label>Clase</label><select id="raceGrupoSel">${data.grupos.map(g => `<option value="${g.id}" ${g.id===raceGroupId?'selected':''}>${g.nombre}</option>`).join('')}</select></div>
+    <div class="field" style="flex:1;min-width:160px"><label>Periodo</label><select id="raceTrimSel">${trimestres.map(t => `<option value="${t.id}" ${t.id===raceTrimestre?'selected':''}>${t.nombre}</option>`).join('')}<option value="todo" ${raceTrimestre==='todo'?'selected':''}>Curso completo</option></select></div>
+  `;
+  $('raceGrupoSel').onchange = e => { raceGroupId = e.target.value; renderRace(); };
+  $('raceTrimSel').onchange = e => { raceTrimestre = e.target.value; renderRace(); };
+
+  const trim = trimestres.find(t => t.id === raceTrimestre);
+  const roster = data.alumnos.filter(a => a.grupoId === raceGroupId);
+  const puntosPorAlumno = roster.map(a => {
+    const pts = data.registros.filter(r => r.alumnoId === a.id && r.tipo === 'puntos' && (raceTrimestre === 'todo' || (r.fecha >= trim.inicio && r.fecha <= trim.fin))).reduce((s,r) => s + (r.puntos||0), 0);
+    return { alumno:a, pts };
+  });
+  const maxPts = Math.max(1, ...puntosPorAlumno.map(x => x.pts));
+
+  const grupos = {};
+  puntosPorAlumno.forEach(({alumno, pts}) => { (grupos[pts] = grupos[pts] || []).push(alumno); });
+  const carriles = Object.entries(grupos).map(([pts, alumnos]) => ({ pts:Number(pts), alumnos })).sort((a,b) => b.pts - a.pts);
+
+  $('raceTrack').innerHTML = carriles.length ? carriles.map(c => {
+    const pct = Math.min(96, (c.pts / maxPts) * 96);
+    const nombres = c.alumnos.map(a => a.nombre.split(' ')[0]).join(', ');
+    return `<div class="race-lane">
+      <div class="race-line"><div class="race-camel" style="left:${pct}%">🐪</div><div class="race-flag">🏁</div></div>
+      <div class="race-label"><b>${c.pts} pts</b> — ${nombres}</div>
+    </div>`;
+  }).join('') : '<div class="empty">No hay alumnos en esta clase.</div>';
+}
+
+function renderClasses(){
+  $('classList').innerHTML = data.grupos.map(g => {
+    const n = data.alumnos.filter(a => a.grupoId === g.id).length;
+    const unidad = data.unidades.find(u => u.grupoId === g.id && u.activa);
+    const c = groupColor(g.id);
+    const encargados = getEncargadosSemana(g.id);
+    const encargadosLine = encargados.length ? `📦 ${encargados.map(a => a.nombre.split(' ')[0]).join(', ')}` : '';
+    return `<div class="row class-row" data-id="${g.id}" style="cursor:pointer"><div class="row-info"><div class="avatar" style="background:${c.bg};color:${c.fg}">${initials(g.nombre)}</div><div><b>${g.nombre}</b><small>${n} alumnos · ${unidad ? unidad.nombre : 'Sin unidad activa'}${encargadosLine ? ' · ' + encargadosLine : ''}</small></div></div><span class="score" style="color:${c.fg}">${grupoPuntos(g.id)} pts</span></div>`;
+  }).join('');
+  document.querySelectorAll('.class-row').forEach(el => el.onclick = () => openClassRoster(el.dataset.id));
+}
+
+function openClassRoster(grupoId){
+  const g = data.grupos.find(x => x.id === grupoId);
+  if(!g) return;
+  const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+  const encargados = getEncargadosSemana(grupoId);
+  const encargadosIds = new Set(encargados.map(a => a.id));
+  const count = g.encargadosPorSemana || 2;
+  $('modalContent').innerHTML = `
+    <div class="eyebrow">Clase</div>
+    <h2 style="margin-top:7px">${g.nombre}</h2>
+    <p class="sub">${roster.length} alumnos · orden alfabético · ${grupoPuntos(grupoId)} puntos en total</p>
+    <div class="row" style="margin-top:14px;background:#fffaf0;border-color:#f0d998">
+      <div><b>📦 Material esta semana</b><small>${encargados.length ? encargados.map(a => a.nombre).join(' · ') : 'Sin alumnos en el grupo'}</small></div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="simbtn" onclick="cambiarEncargadosPorSemana('${grupoId}',-1)" style="padding:5px 11px">−</button>
+        <span style="font-size:12px;color:var(--muted);white-space:nowrap">${count}/semana</span>
+        <button class="simbtn" onclick="cambiarEncargadosPorSemana('${grupoId}',1)" style="padding:5px 11px">+</button>
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px;background:#e4edfb;border-color:#c7d9f5">
+      <div><b>🅲 Delegado/a</b><small>Se marca en la lista con la insignia</small></div>
+      <select onchange="setDelegado('${grupoId}', this.value)" style="max-width:190px">
+        <option value="">— Sin delegado/a —</option>
+        ${roster.map(a => `<option value="${a.id}" ${g.delegadoId===a.id?'selected':''}>${a.nombre}</option>`).join('')}
+      </select>
+    </div>
+    <div class="list" style="margin-top:16px">${roster.map(a => `<div class="row roster-row${encargadosIds.has(a.id) ? ' roster-row-encargado' : ''}" data-id="${a.id}" style="cursor:pointer;padding:11px 14px"><div class="row-info">${avatarHtml(a,'sm')}<b style="font-size:14px">${a.nombre}</b>${g.delegadoId===a.id ? '<span class="tag" style="background:#e4edfb;color:#2f5fa8">🅲 Delegado/a</span>' : ''}${encargadosIds.has(a.id) ? '<span class="tag" style="background:#fdf0cf;color:#9a6b0a">📦 Material</span>' : ''}</div><span class="score" style="font-size:13px">${alumnoPuntos(a.id)} pts</span></div>`).join('')}</div>
+  `;
+  $('modal').style.display = 'grid';
+  document.querySelectorAll('.roster-row').forEach(el => el.onclick = () => openStudentDetail(el.dataset.id));
+  modalRefresh = () => openClassRoster(grupoId);
+}
+
+/* ———————————— render: Horario (rejilla semanal, de un vistazo) ———————————— */
+function renderSchedule(){
+  const days = ['lunes','martes','miercoles','jueves','viernes'];
+  const slots = [...new Set(data.horario.map(h => h.inicio + '|' + h.fin))]
+    .map(s => { const [inicio,fin] = s.split('|'); return { inicio, fin }; })
+    .sort((a,b) => a.inicio.localeCompare(b.inicio));
+
+  const ctx = getCurrentContext();
+
+  const header = `<tr><th></th>${days.map(d => `<th>${DAY_LABELS[d]}</th>`).join('')}</tr>`;
+
+  const rows = slots.map(slot => {
+    const cells = days.map(d => {
+      const h = data.horario.find(x => x.dia === d && x.inicio === slot.inicio && x.fin === slot.fin);
+      const isNow = h && ctx.entry && ctx.entry === h;
+      if(!h) return `<td><div class="sched-cell empty">—</div></td>`;
+      if(h.lectivo === false){
+        return `<td><div class="sched-cell${isNow?' now':''}" style="background:${NO_LECTIVO_COLOR.bg};color:${NO_LECTIVO_COLOR.fg}">${h.materia}</div></td>`;
+      }
+      const g = data.grupos.find(x => x.id === h.grupoId);
+      const c = groupColor(h.grupoId);
+      const ubicacion = h.pabellon ? '🏟️ Pabellón' : 'Pista exterior';
+      return `<td><div class="sched-cell${isNow?' now':''}${h.pabellon?' pabellon':''}" style="background:${c.bg};color:${c.fg}">${h.materia}<small>${g ? g.nombre : '—'}</small><small style="font-weight:700">${ubicacion}</small></div></td>`;
+    }).join('');
+    return `<tr><td class="sched-time">${slot.inicio}–${slot.fin}</td>${cells}</tr>`;
+  }).join('');
+
+  $('scheduleGrid').innerHTML = `<table class="sched-table">${header}${rows}</table>`;
+}
+
+/* ———————————— render: Calendario del curso ———————————— */
+let calMonthOffset = 0;
+const MES_NOMBRES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+function calFechaBase(){
+  const d = new Date();
+  d.setDate(1);
+  d.setMonth(d.getMonth() + calMonthOffset);
+  return d;
+}
+function renderCalendar(){
+  const base = calFechaBase();
+  const year = base.getFullYear(), month = base.getMonth();
+  const startWeekday = (new Date(year, month, 1).getDay() + 6) % 7; // lunes = 0
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  $('calTitle').textContent = MES_NOMBRES[month].charAt(0).toUpperCase() + MES_NOMBRES[month].slice(1) + ' ' + year;
+
+  const todayStr = new Date().toISOString().slice(0,10);
+  let html = '<div class="cal-grid">';
+  ['L','M','X','J','V','S','D'].forEach(d => html += `<div class="cal-head">${d}</div>`);
+  for(let i = 0; i < startWeekday; i++) html += '<div class="cal-cell empty"></div>';
+  for(let day = 1; day <= daysInMonth; day++){
+    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const eventos = data.calendario.filter(e => e.fecha === dateStr);
+    const isToday = dateStr === todayStr;
+    html += `<div class="cal-cell${isToday?' today':''}${eventos.length?' has-event':''}" data-date="${dateStr}" title="${eventos.map(e=>e.titulo).join(', ')}"><span>${day}</span>${eventos.length ? '<div class="cal-dot"></div>' : ''}</div>`;
+  }
+  html += '</div>';
+  $('calGrid').innerHTML = html;
+  document.querySelectorAll('.cal-cell:not(.empty)').forEach(el => el.onclick = () => openCalendarDay(el.dataset.date));
+
+  const proximos = data.calendario.filter(e => e.fecha >= todayStr).sort((a,b) => a.fecha.localeCompare(b.fecha)).slice(0, 8);
+  $('calUpcoming').innerHTML = proximos.length
+    ? proximos.map(e => `<div class="row"><div><b>${e.titulo}</b><small>${e.fecha}</small></div></div>`).join('')
+    : '<div class="empty">No hay eventos próximos anotados.</div>';
+}
+function openCalendarDay(dateStr){
+  const eventos = data.calendario.filter(e => e.fecha === dateStr);
+  $('modalContent').innerHTML = `
+    <div class="eyebrow">Calendario</div>
+    <h2 style="margin-top:7px">${dateStr}</h2>
+    <div class="list" style="margin-top:12px">${eventos.length ? eventos.map(e => `<div class="row"><div><b>${e.titulo}</b></div><button class="link" onclick="deleteCalEvent('${e.id}','${dateStr}')">Quitar</button></div>`).join('') : '<div class="empty">Sin eventos este día.</div>'}</div>
+    <div class="field" style="margin-top:16px"><label>Añadir evento</label><input type="text" id="calNewTitle" placeholder="Ej.: Excursión a la piscina"></div>
+    <div class="modal-actions"><button class="primary" style="height:44px;flex:1" onclick="addCalEvent('${dateStr}')">Añadir</button></div>
+  `;
+  $('modal').style.display = 'grid';
+  $('calNewTitle').onkeydown = e => { if(e.key === 'Enter') addCalEvent(dateStr); };
+}
+function addCalEvent(dateStr){
+  const input = $('calNewTitle');
+  const titulo = input.value.trim();
+  if(!titulo) return;
+  data.calendario.push({ id:'c_' + Date.now() + '_' + Math.random().toString(36).slice(2,7), fecha:dateStr, titulo });
+  saveData();
+  renderCalendar();
+  openCalendarDay(dateStr);
+}
+function deleteCalEvent(id, dateStr){
+  data.calendario = data.calendario.filter(e => e.id !== id);
+  saveData();
+  renderCalendar();
+  openCalendarDay(dateStr);
+}
+
+/* ———————————— render: Unidades (catálogo de contenidos) ———————————— */
+function renderUnits(){
+  $('unitList').innerHTML = data.unidades.map(u => {
+    const g = data.grupos.find(x => x.id === u.grupoId);
+    return `<div class="row"><div class="row-info"><span style="font-size:20px">📁</span><div><b>${u.nombre}</b><small>${g ? g.nombre : 'Catálogo general · sin asignar a una clase'}</small></div></div></div>`;
+  }).join('');
+}
+
+/* ———————————— render: Alumnos ———————————— */
+// La pestaña "Alumnos" se ha retirado: ahora se accede a cada alumno desde
+// la ficha de su grupo, en "Grupos y alumnos" (openClassRoster).
+
+function openStudentDetail(id){
+  const a = data.alumnos.find(x => x.id === id);
+  if(!a) return;
+  const g = data.grupos.find(x => x.id === a.grupoId);
+  const historial = alumnoHistorial(id);
+
+  const filasEval = data.unidades.map(u => {
+    const ev = getEval(id, u.id);
+    const pts = puntosPorUnidad(id, u.id);
+    return `<tr>
+      <td class="eval-unit">${u.nombre}</td>
+      <td><input type="text" placeholder="—" value="${ev.exposicion}" onchange="setEval('${id}','${u.id}','exposicion',this.value)"></td>
+      <td><input type="number" min="0" placeholder="0" value="${ev.retrasos}" onchange="setEval('${id}','${u.id}','retrasos',this.value)"></td>
+      <td><input type="number" min="0" placeholder="0" value="${ev.asistencia}" onchange="setEval('${id}','${u.id}','asistencia',this.value)"></td>
+      <td class="eval-puntos">${pts}</td>
+      <td><select onchange="setEval('${id}','${u.id}','actitud',this.value)">${['—','Excelente','Buena','Mejorable','Deficiente'].map(op => `<option ${ev.actitud===op?'selected':''}>${op}</option>`).join('')}</select></td>
+      <td><input type="text" placeholder="—" value="${ev.notas}" onchange="setEval('${id}','${u.id}','notas',this.value)"></td>
+    </tr>`;
+  }).join('');
+
+  $('modalContent').innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px">
+      <label class="photo-upload" title="Cambiar foto">${avatarHtml(a,'lg')}<input type="file" accept="image/*" onchange="handleFotoUpload('${a.id}', this)"></label>
+      <div><div class="eyebrow">Ficha individual</div><h2 style="margin:2px 0 0">${a.nombre}</h2>${a.foto ? `<button class="link" style="font-size:11px;padding:0" onclick="removeAlumnoFoto('${a.id}')">Quitar foto</button>` : `<span class="sub" style="font-size:11px">Toca la foto para añadirla</span>`}</div>
+    </div>
+    <p class="sub" style="margin-top:10px">${g ? g.nombre : ''} · ${alumnoPuntos(id)} puntos acumulados</p>
+    <div class="section-head" style="margin-top:22px"><h2 style="margin:0">Evaluación por unidad</h2></div>
+    <div class="eval-wrap"><table class="eval-table"><thead><tr><th>Unidad</th><th>Exposición</th><th>Retrasos</th><th>Asistencia</th><th>Puntos</th><th>Actitud</th><th>Notas</th></tr></thead><tbody>${filasEval}</tbody></table></div>
+    <p class="hint">Puntos se calcula solo a partir de los registros; el resto se guarda al escribir.</p>
+    <div class="section-head"><h2 style="margin:0">Historial de registros</h2></div>
+    <div>${historial.length ? historial.map(r => `<div class="record"><div class="record-main"><b>${r.textoInterpretado || r.textoOriginal}</b>${r.textoInterpretado && r.textoInterpretado !== r.textoOriginal ? `<div class="record-meta" style="font-style:italic">Nota original: «${r.textoOriginal}»</div>` : ''}<div class="record-meta">${r.fecha} · ${r.hora} · ${tagLabel(r)}</div></div></div>`).join('') : '<div class="empty">Sin historial todavía.</div>'}</div>`;
+  $('modal').style.display = 'grid';
+  modalRefresh = () => openStudentDetail(id);
+}
+
+/* ———————————— modo simulación ———————————— */
+function openSimModal(){
+  const s = data.simulacion || { activo:false, dia:'lunes', hora:'10:20' };
+  $('simModalContent').innerHTML = `
+    <div class="eyebrow">Motor de contexto</div>
+    <h2 style="margin-top:7px">Modo simulación</h2>
+    <p class="sub">Selecciona día y hora para comprobar qué grupo detecta GRACCUS, sin esperar a que llegue esa clase.</p>
+    <div class="switch-row"><span><b>Activar simulación</b><br><small style="color:var(--muted)">Sustituye la hora real del dispositivo</small></span><input type="checkbox" id="simActivo" ${s.activo ? 'checked' : ''}></div>
+    <div class="field"><label>Día</label><select id="simDia">${['lunes','martes','miercoles','jueves','viernes','sabado','domingo'].map(d => `<option value="${d}" ${s.dia===d?'selected':''}>${DAY_LABELS[d]}</option>`).join('')}</select></div>
+    <div class="field"><label>Hora</label><input type="time" id="simHora" value="${s.hora}"></div>
+    <div class="modal-actions"><button class="primary" id="simSave" style="height:44px;flex:1">Guardar</button></div>
+  `;
+  $('simModal').style.display = 'grid';
+  $('simSave').onclick = () => {
+    data.simulacion = {
+      activo: $('simActivo').checked,
+      dia: $('simDia').value,
+      hora: $('simHora').value || '00:00'
+    };
+    saveData();
+    $('simModal').style.display = 'none';
+    renderAll();
+  };
+}
+
+/* ———————————— render maestro ———————————— */
+// Cada sección se pinta en su propio try/catch: si una diera un error puntual,
+// no debe impedir que las demás (puntos, clasificación, etc.) se actualicen igualmente.
+function renderAll(){
+  try{ updateContextUI(); }catch(e){ console.error('updateContextUI', e); }
+  try{ renderToday(); }catch(e){ console.error('renderToday', e); }
+  try{ renderClasses(); }catch(e){ console.error('renderClasses', e); }
+  try{ renderRace(); }catch(e){ console.error('renderRace', e); }
+  try{ renderSchedule(); }catch(e){ console.error('renderSchedule', e); }
+  try{ renderCalendar(); }catch(e){ console.error('renderCalendar', e); }
+  try{ renderUnits(); }catch(e){ console.error('renderUnits', e); }
+  try{ updateUndoRedoButtons(); }catch(e){ console.error('updateUndoRedoButtons', e); }
+  // Si hay una ficha de alumno o de clase abierta, se vuelve a pintar con los
+  // datos frescos (para que dar puntos con la ficha abierta se note al momento).
+  if($('modal').style.display === 'grid' && modalRefresh){
+    try{ modalRefresh(); }catch(e){ console.error('modalRefresh', e); }
+  }
+}
+
+/* ———————————— eventos ———————————— */
+document.querySelectorAll('.nav button').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.nav button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  $(b.dataset.view).classList.add('active');
+});
+$('phrase').onkeydown = e => { if(e.key === 'Enter') handleAdd(); };
+$('clearAll').onclick = () => {
+  if(confirm('¿Eliminar todos los registros?')){
+    undoStack.push({ action:'clear', records: data.registros.slice() });
+    redoStack = [];
+    data.registros = [];
+    saveData(); renderAll();
+  }
+};
+$('undoBtn').onclick = performUndo;
+$('redoBtn').onclick = performRedo;
+$('close').onclick = () => { $('modal').style.display = 'none'; modalRefresh = null; };
+$('modal').onclick = e => { if(e.target.id === 'modal'){ $('modal').style.display = 'none'; modalRefresh = null; } };
+$('openSim').onclick = openSimModal;
+$('simClose').onclick = () => $('simModal').style.display = 'none';
+$('simModal').onclick = e => { if(e.target.id === 'simModal') $('simModal').style.display = 'none'; };
+$('calPrev').onclick = () => { calMonthOffset--; renderCalendar(); };
+$('calNext').onclick = () => { calMonthOffset++; renderCalendar(); };
+
+$('date').textContent = new Date().toLocaleDateString('es-ES', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+setupVoice();
+renderAll();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js', {scope:'./'})
+      .catch(err => console.warn('GRACCUS: service worker no disponible', err));
+  });
+}
+</script>
+
+</body></html>

@@ -1,0 +1,28 @@
+GRACCUS 0.12 — PWA para iPhone
+
+CONTENIDO
+- index.html: página principal para publicar.
+- graccus-0.12.html: misma aplicación con nombre de versión.
+- manifest.json: configuración PWA.
+- service-worker.js: funcionamiento offline/caché.
+- iconos/: iconos para iPhone/PWA.
+
+IMPORTANTE
+GRACCUS necesita abrirse desde HTTPS (o localhost) para poder instalarse como PWA.
+El archivo file:///... del PC no se puede instalar directamente en el iPhone.
+
+DATOS
+La aplicación usa localStorage. Los datos quedan guardados en el navegador/dispositivo y
+no se sincronizan automáticamente entre PC e iPhone. La primera vez que abras la versión
+publicada en el iPhone, será un almacenamiento nuevo.
+
+INSTALACIÓN EN IPHONE
+1. Publica esta carpeta en un sitio HTTPS.
+2. Abre la dirección en Safari del iPhone.
+3. Pulsa Compartir.
+4. Pulsa "Añadir a pantalla de inicio".
+5. Abre GRACCUS desde el icono de la pantalla de inicio.
+
+USO PERSONAL
+No se ha añadido ningún sistema de usuarios, registro ni servidor de datos. Es una PWA
+personal; la privacidad real dependerá también del servicio donde publiques los archivos.
