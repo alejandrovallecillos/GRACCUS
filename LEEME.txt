@@ -1,14 +1,6 @@
-GRACCUS 0.16 — PWA para iPhone
+GRACCUS 0.17
 
-CAMBIOS DE ESTA VERSIÓN
-- Ajuste de la navegación inferior a 5 iconos.
-- Icono de Alumnos recuperado con el peto y aclarado visualmente.
-- Horario usa un reloj rojo dibujado, claramente distinto del calendario.
-- Calendario recupera el icono de calendario anterior.
-- La G de Inicio adopta el lenguaje visual del icono de la app: fondo verde, contorno oscuro y punto naranja, en formato circular.
-- Más espacio seguro en la parte superior para evitar solapamientos con la hora, batería y zona superior del iPhone.
-- Registros más compactos: nombre arriba, puntuación/acción debajo y hora de forma discreta.
-- Se mantienen las mejoras funcionales de la versión 0.15: micrófono dentro de la barra de escritura, botón Intro independiente, clases del día, navegación directa a la clase, calendario con fines de semana/festivos y grupos del curso actual.
+Versión de prueba para el curso 2026/27.
+Incluye horario de ejemplo, registro por lenguaje natural, ausencias, grupos de trabajo y mejoras para iPhone.
 
-DATOS
-La aplicación usa localStorage. Los datos quedan guardados en el navegador/dispositivo y no se sincronizan automáticamente entre PC e iPhone.
+Para probarla en GitHub Pages, abre la raíz del repositorio. El index.html apunta a esta versión.

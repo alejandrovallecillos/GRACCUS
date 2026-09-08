@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#12202d"><meta name="description" content="GRACCUS — registro docente mediante lenguaje natural">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="theme-color" content="#12202d"><meta name="description" content="GRACCUS — registro docente mediante lenguaje natural">
 <title>graccus</title>
 <style>
-:root{--ink:#12202d;--muted:#6c7883;--line:#e5e9ec;--paper:#f7f8f9;--card:#fff;--accent:#2d7d73;--accent-soft:#e5f2ef;--orange:#c97832;--orange-soft:#fbeee0;--danger:#b94b4b;--shadow:0 8px 28px #12202d0b}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0}.app{display:flex;min-height:100vh}.sidebar{width:244px;background:var(--ink);color:#fff;padding:26px 16px;display:flex;flex-direction:column;gap:28px;position:relative;z-index:2}.corner-ball{position:fixed;top:-42px;left:202px;width:84px;height:84px;display:flex;align-items:center;justify-content:center;font-size:60px;line-height:1;z-index:1;pointer-events:none;user-select:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.2))}.brand{padding:0 14px}.brand strong{font-size:25px;letter-spacing:.15em}.brand small{display:block;color:#9eabb5;margin-top:3px;font-size:11px;letter-spacing:.08em}.brand-subject{display:inline-block;margin-top:9px;background:#ffffff1a;color:#bfe8e0;border:1px solid #ffffff26;border-radius:20px;padding:3px 10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}.nav{display:grid;gap:6px}.nav button{background:transparent;color:#c2cbd0;text-align:left;padding:12px 14px;border-radius:9px;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#ffffff14;color:white}.nav b{font-size:17px;width:20px;text-align:center}.sidebar-footer{margin-top:auto;color:#86949d;font-size:12px;padding:0 14px}.main{flex:1;max-width:1200px;margin:auto;padding:calc(28px + env(safe-area-inset-top)) 34px calc(60px + env(safe-area-inset-bottom))}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:10px;flex-wrap:wrap}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--muted);font-weight:700}.date{font-size:14px;color:var(--muted)}.topbar-actions{display:flex;gap:8px;align-items:center}.view{display:none}.view.active{display:block}.secondary-view .topbar{display:none}h1{font-size:32px;letter-spacing:-.04em;margin:4px 0 6px}h2{font-size:20px;margin:0 0 16px;letter-spacing:-.02em}h3{font-size:16px;margin:0 0 4px}.sub{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:1.3fr .7fr;gap:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}.context{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}.pill{background:var(--accent-soft);color:var(--accent);border-radius:30px;padding:7px 11px;font-size:12px;font-weight:700}.pill.sim{background:var(--orange-soft);color:var(--orange)}.pill.muted{background:#f0f2f3;color:var(--muted)}.simbtn{background:#fff;border:1px solid var(--line);color:var(--ink);padding:9px 13px;border-radius:9px;font-size:12px;font-weight:700}.simbtn:hover{border-color:var(--accent);color:var(--accent)}.entry-card{margin-top:18px}.entry{display:flex;gap:10px}.entry input{flex:1;min-width:0;border:1px solid #cfd7dc;border-radius:10px;padding:15px 16px;outline:0}.entry input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #2d7d7317}.entry input:disabled{background:#f3f4f5;color:var(--muted)}.primary{background:var(--accent);color:#fff;padding:0 20px;border-radius:10px;font-weight:700}.primary:disabled{background:#a9c4c0;cursor:not-allowed}.voice{background:#eef1f3;color:var(--ink);width:64px;border-radius:10px;font-size:28px;position:relative;transition:background .1s,color .1s;touch-action:none;user-select:none;-webkit-user-select:none}.voice.listening{background:var(--danger);color:#fff;animation:pulse 1.1s ease-in-out infinite}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #b94b4b55}50%{box-shadow:0 0 0 8px #b94b4b00}}.hint{color:var(--muted);font-size:12px;margin-top:12px}.feedback{font-size:12px;margin-top:8px;min-height:15px;font-weight:600}.feedback.ok{color:var(--accent)}.feedback.warn{color:var(--orange)}.feedback.error{color:var(--danger)}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}.metric{padding:16px;background:#fbfcfc;border:1px solid var(--line);border-radius:10px}.metric strong{display:block;font-size:24px}.metric span{color:var(--muted);font-size:12px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:30px 0 13px}.link{background:transparent;color:var(--accent);font-weight:700;font-size:13px}.link:disabled{opacity:.35;cursor:not-allowed}.avatar-img{height:36px;width:36px;border-radius:50%;object-fit:cover;flex-shrink:0}.avatar-img.sm{height:30px;width:30px}.avatar-img.lg{height:64px;width:64px}.avatar.sm{height:30px;width:30px;font-size:12px}.avatar.lg{height:64px;width:64px;font-size:22px}.photo-upload{position:relative;cursor:pointer;display:inline-block;border-radius:50%}.photo-upload::after{content:'📷';position:absolute;right:-2px;bottom:-2px;background:var(--ink);color:#fff;border-radius:50%;width:20px;height:20px;font-size:11px;display:flex;align-items:center;justify-content:center}.photo-upload input{display:none}.record{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--line)}.record:last-child{border-bottom:0}.avatar{height:36px;width:36px;background:#e9eff0;color:var(--accent);border-radius:50%;display:grid;place-items:center;font-weight:700;flex-shrink:0}.record-main{flex:1;min-width:0}.record-meta{font-size:12px;color:var(--muted);margin-top:3px}.tag{font-size:11px;padding:4px 7px;border-radius:5px;background:#f0f2f3;color:var(--muted);height:max-content;white-space:nowrap}.positive{color:var(--accent);background:var(--accent-soft)}.absent{color:var(--danger);background:#fbecec}.absence-mark{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#fbecec;color:var(--danger);font-size:13px;font-weight:900;margin-left:5px;flex-shrink:0}.roster-row-absent{border-color:#efcaca;background:#fffafa}.incident{color:var(--orange);background:var(--orange-soft)}.list{display:grid;gap:10px}.row{display:flex;justify-content:space-between;align-items:center;padding:17px 18px;background:#fff;border:1px solid var(--line);border-radius:11px;gap:12px}.roster-row-encargado{background:#fffaf0;border-color:#f0d998}.roster-row-delegado{box-shadow:inset 3px 0 0 #2f5fa8}.delegate-btn{padding:5px 8px;min-width:32px}.row-info{display:flex;gap:13px;align-items:center;min-width:0}.row small{display:block;color:var(--muted);margin-top:2px}.score{font-weight:800;color:var(--accent);white-space:nowrap}.toolbar{display:flex;gap:10px;margin:20px 0}.toolbar input{border:1px solid var(--line);padding:11px 13px;border-radius:9px;flex:1}.empty{color:var(--muted);padding:20px 0}.toast{display:none}.modal{position:fixed;inset:0;background:#12202d66;display:none;place-items:center;padding:20px;z-index:3}.modal .card{max-width:min(680px,92vw);width:100%;max-height:86vh;overflow:auto}.close{float:right;background:none;font-size:20px;color:var(--muted)}.field{margin:14px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}.field select,.field input[type=time]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}.switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0;padding:12px 14px;background:#fbfcfc;border:1px solid var(--line);border-radius:10px}.switch-row input{width:18px;height:18px}.modal-actions{display:flex;gap:10px;margin-top:18px}.sched-table{width:100%;border-collapse:separate;border-spacing:6px;min-width:640px}.sched-table th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:4px 8px;text-align:left}.sched-time{font-size:12px;color:var(--muted);white-space:nowrap;font-weight:700;padding-right:6px}.sched-cell{border-radius:9px;padding:10px 11px;font-size:12px;font-weight:700;min-height:46px;display:flex;flex-direction:column;justify-content:center;gap:2px;line-height:1.25}.sched-cell.clase{background:var(--accent-soft);color:var(--accent)}.sched-cell.no-lectivo{background:var(--orange-soft);color:var(--orange)}.sched-cell.empty{background:transparent;border:1px dashed var(--line);color:var(--muted);font-weight:400}.sched-cell small{font-weight:400;opacity:.75;font-size:11px}.sched-cell.now{box-shadow:0 0 0 2px var(--ink) inset}.sched-cell.pabellon{border:2px solid #c97832}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal-head{font-size:11px;text-transform:uppercase;color:var(--muted);text-align:center;padding:4px 0;font-weight:700}.cal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:8px;border:1px solid var(--line);cursor:pointer;font-size:13px;position:relative}.cal-cell.empty{border-color:transparent;cursor:default}.cal-cell.today{border-color:var(--accent);font-weight:700;color:var(--accent)}.cal-cell.has-event{background:var(--accent-soft)}.cal-cell:hover:not(.empty){border-color:var(--accent)}.cal-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}.eval-wrap{overflow-x:auto;margin-top:8px}.eval-table{width:100%;border-collapse:collapse;min-width:620px;font-size:12px}.eval-table th{text-align:left;padding:6px 7px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}.eval-table td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:middle}.eval-table tr:last-child td{border-bottom:0}.eval-table input,.eval-table select{width:100%;border:1px solid var(--line);border-radius:6px;padding:5px 6px;font-size:12px;background:#fff;color:var(--ink)}.eval-table input[type=number]{width:52px}.eval-table td.eval-unit{font-weight:700;white-space:nowrap;padding-right:10px}.eval-table td.eval-puntos{font-weight:700;color:var(--accent);text-align:center}.race-lane{margin-bottom:16px}.race-line{position:relative;height:36px;background:repeating-linear-gradient(90deg,#f3ede0,#f3ede0 18px,#ece5d5 18px,#ece5d5 20px);border-radius:8px;border:1px solid var(--line);margin-bottom:5px;overflow:visible}.race-line::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:4px;border-radius:50%;background:repeating-linear-gradient(90deg,#d9c28f 0 14px,#ead9ae 14px 28px);opacity:.85}.race-camel{position:absolute;top:50%;transform:translate(-50%,-50%) scaleX(-1);font-size:24px;transition:left .4s ease;z-index:2}.race-flag{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:18px}.race-label{font-size:12px;color:var(--muted)}.race-label b{color:var(--ink)}@media(max-width:760px){.corner-ball{display:none}.app{display:block}.sidebar{position:fixed;bottom:0;left:0;right:0;width:auto;height:calc(72px + env(safe-area-inset-bottom));padding:6px 6px env(safe-area-inset-bottom);z-index:20;border-top:1px solid #ffffff18}.brand,.sidebar-footer{display:none}.nav{display:flex;justify-content:space-around;gap:2px}.nav button{padding:7px 8px;display:grid;gap:0;justify-items:center;text-align:center;font-size:10px;border-radius:8px;min-width:42px}.nav button span{display:none}.nav b{font-size:22px;width:auto}.main{padding:calc(14px + env(safe-area-inset-top)) 14px calc(92px + env(safe-area-inset-bottom))}.topbar{margin-bottom:18px}.topbar .eyebrow{font-size:10px}.grid{display:block}.right-card{margin-top:18px}h1{font-size:28px;margin-top:2px}.entry{display:grid;grid-template-columns:1fr 58px 58px}.metrics{grid-template-columns:repeat(3,1fr)}.card{padding:17px}.section-head{flex-wrap:nowrap}.section-head h2{white-space:nowrap}.section-head>div{flex-shrink:0}.date{font-size:12px}.race-line{height:40px;border-radius:10px}.race-camel{font-size:25px}.modal{padding:calc(12px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom))}.modal .card{max-height:calc(92vh - env(safe-area-inset-top) - env(safe-area-inset-bottom))}}
+:root{--ink:#12202d;--muted:#6c7883;--line:#e5e9ec;--paper:#f7f8f9;--card:#fff;--accent:#2d7d73;--accent-soft:#e5f2ef;--orange:#c97832;--orange-soft:#fbeee0;--danger:#b94b4b;--shadow:0 8px 28px #12202d0b}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0}.app{display:flex;min-height:100vh}.sidebar{width:244px;background:var(--ink);color:#fff;padding:26px 16px;display:flex;flex-direction:column;gap:28px;position:relative;z-index:2}.corner-ball{position:fixed;top:-42px;left:202px;width:84px;height:84px;display:flex;align-items:center;justify-content:center;font-size:60px;line-height:1;z-index:1;pointer-events:none;user-select:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.2))}.brand{padding:0 14px}.brand strong{font-size:25px;letter-spacing:.15em}.brand small{display:block;color:#9eabb5;margin-top:3px;font-size:11px;letter-spacing:.08em}.brand-subject{display:inline-block;margin-top:9px;background:#ffffff1a;color:#bfe8e0;border:1px solid #ffffff26;border-radius:20px;padding:3px 10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}.nav{display:grid;gap:6px}.nav button{background:transparent;color:#c2cbd0;text-align:left;padding:12px 14px;border-radius:9px;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#ffffff14;color:white}.nav b{font-size:17px;width:20px;text-align:center}.sidebar-footer{margin-top:auto;color:#86949d;font-size:12px;padding:0 14px}.main{flex:1;max-width:1200px;margin:auto;padding:calc(28px + env(safe-area-inset-top)) 34px calc(60px + env(safe-area-inset-bottom))}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:10px;flex-wrap:wrap}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--muted);font-weight:700}.date{font-size:14px;color:var(--muted)}.topbar-actions{display:flex;gap:8px;align-items:center}.view{display:none}.view.active{display:block}.secondary-view .topbar{display:none}h1{font-size:32px;letter-spacing:-.04em;margin:4px 0 6px}h2{font-size:20px;margin:0 0 16px;letter-spacing:-.02em}h3{font-size:16px;margin:0 0 4px}.sub{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:1.3fr .7fr;gap:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}.context{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}.pill{background:var(--accent-soft);color:var(--accent);border-radius:30px;padding:7px 11px;font-size:12px;font-weight:700}.pill.sim{background:var(--orange-soft);color:var(--orange)}.pill.muted{background:#f0f2f3;color:var(--muted)}.simbtn{background:#fff;border:1px solid var(--line);color:var(--ink);padding:9px 13px;border-radius:9px;font-size:12px;font-weight:700}.simbtn:hover{border-color:var(--accent);color:var(--accent)}.entry-card{margin-top:18px}.entry{display:flex;gap:10px}.entry input{flex:1;min-width:0;border:1px solid #cfd7dc;border-radius:10px;padding:15px 16px;outline:0}.entry input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #2d7d7317}.entry input:disabled{background:#f3f4f5;color:var(--muted)}.primary{background:var(--accent);color:#fff;padding:0 20px;border-radius:10px;font-weight:700}.primary:disabled{background:#a9c4c0;cursor:not-allowed}.voice{background:#eef1f3;color:var(--ink);width:64px;border-radius:10px;font-size:28px;position:relative;transition:background .1s,color .1s;touch-action:none;user-select:none;-webkit-user-select:none}.voice.listening{background:var(--danger);color:#fff;animation:pulse 1.1s ease-in-out infinite}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #b94b4b55}50%{box-shadow:0 0 0 8px #b94b4b00}}.hint{color:var(--muted);font-size:12px;margin-top:12px}.feedback{font-size:12px;margin-top:8px;min-height:15px;font-weight:600}.feedback.ok{color:var(--accent)}.feedback.warn{color:var(--orange)}.feedback.error{color:var(--danger)}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}.metric{padding:16px;background:#fbfcfc;border:1px solid var(--line);border-radius:10px}.metric strong{display:block;font-size:24px}.metric span{color:var(--muted);font-size:12px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:30px 0 13px}.link{background:transparent;color:var(--accent);font-weight:700;font-size:13px}.link:disabled{opacity:.35;cursor:not-allowed}.avatar-img{height:36px;width:36px;border-radius:50%;object-fit:cover;flex-shrink:0}.avatar-img.sm{height:30px;width:30px}.avatar-img.lg{height:64px;width:64px}.avatar.sm{height:30px;width:30px;font-size:12px}.avatar.lg{height:64px;width:64px;font-size:22px}.photo-upload{position:relative;cursor:pointer;display:inline-block;border-radius:50%}.photo-upload::after{content:'📷';position:absolute;right:-2px;bottom:-2px;background:var(--ink);color:#fff;border-radius:50%;width:20px;height:20px;font-size:11px;display:flex;align-items:center;justify-content:center}.photo-upload input{display:none}.record{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--line)}.record:last-child{border-bottom:0}.avatar{height:36px;width:36px;background:#e9eff0;color:var(--accent);border-radius:50%;display:grid;place-items:center;font-weight:700;flex-shrink:0}.record-main{flex:1;min-width:0}.record-meta{font-size:12px;color:var(--muted);margin-top:3px}.tag{font-size:11px;padding:4px 7px;border-radius:5px;background:#f0f2f3;color:var(--muted);height:max-content;white-space:nowrap}.positive{color:var(--accent);background:var(--accent-soft)}.absent{color:var(--danger);background:#fbecec}.absence-mark{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#fbecec;color:var(--danger);font-size:13px;font-weight:900;margin-left:5px;flex-shrink:0}.roster-row-absent{border-color:#efcaca;background:#fffafa}.incident{color:var(--orange);background:var(--orange-soft)}.list{display:grid;gap:10px}.row{display:flex;justify-content:space-between;align-items:center;padding:17px 18px;background:#fff;border:1px solid var(--line);border-radius:11px;gap:12px}.roster-row-encargado{background:#fffaf0;border-color:#f0d998}.roster-row-delegado{box-shadow:inset 3px 0 0 #2f5fa8}.delegate-btn{padding:5px 8px;min-width:32px}.row-info{display:flex;gap:13px;align-items:center;min-width:0}.row small{display:block;color:var(--muted);margin-top:2px}.score{font-weight:800;color:var(--accent);white-space:nowrap}.toolbar{display:flex;gap:10px;margin:20px 0}.toolbar input{border:1px solid var(--line);padding:11px 13px;border-radius:9px;flex:1}.empty{color:var(--muted);padding:20px 0}.toast{display:none}.modal{position:fixed;inset:0;background:#12202d66;display:none;place-items:center;padding:20px;z-index:3}.modal .card{max-width:min(680px,92vw);width:100%;max-height:86vh;overflow:auto}.close{float:right;background:none;font-size:20px;color:var(--muted)}.field{margin:14px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}.field select,.field input[type=time]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff}.switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0;padding:12px 14px;background:#fbfcfc;border:1px solid var(--line);border-radius:10px}.switch-row input{width:18px;height:18px}.modal-actions{display:flex;gap:10px;margin-top:18px}.sched-table{width:100%;border-collapse:separate;border-spacing:6px;min-width:640px}.sched-table th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:4px 8px;text-align:left}.sched-time{font-size:12px;color:var(--muted);white-space:nowrap;font-weight:700;padding-right:6px}.sched-cell{border-radius:9px;padding:10px 11px;font-size:12px;font-weight:700;min-height:46px;display:flex;flex-direction:column;justify-content:center;gap:2px;line-height:1.25}.sched-cell.clase{background:var(--accent-soft);color:var(--accent)}.sched-cell.no-lectivo{background:var(--orange-soft);color:var(--orange)}.sched-cell.empty{background:transparent;border:1px dashed var(--line);color:var(--muted);font-weight:400}.sched-cell small{font-weight:400;opacity:.75;font-size:11px}.sched-cell.now{box-shadow:0 0 0 2px var(--ink) inset}.sched-cell.pabellon{border:2px solid #c97832}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal-head{font-size:11px;text-transform:uppercase;color:var(--muted);text-align:center;padding:4px 0;font-weight:700}.cal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:8px;border:1px solid var(--line);cursor:pointer;font-size:13px;position:relative}.cal-cell.empty{border-color:transparent;cursor:default}.cal-cell.today{border-color:var(--accent);font-weight:700;color:var(--accent)}.cal-cell.has-event{background:var(--accent-soft)}.cal-cell:hover:not(.empty){border-color:var(--accent)}.cal-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}.eval-wrap{overflow-x:auto;margin-top:8px}.eval-table{width:100%;border-collapse:collapse;min-width:620px;font-size:12px}.eval-table th{text-align:left;padding:6px 7px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}.eval-table td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:middle}.eval-table tr:last-child td{border-bottom:0}.eval-table input,.eval-table select{width:100%;border:1px solid var(--line);border-radius:6px;padding:5px 6px;font-size:12px;background:#fff;color:var(--ink)}.eval-table input[type=number]{width:52px}.eval-table td.eval-unit{font-weight:700;white-space:nowrap;padding-right:10px}.eval-table td.eval-puntos{font-weight:700;color:var(--accent);text-align:center}.race-lane{margin-bottom:16px}.race-line{position:relative;height:36px;background:repeating-linear-gradient(90deg,#f3ede0,#f3ede0 18px,#ece5d5 18px,#ece5d5 20px);border-radius:8px;border:1px solid var(--line);margin-bottom:5px;overflow:visible}.race-line::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:4px;border-radius:50%;background:repeating-linear-gradient(90deg,#d9c28f 0 14px,#ead9ae 14px 28px);opacity:.85}.race-camel{position:absolute;top:50%;transform:translate(-50%,-50%) scaleX(-1);font-size:24px;transition:left .4s ease;z-index:2}.race-flag{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:18px}.race-label{font-size:12px;color:var(--muted)}.race-label b{color:var(--ink)}@media(max-width:760px){.corner-ball{display:none}.app{display:block}.sidebar{position:fixed;bottom:0;left:0;right:0;width:auto;height:calc(72px + env(safe-area-inset-bottom));padding:6px 6px env(safe-area-inset-bottom);z-index:20;border-top:1px solid #ffffff18}.brand,.sidebar-footer{display:none}.nav{display:flex;justify-content:space-around;gap:2px}.nav button{padding:7px 8px;display:grid;gap:0;justify-items:center;text-align:center;font-size:10px;border-radius:8px;min-width:42px}.nav button span{display:none}.nav b{font-size:22px;width:auto}.main{padding:calc(14px + env(safe-area-inset-top)) 14px calc(74px + env(safe-area-inset-bottom))}.topbar{margin-bottom:18px}.topbar .eyebrow{font-size:10px}.grid{display:block}.right-card{margin-top:18px}h1{font-size:28px;margin-top:2px}.entry{display:grid;grid-template-columns:1fr 58px 58px}.metrics{grid-template-columns:repeat(3,1fr)}.card{padding:17px}.section-head{flex-wrap:nowrap}.section-head h2{white-space:nowrap}.section-head>div{flex-shrink:0}.date{font-size:12px}.race-line{height:40px;border-radius:10px}.race-camel{font-size:25px}.modal{padding:calc(12px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom))}.modal .card{max-height:calc(92vh - env(safe-area-inset-top) - env(safe-area-inset-bottom))}}
 
 .daily-classes{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px;margin-bottom:18px}
 .daily-class{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 10px;text-align:left;min-width:112px;cursor:pointer;box-shadow:var(--shadow)}
@@ -23,12 +23,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="graccus">
-<link rel="apple-touch-icon" href="./iconos/icon-180.png">
-<link rel="icon" type="image/png" sizes="192x192" href="./iconos/icon-192.png">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
 <style>
 html,body{overscroll-behavior-y:none}
 body{-webkit-tap-highlight-color:transparent}
-@supports(padding:max(0px)){.main{padding-bottom:max(92px,calc(92px + env(safe-area-inset-bottom)))}.sidebar{padding-bottom:max(7px,env(safe-area-inset-bottom))}}
+@supports(padding:max(0px)){.main{padding-bottom:max(74px,calc(74px + env(safe-area-inset-bottom)))}.sidebar{padding-bottom:max(7px,env(safe-area-inset-bottom))}}
 </style>
 
 
@@ -52,7 +52,7 @@ body{-webkit-tap-highlight-color:transparent}
   .nav button.active span{color:var(--ink);font-weight:700}
   .home-nav b{width:40px !important;height:40px;margin:auto;font-size:21px !important}
   .nav-clock{font-size:28px !important;color:#d53b3b !important}
-  .entry{display:flex;gap:8px}.input-shell{min-width:0}.entry input{padding:14px 54px 14px 14px}.input-shell .voice{width:44px;height:44px;font-size:23px}.send-entry{width:54px;min-width:54px;padding:0}
+  .entry{display:flex;gap:8px}.input-shell{min-width:0}.entry input{padding:14px 54px 14px 14px}.input-shell .voice{width:38px;height:38px;font-size:19px;opacity:.62}.send-entry{width:54px;min-width:54px;padding:0}
   .section-head{margin:22px 0 9px}
   .section-head h2{font-size:18px}
   .record{gap:10px}.record .avatar{width:32px;height:32px;font-size:11px}.record-time{font-size:10px}
@@ -72,8 +72,8 @@ body{-webkit-tap-highlight-color:transparent}
   border:3px solid var(--ink) !important;box-shadow:0 1px 0 #12202d22;
   display:grid !important;place-items:center !important;
 }
-.home-g-mark{font-size:22px;font-weight:800;line-height:1;letter-spacing:-.04em;}
-.home-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--orange);right:5px;top:5px;border:1.5px solid var(--ink);box-shadow:0 0 0 1px #ffffff22;}
+.home-g-mark{width:30px;height:auto;display:block;object-fit:contain;}
+.home-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--orange);right:5px;top:5px;border:0;box-shadow:none;}
 /* Banda superior: deixa aire para la isla/zona segura del iPhone */
 .main{padding-top:calc(18px + env(safe-area-inset-top)) !important;}
 .topbar{padding-top:10px !important;}
@@ -105,12 +105,28 @@ body{-webkit-tap-highlight-color:transparent}
 @media(max-width:390px){
   .record .record-summary{max-width:190px;}
 }
+
+/* GRACCUS 0.17 */
+.home-nav b{position:relative;display:flex;align-items:center;justify-content:center;width:48px;height:48px;}
+.home-g-mark{width:30px!important;height:auto!important;}
+.home-dot{border:0!important;box-shadow:none!important;width:9px;height:9px;right:4px;top:4px;}
+.voice{width:50px!important;font-size:21px!important;opacity:.68;touch-action:none;-webkit-touch-callout:none;}
+.voice.listening{opacity:1;}
+.daily-classes{overflow-x:auto;flex-wrap:nowrap;padding-bottom:2px;margin-top:14px;}
+.daily-class{flex:0 0 auto;min-width:118px;}
+.record-name-link{background:none;border:0;padding:0;font-weight:800;color:inherit;text-align:left;}
+.record-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.absence-btn{min-width:34px;color:var(--danger);}
+.work-groups{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);}
+.work-group{padding:10px 12px;background:#fbfcfc;border:1px solid var(--line);border-radius:9px;margin-top:8px;font-size:13px;}
+.work-group small{color:var(--muted);display:block;margin-top:3px;}
+@media(max-width:760px){.sidebar{height:calc(60px + env(safe-area-inset-bottom));}.nav{height:56px}.nav button{height:52px}.home-nav b{width:44px!important;height:44px!important}.home-g-mark{width:28px!important}.home-dot{width:8px;height:8px;right:3px;top:3px}.main{padding-bottom:calc(70px + env(safe-area-inset-bottom))!important}.voice{width:42px!important;font-size:19px!important}.entry{grid-template-columns:1fr 50px 50px!important}}
 </style>
 </head>
-<body><div class="app"><aside class="sidebar"><div class="brand"><strong>GRACCUS</strong><small>Registro docente inteligente</small><span class="brand-subject">Educación Física</span></div><nav class="nav"><button data-view="classes"><b class="nav-students">🎽</b><span>Alumnos</span></button><button data-view="schedule"><b class="nav-clock" aria-label="Horario"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5"></circle><path d="M16 9v7l5 3"></path></svg></b><span>Horario</span></button><button class="home-nav active" data-view="today"><b><span class="home-g-mark">G</span><i class="home-dot"></i></b><span>Inicio</span></button><button data-view="calendar"><b class="nav-calendar">🗓️</b><span>Calendario</span></button><button data-view="race"><b>🐪</b><span>Clasificación</span></button></nav><div class="sidebar-footer">GRACCUS<br>Datos guardados en este dispositivo</div></aside><main class="main">
+<body><div class="app"><aside class="sidebar"><div class="brand"><strong>GRACCUS</strong><small>Registro docente inteligente</small><span class="brand-subject">Educación Física</span></div><nav class="nav"><button data-view="classes"><b class="nav-students">🎽</b><span>Alumnado</span></button><button data-view="schedule"><b class="nav-clock" aria-label="Horario"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5"></circle><path d="M16 9v7l5 3"></path></svg></b><span>Horario</span></button><button class="home-nav active" data-view="today"><b><img class="home-g-mark" src="./g-mark.png" alt="G"><i class="home-dot"></i></b><span>Inicio</span></button><button data-view="calendar"><b class="nav-calendar">🗓️</b><span>Calendario</span></button><button data-view="race"><b>🐪</b><span>Clasificación</span></button></nav><div class="sidebar-footer">GRACCUS<br>Datos guardados en este dispositivo</div></aside><main class="main">
 <div class="topbar"><div><div class="eyebrow">Panel docente</div><div class="date" id="date"></div></div><div class="topbar-actions"><span class="pill" id="statusPill">● —</span><span class="pill sim" id="simPill" style="display:none">SIMULACIÓN</span><button class="simbtn" id="openSim">🧪 Modo simulación</button></div></div>
 
-<section id="today" class="view active"><h1>Hoy</h1><p class="sub">Registra lo que ocurre, sin interrumpir la clase.</p><div class="context" id="contextPills"></div><div class="grid"><div><div class="card entry-card"><h2>¿Qué ha ocurrido?</h2><div class="entry"><div class="input-shell"><input id="phrase" placeholder="Ej.: Luis 5 puntos o Daniela se esfuerza" autocomplete="off"><button class="voice" id="voiceBtn" title="Dictar">🎙</button></div><button class="primary send-entry" id="sendBtn" title="Registrar (Intro)">↵</button></div><div class="hint" id="entryHint">Escribe una frase y pulsa Intro para registrar. GRACCUS reconocerá al alumno del grupo actual (o su nombre y apellido completos, aunque sea fuera de horario) y el tipo de registro.</div><div class="feedback" id="feedback"></div></div><div class="section-head"><h2>Registros recientes</h2><div style="display:flex;gap:6px"><button class="link" id="undoBtn" disabled>↺ Deshacer</button><button class="link" id="redoBtn" disabled>↻ Rehacer</button><button class="link" id="clearAll">Limpiar</button></div></div><div class="card" id="recent"></div></div><div class="right-card"><div class="card"><h2>Resumen del día</h2><div class="metrics"><div class="metric"><strong id="points">0</strong><span>Puntos</span></div><div class="metric"><strong id="absences">0</strong><span>Faltas</span></div><div class="metric"><strong id="observations">0</strong><span>Observaciones</span></div><div class="metric"><strong id="incidents">0</strong><span>Incidencias</span></div><div class="metric"><strong id="laps">0</strong><span>Vueltas</span></div></div></div><div class="card" style="margin-top:18px"><div class="eyebrow">Horario actual</div><h3 style="margin-top:8px" id="scheduleNow">—</h3><p class="sub" id="scheduleNowSub">—</p></div></div></div></section>
+<section id="today" class="view active"><h1>Hoy</h1><p class="sub">Registra lo que ocurre, sin interrumpir la clase.</p><div class="context" id="contextPills"></div><div class="grid"><div><div class="card entry-card"><h2>¿Qué ha ocurrido?</h2><div class="entry"><div class="input-shell"><input id="phrase" placeholder="Ej.: Luis 5 puntos o Daniela se esfuerza" autocomplete="off"><button class="voice" id="voiceBtn" title="Dictar">🎙</button></div><button class="primary send-entry" id="sendBtn" title="Registrar (Intro)">↵</button></div><div class="hint" id="entryHint">Escribe una frase y pulsa Intro para registrar. GRACCUS reconocerá al alumno del grupo actual (o su nombre y apellido completos, aunque sea fuera de horario) y el tipo de registro.</div><div class="feedback" id="feedback"></div></div><div class="section-head"><h2>Registros recientes</h2><div style="display:flex;gap:6px"><button class="link" id="undoBtn" disabled>↺ Deshacer</button><button class="link" id="redoBtn" disabled>↻ Rehacer</button></div></div><div class="card" id="recent"></div></div><div class="right-card"><div class="card"><h2>Resumen del día</h2><div class="metrics"><div class="metric"><strong id="points">0</strong><span>Puntos</span></div><div class="metric"><strong id="absences">0</strong><span>Faltas</span></div><div class="metric"><strong id="observations">0</strong><span>Observaciones</span></div><div class="metric"><strong id="incidents">0</strong><span>Incidencias</span></div><div class="metric"><strong id="laps">0</strong><span>Vueltas</span></div></div></div><div class="card" style="margin-top:18px"><div class="eyebrow">Horario actual</div><h3 style="margin-top:8px" id="scheduleNow">—</h3><p class="sub" id="scheduleNowSub">—</p></div></div></div></section>
 
 <section id="classes" class="view"><h1>Grupos y alumnos</h1><div class="list" id="classList"></div></section>
 <section id="race" class="view"><h1>Clasificación</h1><div class="card"><div style="display:flex;gap:12px;flex-wrap:wrap" id="raceControls"></div><div style="margin-top:18px" id="raceTrack"></div></div></section>
@@ -124,7 +140,7 @@ body{-webkit-tap-highlight-color:transparent}
 
 <script>
 /* ————————————————————————————————————————————
-   GRACCUS 0.16 — motor de contexto
+   GRACCUS 0.17 — motor de contexto
    Filosofía: ABRIR → ESCRIBIR/DECIR → CONTINUAR CON LA CLASE
    ———————————————————————————————————————————— */
 
@@ -206,25 +222,22 @@ function defaultData(){
    * Completa aquí los grupos de cada tramo cuando quieras fijar el horario.
    */
   const horarioReal = [
-    { dia:'lunes', inicio:'08:15', fin:'09:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'martes', inicio:'08:15', fin:'09:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'miercoles', inicio:'08:15', fin:'09:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'jueves', inicio:'08:15', fin:'09:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'viernes', inicio:'08:15', fin:'09:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'lunes', inicio:'09:15', fin:'10:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'martes', inicio:'09:15', fin:'10:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'miercoles', inicio:'09:15', fin:'10:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'jueves', inicio:'09:15', fin:'10:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'lunes', inicio:'10:15', fin:'11:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'martes', inicio:'10:15', fin:'11:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'miercoles', inicio:'10:15', fin:'11:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'jueves', inicio:'10:15', fin:'11:15', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'lunes', inicio:'11:45', fin:'12:45', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'martes', inicio:'11:45', fin:'12:45', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'lunes', inicio:'12:45', fin:'13:45', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'martes', inicio:'12:45', fin:'13:45', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'lunes', inicio:'13:45', fin:'14:45', grupoId:null, materia:'Educación Física', aula:'', lectivo:true },
-    { dia:'martes', inicio:'13:45', fin:'14:45', grupoId:null, materia:'Educación Física', aula:'', lectivo:true }
+    { dia:'lunes', inicio:'08:15', fin:'09:15', grupoId:'g2e', materia:'Educación Física', aula:'Pabellón', lectivo:true, pabellon:true },
+    { dia:'lunes', inicio:'09:15', fin:'10:15', grupoId:'g3a', materia:'Educación Física', aula:'Pabellón', lectivo:true, pabellon:true },
+    { dia:'lunes', inicio:'10:15', fin:'11:15', grupoId:'g3b', materia:'Educación Física', aula:'Pabellón', lectivo:true, pabellon:true },
+    { dia:'lunes', inicio:'11:45', fin:'12:45', grupoId:'g3c', materia:'Educación Física', aula:'Pabellón', lectivo:true, pabellon:true },
+    { dia:'lunes', inicio:'12:45', fin:'13:45', grupoId:'g3d', materia:'Educación Física', aula:'Pabellón', lectivo:true, pabellon:true },
+    { dia:'lunes', inicio:'13:45', fin:'14:45', grupoId:'g3e', materia:'Educación Física', aula:'Pabellón', lectivo:true, pabellon:true },
+    { dia:'martes', inicio:'08:15', fin:'09:15', grupoId:'g4e', materia:'Educación Física', aula:'Pabellón', lectivo:true, pabellon:true },
+    { dia:'martes', inicio:'09:15', fin:'10:15', grupoId:'gbach', materia:'Educación Física', aula:'Pabellón', lectivo:true, pabellon:true },
+    { dia:'miercoles', inicio:'08:15', fin:'09:15', grupoId:'g2e', materia:'Educación Física', aula:'Pista exterior', lectivo:true },
+    { dia:'miercoles', inicio:'09:15', fin:'10:15', grupoId:'g3a', materia:'Educación Física', aula:'Pista exterior', lectivo:true },
+    { dia:'miercoles', inicio:'10:15', fin:'11:15', grupoId:'g3b', materia:'Educación Física', aula:'Pista exterior', lectivo:true },
+    { dia:'jueves', inicio:'08:15', fin:'09:15', grupoId:'g3c', materia:'Educación Física', aula:'Pista exterior', lectivo:true },
+    { dia:'jueves', inicio:'09:15', fin:'10:15', grupoId:'g3d', materia:'Educación Física', aula:'Pista exterior', lectivo:true },
+    { dia:'jueves', inicio:'10:15', fin:'11:15', grupoId:'g3e', materia:'Educación Física', aula:'Pista exterior', lectivo:true },
+    { dia:'jueves', inicio:'11:45', fin:'12:45', grupoId:'g4e', materia:'Educación Física', aula:'Pista exterior', lectivo:true },
+    { dia:'viernes', inicio:'08:15', fin:'09:15', grupoId:'gbach', materia:'Educación Física', aula:'Pista exterior', lectivo:true }
   ];
 
   marcarPabellon(horarioReal);
@@ -260,7 +273,7 @@ function defaultData(){
     evaluaciones: {},
     calendario: [],
     simulacion: { activo:false, dia:'lunes', hora:'10:20' },
-    _v: 7
+    _v: 8
   };
 }
 
@@ -273,7 +286,7 @@ function loadData(){
     // Si los datos guardados son de una versión anterior del horario/grupos,
     // se sustituyen por los nuevos datos de demostración pero se conservan
     // los registros ya guardados por el profesor.
-    if(parsed._v !== 7){
+    if(parsed._v !== 8){
       const fresh = defaultData();
       fresh.registros = parsed.registros || [];
       fresh.evaluaciones = parsed.evaluaciones || {};
@@ -369,7 +382,7 @@ function getEncargadosSemana(grupoId){
   if(g && g.materialSemana === semana && Array.isArray(g.materialIdsSemana)){
     return g.materialIdsSemana.map(id => roster.find(a => a.id === id)).filter(Boolean);
   }
-  const k = Math.max(1, Math.min(3, (g && g.encargadosPorSemana) || 2));
+  const k = Math.max(1, Math.min(3, (g && g.encargadosPorSemana) || 3));
   const inicio = (semana * k) % n;
   const encargados = [];
   for(let i = 0; i < k; i++) encargados.push(roster[(inicio + i) % n]);
@@ -381,7 +394,7 @@ function toggleMaterial(grupoId, alumnoId){
   const semana = semanaActual();
   if(g.materialSemana !== semana || !Array.isArray(g.materialIdsSemana)){
     const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
-    const k = Math.max(1, Math.min(3, (g.encargadosPorSemana || 2)));
+    const k = Math.max(1, Math.min(3, (g.encargadosPorSemana || 3)));
     const inicio = (semana * k) % Math.max(1, roster.length);
     g.materialSemana = semana;
     g.materialIdsSemana = roster.length ? Array.from({length: Math.min(k, roster.length)}, (_,i) => roster[(inicio+i) % roster.length].id) : [];
@@ -395,7 +408,7 @@ function toggleMaterial(grupoId, alumnoId){
 function cambiarEncargadosPorSemana(grupoId, delta){
   const g = data.grupos.find(x => x.id === grupoId);
   if(!g) return;
-  const actual = g.encargadosPorSemana || 2;
+  const actual = g.encargadosPorSemana || 3;
   g.encargadosPorSemana = Math.max(1, Math.min(3, actual + delta));
   saveData();
   openClassRoster(grupoId);
@@ -553,63 +566,41 @@ function findUniqueFullNameMatch(text){
   return best;
 }
 
+function levenshtein(a,b){
+  const m=a.length,n=b.length,dp=Array.from({length:m+1},()=>Array(n+1).fill(0));
+  for(let i=0;i<=m;i++)dp[i][0]=i; for(let j=0;j<=n;j++)dp[0][j]=j;
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return dp[m][n];
+}
+function matchStudentToken(tok, students){
+  const t=stripAccents(tok.toLowerCase());
+  let exact=students.filter(a=>stripAccents(a.nombre.split(' ')[0].toLowerCase())===t);
+  if(exact.length===1) return exact[0];
+  const cand=students.map(a=>({a,d:levenshtein(t,stripAccents(a.nombre.split(' ')[0].toLowerCase()))})).filter(x=>x.d<=2 && t.length>=4).sort((x,y)=>x.d-y.d);
+  if(cand.length && (cand.length===1 || cand[0].d<cand[1].d)) return cand[0].a;
+  return null;
+}
 function parseEntry(text, students, forcedAlumno){
   if(forcedAlumno) return classifyForAlumno(text, forcedAlumno);
-  // Varios alumnos + un único número: "bea ana y carlos 3" => 3 puntos para cada uno.
-  const sharedPoints = text.match(/^(.+?)\s+([1-5])\s*(?:puntos?)?$/i);
-  if(sharedPoints && !forcedAlumno){
-    const nombresTexto = sharedPoints[1].trim();
-    const tokens = nombresTexto.match(/[\p{L}]+/gu) || [];
-    const candidatos = [];
-    const vistos = new Set();
-    for(const tokRaw of tokens){
-      const tok = stripAccents(tokRaw.toLowerCase());
-      const alumno = students.find(a => stripAccents(a.nombre.split(' ')[0].toLowerCase()) === tok);
-      if(alumno && !vistos.has(alumno.id)){ candidatos.push(alumno); vistos.add(alumno.id); }
-    }
-    if(candidatos.length >= 2){
-      const puntos = parseInt(sharedPoints[2],10);
-      return candidatos.map(alumno => ({
-        alumno, tipo:'puntos', categoria:null, puntos,
-        textoInterpretado:`${alumno.nombre.split(' ')[0]} recibe ${puntos} puntos`
-      }));
-    }
+  const sharedPoints=text.match(/^(.+?)\s+([1-5])\s*(?:puntos?)?$/i);
+  if(sharedPoints){
+    const nombresTexto=sharedPoints[1].trim();
+    const tokens=nombresTexto.match(/[\p{L}]+/gu)||[];
+    const candidatos=[]; const vistos=new Set();
+    for(const tokRaw of tokens){ const alumno=matchStudentToken(tokRaw,students); if(alumno&&!vistos.has(alumno.id)){candidatos.push(alumno);vistos.add(alumno.id);} }
+    if(candidatos.length>=2){ const puntos=parseInt(sharedPoints[2],10); return candidatos.map(alumno=>({alumno,tipo:'puntos',categoria:null,puntos,textoInterpretado:`${alumno.nombre.split(' ')[0]} recibe ${puntos} punto${puntos===1?'':'s'}`})); }
   }
-
-  const aliasMap = new Map();
-  students.forEach(a => {
-    const alias = stripAccents(a.nombre.split(' ')[0].toLowerCase());
-    if(!aliasMap.has(alias)) aliasMap.set(alias, a);
-  });
-
-  const lowerNoAcc = stripAccents(text.toLowerCase());
-
-  // Faltas en plural: "Faltan X y Y", "Hoy no han venido X y Y"
-  if(/\bfaltan\b/.test(lowerNoAcc) || lowerNoAcc.includes('no han venido') || lowerNoAcc.includes('no vinieron')){
-    const found = [];
-    const re = /[\p{L}]+/gu; let m;
-    while((m = re.exec(text))){
-      const tok = stripAccents(m[0].toLowerCase());
-      if(aliasMap.has(tok)){
-        const alumno = aliasMap.get(tok);
-        if(!found.find(f => f.id === alumno.id)) found.push(alumno);
-      }
-    }
-    if(found.length){
-      return found.map(a => ({ alumno:a, tipo:'falta', categoria:null, puntos:null, textoInterpretado:`Falta de ${a.nombre.split(' ')[0]}` }));
-    }
+  const lowerNoAcc=stripAccents(text.toLowerCase());
+  const aliasWords=(text.match(/[\p{L}]+/gu)||[]);
+  if(/\bfaltan\b/.test(lowerNoAcc)||lowerNoAcc.includes('no han venido')||lowerNoAcc.includes('no vinieron')){
+    const found=[]; for(const tokRaw of aliasWords){const a=matchStudentToken(tokRaw,students);if(a&&!found.some(x=>x.id===a.id))found.push(a);}
+    if(found.length)return found.map(a=>({alumno:a,tipo:'falta',categoria:null,puntos:null,textoInterpretado:`Falta de ${a.nombre.split(' ')[0]}`}));
   }
-
-  // Localizar al alumno por su primer nombre (dentro del grupo del contexto actual)
-  const re = /[\p{L}]+/gu; let m; let match = null;
-  while((m = re.exec(text))){
-    const tok = stripAccents(m[0].toLowerCase());
-    if(aliasMap.has(tok)){ match = { alumno: aliasMap.get(tok), start: m.index, end: m.index + m[0].length }; break; }
-  }
-  if(!match) return { error:'not-found' };
-
-  const remaining = (text.slice(0, match.start) + ' ' + text.slice(match.end)).replace(/\s+/g,' ').trim();
-  return classifyForAlumno(remaining, match.alumno);
+  let match=null;
+  for(const m of text.matchAll(/[\p{L}]+/gu)){const a=matchStudentToken(m[0],students);if(a){match={alumno:a,start:m.index,end:m.index+m[0].length};break;}}
+  if(!match)return {error:'not-found'};
+  const remaining=(text.slice(0,match.start)+' '+text.slice(match.end)).replace(/\s+/g,' ').trim();
+  return classifyForAlumno(remaining,match.alumno);
 }
 
 /* ———————————— registro de un nuevo hecho ———————————— */
@@ -717,65 +708,31 @@ let recognizer = null;
 let listening = false;
 
 function setupVoice(){
-  const btn = $('voiceBtn');
+  const btn=$('voiceBtn');
   if(!SpeechRecognitionAPI){
-    btn.title = 'Dictado no disponible en este navegador';
-    btn.onclick = () => showFeedback('El dictado por voz no está disponible en este navegador/PWA. Puedes escribir y pulsar ↵.', 'warn');
+    btn.title='Dictado no disponible en este navegador';
+    btn.onpointerdown=e=>{e.preventDefault();showFeedback('El dictado por voz no está disponible aquí. En iPhone, prueba GRACCUS desde Safari y permite el micrófono.','warn');};
     return;
   }
-
-  recognizer = new SpeechRecognitionAPI();
-  recognizer.lang = 'es-ES';
-  recognizer.interimResults = false;
-  recognizer.continuous = false;
-  recognizer.maxAlternatives = 1;
-
-  recognizer.onstart = () => {
-    listening = true;
-    btn.classList.add('listening');
-    showFeedback('Escuchando… habla ahora.', 'ok');
+  recognizer=new SpeechRecognitionAPI();
+  recognizer.lang='es-ES'; recognizer.interimResults=false; recognizer.continuous=false; recognizer.maxAlternatives=1;
+  recognizer.onstart=()=>{listening=true;btn.classList.add('listening');showFeedback('Escuchando… suelta el micrófono cuando termines.','ok');};
+  recognizer.onresult=e=>{const texto=e.results[0][0].transcript; $('phrase').value=texto; $('phrase').focus(); showFeedback('Dictado recibido. Pulsa ↵ para registrarlo.','ok');};
+  recognizer.onerror=e=>{
+    listening=false;btn.classList.remove('listening');
+    const code=e&&e.error;
+    if(code==='not-allowed'||code==='service-not-allowed') showFeedback('El micrófono está bloqueado. En iPhone, permite el micrófono para Safari y vuelve a intentarlo.','error');
+    else if(code==='audio-capture') showFeedback('No se detecta el micrófono. Comprueba los permisos de Safari.','error');
+    else if(code==='no-speech') showFeedback('No he detectado voz. Mantén pulsado el micrófono y habla.','warn');
+    else showFeedback('No se ha podido iniciar el dictado. Prueba desde Safari si la app está instalada en la pantalla de inicio.','error');
   };
-  recognizer.onresult = e => {
-    const texto = e.results[0][0].transcript;
-    $('phrase').value = texto;
-    $('phrase').focus();
-    showFeedback('Dictado recibido. Pulsa ↵ para registrarlo.', 'ok');
-  };
-  recognizer.onerror = e => {
-    listening = false;
-    btn.classList.remove('listening');
-    const code = e && e.error;
-    if(code === 'not-allowed' || code === 'service-not-allowed'){
-      showFeedback('El micrófono está bloqueado. En iPhone, permite el micrófono para Safari y vuelve a intentarlo.', 'error');
-    } else if(code === 'audio-capture'){
-      showFeedback('No se detecta el micrófono. Comprueba los permisos del sitio y vuelve a intentarlo.', 'error');
-    } else if(code === 'no-speech'){
-      showFeedback('No he detectado voz. Pulsa el micrófono y habla.', 'warn');
-    } else {
-      showFeedback('No se ha podido iniciar el dictado. Si la app está instalada como acceso directo, prueba también desde Safari.', 'error');
-    }
-  };
-  recognizer.onend = () => {
-    listening = false;
-    btn.classList.remove('listening');
-  };
-
-  function start(){
-    if(listening) return;
-    try{
-      recognizer.start();
-    }catch(e){
-      showFeedback('No se ha podido iniciar el micrófono. Inténtalo de nuevo.', 'error');
-    }
-  }
-  function stop(){
-    if(!listening) return;
-    try{ recognizer.stop(); }catch(e){}
-  }
-
-  // Un toque activa/desactiva el dictado; ya no depende de mantener pulsado.
-  btn.addEventListener('click', () => listening ? stop() : start());
-  btn.addEventListener('contextmenu', e => e.preventDefault());
+  recognizer.onend=()=>{listening=false;btn.classList.remove('listening');};
+  function start(){if(listening)return;try{recognizer.start();}catch(e){showFeedback('No se ha podido iniciar el micrófono. Suelta y vuelve a pulsar.','error');}}
+  function stop(){if(!listening)return;try{recognizer.stop();}catch(e){}}
+  btn.onpointerdown=e=>{e.preventDefault();start();};
+  btn.onpointerup=e=>{e.preventDefault();stop();};
+  btn.onpointercancel=()=>stop(); btn.onpointerleave=()=>{if(listening)stop();};
+  btn.oncontextmenu=e=>e.preventDefault();
 }
 
 /* ———————————— UI: helpers ———————————— */
@@ -967,17 +924,64 @@ function renderClasses(){
     const c = groupColor(g.id);
     const encargados = getEncargadosSemana(g.id);
     const encargadosLine = encargados.length ? `📦 ${encargados.map(a => a.nombre.split(' ')[0]).join(', ')}` : '';
-    return `<div class="row class-row" data-id="${g.id}" style="cursor:pointer"><div class="row-info"><div class="avatar" style="background:${c.bg};color:${c.fg}">${initials(g.nombre)}</div><div><b>${g.nombre}</b><small>${n} alumnos${encargadosLine ? ' · ' + encargadosLine : ''}</small></div></div><span class="score" style="color:${c.fg}">${grupoPuntos(g.id)} pts</span></div>`;
+    return `<div class="row class-row" data-id="${g.id}" style="cursor:pointer"><div class="row-info"><div class="avatar" style="background:${c.bg};color:${c.fg}">${initials(g.nombre)}</div><div><b>${g.nombre}</b><small>${n} alumnos${encargadosLine ? ' · ' + encargadosLine : ''}</small></div></div></div>`;
   }).join('');
   document.querySelectorAll('.class-row').forEach(el => el.onclick = () => openClassRoster(el.dataset.id));
 }
 
-function setDelegado(grupoId, alumnoId){
-  const g = data.grupos.find(x => x.id === grupoId);
-  if(!g) return;
-  g.delegadoId = alumnoId || null;
-  saveData();
-  openClassRoster(grupoId);
+function fechaLocal(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function toggleAbsence(grupoId, alumnoId){
+  const hoy=fechaLocal();
+  const idx=data.registros.findIndex(r=>r.alumnoId===alumnoId && r.grupoId===grupoId && r.fecha===hoy && r.tipo==='falta');
+  if(idx>=0){ data.registros.splice(idx,1); showFeedback('Ausencia quitada','ok'); }
+  else{
+    const a=data.alumnos.find(x=>x.id===alumnoId);
+    data.registros.unshift({id:'r_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),timestamp:Date.now(),fecha:hoy,hora:new Date().toTimeString().slice(0,5),grupoId,alumnoId,unidadId:null,tipo:'falta',categoria:null,puntos:null,vueltas:null,trote:false,textoOriginal:'Ausencia',textoInterpretado:`Falta de ${a?a.nombre.split(' ')[0]:'alumno'}`,manual:true});
+    showFeedback('Ausencia registrada','ok');
+  }
+  saveData(); renderAll(); openClassRoster(grupoId);
+}
+function crearGruposTrabajo(grupoId, tamano, mixtos, incluirAusentes){
+  const roster=data.alumnos.filter(a=>a.grupoId===grupoId);
+  const hoy=fechaLocal();
+  const ausentes=new Set(data.registros.filter(r=>r.grupoId===grupoId&&r.fecha===hoy&&r.tipo==='falta').map(r=>r.alumnoId));
+  let pool=(incluirAusentes?roster:roster.filter(a=>!ausentes.has(a.id))).slice();
+  if(!pool.length) return [];
+  // Mezcla reproducible usando una semilla basada en fecha y grupo para que al volver a abrir no cambien solos.
+  let seed=Array.from(grupoId+hoy).reduce((a,c)=>a+c.charCodeAt(0),0);
+  pool.sort((a,b)=>{ seed=(seed*9301+49297)%233280; const ra=seed/233280; seed=(seed*9301+49297)%233280; const rb=seed/233280; return ra-rb; });
+  const grupos=[];
+  for(let i=0;i<pool.length;i+=tamano) grupos.push(pool.slice(i,i+tamano));
+  if(mixtos){
+    // Si existen datos de sexo en el alumnado, intercambiamos miembros para equilibrar los grupos.
+    const conSexo=pool.every(a=>a.sexo);
+    if(conSexo){
+      for(let i=0;i<grupos.length-1;i++){
+        const tipos=new Set(grupos[i].map(a=>a.sexo));
+        if(tipos.size===1){ const j=grupos.findIndex((g,k)=>k>i&&g.some(a=>a.sexo!==[...tipos][0])); if(j>=0){ const objetivo=[...tipos][0]; const idx=grupos[j].findIndex(a=>a.sexo!==objetivo); if(idx>=0) [grupos[i][0],grupos[j][idx]]=[grupos[j][idx],grupos[i][0]]; } }
+      }
+    }
+  }
+  return grupos;
+}
+function openWorkGroups(grupoId){
+  const g=data.grupos.find(x=>x.id===grupoId); if(!g) return;
+  const hoy=fechaLocal();
+  const ausentes=new Set(data.registros.filter(r=>r.grupoId===grupoId&&r.fecha===hoy&&r.tipo==='falta').map(r=>r.alumnoId));
+  $('modalContent').innerHTML=`<div class="eyebrow">Trabajo cooperativo</div><h2 style="margin-top:7px">Grupos de trabajo · ${g.nombre}</h2><p class="sub">Crea agrupamientos temporales. Por defecto no se incluyen las ausencias de hoy.</p>
+  <div class="field"><label>Personas por grupo</label><select id="wgSize">${[2,3,4,5,6,7,8].map(n=>`<option value="${n}">${n}</option>`).join('')}</select></div>
+  <div class="switch-row"><span><b>Grupos mixtos</b><br><small>Intenta mezclar por sexo si el listado contiene ese dato.</small></span><input type="checkbox" id="wgMixed"></div>
+  <div class="switch-row"><span><b>Incluir ausentes</b><br><small>Hoy hay ${ausentes.size} ausencia${ausentes.size===1?'':'s'} marcada${ausentes.size===1?'':'s'}.</small></span><input type="checkbox" id="wgAbsent"></div>
+  <div class="modal-actions"><button class="primary" id="wgCreate" style="height:44px;flex:1">Crear grupos</button></div>
+  <div id="wgResult"></div>`;
+  $('modal').style.display='grid';
+  $('wgCreate').onclick=()=>{
+    const gs=crearGruposTrabajo(grupoId,parseInt($('wgSize').value,10),$('wgMixed').checked,$('wgAbsent').checked);
+    $('wgResult').innerHTML=gs.length?`<div class="work-groups"><h3>Resultado</h3>${gs.map((x,i)=>`<div class="work-group"><b>Grupo ${i+1}</b><div>${x.map(a=>a.nombre.split(' ')[0]).join(' · ')}</div><small>${x.length} personas</small></div>`).join('')}</div>`:'<div class="empty">No hay alumnado disponible para agrupar.</div>';
+  };
 }
 
 /* ———————————— render: Clasificación (puntos por clase, con empates agrupados) ———————————— */
@@ -1042,7 +1046,7 @@ function renderClasses(){
     const c = groupColor(g.id);
     const encargados = getEncargadosSemana(g.id);
     const encargadosLine = encargados.length ? `📦 ${encargados.map(a => a.nombre.split(' ')[0]).join(', ')}` : '';
-    return `<div class="row class-row" data-id="${g.id}" style="cursor:pointer"><div class="row-info"><div class="avatar" style="background:${c.bg};color:${c.fg}">${initials(g.nombre)}</div><div><b>${g.nombre}</b><small>${n} alumnos${encargadosLine ? ' · ' + encargadosLine : ''}</small></div></div><span class="score" style="color:${c.fg}">${grupoPuntos(g.id)} pts</span></div>`;
+    return `<div class="row class-row" data-id="${g.id}" style="cursor:pointer"><div class="row-info"><div class="avatar" style="background:${c.bg};color:${c.fg}">${initials(g.nombre)}</div><div><b>${g.nombre}</b><small>${n} alumnos${encargadosLine ? ' · ' + encargadosLine : ''}</small></div></div></div>`;
   }).join('');
   document.querySelectorAll('.class-row').forEach(el => el.onclick = () => openClassRoster(el.dataset.id));
 }
@@ -1056,11 +1060,12 @@ function openClassRoster(grupoId){
   $('modalContent').innerHTML = `
     <div class="eyebrow">Clase</div>
     <h2 style="margin-top:7px">${g.nombre}</h2>
-    <p class="sub">${roster.length} alumnos · orden alfabético · ${grupoPuntos(grupoId)} puntos en total</p>
-    <div class="hint" style="margin-top:14px">Pulsa 🅲 para marcar al delegado/a y 📦 para asignar el material esta semana.</div>
+    <p class="sub">${roster.length} alumnos</p>
+    <div class="modal-actions" style="margin-top:12px"><button class="simbtn" onclick="openWorkGroups('${grupoId}')">👥 Crear grupos de trabajo</button></div>
+    <div class="hint" style="margin-top:14px">Pulsa ✕ para marcar o quitar la ausencia de hoy y 📦 para el material.</div>
     <div class="list" style="margin-top:12px">${roster.map(a => {
       const absentToday = data.registros.some(r => r.alumnoId === a.id && r.fecha === new Date().toISOString().slice(0,10) && r.tipo === 'falta');
-      return `<div class="row roster-row${encargadosIds.has(a.id) ? ' roster-row-encargado' : ''}${g.delegadoId===a.id ? ' roster-row-delegado' : ''}${absentToday ? ' roster-row-absent' : ''}" data-id="${a.id}" style="cursor:pointer;padding:10px 12px"><div class="row-info">${avatarHtml(a,'sm')}<div><b style="font-size:14px">${a.nombre}</b>${absentToday ? '<span class="absence-mark" title="Falta hoy">×</span>' : ''}${g.delegadoId===a.id ? '<small style="color:#2f5fa8;font-weight:700">🅲 Delegado/a</small>' : ''}${encargadosIds.has(a.id) ? '<small style="color:#9a6b0a;font-weight:700">📦 Material</small>' : ''}</div></div><span style="display:flex;align-items:center;gap:5px"><span class="score" style="font-size:13px">${alumnoPuntos(a.id)} pts</span><button class="simbtn delegate-btn" title="Seleccionar como delegado/a" onclick="event.stopPropagation(); setDelegado('${grupoId}','${g.delegadoId===a.id?'':a.id}')">${g.delegadoId===a.id?'🅲':'○'}</button><button class="simbtn delegate-btn" title="Asignar material esta semana" onclick="event.stopPropagation(); toggleMaterial('${grupoId}','${a.id}')">${encargadosIds.has(a.id)?'📦':'▫️'}</button></span></div>`;
+      return `<div class="row roster-row${encargadosIds.has(a.id) ? ' roster-row-encargado' : ''}${absentToday ? ' roster-row-absent' : ''}" data-id="${a.id}" style="cursor:pointer;padding:10px 12px"><div class="row-info">${avatarHtml(a,'sm')}<div><b style="font-size:14px">${a.nombre}</b>${absentToday ? '<span class="absence-mark" title="Falta hoy">×</span>' : ''}${encargadosIds.has(a.id) ? '<small style="color:#9a6b0a;font-weight:700">📦 Material</small>' : ''}</div></div><span style="display:flex;align-items:center;gap:5px"><span class="score" style="font-size:13px">${alumnoPuntos(a.id)} pts</span><button class="simbtn absence-btn" title="Marcar o quitar ausencia de hoy" onclick="event.stopPropagation(); toggleAbsence('${grupoId}','${a.id}')">${absentToday?'✕':'○'}</button><button class="simbtn delegate-btn" title="Asignar material esta semana" onclick="event.stopPropagation(); toggleMaterial('${grupoId}','${a.id}')">${encargadosIds.has(a.id)?'📦':'▫️'}</button></span></div>`;
     }).join('')}</div>
   `;
   $('modal').style.display = 'grid';
@@ -1122,35 +1127,24 @@ function calFechaBase(){
   return d;
 }
 function renderCalendar(){
-  const base = calFechaBase();
-  const year = base.getFullYear(), month = base.getMonth();
-  const startWeekday = (new Date(year, month, 1).getDay() + 6) % 7; // lunes = 0
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  $('calTitle').textContent = MES_NOMBRES[month].charAt(0).toUpperCase() + MES_NOMBRES[month].slice(1) + ' ' + year;
-
-  const todayStr = new Date().toISOString().slice(0,10);
-  let html = '<div class="cal-grid">';
-  ['L','M','X','J','V','S','D'].forEach(d => html += `<div class="cal-head">${d}</div>`);
-  for(let i = 0; i < startWeekday; i++) html += '<div class="cal-cell empty"></div>';
-  for(let day = 1; day <= daysInMonth; day++){
-    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
-    const eventos = data.calendario.filter(e => e.fecha === dateStr);
-    const isToday = dateStr === todayStr;
-    const weekend = isWeekendDate(year, month, day);
-    const holiday = FESTIVOS_ANDALUCIA.has(dateStr);
-    const special = weekend || holiday;
-    const titleExtra = holiday ? ' · Festivo' : weekend ? ' · Fin de semana' : '';
-    html += `<div class="cal-cell${isToday?' today':''}${eventos.length?' has-event':''}${weekend?' weekend':''}${holiday?' holiday':''}" data-date="${dateStr}" title="${eventos.map(e=>e.titulo).join(', ')}${titleExtra}"><span>${day}</span>${eventos.length ? '<div class="cal-dot"></div>' : ''}</div>`;
+  const base=calFechaBase(), year=base.getFullYear(), month=base.getMonth();
+  const startWeekday=(new Date(year,month,1).getDay()+6)%7;
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  $('calTitle').textContent=MES_NOMBRES[month].charAt(0).toUpperCase()+MES_NOMBRES[month].slice(1)+' '+year;
+  const todayStr=fechaLocal(); let html='<div class="cal-grid">';
+  ['L','M','X','J','V','S','D'].forEach(d=>html+=`<div class="cal-head">${d}</div>`);
+  for(let i=0;i<startWeekday;i++)html+='<div class="cal-cell empty"></div>';
+  for(let day=1;day<=daysInMonth;day++){
+    const dateStr=`${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const eventos=data.calendario.filter(e=>e.fecha===dateStr), isToday=dateStr===todayStr, weekend=isWeekendDate(year,month,day), holiday=FESTIVOS_ANDALUCIA.has(dateStr);
+    html+=`<div class="cal-cell${isToday?' today':''}${eventos.length?' has-event':''}${weekend?' weekend':''}${holiday?' holiday':''}" data-date="${dateStr}" title="${eventos.map(e=>e.titulo).join(', ')}${holiday?' · Festivo':weekend?' · Fin de semana':''}"><span>${day}</span>${eventos.length?'<div class="cal-dot"></div>':''}</div>`;
   }
-  html += '</div>';
-  $('calGrid').innerHTML = html;
-  document.querySelectorAll('.cal-cell:not(.empty)').forEach(el => el.onclick = () => openCalendarDay(el.dataset.date));
-
-  const proximos = data.calendario.filter(e => e.fecha >= todayStr).sort((a,b) => a.fecha.localeCompare(b.fecha)).slice(0, 8);
-  $('calUpcoming').innerHTML = proximos.length
-    ? proximos.map(e => `<div class="row"><div><b>${e.titulo}</b><small>${e.fecha}</small></div></div>`).join('')
-    : '<div class="empty">No hay eventos próximos anotados.</div>';
+  html+='</div>'; $('calGrid').innerHTML=html;
+  document.querySelectorAll('.cal-cell:not(.empty)').forEach(el=>el.onclick=()=>openCalendarDay(el.dataset.date));
+  const proximos=data.calendario.filter(e=>e.fecha>=todayStr).sort((a,b)=>a.fecha.localeCompare(b.fecha)).slice(0,8);
+  $('calUpcoming').innerHTML=proximos.length?proximos.map(e=>`<div class="row"><div><b>${e.titulo}</b><small>${e.fecha}</small></div></div>`).join(''):'<div class="empty">No hay eventos próximos anotados.</div>';
 }
+
 function openCalendarDay(dateStr){
   const eventos = data.calendario.filter(e => e.fecha === dateStr);
   $('modalContent').innerHTML = `
@@ -1191,6 +1185,12 @@ function renderUnits(){
 // La pestaña "Alumnos" se ha retirado: ahora se accede a cada alumno desde
 // la ficha de su grupo, en "Grupos y alumnos" (openClassRoster).
 
+function deleteRecord(id){
+  const idx=data.registros.findIndex(r=>r.id===id); if(idx<0) return;
+  const [removed]=data.registros.splice(idx,1);
+  undoStack.push({action:'add',records:[removed]}); redoStack=[];
+  saveData(); renderAll(); $('modal').style.display='none'; modalRefresh=null; showFeedback('Registro eliminado','ok');
+}
 function openRecordDetail(id){
   const r = data.registros.find(x => x.id === id);
   if(!r) return;
@@ -1204,6 +1204,10 @@ function openRecordDetail(id){
       <h3>${r.textoInterpretado || r.textoOriginal}</h3>
       <div class="record-meta" style="margin-top:8px">${r.fecha} · ${r.hora}</div>
       ${r.textoOriginal && r.textoOriginal !== r.textoInterpretado ? `<div class="record-meta" style="margin-top:10px;font-style:italic">Original: «${r.textoOriginal}»</div>` : ''}
+    </div>
+    <div class="record-actions">
+      ${alumno ? `<button class="simbtn" onclick="openStudentDetail('${alumno.id}')">👤 Ir al alumno</button>` : ''}
+      <button class="simbtn" style="color:var(--danger)" onclick="deleteRecord('${r.id}')">🗑 Eliminar registro</button>
     </div>`;
   $('modal').style.display = 'grid';
   modalRefresh = () => openRecordDetail(id);
@@ -1287,14 +1291,6 @@ function switchToClassesAndOpen(grupoId){
 /* ———————————— eventos ———————————— */
 document.querySelectorAll('.nav button').forEach(b => b.onclick = () => switchToView(b.dataset.view));
 $('phrase').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); handleAdd(); } }; $('sendBtn').onclick = handleAdd;
-$('clearAll').onclick = () => {
-  if(confirm('¿Eliminar todos los registros?')){
-    undoStack.push({ action:'clear', records: data.registros.slice() });
-    redoStack = [];
-    data.registros = [];
-    saveData(); renderAll();
-  }
-};
 $('undoBtn').onclick = performUndo;
 $('redoBtn').onclick = performRedo;
 $('close').onclick = () => { $('modal').style.display = 'none'; modalRefresh = null; };
