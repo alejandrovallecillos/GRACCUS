@@ -1,26 +1,14 @@
-graccus 0.13 — PWA para iPhone
+GRACCUS 0.16 — PWA para iPhone
 
 CAMBIOS DE ESTA VERSIÓN
-- Nombre de la aplicación en minúsculas: graccus.
-- Mejor adaptación al iPhone: respeta la zona segura superior e inferior.
-- En móvil, la barra inferior muestra solo los iconos.
-- Las pestañas secundarias no muestran el encabezado general "Panel docente".
-- Se han eliminado las descripciones grises bajo los títulos de las pestañas.
-- Las faltas de hoy aparecen con una X roja junto al alumno en su clase.
-- Las anotaciones libres se guardan como observaciones; por ejemplo, "Nacho baño" queda registrada como anotación de baño.
-- En la lista de una clase se puede marcar/desmarcar directamente el delegado y el material mediante sus iconos.
-- La clasificación muestra el camello orientado hacia la meta y una línea de terreno/desierto.
+- Ajuste de la navegación inferior a 5 iconos.
+- Icono de Alumnos recuperado con el peto y aclarado visualmente.
+- Horario usa un reloj rojo dibujado, claramente distinto del calendario.
+- Calendario recupera el icono de calendario anterior.
+- La G de Inicio adopta el lenguaje visual del icono de la app: fondo verde, contorno oscuro y punto naranja, en formato circular.
+- Más espacio seguro en la parte superior para evitar solapamientos con la hora, batería y zona superior del iPhone.
+- Registros más compactos: nombre arriba, puntuación/acción debajo y hora de forma discreta.
+- Se mantienen las mejoras funcionales de la versión 0.15: micrófono dentro de la barra de escritura, botón Intro independiente, clases del día, navegación directa a la clase, calendario con fines de semana/festivos y grupos del curso actual.
 
 DATOS
-La aplicación usa localStorage. Los datos quedan guardados en el navegador/dispositivo y
-no se sincronizan automáticamente entre PC e iPhone.
-
-ACTUALIZACIÓN EN IPHONE
-Si ya tenías graccus instalado desde una versión anterior, después de publicar los nuevos
-archivos abre la versión web en Safari y vuelve a abrir la app instalada. Si el nombre del
-icono sigue apareciendo en mayúsculas, elimina el acceso anterior de la pantalla de inicio
-y vuelve a usar Safari → Compartir → Añadir a pantalla de inicio.
-
-PRIVACIDAD
-No se ha añadido ningún sistema de usuarios, registro ni servidor de datos. Publica solo
-los archivos de la aplicación y no subas archivos con datos personales de alumnado.
+La aplicación usa localStorage. Los datos quedan guardados en el navegador/dispositivo y no se sincronizan automáticamente entre PC e iPhone.

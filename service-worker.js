@@ -1,8 +1,8 @@
-const CACHE = 'graccus-0-13-v1';
+const CACHE = 'graccus-0-16-v1';
 const ASSETS = [
   './',
   './index.html',
-  './graccus-0.12.html',
+  './graccus-0.16.html',
   './manifest.json',
   './iconos/icon-180.png',
   './iconos/icon-192.png',
