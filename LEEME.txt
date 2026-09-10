@@ -1,19 +1,27 @@
-GRACCUS 0.18
+GRACCUS 0.19
 
 Versión de prueba para el curso 2026/27.
-Incluye horario de ejemplo, registro por lenguaje natural, ausencias, grupos de trabajo y mejoras para iPhone.
 
 Cambios en esta versión:
-- Corregido un error real en el registro por nombre completo o por mención de grupo
-  explícita ("de 3B", "de 1 bachillerato"): una variable sin definir ("unidad") hacía
-  que esos dos caminos fallaran silenciosamente. Ya funcionan correctamente.
-- El grupo de 1º Bachillerato pasa a llamarse "1º Bachillerato V" (tu grupo real
-  asignado). Los alumnos de esa clase siguen siendo ficticios hasta que me pases
-  el listado real (vía copia y pega) para sustituirlos.
-- Nuevo campo de correo electrónico en la ficha de cada alumno (editable a mano,
-  con enlace directo para escribirle).
-- Corregida la "G" del icono de Inicio: antes era una imagen distinta a la de la
-  portada de la app, con otra tipografía; ahora es exactamente el mismo dibujo,
-  solo que más pequeño.
+- Cargado el alumnado REAL de 1º Bachillerato V (30 alumnos), con foto, correo
+  y sexo (para los grupos mixtos) a partir del PDF de Séneca. A Daniel García
+  Pavón y Mirian Zapata Martín, que en Séneca tienen el avatar genérico gris/azul
+  (sin foto real), se les deja el avatar de iniciales de GRACCUS.
+- Corregido el tamaño de la "G" del icono de Inicio (más pequeña, más parecida
+  a la proporción de la portada/icono del iPhone).
+- Micrófono: se pide el permiso de audio explícitamente (getUserMedia) antes de
+  arrancar el dictado, y los mensajes de error distinguen si la app está
+  instalada en pantalla de inicio (sugiriendo probar primero desde Safari
+  normal) de si es un bloqueo de permisos corriente.
+- Nuevo botón "Crear grupos de trabajo" en la pantalla Hoy, que usa directamente
+  la clase que tienes activa en ese momento. Para otra clase, sigue disponible
+  desde Alumnado → esa clase → Crear grupos de trabajo.
+- Los grupos de trabajo ahora se pueden guardar con un nombre (p. ej. "Grupos
+  Acrosport") para reutilizarlos durante toda una unidad, además de poder seguir
+  creando grupos temporales sueltos.
+- Rediseñados los botones de asistencia y material en la ficha de cada clase:
+  ahora son dos cuadrados iguales (vacíos cuando no aplican, coloreados con su
+  icono cuando sí), y los puntos van en una píldora junto a ellos en vez de
+  quedar sueltos.
 
 Para probarla en GitHub Pages, abre la raíz del repositorio. El index.html apunta a esta versión.
