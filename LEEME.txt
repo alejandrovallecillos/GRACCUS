@@ -1,29 +1,33 @@
-GRACCUS 0.20
+GRACCUS 0.21
 
 Cambios en esta versión:
-- Nombre y apellidos separados de verdad (no adivinados): en la lista de cada
-  clase, el nombre de pila se ve igual que antes y los apellidos aparecen más
-  pequeños en una segunda línea. Funciona también con nombres compuestos
-  ("Sonia María", "Ángela de la Cruz"...).
-- Foto del alumno: al tocarla se amplía (aunque pierda algo de calidad); para
-  cambiarla hay que tocar el icono de la cámara aparte. Quitados "Quitar foto"
-  y el enlace "Escribir a...".
-- El correo ya no se puede editar en la ficha (solo se muestra, más pequeño,
-  bajo el nombre).
-- Nueva sección "Notas privadas" en la ficha del alumno: no aparece nunca en
-  el historial de registros ni en ningún informe futuro.
-- Registro rápido directamente desde la ficha del alumno, sin tener que volver
-  a Hoy ni escribir su nombre.
-- En la ficha de cada clase: el material ya no tiene un botón por alumno; hay
-  un único icono 📦 arriba de la lista que activa el "modo asignar" (tocas un
-  alumno de la lista y se le asigna/quita). Junto a él, un desplegable para
-  elegir si el material rota cada semana o cada clase. El delegado/a se elige
-  con el icono 🎗️ y se representa como "(C)" junto al nombre en el listado.
-- Quitada la marca redonda roja junto al nombre (ya era redundante con el
-  cuadrado ✕). El cuadrado de asistencia ahora muestra un tick ✓ verde cuando
-  el alumno está presente, para que no parezca que falta información.
-- Clasificación: ahora se puede elegir clasificar por puntos o por faltas (la
-  de "calificación" queda preparada para cuando se añadan notas), y además de
-  por clase, hay una opción "Total" que compara a todo tu alumnado junto.
+- Corregido un bug real: al cambiar de pestaña con una ficha abierta (alumno,
+  clase...), el fondo se quedaba tapado y "Inicio" no respondía. Ahora cambiar
+  de pestaña cierra siempre cualquier ficha abierta, y el botón × es más grande.
+- Motor de nombres reescrito y probado a fondo: ahora reconoce "María Ruiz" o
+  "Martina Ruiz" aunque haya varias "María"/"Martina" en la clase (usa el
+  apellido para desambiguar), acepta nombres compuestos ("Sonia María",
+  "Ángela de la Cruz") y tolera una letra de typo. Si de verdad es ambiguo, el
+  aviso te pregunta cuál de los dos, con el primer apellido de cada uno.
+- Más palabras reconocidas para el registro de observaciones: tripa/barriga,
+  regla/menstruación/periodo, virus/fiebre/enfermo, cansancio, agujetas, baño/WC,
+  cada una con su icono. Los puntos llevan medalla (🥇 4-5, 🥈 2-3, 🥉 1).
+- "Registros recientes" ya muestra siempre el texto redactado (no lo que
+  escribiste literalmente), en todos los tipos de registro.
+- Alumnado rediseñado tipo Séneca: rejilla de 3 columnas, foto grande, nombre
+  debajo (con el primer apellido si hay dos alumnos con el mismo nombre de
+  pila), menú ⋮ para abrir la ficha. Material y delegado ahora son solo dos
+  iconos (📦 y una "C", sin el lazo amarillo) que abren su propio panel.
+- Ausencias con justificación: tocar un alumno alterna entre injustificada →
+  justificada → sin falta.
+- Grupos de trabajo: el icono de guardar va junto al campo del nombre (ya no
+  se queda oculto tras la barra de navegación); título "GUARDAR ESTOS GRUPOS";
+  quitados los subtítulos de "mixtos"/"incluir ausentes"; el número de
+  componentes por grupo ahora resalta más.
+- Quitado el botón "Crear grupos de trabajo" de la pantalla Hoy.
+- Las clases del día (con sus horas) ahora caben todas en una línea, sin
+  scroll horizontal.
+- Icono de "Alumnado" cambiado a tres cabecitas (como en Séneca); todos los
+  iconos del menú en gris, menos el de Inicio.
 
 Para probarla en GitHub Pages, abre la raíz del repositorio. El index.html apunta a esta versión.
