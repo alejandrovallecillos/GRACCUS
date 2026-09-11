@@ -1,33 +1,21 @@
-GRACCUS 0.21
+GRACCUS 0.22
 
-Cambios en esta versión:
-- Corregido un bug real: al cambiar de pestaña con una ficha abierta (alumno,
-  clase...), el fondo se quedaba tapado y "Inicio" no respondía. Ahora cambiar
-  de pestaña cierra siempre cualquier ficha abierta, y el botón × es más grande.
-- Motor de nombres reescrito y probado a fondo: ahora reconoce "María Ruiz" o
-  "Martina Ruiz" aunque haya varias "María"/"Martina" en la clase (usa el
-  apellido para desambiguar), acepta nombres compuestos ("Sonia María",
-  "Ángela de la Cruz") y tolera una letra de typo. Si de verdad es ambiguo, el
-  aviso te pregunta cuál de los dos, con el primer apellido de cada uno.
-- Más palabras reconocidas para el registro de observaciones: tripa/barriga,
-  regla/menstruación/periodo, virus/fiebre/enfermo, cansancio, agujetas, baño/WC,
-  cada una con su icono. Los puntos llevan medalla (🥇 4-5, 🥈 2-3, 🥉 1).
-- "Registros recientes" ya muestra siempre el texto redactado (no lo que
-  escribiste literalmente), en todos los tipos de registro.
-- Alumnado rediseñado tipo Séneca: rejilla de 3 columnas, foto grande, nombre
-  debajo (con el primer apellido si hay dos alumnos con el mismo nombre de
-  pila), menú ⋮ para abrir la ficha. Material y delegado ahora son solo dos
-  iconos (📦 y una "C", sin el lazo amarillo) que abren su propio panel.
-- Ausencias con justificación: tocar un alumno alterna entre injustificada →
-  justificada → sin falta.
-- Grupos de trabajo: el icono de guardar va junto al campo del nombre (ya no
-  se queda oculto tras la barra de navegación); título "GUARDAR ESTOS GRUPOS";
-  quitados los subtítulos de "mixtos"/"incluir ausentes"; el número de
-  componentes por grupo ahora resalta más.
-- Quitado el botón "Crear grupos de trabajo" de la pantalla Hoy.
-- Las clases del día (con sus horas) ahora caben todas en una línea, sin
-  scroll horizontal.
-- Icono de "Alumnado" cambiado a tres cabecitas (como en Séneca); todos los
-  iconos del menú en gris, menos el de Inicio.
+Corrección de un fallo de la 0.21: al quitar el botón "Crear grupos de trabajo"
+de la pantalla Hoy, quedó suelta la línea de código que le enganchaba el
+evento de clic. Como ese botón ya no existía en la página, esa línea rompía
+la carga completa de la app nada más abrirla (antes de pintar nada y antes de
+activar las demás pestañas) — por eso "no funcionaba nada". Corregido y
+comprobado cargando la página entera de principio a fin sin errores.
+
+También, según lo pedido:
+- Vuelta a los iconos de menú en color (quitado el filtro gris).
+- El icono de "Alumnado" ahora son 3 siluetas de persona (cabeza + hombros),
+  no 3 círculos sueltos.
+
+El resto de cambios de la 0.21 (motor de nombres, ausencias justificadas,
+alumnado tipo Séneca, medallas, grupos de trabajo, etc.) siguen igual.
+
+A partir de ahora, cada entrega llevará su número correlativo (0.22, 0.23...),
+aunque sea para corregir un fallo de la anterior.
 
 Para probarla en GitHub Pages, abre la raíz del repositorio. El index.html apunta a esta versión.
