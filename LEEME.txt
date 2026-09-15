@@ -1,21 +1,29 @@
-GRACCUS 0.22
+GRACCUS 0.24
 
-Corrección de un fallo de la 0.21: al quitar el botón "Crear grupos de trabajo"
-de la pantalla Hoy, quedó suelta la línea de código que le enganchaba el
-evento de clic. Como ese botón ya no existía en la página, esa línea rompía
-la carga completa de la app nada más abrirla (antes de pintar nada y antes de
-activar las demás pestañas) — por eso "no funcionaba nada". Corregido y
-comprobado cargando la página entera de principio a fin sin errores.
+Cambios en esta versión:
+- Completado el grupo "Actividad Física 4º ESO": ya son los 104 alumnos (antes
+  solo había 50, faltaban las páginas 2 y 3 del listado). Todos con foto y
+  correo.
+- Corregida una nota privada que se había asignado de forma provisional: el
+  apunte "repetidor, cuadro depresivo" estaba puesto en Jesús Falcón Roldán
+  (una suposición, por el 2º apellido, al no tener aún el listado completo).
+  Ahora que aparece Jesús Roldán Jiménez, encaja mucho mejor con el apellido
+  indicado en la nota original, así que se ha trasladado a él.
+- Añadidas 8 notas privadas más que antes no se podían enlazar con seguridad
+  (Guillermo Sánchez Jiménez, Jesús Sánchez Moreno, Javier Ponce Bonilla,
+  Fabiola Santoja Moreno, Carmen Rocío Pinelo Bonilla, Lucía López Pineda,
+  Adrián León Soto, Juan Pablo Martín Morillo). En total, 16 fichas de este
+  grupo llevan ya nota privada.
+- Sigue pendiente sin enlazar la nota "Luis Ángel Patiño: madre fallecida por
+  violencia de género..." — no hay ningún alumno con ese apellido en el
+  listado completo de 4º ESO; podría tratarse de una confusión de curso en el
+  documento original (si hay un alumno de 3º con ese nombre, no es la misma
+  persona, así que no se ha asignado por precaución).
 
-También, según lo pedido:
-- Vuelta a los iconos de menú en color (quitado el filtro gris).
-- El icono de "Alumnado" ahora son 3 siluetas de persona (cabeza + hombros),
-  no 3 círculos sueltos.
-
-El resto de cambios de la 0.21 (motor de nombres, ausencias justificadas,
-alumnado tipo Séneca, medallas, grupos de trabajo, etc.) siguen igual.
-
-A partir de ahora, cada entrega llevará su número correlativo (0.22, 0.23...),
-aunque sea para corregir un fallo de la anterior.
+Sobre la lista larga de cambios que volviste a pegar en este mensaje: ya
+estaba todo aplicado desde la 0.21/0.22 (motor de nombres, faltas
+justificadas, rejilla estilo Séneca, grupos de trabajo, medallas, iconos...).
+Lo único que cambió después fue el color de los iconos, que se quedó en color
+(no en gris) porque me lo pediste así en un mensaje posterior.
 
 Para probarla en GitHub Pages, abre la raíz del repositorio. El index.html apunta a esta versión.
