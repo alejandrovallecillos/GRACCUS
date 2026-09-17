@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"><meta name="theme-color" content="#12202d"><meta name="description" content="GRACCUS — registro docente mediante lenguaje natural">
+<title>graccus</title>
+<style>
+:root{--ink:#12202d;--muted:#6c7883;--line:#e5e9ec;--paper:#f7f8f9;--card:#fff;--accent:#2d7d73;--accent-soft:#e5f2ef;--orange:#c97832;--orange-soft:#fbeee0;--danger:#b94b4b;--shadow:0 8px 28px #12202d0b}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0}.app{display:flex;min-height:100vh}.sidebar{width:244px;background:var(--ink);color:#fff;padding:26px 16px;display:flex;flex-direction:column;gap:28px;position:relative;z-index:2}.corner-ball{position:fixed;top:-42px;left:202px;width:84px;height:84px;display:flex;align-items:center;justify-content:center;font-size:60px;line-height:1;z-index:1;pointer-events:none;user-select:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.2))}.brand{padding:0 14px}.brand strong{font-size:25px;letter-spacing:.15em}.brand small{display:block;color:#9eabb5;margin-top:3px;font-size:11px;letter-spacing:.08em}.brand-subject{display:inline-block;margin-top:9px;background:#ffffff1a;color:#bfe8e0;border:1px solid #ffffff26;border-radius:20px;padding:3px 10px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}.nav{display:grid;gap:6px}.nav button{background:transparent;color:#c2cbd0;text-align:left;padding:12px 14px;border-radius:9px;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:#ffffff14;color:white}.nav b{font-size:17px;width:20px;text-align:center}.sidebar-footer{margin-top:auto;color:#86949d;font-size:12px;padding:0 14px}.main{flex:1;max-width:1200px;margin:auto;padding:calc(28px + env(safe-area-inset-top)) 34px calc(60px + env(safe-area-inset-bottom))}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;gap:10px;flex-wrap:wrap}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--muted);font-weight:700}.date{font-size:14px;color:var(--muted)}.topbar-actions{display:flex;gap:8px;align-items:center}.view{display:none}.view.active{display:block}.secondary-view .topbar{display:none}h1{font-size:32px;letter-spacing:-.04em;margin:4px 0 6px}h2{font-size:20px;margin:0 0 16px;letter-spacing:-.02em}h3{font-size:16px;margin:0 0 4px}.sub{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:1.3fr .7fr;gap:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}.context{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}.pill{background:var(--accent-soft);color:var(--accent);border-radius:30px;padding:7px 11px;font-size:12px;font-weight:700}.pill.muted{background:#f0f2f3;color:var(--muted)}.simbtn{background:#fff;border:1px solid var(--line);color:var(--ink);padding:9px 13px;border-radius:9px;font-size:12px;font-weight:700}.simbtn:hover{border-color:var(--accent);color:var(--accent)}.entry-card{margin-top:18px}.entry{display:flex;gap:10px}.entry input{flex:1;min-width:0;border:1px solid #cfd7dc;border-radius:10px;padding:15px 16px;outline:0}.entry input:focus{border-color:var(--accent);box-shadow:0 0 0 3px #2d7d7317}.entry input:disabled{background:#f3f4f5;color:var(--muted)}.primary{background:var(--accent);color:#fff;padding:0 20px;border-radius:10px;font-weight:700}.primary:disabled{background:#a9c4c0;cursor:not-allowed}.voice{background:#eef1f3;color:var(--ink);width:64px;border-radius:10px;font-size:28px;position:relative;transition:background .1s,color .1s;touch-action:none;user-select:none;-webkit-user-select:none}.voice.listening{background:var(--danger);color:#fff;animation:pulse 1.1s ease-in-out infinite}@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #b94b4b55}50%{box-shadow:0 0 0 8px #b94b4b00}}.hint{color:var(--muted);font-size:12px;margin-top:12px}.feedback{font-size:12px;margin-top:8px;min-height:15px;font-weight:600}.feedback.ok{color:var(--accent)}.feedback.warn{color:var(--orange)}.feedback.error{color:var(--danger)}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}.metric{padding:16px;background:#fbfcfc;border:1px solid var(--line);border-radius:10px}.metric strong{display:block;font-size:24px}.metric span{color:var(--muted);font-size:12px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:30px 0 13px}.link{background:transparent;color:var(--accent);font-weight:700;font-size:13px}.link:disabled{opacity:.35;cursor:not-allowed}.avatar-img{height:36px;width:36px;border-radius:50%;object-fit:cover;flex-shrink:0}.avatar-img.sm{height:30px;width:30px}.avatar-img.lg{height:64px;width:64px}.avatar-img.xl{height:84px;width:84px}.avatar.sm{height:30px;width:30px;font-size:12px}.avatar.lg{height:64px;width:64px;font-size:22px}.avatar.xl{height:84px;width:84px;font-size:28px}.photo-upload-badge{position:absolute;right:-2px;bottom:-2px;background:var(--ink);color:#fff;border-radius:50%;width:24px;height:24px;font-size:12px;display:flex;align-items:center;justify-content:center;cursor:pointer}.photo-upload-badge input{display:none}.photo-lightbox{position:fixed;inset:0;background:#12202dcc;display:none;place-items:center;padding:20px;z-index:50;cursor:zoom-out}.photo-lightbox.active{display:grid}.photo-lightbox img{max-width:min(70vw,360px);max-height:70vh;border-radius:16px;box-shadow:0 20px 60px #0007}.record{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--line)}.record:last-child{border-bottom:0}.avatar{height:36px;width:36px;background:#e9eff0;color:var(--accent);border-radius:50%;display:grid;place-items:center;font-weight:700;flex-shrink:0}.record-main{flex:1;min-width:0}.record-meta{font-size:12px;color:var(--muted);margin-top:3px}.tag{font-size:11px;padding:4px 7px;border-radius:5px;background:#f0f2f3;color:var(--muted);height:max-content;white-space:nowrap}.positive{color:var(--accent);background:var(--accent-soft)}.absent{color:var(--danger);background:#fbecec}.absence-mark{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#fbecec;color:var(--danger);font-size:13px;font-weight:900;margin-left:5px;flex-shrink:0}.roster-row-absent{border-color:#efcaca;background:#fffafa}.incident{color:var(--orange);background:var(--orange-soft)}.list{display:grid;gap:10px}.row{display:flex;justify-content:space-between;align-items:center;padding:17px 18px;background:#fff;border:1px solid var(--line);border-radius:11px;gap:12px}.roster-row-encargado{background:#fffaf0;border-color:#f0d998}.roster-row-delegado{box-shadow:inset 3px 0 0 #2f5fa8}.roster-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}.score-pill{background:var(--accent-soft);color:var(--accent);font-weight:800;font-size:12px;padding:6px 10px;border-radius:8px;white-space:nowrap;flex-shrink:0}.square-toggle{width:34px;height:34px;padding:0;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;border:1px solid var(--line);background:#fff;border-radius:8px;color:var(--muted);line-height:1}.square-toggle.on-absent{background:#fbecec;border-color:#f0b8b8;color:var(--danger)}.square-toggle.on-material{background:#fdf0cf;border-color:#f0d998;color:#9a6b0a}.square-toggle.present-ok{background:#eef8f3;border-color:#bfe3d2;color:var(--accent)}.sen-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 10px;margin-top:14px}.sen-card{text-align:center;cursor:pointer;position:relative}.sen-photo-wrap{position:relative;width:84px;height:84px;margin:0 auto}.sen-dots{position:absolute;top:-4px;right:-6px;width:24px;height:24px;border-radius:50%;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--ink);box-shadow:var(--shadow);z-index:2}.sen-badge{position:absolute;bottom:-2px;background:#fff;border:1px solid var(--line);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:var(--shadow);z-index:2}.sen-badge-material{left:-4px}.sen-badge-delegado{right:-4px;font-weight:900;color:#2f5fa8}.sen-name{margin-top:8px;font-size:12.5px;font-weight:700;line-height:1.2}.sen-sub{margin-top:2px;font-size:10.5px;color:var(--muted)}.sen-falta-tag{display:block;font-size:10px;font-weight:800;margin-top:2px}.sen-falta-tag.injustificada{color:var(--danger)}.sen-falta-tag.justificada{color:var(--muted)}.sen-points{display:block;font-size:10px;color:var(--muted);margin-top:1px}.row-info{display:flex;gap:13px;align-items:center;min-width:0}.row small{display:block;color:var(--muted);margin-top:2px}.score{font-weight:800;color:var(--accent);white-space:nowrap}.toolbar{display:flex;gap:10px;margin:20px 0}.toolbar input{border:1px solid var(--line);padding:11px 13px;border-radius:9px;flex:1}.empty{color:var(--muted);padding:20px 0}.toast{display:none}.modal{position:fixed;inset:0;background:#12202d66;display:none;place-items:center;padding:20px;z-index:30}.modal .card{max-width:min(680px,92vw);width:100%;max-height:86vh;overflow:auto}.close{float:right;background:none;font-size:24px;color:var(--muted);width:40px;height:40px;line-height:40px;text-align:center;margin:-8px -8px 0 0}.field{margin:14px 0}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}.field select,.field input[type=time],.field input[type=text],.field input[type=email],.field textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;font-family:inherit;font-size:13px}.field textarea{resize:vertical}.switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0;padding:12px 14px;background:#fbfcfc;border:1px solid var(--line);border-radius:10px}.switch-row input{width:18px;height:18px}.modal-actions{display:flex;gap:10px;margin-top:18px}.sched-table{width:100%;border-collapse:separate;border-spacing:6px;min-width:640px}.sched-table th{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:4px 8px;text-align:left}.sched-time{font-size:12px;color:var(--muted);white-space:nowrap;font-weight:700;padding-right:6px}.sched-cell{border-radius:9px;padding:10px 11px;font-size:12px;font-weight:700;min-height:46px;display:flex;flex-direction:column;justify-content:center;gap:2px;line-height:1.25}.sched-cell.clase{background:var(--accent-soft);color:var(--accent)}.sched-cell.no-lectivo{background:var(--orange-soft);color:var(--orange)}.sched-cell.empty{background:transparent;border:1px dashed var(--line);color:var(--muted);font-weight:400}.sched-cell small{font-weight:400;opacity:.75;font-size:11px}.sched-cell.now{box-shadow:0 0 0 2px var(--ink) inset}.sched-cell.pabellon{border:2px solid #c97832}.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.cal-head{font-size:11px;text-transform:uppercase;color:var(--muted);text-align:center;padding:4px 0;font-weight:700}.cal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:8px;border:1px solid var(--line);cursor:pointer;font-size:13px;position:relative}.cal-cell.empty{border-color:transparent;cursor:default}.cal-cell.today{border-color:var(--accent);font-weight:700;color:var(--accent)}.cal-cell.has-event{background:var(--accent-soft)}.cal-cell:hover:not(.empty){border-color:var(--accent)}.cal-dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}.eval-wrap{overflow-x:auto;margin-top:8px}.eval-table{width:100%;border-collapse:collapse;min-width:620px;font-size:12px}.eval-table th{text-align:left;padding:6px 7px;font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:1px solid var(--line);white-space:nowrap}.eval-table td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:middle}.eval-table tr:last-child td{border-bottom:0}.eval-table input,.eval-table select{width:100%;border:1px solid var(--line);border-radius:6px;padding:5px 6px;font-size:12px;background:#fff;color:var(--ink)}.eval-table input[type=number]{width:52px}.eval-table td.eval-unit{font-weight:700;white-space:nowrap;padding-right:10px}.eval-table td.eval-puntos{font-weight:700;color:var(--accent);text-align:center}.race-lane{margin-bottom:16px}.race-line{position:relative;height:36px;background:repeating-linear-gradient(90deg,#f3ede0,#f3ede0 18px,#ece5d5 18px,#ece5d5 20px);border-radius:8px;border:1px solid var(--line);margin-bottom:5px;overflow:visible}.race-line::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:4px;border-radius:50%;background:repeating-linear-gradient(90deg,#d9c28f 0 14px,#ead9ae 14px 28px);opacity:.85}.race-camel{position:absolute;top:50%;transform:translate(-50%,-50%) scaleX(-1);font-size:24px;transition:left .4s ease;z-index:2}.race-flag{position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:18px}.race-label{font-size:12px;color:var(--muted)}.race-label b{color:var(--ink)}@media(max-width:760px){.corner-ball{display:none}.app{display:block}.sidebar{position:fixed;bottom:0;left:0;right:0;width:auto;height:calc(72px + env(safe-area-inset-bottom));padding:6px 6px env(safe-area-inset-bottom);z-index:20;border-top:1px solid #ffffff18}.brand,.sidebar-footer{display:none}.nav{display:flex;justify-content:space-around;gap:2px}.nav button{padding:7px 8px;display:grid;gap:0;justify-items:center;text-align:center;font-size:10px;border-radius:8px;min-width:42px}.nav button span{display:none}.nav b{font-size:22px;width:auto}.main{padding:calc(14px + env(safe-area-inset-top)) 14px calc(74px + env(safe-area-inset-bottom))}.topbar{margin-bottom:18px}.topbar .eyebrow{font-size:10px}.grid{display:block}.right-card{margin-top:18px}h1{font-size:28px;margin-top:2px}.entry{display:grid;grid-template-columns:1fr 58px 58px}.metrics{grid-template-columns:repeat(3,1fr)}.card{padding:17px}.section-head{flex-wrap:nowrap}.section-head h2{white-space:nowrap}.section-head>div{flex-shrink:0}.date{font-size:12px}.race-line{height:40px;border-radius:10px}.race-camel{font-size:25px}.modal{padding:calc(12px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom))}.modal .card{max-height:calc(92vh - env(safe-area-inset-top) - env(safe-area-inset-bottom))}.empty{padding:4px 0}}
+
+.daily-classes{display:grid;gap:5px;margin-top:18px;margin-bottom:12px}
+.daily-classes+.daily-classes{margin-top:5px}
+.daily-class{border:1px solid var(--line);background:#fff;border-radius:9px;padding:8px 10px;text-align:left;min-width:112px;cursor:pointer;box-shadow:var(--shadow)}
+.daily-class small{display:block;color:var(--muted);font-size:10px;font-weight:600}
+.daily-class b{display:block;font-size:12px;margin-top:2px}
+.daily-class.current{background:var(--accent-soft);border-color:var(--accent);box-shadow:0 0 0 2px #2d7d7320}
+.daily-class.current small,.daily-class.current b{color:var(--accent)}
+.daily-class.no-current{opacity:.72}
+.daily-class:hover{border-color:var(--accent)}
+.daily-class-wrap{display:flex;align-items:stretch;gap:3px}
+.daily-class-wrap .daily-class{flex:1}
+.daily-class.selected{background:#eef0ef;border-color:#8fae8f}
+.daily-class.selected small,.daily-class.selected b{color:#3d5a3d}
+.daily-class-roster{border:1px solid var(--line);background:#fff;border-radius:9px;padding:0 8px;cursor:pointer;box-shadow:var(--shadow);font-size:13px}
+.daily-class-roster:hover{border-color:var(--accent)}
+.send-entry{font-size:25px;display:flex;align-items:center;justify-content:center}
+.cal-cell.weekend,.cal-cell.holiday{background:#eceff1;color:#8b959d;border-color:#e0e4e7;cursor:default}
+.cal-cell.weekend:hover,.cal-cell.holiday:hover{border-color:#e0e4e7}
+.cal-cell.holiday{box-shadow:inset 0 0 0 1px #d8dde0}
+</style>
+<link rel="manifest" href="./manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="graccus">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<style>
+html,body{overscroll-behavior-y:none}
+body{-webkit-tap-highlight-color:transparent}
+@supports(padding:max(0px)){.main{padding-bottom:max(74px,calc(74px + env(safe-area-inset-bottom)))}.sidebar{padding-bottom:max(7px,env(safe-area-inset-bottom))}}
+</style>
+
+
+<style>
+/* GRACCUS 0.24 — mobile-first UI */
+.nav-clock{color:#d53b3b !important;font-size:28px !important;font-weight:900 !important;line-height:1}
+.home-nav b{width:42px !important;height:42px;border-radius:50%;background:var(--accent);color:#fff;display:grid !important;place-items:center;font-size:22px !important;letter-spacing:-.04em}
+.input-shell{position:relative;flex:1;min-width:0}.input-shell input{width:100%;padding-right:58px}.input-shell .voice{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:8px;background:transparent}.input-shell .voice.listening{background:var(--danger);color:#fff;transform:translateY(-50%)}
+.record{cursor:pointer;align-items:center;padding:11px 0}.record:hover{background:#fbfcfc}.record-main{min-width:0}.record-main>b{display:block}.record-summary{margin-top:2px;font-weight:700}.record-meta{font-size:11px}.record-time{font-size:11px;color:var(--muted);white-space:nowrap;margin-left:8px}
+.record .tag{display:none}
+.record-review{background:#fdeeee}
+.record-review:hover{background:#fbe2e2}
+.record-review .record-summary{white-space:normal;overflow:visible;text-overflow:clip;color:#b02a2a}
+.review-x{flex:0 0 auto;color:#d32f2f;font-size:16px;line-height:1;align-self:center}
+@media(max-width:760px){
+  body{background:var(--paper)}
+  .main{padding:calc(18px + env(safe-area-inset-top)) 14px calc(76px + env(safe-area-inset-bottom))}
+  .topbar{padding-top:4px;margin-bottom:14px}
+  .topbar .eyebrow{color:var(--muted)}
+  .sidebar{height:calc(62px + env(safe-area-inset-bottom));padding:2px 8px env(safe-area-inset-bottom);background:#fff;border-top:1px solid var(--line);box-shadow:0 -4px 18px #12202d10}
+  .nav{height:58px;align-items:center;justify-content:space-between;gap:0}
+  .nav button{flex:1;padding:3px 4px;min-width:0;height:54px}
+  .nav b{font-size:22px;width:auto;height:30px;display:grid;place-items:center}
+  .nav button span{display:block;font-size:9px;color:var(--muted);margin-top:1px}
+  .nav button.active span{color:var(--ink);font-weight:700}
+  .home-nav b{width:40px !important;height:40px;margin:auto;font-size:21px !important}
+  .nav-clock{font-size:28px !important;color:#d53b3b !important}
+  .entry{display:flex;gap:8px}.input-shell{min-width:0}.entry input{padding:14px 54px 14px 14px}.input-shell .voice{width:38px;height:38px;font-size:19px;opacity:.62}.send-entry{width:54px;min-width:54px;padding:0}
+  .section-head{margin:22px 0 9px}
+  .section-head h2{font-size:18px}
+  .record{gap:10px}.record .avatar{width:32px;height:32px;font-size:11px}.record-time{font-size:10px}
+}
+</style>
+
+<style>
+/* GRACCUS 0.24 — ajustes visuales específicos para iPhone */
+.nav-students{font-size:24px !important;filter:saturate(.78) brightness(1.16);}.nav-students svg{width:26px;height:26px;display:block;fill:currentColor;stroke:none;}
+.nav-clock{width:30px !important;height:30px !important;color:#d53b3b !important;}
+.nav-clock svg{width:28px;height:28px;display:block;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.nav-calendar{font-size:23px !important;filter:saturate(.92) brightness(1.02);}
+/* La G conserva el equilibrio del icono de la app: verde + contorno oscuro + punto naranja */
+.home-nav b{
+  position:relative !important;width:42px !important;height:42px !important;border-radius:50% !important;
+  background:var(--accent) !important;color:#fff !important;
+  border:3px solid var(--ink) !important;box-shadow:0 1px 0 #12202d22;
+  display:grid !important;place-items:center !important;
+}
+.home-g-mark{width:20px;height:auto;display:block;object-fit:contain;}
+.home-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--orange);right:5px;top:5px;border:0;box-shadow:none;}
+/* Banda superior: deixa aire para la isla/zona segura del iPhone */
+.main{padding-top:calc(18px + env(safe-area-inset-top)) !important;}
+.topbar{padding-top:10px !important;}
+/* Registros: nombre + puntos compactos y sin columnas rígidas */
+.record{display:flex;gap:10px;min-width:0;}
+.record-main{flex:1;min-width:0;}
+.record-main>b{font-size:15px;line-height:1.2;}
+.record-summary{font-size:13px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.record-time{flex:0 0 auto;margin-left:auto;}
+/* En móvil, más ancho útil para cada registro */
+@media(max-width:760px){
+  .sidebar{height:calc(62px + env(safe-area-inset-bottom));padding:2px 8px env(safe-area-inset-bottom);}
+  .nav{height:58px;}
+  .nav button{height:54px;}
+  .nav-students{font-size:23px !important;}
+  .nav-calendar{font-size:22px !important;}
+  .nav-clock svg{width:27px;height:27px;}
+  .home-nav b{width:42px !important;height:42px !important;}
+  .home-dot{width:8px;height:8px;right:5px;top:5px;}
+  .main{padding-top:calc(22px + env(safe-area-inset-top)) !important;padding-bottom:calc(84px + env(safe-area-inset-bottom)) !important;}
+  .topbar{padding-top:4px !important;margin-bottom:14px;}
+  .topbar .eyebrow{font-size:10px;}
+  .record{padding:9px 0;gap:9px;}
+  .record .avatar{width:32px;height:32px;flex:0 0 32px;}
+  .record-summary{font-size:13px;}
+  .record-time{font-size:10px;}
+}
+/* En pantallas estrechas, ocultar cualquier texto auxiliar de columnas */
+@media(max-width:390px){
+  .record .record-summary{max-width:190px;}
+}
+
+/* GRACCUS 0.24 */
+.home-nav b{position:relative;display:flex;align-items:center;justify-content:center;width:48px;height:48px;}
+.home-g-mark{width:20px!important;height:auto!important;}
+.home-dot{border:0!important;box-shadow:none!important;width:9px;height:9px;right:4px;top:4px;}
+.voice{width:50px!important;font-size:21px!important;opacity:.68;touch-action:none;-webkit-touch-callout:none;}
+.voice.listening{opacity:1;}
+.daily-classes{margin-top:14px;margin-bottom:5px;gap:3px}
+.daily-classes+.daily-classes{margin-top:3px}
+.daily-class-wrap{flex:1 1 0;min-width:0;gap:1px}
+.daily-class{padding:5px 2px;text-align:center;min-width:0}
+.daily-class small{font-size:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.daily-class b{font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+.daily-class-roster{padding:0 3px;font-size:10px;min-width:18px}
+.record-name-link{background:none;border:0;padding:0;font-weight:800;color:inherit;text-align:left;}
+.record-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;}
+.absence-btn{min-width:34px;color:var(--danger);}
+.work-groups{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);}
+.work-group{padding:10px 12px;background:#fbfcfc;border:1px solid var(--line);border-radius:9px;margin-top:8px;font-size:13px;}
+.work-group small{color:var(--muted);display:block;margin-top:3px;}
+@media(max-width:760px){.sidebar{height:calc(60px + env(safe-area-inset-bottom));}.nav{height:56px}.nav button{height:52px}.home-nav b{width:44px!important;height:44px!important}.home-g-mark{width:18px!important}.home-dot{width:8px;height:8px;right:3px;top:3px}.main{padding-bottom:calc(70px + env(safe-area-inset-bottom))!important}.voice{width:42px!important;font-size:19px!important}.entry{grid-template-columns:1fr 50px 50px!important}}
+</style>
+</head>
+<body><div class="app"><aside class="sidebar"><div class="brand"><strong>GRACCUS</strong><small>Registro docente inteligente</small><span class="brand-subject">Educación Física</span></div><nav class="nav"><button data-view="classes"><b class="nav-students" aria-label="Alumnado"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M6 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="4.5" cy="9" r="2.4"/><path d="M0.5 19c0-2.6 1.8-4.6 4-5"/><circle cx="19.5" cy="9" r="2.4"/><path d="M23.5 19c0-2.6-1.8-4.6-4-5"/></svg></b><span>Alumnado</span></button><button data-view="schedule"><b class="nav-clock" aria-label="Horario"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5"></circle><path d="M16 9v7l5 3"></path></svg></b><span>Horario</span></button><button class="home-nav active" data-view="today"><b><img class="home-g-mark" src="./g-mark.png" alt="G"><i class="home-dot"></i></b></button><button data-view="calendar"><b class="nav-calendar">🗓️</b><span>Calendario</span></button><button data-view="race"><b>🐪</b><span>Clasificación</span></button></nav><div class="sidebar-footer">GRACCUS<br>Datos guardados en este dispositivo<br><label style="color:#bfe8e0;cursor:pointer;text-decoration:underline">📥 Importar datos privados<input type="file" accept="application/json" id="importPrivadoInput" style="display:none"></label><br><a href="#" id="exportarCopiaDesktop" style="color:#bfe8e0;text-decoration:underline">💾 Copia de seguridad</a><br><label style="color:#e8b0b0;cursor:pointer;text-decoration:underline">♻️ Restaurar copia<input type="file" accept="application/json" id="restaurarCopiaInputDesktop" style="display:none"></label></div></aside><main class="main">
+<div class="topbar"><div><div class="eyebrow">Panel docente</div><div class="date" id="date"></div></div></div>
+
+<section id="today" class="view active"><h1>Hoy</h1><p class="sub">Registra lo que ocurre, sin interrumpir la clase.</p><div class="context" id="contextPills"></div><div class="grid"><div><div class="card entry-card"><h2>¿Qué ha ocurrido?</h2><div class="entry"><div class="input-shell"><input id="phrase" placeholder="Ej.: Luis 5 puntos o Daniela se esfuerza" autocomplete="off"><button class="voice" id="voiceBtn" title="Dictar">🎙</button></div><button class="primary send-entry" id="sendBtn" title="Registrar (Intro)">↵</button></div><div class="hint" id="entryHint">Escribe una frase y pulsa Intro para registrar. GRACCUS reconocerá al alumno del grupo actual (o su nombre y apellido completos, aunque sea fuera de horario) y el tipo de registro.</div><div class="feedback" id="feedback"></div></div><div class="section-head"><h2>Registros recientes</h2><div style="display:flex;gap:6px"><button class="link" id="undoBtn" disabled>↺ Deshacer</button><button class="link" id="redoBtn" disabled>↻ Rehacer</button></div></div><div class="card" id="recent"></div></div><div class="right-card"><div class="card"><h2>Resumen del día</h2><div class="metrics"><div class="metric"><strong id="points">0</strong><span>Puntos</span></div><div class="metric"><strong id="absences">0</strong><span>Faltas</span></div><div class="metric"><strong id="observations">0</strong><span>Observaciones</span></div><div class="metric"><strong id="incidents">0</strong><span>Incidencias</span></div><div class="metric"><strong id="laps">0</strong><span>Vueltas</span></div><div class="metric"><strong id="review">0</strong><span>❌ Sin identificar</span></div></div></div></div></div></section>
+
+<section id="classes" class="view"><h1>Grupos y alumnos</h1><div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px"><label style="color:var(--accent);font-size:13px;font-weight:700;cursor:pointer">📥 Importar fotos y notas privadas<input type="file" accept="application/json" id="importPrivadoInputMobile" style="display:none"></label><button class="link" id="exportarCopiaMobile" style="font-size:13px">💾 Descargar copia de seguridad</button><label style="color:var(--danger);font-size:13px;font-weight:700;cursor:pointer">♻️ Restaurar copia de seguridad<input type="file" accept="application/json" id="restaurarCopiaInputMobile" style="display:none"></label></div><div class="list" id="classList"></div></section>
+<section id="race" class="view"><h1>Clasificación</h1><div class="card"><div style="display:flex;gap:12px;flex-wrap:wrap" id="raceControls"></div><div style="margin-top:18px" id="raceTrack"></div></div></section>
+<section id="schedule" class="view"><h1>Horario</h1><div class="card" style="overflow:auto"><div id="scheduleGrid"></div></div></section>
+<section id="calendar" class="view"><h1>Calendario</h1><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><button class="simbtn" id="calPrev">←</button><h2 style="margin:0" id="calTitle">—</h2><button class="simbtn" id="calNext">→</button></div><div id="calGrid"></div></div><div class="section-head"><h2>Próximos eventos</h2></div><div class="card" id="calUpcoming"></div></section>
+<section id="units" class="view"><h1>Unidades</h1><div class="list" id="unitList"></div></section>
+</main></div>
+<div class="corner-ball">🏀</div>
+<div class="modal" id="modal"><div class="card"><button class="close" id="close">×</button><div id="modalContent"></div></div></div>
+<div class="photo-lightbox" id="photoLightbox"><img id="photoLightboxImg" alt=""></div>
+
+<script>
+/* ————————————————————————————————————————————
+   GRACCUS 0.24 — motor de contexto
+   Filosofía: ABRIR → ESCRIBIR/DECIR → CONTINUAR CON LA CLASE
+   ———————————————————————————————————————————— */
+
+const STORAGE_KEY = 'graccus-data';
+const DAY_KEYS = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
+const DAY_LABELS = {lunes:'Lunes',martes:'Martes',miercoles:'Miércoles',jueves:'Jueves',viernes:'Viernes',sabado:'Sábado',domingo:'Domingo'};
+
+// Un color propio por grupo, para reconocer cada clase de un vistazo (horario, pills, listados).
+const GROUP_COLORS = {
+  g1: { bg:'#e5f2ef', fg:'#2d7d73' }, // 3º ESO B — verde (color de acción de GRACCUS)
+  g2: { bg:'#e4edfb', fg:'#2f5fa8' }, // 4º ESO A — azul
+  g3: { bg:'#f0e6fb', fg:'#7c46b8' }, // 2º ESO — morado
+  g4: { bg:'#fbe6ef', fg:'#b83d70' }, // 4º ESO B — rosa
+  g5: { bg:'#dff6f3', fg:'#1a8a7a' }, // 1º ESO — turquesa
+  g6: { bg:'#e7e9fb', fg:'#4b52c4' }, // 3º ESO A — índigo
+  g7: { bg:'#f7e9e3', fg:'#9c4a2c' }  // 1º Bachillerato — marrón
+};
+const NO_LECTIVO_COLOR = { bg:'#fbeee0', fg:'#c97832' };
+const NEUTRAL_COLOR = { bg:'#f0f2f3', fg:'#6c7883' };
+function groupColor(grupoId){ return GROUP_COLORS[grupoId] || NEUTRAL_COLOR; }
+
+// Generador de listas de alumnos ficticias (25 por grupo) para poder probar
+// GRACCUS con clases de tamaño real. `base` fija los primeros alumnos (por
+// ejemplo, los distintos "Luis" usados para probar la desambiguación por grupo).
+const NOMBRES_POOL = ['Daniela','Marta','Nicolás','Ana','Esteban','Carmen','Blanca','Joaquín','Sofía','Pablo','Elena','Hugo','Valeria','Mario','Irene','Diego','Lucía','Adrián','Paula','Alba','Sergio','Claudia','Rubén','Marina','Álvaro','Noa','Iker','Julia','Óscar','Carla','Bruno','Vera','Mateo','Nerea','Gonzalo','Aitana','Rodrigo','Celia','Enzo','Martina','Leo','Zoe','Yeray','Ariadna','Samuel','Candela','Ismael','Alma','Gael','Nayara'];
+const APELLIDOS_POOL = ['García','Pérez','Martín','Ruiz','López','Fernández','Torres','Vidal','Soto','Molina','Ramos','Díaz','Vargas','Serrano','Núñez','Cano','Bravo','Salas','Peña','Cortés','Reyes','Ortega','Gil','Cabrera','Rojas','Navarro','Iglesias','Delgado','Moya','Bueno'];
+
+const ALUMNOS_GBACH_REAL = [
+  { nombrePila:"Lola", apellidos:"Anaya Jiménez", correo:"lanajim0502@g.educaand.es", sexo:"F" },
+  { nombrePila:"Álvaro", apellidos:"Bonilla Jiménez", correo:"abonjim1504@g.educaand.es", sexo:"M" },
+  { nombrePila:"Juliana", apellidos:"Borreguero Sprauer", correo:"jborspr0601@g.educaand.es", sexo:"F" },
+  { nombrePila:"Daniel", apellidos:"García Pavón", correo:"dgarpav689@g.educaand.es", sexo:"M" },
+  { nombrePila:"Leonor", apellidos:"Gómez Jiménez", correo:"lgomjim0412@g.educaand.es", sexo:"F" },
+  { nombrePila:"Isabel", apellidos:"Hernández Pulido", correo:"iherpul2807@g.educaand.es", sexo:"F" },
+  { nombrePila:"Carolina", apellidos:"Jiménez Morillo", correo:"cjimmor184@g.educaand.es", sexo:"F" },
+  { nombrePila:"Ángela de la Cruz", apellidos:"Jiménez Pineda", correo:"ajimpin0901@g.educaand.es", sexo:"F" },
+  { nombrePila:"Manuel", apellidos:"León Borreguero", correo:"mleobor1305@g.educaand.es", sexo:"M" },
+  { nombrePila:"Christian", apellidos:"León Sánchez", correo:"cleosan734@g.educaand.es", sexo:"M" },
+  { nombrePila:"Claudia", apellidos:"Liébana Benítez", correo:"clieben1412@g.educaand.es", sexo:"F" },
+  { nombrePila:"Alejandra", apellidos:"López Rodríguez", correo:"aloprod1312@g.educaand.es", sexo:"F" },
+  { nombrePila:"Álvaro", apellidos:"Muñoz Vergara", correo:"amunver0505@g.educaand.es", sexo:"M" },
+  { nombrePila:"Sonia María", apellidos:"Pineda Bonilla", correo:"spinbon2508@g.educaand.es", sexo:"F" },
+  { nombrePila:"Rubén", apellidos:"Pineda Pérez", correo:"rpinper0206@g.educaand.es", sexo:"M" },
+  { nombrePila:"Martina", apellidos:"Rodrígues Jiménez", correo:"mrodjim2504@g.educaand.es", sexo:"F" },
+  { nombrePila:"Angélica Joanna", apellidos:"Rogel Cantos", correo:"arogcan1008@g.educaand.es", sexo:"F" },
+  { nombrePila:"Carlota del Pilar", apellidos:"Roldán García", correo:"crolgar0210@g.educaand.es", sexo:"F" },
+  { nombrePila:"Curro", apellidos:"Roldán Martín", correo:"crolmar2503@g.educaand.es", sexo:"M" },
+  { nombrePila:"Claudia", apellidos:"Roldán Romero", correo:"crolrom0509@g.educaand.es", sexo:"F" },
+  { nombrePila:"Andrea", apellidos:"Roldán Santos", correo:"arolsan0706@g.educaand.es", sexo:"F" },
+  { nombrePila:"María", apellidos:"Ruiz Figueroa", correo:"mruifig2305@g.educaand.es", sexo:"F" },
+  { nombrePila:"Adrián", apellidos:"Ruiz García", correo:"aruigar3006@g.educaand.es", sexo:"M" },
+  { nombrePila:"Martina", apellidos:"Ruiz Guerrero", correo:"mruigue1011@g.educaand.es", sexo:"F" },
+  { nombrePila:"Gloria", apellidos:"Ruiz Mateos", correo:"gruimat1309@g.educaand.es", sexo:"F" },
+  { nombrePila:"Lola", apellidos:"Sánchez Jiménez", correo:"lsanjim0703@g.educaand.es", sexo:"F" },
+  { nombrePila:"Andrea", apellidos:"Sánchez Rodríguez", correo:"asanrod0606@g.educaand.es", sexo:"F" },
+  { nombrePila:"María Cristina", apellidos:"Topal", correo:"mtop0408@g.educaand.es", sexo:"F" },
+  { nombrePila:"Hugo", apellidos:"Valle Soto", correo:"hvalsot1802@g.educaand.es", sexo:"M" },
+  { nombrePila:"Mirian", apellidos:"Zapata Martín", correo:"mzapmar0303@g.educaand.es", sexo:"F" },
+];
+
+function generarRoster(grupoId, base, offset){
+  const roster = base.map(nombre => ({ nombre, grupoId }));
+  const usados = new Set(roster.map(a => a.nombre));
+  let ni = 0, ai = 0;
+  while(roster.length < 25){
+    const nombre = NOMBRES_POOL[(ni + offset) % NOMBRES_POOL.length];
+    const apellido = APELLIDOS_POOL[(ai + offset * 3) % APELLIDOS_POOL.length];
+    const full = nombre + ' ' + apellido;
+    ni++;
+    if(ni % NOMBRES_POOL.length === 0) ai++;
+    if(usados.has(full)) continue;
+    usados.add(full);
+    roster.push({ nombre: full, grupoId });
+  }
+  return roster.map((a, i) => ({ id: grupoId + '_a' + (i + 1), nombre: a.nombre, grupoId: a.grupoId }));
+}
+
+const ALUMNOS_REALES = {
+  g2e: [
+    { id:"g2e_a1", nombrePila:"Rubén", apellidos:"Alonso Pérez", correo:"raloper2808@g.educaand.es", sexo:"M" },
+    { id:"g2e_a2", nombrePila:"Carolina", apellidos:"Benítez Figueroa", correo:"cbenfig1311@g.educaand.es", sexo:"F" },
+    { id:"g2e_a3", nombrePila:"Mohammed", apellidos:"Boukabous", correo:"mbou575f@g.educaand.es", sexo:"M" },
+    { id:"g2e_a4", nombrePila:"Lola", apellidos:"Cadenas Guillén", correo:"lcadgui2609@g.educaand.es", sexo:"F" },
+    { id:"g2e_a5", nombrePila:"Ángela", apellidos:"Campillo Benítez", correo:"acamben0802@g.educaand.es", sexo:"F" },
+    { id:"g2e_a6", nombrePila:"Jairo", apellidos:"Carreño Del Castillo", correo:"jcarcas2610@g.educaand.es", sexo:"M" },
+    { id:"g2e_a7", nombrePila:"Alexia", apellidos:"Copado Jiménez", correo:"acopjim2209@g.educaand.es", sexo:"F" },
+    { id:"g2e_a8", nombrePila:"Haroun", apellidos:"El Bouaichi Essabry", correo:"helbess808@g.educaand.es", sexo:"M" },
+    { id:"g2e_a9", nombrePila:"Juan Manuel", apellidos:"Flores Romero", correo:"jflorom512@g.educaand.es", sexo:"M" },
+    { id:"g2e_a10", nombrePila:"Triana", apellidos:"Franco Navarro", correo:"tfranav1609@g.educaand.es", sexo:"F" },
+    { id:"g2e_a11", nombrePila:"Daniel", apellidos:"Jiménez Antúnez", correo:"djimant0705@g.educaand.es", sexo:"M" },
+    { id:"g2e_a12", nombrePila:"Darío", apellidos:"Jiménez Vergara", correo:"djimver1805@g.educaand.es", sexo:"M" },
+    { id:"g2e_a13", nombrePila:"Malak", apellidos:"Lakhyari", correo:"mlak1805@g.educaand.es", sexo:"F" },
+    { id:"g2e_a14", nombrePila:"Carlota", apellidos:"León Cano", correo:"cleocan2304@g.educaand.es", sexo:"F" },
+    { id:"g2e_a15", nombrePila:"Matilde", apellidos:"León Ruiz", correo:"mleorui1812@g.educaand.es", sexo:"F" },
+    { id:"g2e_a16", nombrePila:"Juan", apellidos:"López Coca", correo:"jlopcoc2301@g.educaand.es", sexo:"M" },
+    { id:"g2e_a17", nombrePila:"Carmen Eugenia", apellidos:"López Martín", correo:"clopmar2812@g.educaand.es", sexo:"F" },
+    { id:"g2e_a18", nombrePila:"Jesús", apellidos:"Macías Ruiz", correo:"jmacrui3005@g.educaand.es", sexo:"M" },
+    { id:"g2e_a19", nombrePila:"Álvaro", apellidos:"Márquez Palma", correo:"amarpal2910@g.educaand.es", sexo:"M" },
+    { id:"g2e_a20", nombrePila:"Germán", apellidos:"Martín Jiménez", correo:"gmarjim0210@g.educaand.es", sexo:"M" },
+    { id:"g2e_a21", nombrePila:"Elena", apellidos:"Martín Martín", correo:"emarmar1011@g.educaand.es", sexo:"F" },
+    { id:"g2e_a22", nombrePila:"Candela", apellidos:"Martos Parra", correo:"cmarpar2112@g.educaand.es", sexo:"F" },
+    { id:"g2e_a23", nombrePila:"Adrián", apellidos:"Oliva Cepero", correo:"aolicep1606@g.educaand.es", sexo:"M" },
+    { id:"g2e_a24", nombrePila:"Arturo", apellidos:"Pineda Capita", correo:"apincap2002@g.educaand.es", sexo:"M" },
+    { id:"g2e_a25", nombrePila:"Justin Javier", apellidos:"Portillo Muñoz", correo:"jpormun847@g.educaand.es", sexo:"M" },
+    { id:"g2e_a26", nombrePila:"Diego", apellidos:"Roldán López", correo:"drollop0705@g.educaand.es", sexo:"M" },
+    { id:"g2e_a27", nombrePila:"Nolasco", apellidos:"Sánchez Santos", correo:"nsansan1806@g.educaand.es", sexo:"M" },
+    { id:"g2e_a28", nombrePila:"Álvaro", apellidos:"Sánchez Zapata", correo:"asanzap2805@g.educaand.es", sexo:"M" },
+  ],
+  g3a: [
+    { id:"g3a_a1", nombrePila:"Rabab", apellidos:"Aboulibada", correo:"rabo692@g.educaand.es", sexo:"F" },
+    { id:"g3a_a2", nombrePila:"Víctor Manuel", apellidos:"Álvarez Guerra", correo:"valvgue2708@g.educaand.es", sexo:"M" },
+    { id:"g3a_a3", nombrePila:"Mohamed Aminie", apellidos:"Azahaf", correo:"maza1506@g.educaand.es", sexo:"M" },
+    { id:"g3a_a4", nombrePila:"Martina Mafalda", apellidos:"Benítez Martín", correo:"mbenmar2008@g.educaand.es", sexo:"F" },
+    { id:"g3a_a5", nombrePila:"Paula", apellidos:"Bonilla Alcántara", correo:"pbonalc1910@g.educaand.es", sexo:"F" },
+    { id:"g3a_a6", nombrePila:"Aya", apellidos:"Chnani", correo:"achn420@g.educaand.es", sexo:"F" },
+    { id:"g3a_a7", nombrePila:"Celia", apellidos:"Falcón González", correo:"cfalgon2801@g.educaand.es", sexo:"F" },
+    { id:"g3a_a8", nombrePila:"Nolasco", apellidos:"Galván Fernández", correo:"ngalfer0412@g.educaand.es", sexo:"M" },
+    { id:"g3a_a9", nombrePila:"Daniel", apellidos:"García Franco", correo:"dgarfra1202@g.educaand.es", sexo:"M" },
+    { id:"g3a_a10", nombrePila:"Valeria", apellidos:"Gil Fernández", correo:"vgilfer2206@g.educaand.es", sexo:"F" },
+    { id:"g3a_a11", nombrePila:"Sara", apellidos:"Hbidi", correo:"shbi0209@g.educaand.es", sexo:"F" },
+    { id:"g3a_a12", nombrePila:"Nolasco", apellidos:"Jiménez Barrera", correo:"njimbar2108@g.educaand.es", sexo:"M" },
+    { id:"g3a_a13", nombrePila:"Óscar", apellidos:"Jiménez González", correo:"ojimgon2408@g.educaand.es", sexo:"M" },
+    { id:"g3a_a14", nombrePila:"Ángel", apellidos:"Jiménez Guerrero", correo:"ajimgue0611@g.educaand.es", sexo:"M" },
+    { id:"g3a_a15", nombrePila:"Paula Valentina", apellidos:"Jiménez Ruiz", correo:"pjimrui529@g.educaand.es", sexo:"F" },
+    { id:"g3a_a16", nombrePila:"Martín", apellidos:"López Coca", correo:"mlopcoc0802@g.educaand.es", sexo:"M" },
+    { id:"g3a_a17", nombrePila:"Carmen", apellidos:"Marchena Fernández", correo:"cmarfer2909@g.educaand.es", sexo:"F" },
+    { id:"g3a_a18", nombrePila:"Blanca", apellidos:"Martín Jiménez", correo:"bmarjim1709@g.educaand.es", sexo:"F" },
+    { id:"g3a_a19", nombrePila:"Paola", apellidos:"Martín Jiménez", correo:"pmarjim1709@g.educaand.es", sexo:"F" },
+    { id:"g3a_a20", nombrePila:"Victoria Nohemy", apellidos:"Moreno Gudiño", correo:"vmorgud966@g.educaand.es", sexo:"F" },
+    { id:"g3a_a21", nombrePila:"Jorge", apellidos:"Navarro Borreguero", correo:"jnavbor1611@g.educaand.es", sexo:"M" },
+    { id:"g3a_a22", nombrePila:"Eloy", apellidos:"Pareja Yebra", correo:"eparyeb0409@g.educaand.es", sexo:"M" },
+    { id:"g3a_a23", nombrePila:"Luis Ángel", apellidos:"Patiño Toro", correo:"lpattor435@g.educaand.es", sexo:"M" },
+    { id:"g3a_a24", nombrePila:"Iván", apellidos:"Pérez Martín", correo:"ipermar1801@g.educaand.es", sexo:"M" },
+    { id:"g3a_a25", nombrePila:"Dulce Nombre", apellidos:"Pineda Montesino", correo:"dpinmon0403@g.educaand.es", sexo:"F" },
+    { id:"g3a_a26", nombrePila:"Ainhoa", apellidos:"Riaño Paredes", correo:"ariapar1604@g.educaand.es", sexo:"F" },
+    { id:"g3a_a27", nombrePila:"Ingrid", apellidos:"Sánchez Gallego", correo:"igalcer0902@g.educaand.es", sexo:"F" },
+    { id:"g3a_a28", nombrePila:"Lucía", apellidos:"Serralbo Falcón", correo:"lserfal1304@g.educaand.es", sexo:"F" },
+    { id:"g3a_a29", nombrePila:"Nayara", apellidos:"Vallejo Roldán", correo:"nvalrol0410@g.educaand.es", sexo:"F" },
+    { id:"g3a_a30", nombrePila:"Ainhoa", apellidos:"Vega Macías", correo:"avegmac0905@g.educaand.es", sexo:"F" },
+  ],
+  g3b: [
+    { id:"g3b_a1", nombrePila:"Doha", apellidos:"Aboulibada Fakkar", correo:"dabofak605@g.educaand.es", sexo:"F" },
+    { id:"g3b_a2", nombrePila:"Ainhoa", apellidos:"Bonilla Jiménez", correo:"abonjim1707@g.educaand.es", sexo:"F" },
+    { id:"g3b_a3", nombrePila:"Farah", apellidos:"Bouaichi", correo:"fbou151e@g.educaand.es", sexo:"F" },
+    { id:"g3b_a4", nombrePila:"Carmen", apellidos:"Caro Pérez", correo:"ccarper0907@g.educaand.es", sexo:"F" },
+    { id:"g3b_a5", nombrePila:"Irene", apellidos:"Domínguez Figueroa-Lera", correo:"idomfig1504@g.educaand.es", sexo:"F" },
+    { id:"g3b_a6", nombrePila:"Eloy", apellidos:"Domínguez Pérez", correo:"edomper1711@g.educaand.es", sexo:"M" },
+    { id:"g3b_a7", nombrePila:"Rayan", apellidos:"El Isfi El Yassouri", correo:"reliely687@g.educaand.es", sexo:"M" },
+    { id:"g3b_a8", nombrePila:"Nohelia", apellidos:"Fakkar Baomar", correo:"nfakbao156@g.educaand.es", sexo:"F" },
+    { id:"g3b_a9", nombrePila:"Rebeca", apellidos:"Falcón Bonilla", correo:"rfalbon1110@g.educaand.es", sexo:"F" },
+    { id:"g3b_a10", nombrePila:"Jesús", apellidos:"Falcón Pineda", correo:"jfalpin1812@g.educaand.es", sexo:"M" },
+    { id:"g3b_a11", nombrePila:"José Antonio", apellidos:"Flores Vergara", correo:"jflover2207@g.educaand.es", sexo:"M" },
+    { id:"g3b_a12", nombrePila:"Pablo", apellidos:"Gallego Cuevas", correo:"pgalcue0809@g.educaand.es", sexo:"M" },
+    { id:"g3b_a13", nombrePila:"José Manuel", apellidos:"García Fernández", correo:"jgarfer1611@g.educaand.es", sexo:"M" },
+    { id:"g3b_a14", nombrePila:"Ángela", apellidos:"González López", correo:"agonlop1211@g.educaand.es", sexo:"F" },
+    { id:"g3b_a15", nombrePila:"Estrella", apellidos:"González López", correo:"egonlop1211@g.educaand.es", sexo:"F" },
+    { id:"g3b_a16", nombrePila:"Rayane", apellidos:"Hammani", correo:"rham314@g.educaand.es", sexo:"F" },
+    { id:"g3b_a17", nombrePila:"Alba María", apellidos:"Lagarda Bonilla", correo:"alagbon0901@g.educaand.es", sexo:"F" },
+    { id:"g3b_a18", nombrePila:"Víctor Manuel", apellidos:"López Sánchez", correo:"vlopsan0302@g.educaand.es", sexo:"M" },
+    { id:"g3b_a19", nombrePila:"Naoual", apellidos:"Louali", correo:"nlou086@g.educaand.es", sexo:"F" },
+    { id:"g3b_a20", nombrePila:"Martina", apellidos:"Morillo García", correo:"mmorgar0111@g.educaand.es", sexo:"F" },
+    { id:"g3b_a21", nombrePila:"Alberto", apellidos:"Muñoz Sánchez", correo:"amunsan2210@g.educaand.es", sexo:"M" },
+    { id:"g3b_a22", nombrePila:"Ainhoa", apellidos:"Ortiz Lara", correo:"aortlar2212@g.educaand.es", sexo:"F" },
+    { id:"g3b_a23", nombrePila:"Valery Sofía", apellidos:"Parra Gómez", correo:"vpargom069@g.educaand.es", sexo:"F" },
+    { id:"g3b_a24", nombrePila:"Lucía", apellidos:"Pavón Rico", correo:"lpavric2507@g.educaand.es", sexo:"F" },
+    { id:"g3b_a25", nombrePila:"Isaías", apellidos:"Pineda Roldán", correo:"ipinrol2005@g.educaand.es", sexo:"M" },
+    { id:"g3b_a26", nombrePila:"Gabriela", apellidos:"Roldán Segovia", correo:"grolseg1911@g.educaand.es", sexo:"F" },
+    { id:"g3b_a27", nombrePila:"María", apellidos:"Sánchez Barea", correo:"msanbar0808@g.educaand.es", sexo:"F" },
+    { id:"g3b_a28", nombrePila:"Aarón", apellidos:"Silva Martínez", correo:"asilmar1312@g.educaand.es", sexo:"M" },
+    { id:"g3b_a29", nombrePila:"Noelia", apellidos:"Vergara Falcón", correo:"nverfal0312@g.educaand.es", sexo:"F" },
+    { id:"g3b_a30", nombrePila:"Mario", apellidos:"Vergara Muñoz", correo:"mvermun0104@g.educaand.es", sexo:"M" },
+  ],
+  g3c: [
+    { id:"g3c_a1", nombrePila:"Reyes", apellidos:"Benítez Fernández", correo:"rbenfer1210@g.educaand.es", sexo:"F" },
+    { id:"g3c_a2", nombrePila:"Adriana", apellidos:"Blasco Sánchez", correo:"ablasan045@g.educaand.es", sexo:"F" },
+    { id:"g3c_a3", nombrePila:"Ángel", apellidos:"Blasco Sánchez", correo:"ablasan044@g.educaand.es", sexo:"M" },
+    { id:"g3c_a4", nombrePila:"María del Alcor", apellidos:"Borreguero Moreno", correo:"mbormor1511@g.educaand.es", sexo:"F" },
+    { id:"g3c_a5", nombrePila:"Fernando", apellidos:"Camacho Pérez", correo:"fcamper0602@g.educaand.es", sexo:"M" },
+    { id:"g3c_a6", nombrePila:"Dara", apellidos:"Cuartiellas Carrillo", correo:"dcuacar1607@g.educaand.es", sexo:"F" },
+    { id:"g3c_a7", nombrePila:"Claudia", apellidos:"García Cadenas", correo:"cgarcad2712@g.educaand.es", sexo:"F" },
+    { id:"g3c_a8", nombrePila:"Martina", apellidos:"García Vergara", correo:"mgarver2012@g.educaand.es", sexo:"F" },
+    { id:"g3c_a9", nombrePila:"Gonzalo", apellidos:"Huertas Montero", correo:"ghuemon1808@g.educaand.es", sexo:"M" },
+    { id:"g3c_a10", nombrePila:"Pablo", apellidos:"Jiménez Sánchez", correo:"pjimsan2310@g.educaand.es", sexo:"M" },
+    { id:"g3c_a11", nombrePila:"Marina", apellidos:"León Falcón", correo:"mleofal2908@g.educaand.es", sexo:"F" },
+    { id:"g3c_a12", nombrePila:"Adrián", apellidos:"López Alcántara", correo:"alopalc1212@g.educaand.es", sexo:"M" },
+    { id:"g3c_a13", nombrePila:"Ana", apellidos:"López Rodríguez", correo:"aloprod1010@g.educaand.es", sexo:"F" },
+    { id:"g3c_a14", nombrePila:"Jaime", apellidos:"Martín Jiménez", correo:"jmarjim1002@g.educaand.es", sexo:"M" },
+    { id:"g3c_a15", nombrePila:"Manuel", apellidos:"Martín Jiménez", correo:"mmarjim1212c@g.educaand.es", sexo:"M" },
+    { id:"g3c_a16", nombrePila:"Ángela", apellidos:"Martín Rueda", correo:"amarrue1304@g.educaand.es", sexo:"F" },
+    { id:"g3c_a17", nombrePila:"Sofía", apellidos:"Mayo Hanna", correo:"smayhan0108@g.educaand.es", sexo:"F" },
+    { id:"g3c_a18", nombrePila:"María", apellidos:"Navarro Rodríguez", correo:"mnavrod1201@g.educaand.es", sexo:"F" },
+    { id:"g3c_a19", nombrePila:"Estela", apellidos:"Ortiz Bonilla", correo:"eortbon1803@g.educaand.es", sexo:"F" },
+    { id:"g3c_a20", nombrePila:"Elías", apellidos:"Pérez Luna", correo:"eperlun0803@g.educaand.es", sexo:"M" },
+    { id:"g3c_a21", nombrePila:"Paola", apellidos:"Rodríguez Falcón", correo:"prodfal524@g.educaand.es", sexo:"F" },
+    { id:"g3c_a22", nombrePila:"Celia", apellidos:"Rodríguez Moreno", correo:"crodmor533@g.educaand.es", sexo:"F" },
+    { id:"g3c_a23", nombrePila:"Alba", apellidos:"Rodríguez Vecino", correo:"arodvec1811@g.educaand.es", sexo:"F" },
+    { id:"g3c_a24", nombrePila:"Alejandra", apellidos:"Roldán Escribano", correo:"arolesc0912@g.educaand.es", sexo:"F" },
+    { id:"g3c_a25", nombrePila:"Martín", apellidos:"Roldán Martín", correo:"mrolmar1810@g.educaand.es", sexo:"M" },
+    { id:"g3c_a26", nombrePila:"Cecilia", apellidos:"Sánchez Ortner", correo:"csanort409@g.educaand.es", sexo:"F" },
+    { id:"g3c_a27", nombrePila:"Alba", apellidos:"Tigerin Vera", correo:"atigver0506@g.educaand.es", sexo:"F" },
+    { id:"g3c_a28", nombrePila:"Ana", apellidos:"Vega Sánchez", correo:"avegsan2604@g.educaand.es", sexo:"F" },
+    { id:"g3c_a29", nombrePila:"Ronnie", apellidos:"Ziaziulia Vías", correo:"rviacol1608@g.educaand.es", sexo:"M" },
+  ],
+  g3d: [
+    { id:"g3d_a1", nombrePila:"Daniela", apellidos:"Arias Rodríguez", correo:"darirod0406@g.educaand.es", sexo:"F" },
+    { id:"g3d_a2", nombrePila:"Lola", apellidos:"Benítez Ruiz", correo:"lbenrui1209@g.educaand.es", sexo:"F" },
+    { id:"g3d_a3", nombrePila:"Daniel", apellidos:"Blanco León", correo:"dblaleo0203@g.educaand.es", sexo:"M" },
+    { id:"g3d_a4", nombrePila:"Vanesa", apellidos:"Bonilla Olmedo", correo:"vbonolm2901@g.educaand.es", sexo:"F" },
+    { id:"g3d_a5", nombrePila:"Rocío", apellidos:"Capitán Cuevas", correo:"rcapcue1903@g.educaand.es", sexo:"F" },
+    { id:"g3d_a6", nombrePila:"Israel", apellidos:"Carrizosa Peláez", correo:"icarpel2007@g.educaand.es", sexo:"M" },
+    { id:"g3d_a7", nombrePila:"Daniel José", apellidos:"Chaves Roldán", correo:"dcharol1709@g.educaand.es", sexo:"M" },
+    { id:"g3d_a8", nombrePila:"María Reyes", apellidos:"Correa Alcaide", correo:"mcoralc2109@g.educaand.es", sexo:"F" },
+    { id:"g3d_a9", nombrePila:"Natalia Concepción", apellidos:"Doblas Cardozo", correo:"ndobcar0803@g.educaand.es", sexo:"F" },
+    { id:"g3d_a10", nombrePila:"Adrián", apellidos:"Domínguez Almena", correo:"adomalm3011@g.educaand.es", sexo:"M" },
+    { id:"g3d_a11", nombrePila:"Valentina", apellidos:"Escribano Acosta", correo:"vescaco2208@g.educaand.es", sexo:"F" },
+    { id:"g3d_a12", nombrePila:"Gisela", apellidos:"Fernández Benítez", correo:"gferben2610@g.educaand.es", sexo:"F" },
+    { id:"g3d_a13", nombrePila:"Ángel", apellidos:"González Medina", correo:"agonmed0902@g.educaand.es", sexo:"M" },
+    { id:"g3d_a14", nombrePila:"Blanca", apellidos:"Jiménez León", correo:"bjimleo2712@g.educaand.es", sexo:"F" },
+    { id:"g3d_a15", nombrePila:"Paco", apellidos:"López Roldán", correo:"ploprol0110@g.educaand.es", sexo:"M" },
+    { id:"g3d_a16", nombrePila:"Azahara", apellidos:"López Tabernilla", correo:"aloptab0812@g.educaand.es", sexo:"F" },
+    { id:"g3d_a17", nombrePila:"Hirachi", apellidos:"Marchena Bustamante", correo:"hmarbus2411@g.educaand.es", sexo:"F" },
+    { id:"g3d_a18", nombrePila:"Carlota", apellidos:"Martínez García", correo:"cmargar2311@g.educaand.es", sexo:"F" },
+    { id:"g3d_a19", nombrePila:"Ainhoa", apellidos:"Moreno Fernández", correo:"amorfer2508@g.educaand.es", sexo:"F" },
+    { id:"g3d_a20", nombrePila:"Antonio", apellidos:"Peña Muñoz", correo:"apenmun0606@g.educaand.es", sexo:"M" },
+    { id:"g3d_a21", nombrePila:"Álvaro", apellidos:"Pérez Guerrero", correo:"apergue1409@g.educaand.es", sexo:"M" },
+    { id:"g3d_a22", nombrePila:"Lucía", apellidos:"Pérez Pineda", correo:"lperpin2908@g.educaand.es", sexo:"F" },
+    { id:"g3d_a23", nombrePila:"Isabel", apellidos:"Santos Figueroa", correo:"isanfig1709@g.educaand.es", sexo:"F" },
+    { id:"g3d_a24", nombrePila:"María", apellidos:"Santos Roldán", correo:"msanrol2603@g.educaand.es", sexo:"F" },
+    { id:"g3d_a25", nombrePila:"Terry Smith Andriusw", apellidos:"Vasquez Zárate", correo:"tvaszar714@g.educaand.es", sexo:"M" },
+    { id:"g3d_a26", nombrePila:"Gema", apellidos:"Vázquez Roldán", correo:"gvazrol0401@g.educaand.es", sexo:"F" },
+    { id:"g3d_a27", nombrePila:"Shenya", apellidos:"Ye", correo:"sye1603@g.educaand.es", sexo:"F" },
+    { id:"g3d_a28", nombrePila:"Paola", apellidos:"Zambrana Pichardo", correo:"pzampic1612@g.educaand.es", sexo:"F" },
+    { id:"g3d_a29", nombrePila:"Antonio", apellidos:"Zamudio Bonilla", correo:"azambon1808@g.educaand.es", sexo:"M" },
+  ],
+  g3e: [
+    { id:"g3e_a1", nombrePila:"Martina", apellidos:"Aguado Pizarro", correo:"magupiz1309@g.educaand.es", sexo:"F" },
+    { id:"g3e_a2", nombrePila:"Gonzalo", apellidos:"Alcántara Algaba", correo:"galcalg2111@g.educaand.es", sexo:"M" },
+    { id:"g3e_a3", nombrePila:"Triana", apellidos:"Carreño Gutiérrez", correo:"tcargut2311@g.educaand.es", sexo:"F" },
+    { id:"g3e_a4", nombrePila:"Paola", apellidos:"Crespo García", correo:"pcregar0908@g.educaand.es", sexo:"F" },
+    { id:"g3e_a5", nombrePila:"Manuel", apellidos:"De la Flor García", correo:"mflogar2907@g.educaand.es", sexo:"M" },
+    { id:"g3e_a6", nombrePila:"Hugo", apellidos:"Fajardo Rodríguez", correo:"hfajrod2309@g.educaand.es", sexo:"M" },
+    { id:"g3e_a7", nombrePila:"David", apellidos:"García Borreguero", correo:"dgarbor2409@g.educaand.es", sexo:"M" },
+    { id:"g3e_a8", nombrePila:"Rodolfo", apellidos:"García Guerrero", correo:"rgargue0806@g.educaand.es", sexo:"M" },
+    { id:"g3e_a9", nombrePila:"Daniela", apellidos:"Gómez Montero", correo:"dgommon1002@g.educaand.es", sexo:"F" },
+    { id:"g3e_a10", nombrePila:"Carmen", apellidos:"González López", correo:"cgonlop1211@g.educaand.es", sexo:"F" },
+    { id:"g3e_a11", nombrePila:"Jesús Miguel", apellidos:"Guerra Benítez", correo:"jgueben0510@g.educaand.es", sexo:"M" },
+    { id:"g3e_a12", nombrePila:"Darío", apellidos:"Huertas Roldán", correo:"dhuerol0511@g.educaand.es", sexo:"M" },
+    { id:"g3e_a13", nombrePila:"Alejandra", apellidos:"Jiménez Sánchez", correo:"ajimsan0107@g.educaand.es", sexo:"F" },
+    { id:"g3e_a14", nombrePila:"Jimena", apellidos:"León Sánchez", correo:"jleosan0211@g.educaand.es", sexo:"F" },
+    { id:"g3e_a15", nombrePila:"Óscar", apellidos:"Maldonado Rodríguez", correo:"omalrod2611@g.educaand.es", sexo:"M" },
+    { id:"g3e_a16", nombrePila:"Carmen", apellidos:"Márquez García", correo:"cmargar1404@g.educaand.es", sexo:"F" },
+    { id:"g3e_a17", nombrePila:"Aitana", apellidos:"Mejías Bonilla", correo:"amejbon1809@g.educaand.es", sexo:"F" },
+    { id:"g3e_a18", nombrePila:"Darío", apellidos:"Montes Arocha", correo:"dmonaro1008@g.educaand.es", sexo:"M" },
+    { id:"g3e_a19", nombrePila:"Martina", apellidos:"Muñoz Martín", correo:"mmunmar0802b@g.educaand.es", sexo:"F" },
+    { id:"g3e_a20", nombrePila:"Lucía", apellidos:"Ocaña Jiménez", correo:"locajim0712@g.educaand.es", sexo:"F" },
+    { id:"g3e_a21", nombrePila:"Estrella", apellidos:"Ortiz Pérez", correo:"eortper2202@g.educaand.es", sexo:"F" },
+    { id:"g3e_a22", nombrePila:"Cayetano", apellidos:"Rodríguez Borreguero", correo:"crodbor1801@g.educaand.es", sexo:"M" },
+    { id:"g3e_a23", nombrePila:"José Luis", apellidos:"Rodríguez García", correo:"jrodgar2005@g.educaand.es", sexo:"M" },
+    { id:"g3e_a24", nombrePila:"José Manuel", apellidos:"Roldán Borreguero", correo:"jrolbor0404@g.educaand.es", sexo:"M" },
+    { id:"g3e_a25", nombrePila:"Ana María", apellidos:"Rueda León", correo:"arueleo2101@g.educaand.es", sexo:"F" },
+    { id:"g3e_a26", nombrePila:"Julia", apellidos:"Salinas Aguilar", correo:"jsalagu1405@g.educaand.es", sexo:"F" },
+    { id:"g3e_a27", nombrePila:"Salvador", apellidos:"Santos Gallego", correo:"ssangal0201@g.educaand.es", sexo:"M" },
+    { id:"g3e_a28", nombrePila:"Marina", apellidos:"Soto Rodríguez", correo:"msotrod0703@g.educaand.es", sexo:"F" },
+    { id:"g3e_a29", nombrePila:"Valeria", apellidos:"Soto Rodríguez", correo:"vsotrod0703@g.educaand.es", sexo:"F" },
+    { id:"g3e_a30", nombrePila:"Amaro", apellidos:"Vergara Santos", correo:"aversan1403@g.educaand.es", sexo:"M" },
+  ],
+  g_af3: [
+    { id:"g_af3_a1", nombrePila:"Víctor Manuel", apellidos:"Álvarez Guerra", correo:"valvgue2708@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a2", nombrePila:"Adriana", apellidos:"Blasco Sánchez", correo:"ablasan045@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a3", nombrePila:"Ángel", apellidos:"Blasco Sánchez", correo:"ablasan044@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a4", nombrePila:"Paula", apellidos:"Bonilla Alcántara", correo:"pbonalc1910@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a5", nombrePila:"Fernando", apellidos:"Camacho Pérez", correo:"fcamper0602@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a6", nombrePila:"Carmen", apellidos:"Caro Pérez", correo:"ccarper0907@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a7", nombrePila:"Aya", apellidos:"Chnani", correo:"achn420@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a8", nombrePila:"Dara", apellidos:"Cuartiellas Carrillo", correo:"dcuacar1607@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a9", nombrePila:"Rayan", apellidos:"El Isfi El Yassouri", correo:"reliely687@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a10", nombrePila:"Rebeca", apellidos:"Falcón Bonilla", correo:"rfalbon1110@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a11", nombrePila:"Jesús", apellidos:"Falcón Pineda", correo:"jfalpin1812@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a12", nombrePila:"José Antonio", apellidos:"Flores Vergara", correo:"jflover2207@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a13", nombrePila:"Pablo", apellidos:"Gallego Cuevas", correo:"pgalcue0809@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a14", nombrePila:"Nolasco", apellidos:"Galván Fernández", correo:"ngalfer0412@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a15", nombrePila:"José Manuel", apellidos:"García Fernández", correo:"jgarfer1611@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a16", nombrePila:"Daniel", apellidos:"García Franco", correo:"dgarfra1202@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a17", nombrePila:"Ángela", apellidos:"González López", correo:"agonlop1211@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a18", nombrePila:"Estrella", apellidos:"González López", correo:"egonlop1211@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a19", nombrePila:"Rayane", apellidos:"Hammani", correo:"rham314@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a20", nombrePila:"Gonzalo", apellidos:"Huertas Montero", correo:"ghuemon1808@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a21", nombrePila:"Nolasco", apellidos:"Jiménez Barrera", correo:"njimbar2108@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a22", nombrePila:"Óscar", apellidos:"Jiménez González", correo:"ojimgon2408@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a23", nombrePila:"Marina", apellidos:"León Falcón", correo:"mleofal2908@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a24", nombrePila:"Adrián", apellidos:"López Alcántara", correo:"alopalc1212@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a25", nombrePila:"Martín", apellidos:"López Coca", correo:"mlopcoc0802@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a26", nombrePila:"Víctor Manuel", apellidos:"López Sánchez", correo:"vlopsan0302@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a27", nombrePila:"Carmen", apellidos:"Marchena Fernández", correo:"cmarfer2909@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a28", nombrePila:"Blanca", apellidos:"Martín Jiménez", correo:"bmarjim1709@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a29", nombrePila:"Manuel", apellidos:"Martín Jiménez", correo:"mmarjim1212c@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a30", nombrePila:"Paola", apellidos:"Martín Jiménez", correo:"pmarjim1709@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a31", nombrePila:"Sofía", apellidos:"Mayo Hanna", correo:"smayhan0108@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a32", nombrePila:"Victoria Nohemy", apellidos:"Moreno Gudiño", correo:"vmorgud966@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a33", nombrePila:"Martina", apellidos:"Morillo García", correo:"mmorgar0111@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a34", nombrePila:"Alberto", apellidos:"Muñoz Sánchez", correo:"amunsan2210@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a35", nombrePila:"Jorge", apellidos:"Navarro Borreguero", correo:"jnavbor1611@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a36", nombrePila:"Estela", apellidos:"Ortiz Bonilla", correo:"eortbon1803@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a37", nombrePila:"Eloy", apellidos:"Pareja Yebra", correo:"eparyeb0409@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a38", nombrePila:"Valery Sofía", apellidos:"Parra Gómez", correo:"vpargom069@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a39", nombrePila:"Luis Ángel", apellidos:"Patiño Toro", correo:"lpattor435@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a40", nombrePila:"Iván", apellidos:"Pérez Martín", correo:"ipermar1801@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a41", nombrePila:"Ainhoa", apellidos:"Riaño Paredes", correo:"ariapar1604@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a42", nombrePila:"Paola", apellidos:"Rodríguez Falcón", correo:"prodfal524@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a43", nombrePila:"Alba", apellidos:"Rodríguez Vecino", correo:"arodvec1811@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a44", nombrePila:"Martín", apellidos:"Roldán Martín", correo:"mrolmar1810@g.educaand.es", sexo:"M" },
+    { id:"g_af3_a45", nombrePila:"María", apellidos:"Sánchez Barea", correo:"msanbar0808@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a46", nombrePila:"Ingrid", apellidos:"Sánchez Gallego", correo:"igalcer0902@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a47", nombrePila:"Alba", apellidos:"Tigerin Vera", correo:"atigver0506@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a48", nombrePila:"Noelia", apellidos:"Vergara Falcón", correo:"nverfal0312@g.educaand.es", sexo:"F" },
+    { id:"g_af3_a49", nombrePila:"Mario", apellidos:"Vergara Muñoz", correo:"mvermun0104@g.educaand.es", sexo:"M" },
+  ],
+  g_af4: [
+    { id:"g_af4_a1", nombrePila:"Miguel Ángel", apellidos:"Arias Barragán", correo:"maribar0303@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a2", nombrePila:"Nouh", apellidos:"Attioui", correo:"natt645@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a3", nombrePila:"María", apellidos:"Barbero Plaza", correo:"mbarpla1904@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a4", nombrePila:"Yasmine", apellidos:"Belarbi Bahri", correo:"ybel0912@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a5", nombrePila:"Martín", apellidos:"Benítez Madroñal", correo:"mbenmad0306@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a6", nombrePila:"Bernardo", apellidos:"Benítez Ruiz", correo:"bbenrui1707@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a7", nombrePila:"Óscar", apellidos:"Benítez Santos", correo:"obensan1306@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a8", nombrePila:"Jesús", apellidos:"Bonilla Martín", correo:"jbonmar2505@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a9", nombrePila:"Ana", apellidos:"Bonilla Sánchez", correo:"abonsan2009@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a10", nombrePila:"Manuel", apellidos:"Borreguero Jiménez", correo:"mborjim0202@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a11", nombrePila:"Martina", apellidos:"Borreguero Roldán", correo:"mborrol1711@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a12", nombrePila:"Doha", apellidos:"Boukabous Arguig", correo:"dbouarg0503@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a13", nombrePila:"Mario", apellidos:"Cadenas Moreno", correo:"mcadmor0607@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a14", nombrePila:"Israel", apellidos:"Cadenas Pulgarín", correo:"icadpul0403@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a15", nombrePila:"Ángel", apellidos:"Capitas Valladares", correo:"acapval1011@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a16", nombrePila:"Alejandro", apellidos:"Carmona Guerrero", correo:"acargue1909@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a17", nombrePila:"Francisco", apellidos:"Carmona Rojas", correo:"fcarroj2402@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a18", nombrePila:"Miguel", apellidos:"Carrión Rodríguez", correo:"mcarrod2708@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a19", nombrePila:"Borja", apellidos:"Castro Ruiz", correo:"bcasrui1606@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a20", nombrePila:"Martina", apellidos:"Cobos Jiménez", correo:"mcobjim0301@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a21", nombrePila:"Alba", apellidos:"Cordero Carrión", correo:"acorcar1312@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a22", nombrePila:"Claudia", apellidos:"Cordero Roldán", correo:"ccorrol0809@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a23", nombrePila:"Ángel", apellidos:"Cordero Sánchez", correo:"acorsan1505@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a24", nombrePila:"Jesús", apellidos:"De los Santos Jiménez", correo:"jlosjim2106@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a25", nombrePila:"Juan Sebastián", apellidos:"Delgado Alfonso", correo:"jdelalf937@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a26", nombrePila:"Adriana", apellidos:"Delgado Falcón", correo:"adelfal0105@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a27", nombrePila:"Owen Stick", apellidos:"Delgado Jiménez", correo:"odeljim171@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a28", nombrePila:"Arantza", apellidos:"Díaz Pérez", correo:"adiaper639@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a29", nombrePila:"Aya", apellidos:"El Bouaichi", correo:"aelb779y@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a30", nombrePila:"Reda", apellidos:"El Bouaichy Elhassani", correo:"relbelh2812@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a31", nombrePila:"Aya", apellidos:"El Kamili Lafnine", correo:"aelklaf0311@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a32", nombrePila:"Lucía", apellidos:"Escobar Montero", correo:"lescmon1810@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a33", nombrePila:"Antonio", apellidos:"Falcón González", correo:"afalgon2808@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a34", nombrePila:"Jesús", apellidos:"Falcón Roldán", correo:"jfalrol1002@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a35", nombrePila:"Ángela", apellidos:"Fernández Jiménez", correo:"aferjim2603@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a36", nombrePila:"José Manuel", apellidos:"Fernández Jiménez", correo:"jferjim2210@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a37", nombrePila:"Pedro", apellidos:"Franco Espinosa", correo:"pfraesp0304@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a38", nombrePila:"Pastora", apellidos:"Gallego Bonilla", correo:"pgalbon2910@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a39", nombrePila:"Manuel", apellidos:"Gallego Cepero", correo:"mgalcep0107@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a40", nombrePila:"Niko", apellidos:"Gálvez Brzezinska", correo:"ngalbrz2405@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a41", nombrePila:"Álvaro", apellidos:"García García", correo:"agargar186b@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a42", nombrePila:"Luis Miguel", apellidos:"García Rodríguez", correo:"lgarrod0305@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a43", nombrePila:"Lucas", apellidos:"García Ruiz", correo:"lgarrui0512@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a44", nombrePila:"Paola", apellidos:"García Sánchez", correo:"pgarsan0806@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a45", nombrePila:"Miriam", apellidos:"González Jiménez", correo:"mgonjim0902@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a46", nombrePila:"Nayara", apellidos:"González Muñoz", correo:"ngonmun1510@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a47", nombrePila:"Hanaeli Gabriela", apellidos:"Gudiño Jaimes", correo:"hgudjai665@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a48", nombrePila:"David", apellidos:"Jiménez Benítez", correo:"djimben3110@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a49", nombrePila:"Mario Antonio", apellidos:"Jiménez De los Santos", correo:"mjimlos1109@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a50", nombrePila:"Daniela", apellidos:"Jiménez Domínguez", correo:"djimdom2107@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a51", nombrePila:"Antonio", apellidos:"Jiménez Guerra", correo:"ajimgue0812@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a52", nombrePila:"Manuel", apellidos:"Jiménez Guerra", correo:"mjimgue0812@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a53", nombrePila:"Adrián", apellidos:"Jiménez Morante", correo:"ajimmor1911b@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a54", nombrePila:"José Manuel", apellidos:"Jiménez Pineda", correo:"jjimpin2811@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a55", nombrePila:"Yurena", apellidos:"Jiménez Prieto", correo:"yjimpri1003@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a56", nombrePila:"Manuel José", apellidos:"Jiménez Santos", correo:"mjimsan2401@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a57", nombrePila:"Adrián", apellidos:"León Soto", correo:"aleosot1311@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a58", nombrePila:"Aimar", apellidos:"López Benítez", correo:"alopben567@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a59", nombrePila:"Lucía", apellidos:"López Pineda", correo:"lloppin158@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a60", nombrePila:"Ángela", apellidos:"Martín Belloso", correo:"amarbel2511@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a61", nombrePila:"Lidia", apellidos:"Martín Jiménez", correo:"lmarjim2003@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a62", nombrePila:"Germán", apellidos:"Martín Martín", correo:"gmarmar1106@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a63", nombrePila:"Juan Pablo", apellidos:"Martín Morillo", correo:"jmarmor0402@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a64", nombrePila:"Javier", apellidos:"Martínez Benítez", correo:"jmarben1205@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a65", nombrePila:"Pedro", apellidos:"Molina Jiménez", correo:"pmoljim0210@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a66", nombrePila:"Lucía", apellidos:"Montaño Santamaría", correo:"lmonsan0107@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a67", nombrePila:"Gema", apellidos:"Moreno Jiménez", correo:"gmorjim2101@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a68", nombrePila:"Alejandro Tomás", apellidos:"Moreno Sánchez", correo:"amorsan0309c@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a69", nombrePila:"Álvaro", apellidos:"Morillo Escribano", correo:"amoresc2310@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a70", nombrePila:"María", apellidos:"Muñoz Capitas", correo:"mmuncap2710@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a71", nombrePila:"Manuel", apellidos:"Oliva Ruiz", correo:"molirui0212@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a72", nombrePila:"María", apellidos:"Pavón Bonilla", correo:"mpavbon0804@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a73", nombrePila:"Paula", apellidos:"Peña Sánchez", correo:"ppensan3107@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a74", nombrePila:"Marcelo", apellidos:"Pérez Vergara", correo:"mperver0908@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a75", nombrePila:"Carmen Rocío", apellidos:"Pinelo Bonilla", correo:"cpinbon2602@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a76", nombrePila:"Mario", apellidos:"Pintado Belloso", correo:"mpinbel1002@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a77", nombrePila:"Javier", apellidos:"Ponce Bonilla", correo:"jponbon0907@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a78", nombrePila:"José Manuel", apellidos:"Ramos González", correo:"jramgon2404@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a79", nombrePila:"Alcora", apellidos:"Rodríguez Carrión", correo:"arodcar2605@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a80", nombrePila:"Carmen", apellidos:"Rodríguez López", correo:"crodlop1907@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a81", nombrePila:"Jimena", apellidos:"Rodríguez Vergara", correo:"jrodver1610@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a82", nombrePila:"Francisco Javier", apellidos:"Roldán Cordero", correo:"frolcor0111@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a83", nombrePila:"Miguel Ángel", apellidos:"Roldán Guerrero", correo:"mrolgue1510@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a84", nombrePila:"Jesús", apellidos:"Roldán Jiménez", correo:"jroljim0803@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a85", nombrePila:"Araceli", apellidos:"Roldán López", correo:"arollop687@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a86", nombrePila:"José", apellidos:"Roldán López", correo:"jrollop1901@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a87", nombrePila:"Sebastián", apellidos:"Sánchez Caro", correo:"ssancar2112@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a88", nombrePila:"Guillermo", apellidos:"Sánchez Jiménez", correo:"gsanjim0210@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a89", nombrePila:"Julia", apellidos:"Sánchez Jiménez", correo:"jsanjim1802@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a90", nombrePila:"Julia", apellidos:"Sánchez Jiménez", correo:"jsanjim0709@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a91", nombrePila:"Jesús", apellidos:"Sánchez Moreno", correo:"jsanmor0209@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a92", nombrePila:"Daniela", apellidos:"Sánchez Rodríguez", correo:"dsanrod852@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a93", nombrePila:"Francisco Javier", apellidos:"Sánchez Rodríguez", correo:"fsanrod0604@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a94", nombrePila:"Mario", apellidos:"Sánchez Rodríguez", correo:"msanrod2706@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a95", nombrePila:"Fabiola", apellidos:"Santoja Moreno", correo:"fsanmor2812@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a96", nombrePila:"Juan Miguel", apellidos:"Santos Grande", correo:"jsangra2210@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a97", nombrePila:"Félix Antonio", apellidos:"Santos Jiménez", correo:"fsanjim2705@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a98", nombrePila:"Germán", apellidos:"Soto Bonilla", correo:"gsotbon1510@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a99", nombrePila:"Adrián", apellidos:"Torres Muñoz", correo:"atormun2701@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a100", nombrePila:"Kevin Fabián", apellidos:"Valero Beltrán", correo:"kvalbel139@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a101", nombrePila:"Nicolás", apellidos:"Verdugo Pineda", correo:"nverpin0804@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a102", nombrePila:"Nolasco", apellidos:"Vergara Barrera", correo:"nverbar2110@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a103", nombrePila:"Estrella", apellidos:"Vila Calvo-Rubio", correo:"evilcal1410@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a104", nombrePila:"Alba", apellidos:"Vilches Auxilia", correo:"avilaux0707@g.educaand.es", sexo:"F" },
+  ],
+};
+
+function defaultData(){
+  const grupos = [
+    { id:'g2e', nombre:'2º ESO E', curso:'2º ESO', materia:'Educación Física' },
+    { id:'g3a', nombre:'3º ESO A', curso:'3º ESO', materia:'Educación Física' },
+    { id:'g3b', nombre:'3º ESO B', curso:'3º ESO', materia:'Educación Física' },
+    { id:'g3c', nombre:'3º ESO C', curso:'3º ESO', materia:'Educación Física' },
+    { id:'g3d', nombre:'3º ESO D', curso:'3º ESO', materia:'Educación Física' },
+    { id:'g3e', nombre:'3º ESO E', curso:'3º ESO', materia:'Educación Física' },
+    { id:'g_af3', nombre:'Actividad Física 3º ESO', curso:'3º ESO', materia:'Actividad Física' },
+    { id:'g_af4', nombre:'Actividad Física 4º ESO', curso:'4º ESO', materia:'Actividad Física' },
+    { id:'gbach', nombre:'1º Bachillerato V', curso:'1º Bachillerato', materia:'Educación Física' }
+  ];
+
+  const alumnos = grupos.flatMap((g, i) => {
+    if(g.id === 'gbach'){
+      return ALUMNOS_GBACH_REAL.map((a, idx) => {
+        const alumno = { id: 'gbach_a' + (idx + 1), nombre: a.nombrePila + ' ' + a.apellidos, nombrePila: a.nombrePila, apellidos: a.apellidos, grupoId: 'gbach', correo: a.correo, sexo: a.sexo };
+        if(a.foto) alumno.foto = a.foto;
+        return alumno;
+      });
+    }
+    if(ALUMNOS_REALES[g.id]){
+      return ALUMNOS_REALES[g.id].map(a => {
+        const alumno = { id: a.id, nombre: a.nombrePila + ' ' + a.apellidos, nombrePila: a.nombrePila, apellidos: a.apellidos, grupoId: g.id, correo: a.correo, sexo: a.sexo };
+        if(a.foto) alumno.foto = a.foto;
+        if(a.notasPrivadas) alumno.notasPrivadas = a.notasPrivadas;
+        return alumno;
+      });
+    }
+    return generarRoster(g.id, [], i + 1);
+  });
+
+  /*
+   * Horario definitivo 2026/27, con el aula de cada grupo ya fijada.
+   */
+  const AULAS = { g2e:'B5', g3a:'A1', g3b:'A8', g3c:'B6', g3d:'B7', g3e:'B8', gbach:'C11', g_af4:'B13', g_af3:'A4' };
+  const horarioReal = [
+    // LUNES
+    { dia:'lunes', inicio:'11:30', fin:'12:30', grupoId:'g3a', materia:'Educación Física', aula:AULAS.g3a, lectivo:true },
+    { dia:'lunes', inicio:'13:30', fin:'14:30', grupoId:'g3c', materia:'Educación Física', aula:AULAS.g3c, lectivo:true },
+    // MARTES
+    { dia:'martes', inicio:'08:00', fin:'09:00', grupoId:'g3b', materia:'Educación Física', aula:AULAS.g3b, lectivo:true },
+    { dia:'martes', inicio:'09:00', fin:'10:00', grupoId:'g2e', materia:'Educación Física', aula:AULAS.g2e, lectivo:true },
+    { dia:'martes', inicio:'10:00', fin:'11:00', grupoId:'g_af4', materia:'Actividad Física', aula:AULAS.g_af4, lectivo:true },
+    { dia:'martes', inicio:'11:30', fin:'12:30', grupoId:'g3d', materia:'Educación Física', aula:AULAS.g3d, lectivo:true },
+    { dia:'martes', inicio:'12:30', fin:'13:30', grupoId:'g3e', materia:'Educación Física', aula:AULAS.g3e, lectivo:true },
+    { dia:'martes', inicio:'13:30', fin:'14:30', grupoId:'gbach', materia:'Educación Física', aula:AULAS.gbach, lectivo:true },
+    // MIÉRCOLES
+    { dia:'miercoles', inicio:'09:00', fin:'10:00', grupoId:'g_af3', materia:'Actividad Física', aula:AULAS.g_af3, lectivo:true },
+    // JUEVES
+    { dia:'jueves', inicio:'08:00', fin:'09:00', grupoId:'g3e', materia:'Educación Física', aula:AULAS.g3e, lectivo:true },
+    { dia:'jueves', inicio:'09:00', fin:'10:00', grupoId:'g2e', materia:'Educación Física', aula:AULAS.g2e, lectivo:true },
+    { dia:'jueves', inicio:'10:00', fin:'11:00', grupoId:'g_af4', materia:'Actividad Física', aula:AULAS.g_af4, lectivo:true },
+    { dia:'jueves', inicio:'11:30', fin:'12:30', grupoId:'g3c', materia:'Educación Física', aula:AULAS.g3c, lectivo:true },
+    { dia:'jueves', inicio:'12:30', fin:'13:30', grupoId:'g3b', materia:'Educación Física', aula:AULAS.g3b, lectivo:true },
+    { dia:'jueves', inicio:'13:30', fin:'14:30', grupoId:'g3a', materia:'Educación Física', aula:AULAS.g3a, lectivo:true },
+    // VIERNES
+    { dia:'viernes', inicio:'09:00', fin:'10:00', grupoId:'g_af3', materia:'Actividad Física', aula:AULAS.g_af3, lectivo:true },
+    { dia:'viernes', inicio:'11:30', fin:'12:30', grupoId:'g3d', materia:'Educación Física', aula:AULAS.g3d, lectivo:true },
+    { dia:'viernes', inicio:'12:30', fin:'13:30', grupoId:null, materia:'Guardia', aula:'', lectivo:false },
+    { dia:'viernes', inicio:'13:30', fin:'14:30', grupoId:'gbach', materia:'Educación Física', aula:AULAS.gbach, lectivo:true }
+  ];
+
+  return {
+    profesor: { nombre: 'Profesor/a' },
+    grupos,
+    alumnos,
+    // Horario real de EF. Los tramos de GUARDIA y COORD. ÁREA no son grupos de
+    // alumnos: se marcan con lectivo:false y no permiten registrar alumnos,
+    // pero sí aparecen en el motor de contexto.
+    horario: horarioReal,
+    // Catálogo de contenidos (carpetas de unidades de EF). Por ahora son solo
+    // las carpetas de las asignaturas, sin asignar todavía a una clase ni
+    // fecha concreta — eso se podrá afinar más adelante.
+    unidades: [
+      { id:'u1', grupoId:null, nombre:'01_Ultimate', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u2', grupoId:null, nombre:'02_Balonmano', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u3', grupoId:null, nombre:'03_Orientación', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u4', grupoId:null, nombre:'04_Salsa', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u5', grupoId:null, nombre:'05_Malabares', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u6', grupoId:null, nombre:'06_Acrosport', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u7', grupoId:null, nombre:'07_Pinfuvote', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u8', grupoId:null, nombre:'08_Bádminton', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u9', grupoId:null, nombre:'09_Voleibol', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u10', grupoId:null, nombre:'10_Crossfit', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u11', grupoId:null, nombre:'11_Expresión corporal', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u12', grupoId:null, nombre:'12_Béisbol', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u13', grupoId:null, nombre:'13_Rugby tag', descripcion:'', fechaInicio:'', fechaFin:'', activa:false },
+      { id:'u14', grupoId:null, nombre:'14_Hockey', descripcion:'', fechaInicio:'', fechaFin:'', activa:false }
+    ],
+    registros: [],
+    evaluaciones: {},
+    calendario: [],
+    gruposGuardados: {},
+    _v: 13
+  };
+}
+
+function loadData(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return defaultData();
+    const parsed = JSON.parse(raw);
+    if(!parsed || !parsed.grupos || !parsed.alumnos) return defaultData();
+    // Si los datos guardados son de una versión anterior del horario/grupos,
+    // se sustituyen por los nuevos datos de demostración pero se conservan
+    // los registros ya guardados por el profesor.
+    if(parsed._v !== 13){
+      const fresh = defaultData();
+      // Todo lo que el profesor haya ido registrando (puntos, faltas, notas,
+      // calendario, grupos de trabajo guardados) se conserva siempre,
+      // actualice lo que actualice la plantilla de la app.
+      fresh.registros = parsed.registros || [];
+      fresh.evaluaciones = parsed.evaluaciones || {};
+      fresh.calendario = parsed.calendario || [];
+      fresh.gruposGuardados = parsed.gruposGuardados || {};
+      fresh.profesor = parsed.profesor || fresh.profesor;
+
+      // Fotos y notas privadas añadidas a mano desde la propia app (no desde
+      // el listado de fábrica): si el alumno sigue existiendo con el mismo id
+      // en la plantilla nueva, se conservan aunque la plantilla no las traiga.
+      const alumnosPrevios = {};
+      (parsed.alumnos || []).forEach(a => { if(a && a.id) alumnosPrevios[a.id] = a; });
+      fresh.alumnos.forEach(a => {
+        const prev = alumnosPrevios[a.id];
+        if(!prev) return;
+        if(prev.foto && !a.foto) a.foto = prev.foto;
+        if(prev.notasPrivadas && !a.notasPrivadas) a.notasPrivadas = prev.notasPrivadas;
+      });
+
+      // Ajustes de cada grupo hechos desde la propia app (rotación de
+      // material, delegado de clase...) también se conservan si el grupo
+      // sigue existiendo.
+      const gruposPrevios = {};
+      (parsed.grupos || []).forEach(g => { if(g && g.id) gruposPrevios[g.id] = g; });
+      fresh.grupos.forEach(g => {
+        const prev = gruposPrevios[g.id];
+        if(!prev) return;
+        ['rotacionMaterial','encargadosPorSemana','materialPeriodo','materialIdsSemana','delegadoId'].forEach(campo => {
+          if(prev[campo] !== undefined) g[campo] = prev[campo];
+        });
+      });
+
+      return fresh;
+    }
+    return parsed;
+  }catch(e){ return defaultData(); }
+}
+function saveData(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+
+let data = loadData();
+
+/* ———————————— utilidades de texto ———————————— */
+function stripAccents(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+function initials(n){ return n.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase(); }
+// Nombre de pila / apellidos ya separados (alumnado real); si no existen esos
+// campos (alumnado de demostración), se aproximan a partir de "nombre".
+function nombrePilaDe(a){ return a.nombrePila || a.nombre.split(' ')[0]; }
+function apellidosDe(a){ if(a.apellidos !== undefined) return a.apellidos; return a.nombre.split(' ').slice(1).join(' '); }
+
+/* ———————————— MOTOR DE CONTEXTO ———————————— */
+// Referencia explícita a un grupo dentro de la frase (p. ej. "de 3B", "en 1 Bachillerato").
+// Si el profesor la indica, GRACCUS la usa siempre, aunque sea fuera de horario:
+// solo recurre al horario cuando NO se especifica el grupo en la frase.
+// Cada grupo admite muchas formas de escribirlo ("2E", "2ºESO E", "2º ESO E",
+// "de 2 eso e"...). El prefijo (de|del|en|con) es opcional y "eso" también lo
+// es siempre, para que valga tanto "3A" como "3º ESO A".
+const GROUP_MENTION_PATTERNS = [
+  { id:'g2e', re:/\b(?:(?:de|del|en|con)\s+)?2\s*(?:º|°|o)?\s*(?:eso)?\s*e\b/ },
+  { id:'g3a', re:/\b(?:(?:de|del|en|con)\s+)?3\s*(?:º|°|o)?\s*(?:eso)?\s*a\b/ },
+  { id:'g3b', re:/\b(?:(?:de|del|en|con)\s+)?3\s*(?:º|°|o)?\s*(?:eso)?\s*b\b/ },
+  { id:'g3c', re:/\b(?:(?:de|del|en|con)\s+)?3\s*(?:º|°|o)?\s*(?:eso)?\s*c\b/ },
+  { id:'g3d', re:/\b(?:(?:de|del|en|con)\s+)?3\s*(?:º|°|o)?\s*(?:eso)?\s*d\b/ },
+  { id:'g3e', re:/\b(?:(?:de|del|en|con)\s+)?3\s*(?:º|°|o)?\s*(?:eso)?\s*e\b/ },
+  { id:'gbach', re:/\b(?:(?:de|del|en|con)\s+)?1\s*(?:º|°|o)?\s*bach\w*\b/ },
+  // "Actividad Física" de 3º y 4º no tienen letra de clase: se citan como
+  // "AF3"/"AF4", "actividad física 3/4" o, en el caso de 4º (el único grupo de
+  // ese curso), simplemente "4 ESO".
+  { id:'g_af3', re:/\b(?:(?:de|del|en|con)\s+)?(?:af\s*3\b|actividad\s*f[ií]sica\s*(?:de\s*)?3\b|3\s*(?:º|°|o)?\s*eso\s*af\b)/ },
+  { id:'g_af4', re:/\b(?:(?:de|del|en|con)\s+)?(?:af\s*4\b|actividad\s*f[ií]sica\s*(?:de\s*)?4\b|4\s*(?:º|°|o)?\s*eso\s*af\b|4\s*(?:º|°|o)?\s*eso\b)/ }
+];
+function findGroupMention(text){
+  const stripped = stripAccents(text.toLowerCase());
+  for(const p of GROUP_MENTION_PATTERNS){
+    const m = stripped.match(p.re);
+    if(m) return { groupId: p.id, start: m.index, end: m.index + m[0].length };
+  }
+  return null;
+}
+
+// Contexto "efectivo" para registrar: por defecto es la clase que toca ahora
+// mismo según el reloj del dispositivo, pero el profesor puede pulsar sobre
+// una clase anterior del día para registrar algo que se le olvidó (p. ej. son
+// las 11 y quiere anotar algo de la clase de las 9). Se guarda en memoria, no
+// en localStorage: cada vez que se abre la app se vuelve a la hora actual.
+let contextOverrideEntry = null;
+function getCurrentContext(){
+  const now = new Date();
+  const day = DAY_KEYS[now.getDay()];
+  const time = now.toTimeString().slice(0,5);
+  const entry = data.horario.find(h => h.dia === day && time >= h.inicio && time < h.fin);
+  if(!entry){
+    return { day, time, kind:'libre', groupId:null, groupName:'Sin clase asignada', subject:null, classroom:null, unitId:null, unitName:null, entry:null };
+  }
+  if(entry.lectivo === false){
+    // Tramo real (guardia, coordinación de área…) pero sin grupo de alumnos.
+    return { day, time, kind:'no-lectivo', groupId:null, groupName:entry.materia, subject:entry.materia, classroom:entry.aula, unitId:null, unitName:null, entry };
+  }
+  const grupo = data.grupos.find(g => g.id === entry.grupoId);
+  return {
+    day, time, kind:'clase',
+    groupId: grupo ? grupo.id : null,
+    groupName: grupo ? grupo.nombre : 'Grupo desconocido',
+    subject: entry.materia,
+    classroom: entry.aula,
+    unitId: null,
+    unitName: null,
+    entry
+  };
+}
+
+// Igual que getCurrentContext(), pero si el profesor ha seleccionado a mano
+// una clase anterior del día (contextOverrideEntry), se usa esa en vez de la
+// hora real. Es lo que debe usarse siempre para decidir en qué grupo registrar
+// una frase escrita o dictada.
+function getEffectiveContext(){
+  if(contextOverrideEntry){
+    const entry = contextOverrideEntry;
+    const grupo = data.grupos.find(g => g.id === entry.grupoId);
+    return {
+      day: entry.dia, time: entry.inicio, kind:'clase',
+      groupId: grupo ? grupo.id : null,
+      groupName: grupo ? grupo.nombre : 'Grupo desconocido',
+      subject: entry.materia, classroom: entry.aula,
+      unitId: null, unitName: null, entry, overridden: true
+    };
+  }
+  return getCurrentContext();
+}
+function seleccionarClaseParaRegistrar(entry){
+  // Si se vuelve a pulsar la clase que ya toca ahora, quitamos la selección
+  // manual (volvemos a "ahora mismo" automáticamente).
+  const real = getCurrentContext();
+  contextOverrideEntry = (real.entry === entry) ? null : entry;
+  updateContextUI();
+}
+function volverAAhoraParaRegistrar(){
+  contextOverrideEntry = null;
+  updateContextUI();
+}
+
+/* ———————————— cálculos derivados (el historial es la fuente de verdad) ———————————— */
+function alumnoHistorial(alumnoId){ return data.registros.filter(r => r.alumnoId === alumnoId); }
+function alumnoPuntos(alumnoId){ return data.registros.filter(r => r.alumnoId === alumnoId && r.tipo === 'puntos').reduce((a,r) => a + (r.puntos||0), 0); }
+function grupoPuntos(grupoId){ return data.registros.filter(r => r.grupoId === grupoId && r.tipo === 'puntos').reduce((a,r) => a + (r.puntos||0), 0); }
+function puntosPorUnidad(alumnoId, unidadId){ return data.registros.filter(r => r.alumnoId === alumnoId && r.unidadId === unidadId && r.tipo === 'puntos').reduce((a,r) => a + (r.puntos||0), 0); }
+
+/* ———————————— encargados de material (rotación automática semanal o por clase) ———————————— */
+// Se calcula solo a partir de la fecha real y del orden alfabético del grupo:
+// no hay que asignarlo a mano ni acordarse de nada, así que es difícil de evitar.
+// Cada periodo (semana o sesión de clase, según se elija) avanza automáticamente
+// "k" puestos, dando la vuelta a la lista completa antes de repetir a nadie.
+const SEMANA_MS = 7 * 24 * 3600 * 1000;
+const SEMANA_EPOCH = new Date(2020, 0, 1).getTime(); // referencia fija, cualquier fecha vale
+function semanaActual(){ return Math.floor((Date.now() - SEMANA_EPOCH) / SEMANA_MS); }
+function sesionesTranscurridas(grupoId){
+  const diasConClase = new Set(data.horario.filter(h => h.grupoId === grupoId && h.lectivo).map(h => h.dia));
+  if(!diasConClase.size) return 0;
+  const hoy = new Date();
+  let count = 0;
+  const cursor = new Date(SEMANA_EPOCH);
+  while(cursor <= hoy){
+    if(diasConClase.has(DAY_KEYS[cursor.getDay()])) count++;
+    cursor.setDate(cursor.getDate() + 1);
+  }
+  return count;
+}
+function periodoActualMaterial(grupoId){
+  const g = data.grupos.find(x => x.id === grupoId);
+  return (g && g.rotacionMaterial === 'clase') ? sesionesTranscurridas(grupoId) : semanaActual();
+}
+
+function getEncargadosSemana(grupoId){
+  const g = data.grupos.find(x => x.id === grupoId);
+  const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+  const n = roster.length;
+  if(n === 0) return [];
+  const periodo = periodoActualMaterial(grupoId);
+  if(g && g.materialPeriodo === periodo && Array.isArray(g.materialIdsSemana)){
+    return g.materialIdsSemana.map(id => roster.find(a => a.id === id)).filter(Boolean);
+  }
+  const k = Math.max(1, Math.min(3, (g && g.encargadosPorSemana) || 3));
+  const inicio = (periodo * k) % n;
+  const encargados = [];
+  for(let i = 0; i < k; i++) encargados.push(roster[(inicio + i) % n]);
+  return encargados;
+}
+function toggleMaterial(grupoId, alumnoId){
+  const g = data.grupos.find(x => x.id === grupoId);
+  if(!g) return;
+  const periodo = periodoActualMaterial(grupoId);
+  if(g.materialPeriodo !== periodo || !Array.isArray(g.materialIdsSemana)){
+    const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+    const k = Math.max(1, Math.min(3, (g.encargadosPorSemana || 3)));
+    const inicio = (periodo * k) % Math.max(1, roster.length);
+    g.materialPeriodo = periodo;
+    g.materialIdsSemana = roster.length ? Array.from({length: Math.min(k, roster.length)}, (_,i) => roster[(inicio+i) % roster.length].id) : [];
+  }
+  const idx = g.materialIdsSemana.indexOf(alumnoId);
+  if(idx >= 0) g.materialIdsSemana.splice(idx,1);
+  else if(g.materialIdsSemana.length < 3) g.materialIdsSemana.push(alumnoId);
+  saveData();
+  openMaterialPanel(grupoId);
+}
+function cambiarRotacionMaterial(grupoId, valor){
+  const g = data.grupos.find(x => x.id === grupoId);
+  if(!g) return;
+  g.rotacionMaterial = valor;
+  saveData();
+  openMaterialPanel(grupoId);
+}
+function cambiarEncargadosPorSemana(grupoId, delta){
+  const g = data.grupos.find(x => x.id === grupoId);
+  if(!g) return;
+  const actual = g.encargadosPorSemana || 3;
+  g.encargadosPorSemana = Math.max(1, Math.min(3, actual + delta));
+  saveData();
+  openMaterialPanel(grupoId);
+}
+function setDelegadoClase(grupoId, alumnoId){
+  const g = data.grupos.find(x => x.id === grupoId);
+  if(!g) return;
+  g.delegadoId = alumnoId || null;
+  saveData();
+  openClassRoster(grupoId);
+}
+
+/* ———————————— evaluación por unidad (tabla genérica editable) ———————————— */
+function evalKey(alumnoId, unidadId){ return alumnoId + '|' + unidadId; }
+function getEval(alumnoId, unidadId){
+  return data.evaluaciones[evalKey(alumnoId, unidadId)] || { exposicion:'', retrasos:'', asistencia:'', actitud:'', notas:'' };
+}
+function setEval(alumnoId, unidadId, campo, valor){
+  const key = evalKey(alumnoId, unidadId);
+  if(!data.evaluaciones[key]) data.evaluaciones[key] = { exposicion:'', retrasos:'', asistencia:'', actitud:'', notas:'' };
+  data.evaluaciones[key][campo] = valor;
+  saveData();
+}
+
+/* ———————————— redacción algo más formal ———————————— */
+// Mejora ligera y determinista (sin IA externa: este archivo se abre suelto en
+// tu navegador, sin conexión autenticada a ningún modelo). Ablanda los verbos
+// de reporte más coloquiales y cuida mayúscula/punto final. No es una reescritura
+// completa — para un informe realmente pulido, la mejor vía sigue siendo pegar
+// las notas en una conversación conmigo cuando llegue ese momento.
+function ablandarVerbosReporte(t){
+  return t
+    .replace(/\bdice que\b/gi, 'comenta que')
+    .replace(/\bdicen que\b/gi, 'comentan que')
+    .replace(/\bha dicho que\b/gi, 'ha comentado que')
+    .replace(/\bdice:/gi, 'comenta:');
+}
+function formalizarNota(nombreCorto, remaining){
+  const cuerpo = ablandarVerbosReporte(remaining.trim());
+  if(!cuerpo) return `${nombreCorto}.`;
+  let frase = `${nombreCorto} ${cuerpo}`;
+  frase = frase.charAt(0).toUpperCase() + frase.slice(1);
+  if(!/[.!?…]$/.test(frase)) frase += '.';
+  return frase;
+}
+
+/* ———————————— intérprete de lenguaje natural ———————————— */
+// Clasifica el tipo de registro (puntos/falta/incidencia/observación) para un
+// alumno ya identificado, a partir del texto restante tras quitar su nombre.
+function classifyForAlumno(remaining, alumno){
+  const remainingNoAcc = stripAccents(remaining.toLowerCase());
+  const nombreCorto = alumno.nombre.split(' ')[0];
+  const hoy = new Date().toISOString().slice(0,10);
+
+  // Puntos: "5 puntos", "+5", "3" — con medalla según la cantidad (como en WhatsApp)
+  const pm = remaining.match(/^([+-]?\d+)\s*(?:puntos?)?$/i);
+  if(pm){
+    const val = parseInt(pm[1], 10);
+    if(val > 5) return { error:'points-high' };
+    if(val < 0) return { error:'points-low' };
+    // Aviso automático: si ya se ha sentado 2 o más veces hoy, no puede sumar puntos hoy.
+    const vueltasHoy = data.registros.filter(r => r.alumnoId === alumno.id && r.tipo === 'vueltas' && r.fecha === hoy).length;
+    if(vueltasHoy >= 2) return { error:'points-blocked', nombre: nombreCorto };
+    const medalla = val >= 4 ? '🥇' : val >= 2 ? '🥈' : val === 1 ? '🥉' : '';
+    return [{ alumno, tipo:'puntos', categoria:null, puntos: val, textoInterpretado:`${medalla ? medalla + ' ' : ''}${nombreCorto} recibe ${val} punto${val===1?'':'s'}` }];
+  }
+
+  // Vueltas de castigo por sentarse: "2 vueltas por sentarse" / "2 vueltas más"
+  const vm = remaining.match(/^(\d+)\s*vueltas?\b/i);
+  if(vm){
+    const cantidad = parseInt(vm[1], 10);
+    const vueltasPrevias = data.registros.filter(r => r.alumnoId === alumno.id && r.tipo === 'vueltas' && r.fecha === hoy).length;
+    const reincidencia = vueltasPrevias >= 1;
+    const trote = reincidencia;
+    const texto = `${nombreCorto} da ${cantidad} vuelta${cantidad===1?'':'s'} al campo${trote?' trotando':''} por sentarse${reincidencia?' (reincidencia)':''}.`;
+    return [{ alumno, tipo:'vueltas', categoria:'sentarse', puntos:null, vueltas:cantidad, trote, textoInterpretado: texto }];
+  }
+
+  // Falta singular
+  if(/\b(falta|ausente|no ha venido|no vino)\b/.test(remainingNoAcc)){
+    return [{ alumno, tipo:'falta', categoria:null, puntos:null, textoInterpretado:`Falta de ${nombreCorto}` }];
+  }
+
+  // Palabrota / lenguaje soez: se comprueba antes que cualquier otra cosa,
+  // para que "Alejandro dice puto" o simplemente "Alejandro cabrón" queden
+  // siempre como incidencia y no se cuelen como observación genérica. Las
+  // frases de dos palabras se miran antes que las sueltas (para no perder
+  // "hijo de puta" por culpa de que "puta" sola ya haría matchear antes).
+  const palabrotaDetectada = detectaPalabrota(remainingNoAcc);
+  if(palabrotaDetectada){
+    return [{ alumno, tipo:'incidencia', categoria:'palabrota', puntos:null,
+      textoInterpretado: formalizarNota(nombreCorto, `dice ${palabrotaDetectada}`) }];
+  }
+
+  // Incidencia (por ahora solo la categoría "material")
+  if(['olvid','material'].some(k => remainingNoAcc.includes(k))){
+    return [{ alumno, tipo:'incidencia', categoria:'material', puntos:null, textoInterpretado: formalizarNota(nombreCorto, remaining) }];
+  }
+
+  // Observación, clasificada por palabras clave — incluye motivos habituales para
+  // no querer hacer EF (dolencias, cansancio, regla, virus...), cada una con su icono.
+  const obsDict = {
+    'malestar': ['tripa','barriga','estomago','vomito','mareo','mareado','mareada'],
+    'menstruación': ['regla','menstruacion','menstruo','periodo'],
+    'enfermedad': ['virus','fiebre','enfermo','enferma','resfriado','resfriada','gripe'],
+    'cansancio': ['cansancio','cansado','cansada','agotado','agotada','sueno'],
+    'agujetas': ['agujetas'],
+    'baño': ['bano','aseo','wc','vater','servicio','lavabo'],
+    'cooperación': ['ayuda','ayudar','companero','compañera','colabora','colaborar'],
+    'esfuerzo': ['esfuerza','esfuerzo','trabaja'],
+    'participación': ['participa'],
+    'atención': ['distraid'],
+    'comportamiento': ['comportamiento','conducta']
+  };
+  let categoria = 'general';
+  for(const [cat, keys] of Object.entries(obsDict)){
+    if(keys.some(k => remainingNoAcc.includes(stripAccents(k)))){ categoria = cat; break; }
+  }
+  // Para motivos de salud escritos muy telegráficamente ("tripa", "regla"...),
+  // añadimos una plantilla para que quede una frase completa, no solo la palabra suelta.
+  const YA_TIENE_VERBO = /\b(duele|duelen|tiene|tengo|esta|está|siente|encuentra)\b/;
+  const PLANTILLA_CATEGORIA = {
+    'malestar':'le duele', 'menstruación':'tiene', 'enfermedad':'está', 'cansancio':'está', 'agujetas':'tiene', 'baño':'necesita ir'
+  };
+  let cuerpoObs = remaining;
+  if(PLANTILLA_CATEGORIA[categoria] && !YA_TIENE_VERBO.test(remainingNoAcc) && remaining.trim().split(/\s+/).length <= 3){
+    cuerpoObs = `${PLANTILLA_CATEGORIA[categoria]} ${remaining.trim()}`;
+  }
+  return [{ alumno, tipo:'observación', categoria, puntos:null, textoInterpretado: formalizarNota(nombreCorto, cuerpoObs) }];
+}
+const ICONOS_CATEGORIA = {
+  'malestar':'🤢','menstruación':'🩸','enfermedad':'🤒','cansancio':'😴','agujetas':'🦵','baño':'🚻',
+  'cooperación':'🤝','esfuerzo':'💪','participación':'🙌','atención':'👀','comportamiento':'⚠️',
+  'material':'📦','sentarse':'🏃','general':'📝','palabrota':'🤬'
+};
+
+// Palabrotas e insultos habituales que GRACCUS reconoce en cualquier frase,
+// digan "Alejandro dice puto", "Alejandro puto" o "Alejandro cabrón": basta
+// con que la palabra (o la frase, para las de varias palabras) aparezca en el
+// texto ya sin el nombre del alumno. Amplía esta lista libremente si hace
+// falta; se comparan sin acentos y en minúsculas.
+const PALABROTAS = [
+  'hijo de puta','hija de puta','hijoputa','hijaputa','malparido','malparida',
+  'puta madre','puto','puta','putos','putas','maricon','marica','maricones',
+  'cabron','cabrona','cabrones','cabronas','mierda','mierdas',
+  'gilipollas','gilipollez','joder','jodido','jodida','coño',
+  'zorra','zorras','guarro','guarra','capullo','capulla',
+  'subnormal','subnormales','imbecil','imbeciles'
+];
+function detectaPalabrota(remainingNoAcc){
+  // Las frases de varias palabras se comprueban antes que las palabras
+  // sueltas que contienen, para no perder "hijo de puta" por culpa de que
+  // "puta" ya habría hecho matchear la lista antes.
+  const ordenadas = [...PALABROTAS].sort((a,b) => b.length - a.length);
+  for(const p of ordenadas){
+    const re = new RegExp('\\b' + stripAccents(p).replace(/\s+/g,'\\s+') + '\\b');
+    if(re.test(remainingNoAcc)) return p;
+  }
+  return null;
+}
+
+/* ———————————— eventos de calendario dictados desde la misma barra ———————————— */
+// Si la frase contiene una fecha reconocible ("23 de octubre"), se trata como
+// un evento de curso (excursión, etc.), no como un registro de alumno — así
+// quedan diferenciados: uno va al historial de la clase, el otro al calendario.
+const MESES_NOMBRE = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const RE_FECHA_EVENTO = /\b(?:el|del)?\s*(\d{1,2})\s*(?:de)?\s*(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)(?:\s*(?:de)?\s*(\d{4}))?\b/i;
+const RE_HORA_RANGO = /\bde\s*(\d{1,2}(?::\d{2})?)\s*a\s*(\d{1,2}(?::\d{2})?)\b/i;
+
+function parseCalendarEvent(text){
+  const fm = text.match(RE_FECHA_EVENTO);
+  if(!fm) return null; // sin fecha reconocible: no es un evento de calendario
+
+  const dia = parseInt(fm[1], 10);
+  const mesIdx = MESES_NOMBRE.indexOf(fm[2].toLowerCase());
+  if(mesIdx < 0 || dia < 1 || dia > 31) return null;
+  const anio = fm[3] ? parseInt(fm[3], 10) : new Date().getFullYear();
+  const fecha = `${anio}-${String(mesIdx+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+
+  const hm = text.match(RE_HORA_RANGO);
+  const norm = h => h.includes(':') ? h : h.padStart(2,'0') + ':00';
+  const hora = hm ? `${norm(hm[1])}–${norm(hm[2])}` : null;
+
+  const mention = findGroupMention(text);
+  const grupo = mention ? data.grupos.find(g => g.id === mention.groupId) : null;
+
+  // Construir un título limpio: quitamos el grupo (por índice), la fecha y la hora.
+  let limpio = text;
+  if(mention) limpio = limpio.slice(0, mention.start) + ' ' + limpio.slice(mention.end);
+  limpio = limpio.replace(RE_FECHA_EVENTO, ' ');
+  if(hm) limpio = limpio.replace(RE_HORA_RANGO, ' ');
+  limpio = limpio.replace(/\s+/g, ' ').trim();
+  limpio = limpio.replace(/^(el|con|de|del)\s+/i, '').replace(/\s+(el|con|de|del)$/i, '').trim();
+  if(limpio) limpio = limpio.charAt(0).toUpperCase() + limpio.slice(1);
+  const titulo = limpio || 'Evento';
+
+  return { fecha, hora, grupoId: grupo ? grupo.id : null, grupoNombre: grupo ? grupo.nombre : null, titulo };
+}
+
+// Referencia por NOMBRE Y APELLIDO completos: si es único en todo el centro,
+// identifica al alumno directamente, sin necesitar horario ni grupo — funciona
+// siempre, incluso fuera de horario lectivo.
+function findUniqueFullNameMatch(text){
+  const stripped = stripAccents(text.toLowerCase());
+  const nameCounts = {};
+  data.alumnos.forEach(a => {
+    const key = stripAccents(a.nombre.toLowerCase());
+    nameCounts[key] = (nameCounts[key] || 0) + 1;
+  });
+  let best = null;
+  for(const a of data.alumnos){
+    const key = stripAccents(a.nombre.toLowerCase());
+    if(nameCounts[key] !== 1) continue; // no es único en todo el centro: no arriesgamos
+    const re = new RegExp('\\b' + key.replace(/\s+/g,'\\s+') + '\\b');
+    const m = stripped.match(re);
+    if(m && (!best || m[0].length > best.len)){
+      best = { alumno:a, start:m.index, end:m.index + m[0].length, len:m[0].length };
+    }
+  }
+  return best;
+}
+
+function levenshtein(a,b){
+  const m=a.length,n=b.length,dp=Array.from({length:m+1},()=>Array(n+1).fill(0));
+  for(let i=0;i<=m;i++)dp[i][0]=i; for(let j=0;j<=n;j++)dp[0][j]=j;
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
+  return dp[m][n];
+}
+function palabraCoincide(tok, palabra){
+  if(!tok || !palabra) return false;
+  if(tok === palabra) return true;
+  if(palabra.length < 4) return false; // nombres muy cortos: exigimos exactitud, para no confundir
+  return levenshtein(tok, palabra) <= 1; // tolera una letra de diferencia (typo)
+}
+function primerApellido(a){ const ape = apellidosDe(a); return ape ? ape.split(/\s+/)[0] : ''; }
+function quitarNombreDelTexto(text, alumno){
+  const palabras = [...new Set([
+    ...stripAccents(nombrePilaDe(alumno).toLowerCase()).split(/\s+/),
+    ...stripAccents(apellidosDe(alumno).toLowerCase()).split(/\s+/)
+  ].filter(Boolean))];
+  let resultado = '', lastIndex = 0;
+  const re = /[\p{L}]+/gu;
+  let m;
+  while((m = re.exec(text))){
+    const norm = stripAccents(m[0].toLowerCase());
+    if(palabras.some(p => palabraCoincide(norm, p))){
+      resultado += text.slice(lastIndex, m.index) + ' ';
+      lastIndex = m.index + m[0].length;
+    }
+  }
+  resultado += text.slice(lastIndex);
+  return resultado.replace(/\s+/g, ' ').trim();
+}
+
+// Reconoce a un alumno del grupo aunque solo se escriba el nombre de pila (o
+// una palabra de un nombre compuesto), aunque tenga una letra mal escrita, y
+// usa el apellido mencionado (si lo hay) para desempatar entre dos alumnos
+// con el mismo nombre.
+function resolverAlumnoEnGrupo(text, students){
+  const tokens = (text.match(/[\p{L}]+/gu) || []).map(t => stripAccents(t.toLowerCase()));
+  if(!tokens.length) return { error:'not-found' };
+  const candidatos = [];
+  for(const a of students){
+    const palabrasPila = stripAccents(nombrePilaDe(a).toLowerCase()).split(/\s+/).filter(Boolean);
+    const palabrasApe = stripAccents(apellidosDe(a).toLowerCase()).split(/\s+/).filter(Boolean);
+    const matchCount = palabrasPila.filter(p => tokens.some(t => palabraCoincide(t, p))).length;
+    if(!matchCount) continue;
+    const matchApellido = palabrasApe.some(p => tokens.some(t => palabraCoincide(t, p)));
+    // Cuando el apellido mencionado coincide con el PRIMER apellido de alguien
+    // (p. ej. "Roldán" en "Roldán Jiménez"), es más probable que se refiera a
+    // esa persona que a otra cuyo segundo apellido resulte ser el mismo (p.
+    // ej. "Falcón Roldán"). Se usa para desempatar cuando hay varios.
+    const matchPrimerApellido = palabrasApe[0] && tokens.some(t => palabraCoincide(t, palabrasApe[0]));
+    candidatos.push({ alumno:a, matchCount, matchApellido, matchPrimerApellido });
+  }
+  if(!candidatos.length) return { error:'not-found' };
+  // Nos quedamos con quien más palabras del nombre de pila coincida (así "María
+  // Cristina" no se confunde con otra "María" que no tenga también "Cristina").
+  const maxMatch = Math.max(...candidatos.map(c => c.matchCount));
+  const mejores = candidatos.filter(c => c.matchCount === maxMatch);
+  if(mejores.length === 1) return { alumno: mejores[0].alumno };
+  const conApellido = mejores.filter(c => c.matchApellido);
+  if(conApellido.length === 1) return { alumno: conApellido[0].alumno };
+  if(conApellido.length > 1){
+    const conPrimerApellido = conApellido.filter(c => c.matchPrimerApellido);
+    if(conPrimerApellido.length === 1) return { alumno: conPrimerApellido[0].alumno };
+  }
+  const opciones = (conApellido.length ? conApellido : mejores).map(c => `${nombrePilaDe(c.alumno)} ${primerApellido(c.alumno)}`.trim());
+  return { error:'ambiguous', opciones };
+}
+
+function matchStudentToken(tok, students){
+  const t=stripAccents(tok.toLowerCase());
+  const exact=students.filter(a=>stripAccents(nombrePilaDe(a).toLowerCase()).split(/\s+/).some(p=>p===t));
+  if(exact.length===1) return exact[0];
+  if(t.length>=4){
+    const cand=students.map(a=>({a,d:Math.min(...stripAccents(nombrePilaDe(a).toLowerCase()).split(/\s+/).map(p=>levenshtein(t,p)))})).filter(x=>x.d<=1).sort((x,y)=>x.d-y.d);
+    if(cand.length && (cand.length===1 || cand[0].d<cand[1].d)) return cand[0].a;
+  }
+  return null;
+}
+function parseEntry(text, students, forcedAlumno){
+  if(forcedAlumno) return classifyForAlumno(text, forcedAlumno);
+  const sharedPoints=text.match(/^(.+?)\s+([1-5])\s*(?:puntos?)?$/i);
+  if(sharedPoints){
+    const nombresTexto=sharedPoints[1].trim();
+    const tokens=nombresTexto.match(/[\p{L}]+/gu)||[];
+    const candidatos=[]; const vistos=new Set();
+    for(const tokRaw of tokens){ const alumno=matchStudentToken(tokRaw,students); if(alumno&&!vistos.has(alumno.id)){candidatos.push(alumno);vistos.add(alumno.id);} }
+    if(candidatos.length>=2){ const puntos=parseInt(sharedPoints[2],10); return candidatos.map(alumno=>({alumno,tipo:'puntos',categoria:null,puntos,textoInterpretado:`${alumno.nombre.split(' ')[0]} recibe ${puntos} punto${puntos===1?'':'s'}`})); }
+  }
+  const lowerNoAcc=stripAccents(text.toLowerCase());
+  const aliasWords=(text.match(/[\p{L}]+/gu)||[]);
+  if(/\bfaltan\b/.test(lowerNoAcc)||lowerNoAcc.includes('no han venido')||lowerNoAcc.includes('no vinieron')){
+    const found=[]; for(const tokRaw of aliasWords){const a=matchStudentToken(tokRaw,students);if(a&&!found.some(x=>x.id===a.id))found.push(a);}
+    if(found.length)return found.map(a=>({alumno:a,tipo:'falta',categoria:null,puntos:null,textoInterpretado:`Falta de ${a.nombre.split(' ')[0]}`}));
+  }
+  const resuelto = resolverAlumnoEnGrupo(text, students);
+  if(resuelto.error) return resuelto;
+  const match = resuelto.alumno;
+  const remaining = quitarNombreDelTexto(text, match);
+  return classifyForAlumno(remaining, match);
+}
+
+/* ———————————— registro de un nuevo hecho ———————————— */
+function handleAdd(){
+  const input = $('phrase');
+  const text = input.value;
+  if(!text.trim()) return;
+
+  // 0) ¿La frase lleva una fecha ("23 de octubre")? Entonces es un evento de
+  //    curso (excursión, etc.), no un registro de alumno: va directo al calendario.
+  const evento = parseCalendarEvent(text);
+  if(evento){
+    data.calendario.push({
+      id: 'c_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+      fecha: evento.fecha,
+      titulo: evento.titulo + (evento.grupoNombre ? ` — ${evento.grupoNombre}` : '') + (evento.hora ? ` (${evento.hora})` : '')
+    });
+    saveData();
+    input.value = '';
+    renderAll();
+    showFeedback(`Anotado en el calendario: ${evento.fecha}`, 'ok');
+    return;
+  }
+
+  // 1) ¿El nombre y apellido completos identifican a un único alumno de todo
+  //    el centro? En ese caso no hace falta ni horario ni grupo: se usa siempre.
+  // 2) Si no, ¿la frase indica el grupo explícitamente? ("Luis 5 puntos de 3B")
+  // 3) Si tampoco, se usa el grupo que marca el horario en este momento.
+  const fullNameMatch = findUniqueFullNameMatch(text);
+  const mention = fullNameMatch ? null : findGroupMention(text);
+  let targetGroupId, targetGroupName, unitId, textForParsing, manual = false, forcedAlumno = null;
+
+  if(fullNameMatch){
+    forcedAlumno = fullNameMatch.alumno;
+    const g = data.grupos.find(x => x.id === forcedAlumno.grupoId);
+    targetGroupId = g.id;
+    targetGroupName = g.nombre;
+    unitId = null;
+    textForParsing = (text.slice(0, fullNameMatch.start) + ' ' + text.slice(fullNameMatch.end)).replace(/\s+/g,' ').trim();
+    manual = true;
+  } else if(mention){
+    const g = data.grupos.find(x => x.id === mention.groupId);
+    targetGroupId = g.id;
+    targetGroupName = g.nombre;
+    unitId = null;
+    textForParsing = (text.slice(0, mention.start) + ' ' + text.slice(mention.end)).replace(/\s+/g,' ').trim();
+    manual = true;
+  } else {
+    const ctx = getEffectiveContext();
+    if(!ctx.groupId){
+      guardarNoIdentificado(text, null, null, ctx.kind === 'no-lectivo'
+        ? `Ahora mismo es «${ctx.groupName}», sin grupo de alumnos.`
+        : 'Fuera de horario lectivo, sin grupo ni alumno identificado.');
+      input.value = '';
+      return;
+    }
+    targetGroupId = ctx.groupId;
+    targetGroupName = ctx.groupName;
+    unitId = ctx.unitId;
+    textForParsing = text;
+  }
+
+  const groupStudents = data.alumnos.filter(a => a.grupoId === targetGroupId);
+  const result = parseEntry(textForParsing, groupStudents, forcedAlumno);
+  const ok = commitParseResult(result, targetGroupId, targetGroupName, unitId, text, manual);
+  if(ok) input.value = '';
+}
+
+// Aplica el resultado de parseEntry/classifyForAlumno: crea el/los registros,
+// los guarda, refresca la interfaz y muestra el aviso correspondiente. Se usa
+// tanto desde la barra principal como desde el registro rápido de la ficha
+// de un alumno concreto. Devuelve true si se ha guardado algo.
+// Cuando GRACCUS no consigue identificar al alumno (o no sabe en qué grupo
+// registrarlo), la frase NUNCA se descarta: se guarda igualmente en la hoja
+// de registros, marcada con una ❌ roja, para que el profesor la revise más
+// tarde y decida qué hacer con ella (a diferencia de los avisos de validación
+// de puntos, que si se bloquean).
+function guardarNoIdentificado(texto, grupoId, grupoNombre, motivo){
+  const now = new Date();
+  const registro = {
+    id: 'r_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+    timestamp: Date.now(),
+    fecha: now.toISOString().slice(0,10),
+    hora: now.toTimeString().slice(0,5),
+    grupoId: grupoId || null,
+    alumnoId: null,
+    unidadId: null,
+    tipo: 'revisar',
+    categoria: null,
+    puntos: null,
+    vueltas: null,
+    trote: false,
+    textoOriginal: texto,
+    textoInterpretado: motivo || 'No se ha podido interpretar automáticamente.',
+    manual: false,
+    needsReview: true
+  };
+  data.registros.unshift(registro);
+  undoStack.push({ action:'add', records:[registro] });
+  redoStack = [];
+  saveData();
+  renderAll();
+  showFeedback(`❌ No he entendido la frase, pero la he guardado para que la revises${grupoNombre ? ' (' + grupoNombre + ')' : ''}.`, 'warn');
+}
+
+function commitParseResult(result, targetGroupId, targetGroupName, unitId, textoOriginal, manual){
+  if(result.error === 'not-found'){
+    guardarNoIdentificado(textoOriginal, targetGroupId, targetGroupName, `No he identificado a ningún alumno de ${targetGroupName} en esta frase.`);
+    return true;
+  }
+  if(result.error === 'ambiguous'){
+    guardarNoIdentificado(textoOriginal, targetGroupId, targetGroupName, `Hay varios alumnos con ese nombre: ¿${result.opciones.join(' o ')}? Añade el apellido para saber quién es.`);
+    return true;
+  }
+  if(result.error === 'points-high'){ showFeedback('El máximo de puntos por registro es 5. No se ha guardado.', 'error'); return false; }
+  if(result.error === 'points-low'){ showFeedback('Los puntos no pueden ser negativos. No se ha guardado.', 'error'); return false; }
+  if(result.error === 'points-blocked'){ showFeedback(`⚠️ ${result.nombre} no puede sumar puntos hoy: se ha sentado más de una vez.`, 'error'); return false; }
+
+  const now = new Date();
+  result.forEach(r => {
+    data.registros.unshift({
+      id: 'r_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+      timestamp: Date.now(),
+      fecha: now.toISOString().slice(0,10),
+      hora: now.toTimeString().slice(0,5),
+      grupoId: targetGroupId,
+      alumnoId: r.alumno.id,
+      unidadId: unitId,
+      tipo: r.tipo,
+      categoria: r.categoria,
+      puntos: r.puntos != null ? r.puntos : null,
+      vueltas: r.vueltas != null ? r.vueltas : null,
+      trote: r.trote || false,
+      textoOriginal,
+      textoInterpretado: r.textoInterpretado,
+      manual
+    });
+  });
+
+  const added = data.registros.slice(0, result.length);
+  undoStack.push({ action:'add', records: added });
+  redoStack = [];
+
+  saveData();
+  renderAll();
+  const base = result.length > 1 ? `${result.length} registros guardados` : 'Registro guardado';
+  showFeedback(manual ? `${base} en ${targetGroupName}` : base, 'ok');
+  return true;
+}
+
+// Registro rápido desde la propia ficha del alumno: no hace falta escribir su
+// nombre, ya se sabe de quién se trata.
+function handleQuickEntry(alumnoId){
+  const a = data.alumnos.find(x => x.id === alumnoId);
+  if(!a) return;
+  const input = $('quickEntry_' + alumnoId);
+  const text = input.value;
+  if(!text.trim()) return;
+  const result = classifyForAlumno(text, a);
+  const g = data.grupos.find(x => x.id === a.grupoId);
+  const ok = commitParseResult(result, a.grupoId, g ? g.nombre : '', null, text, false);
+  if(ok) input.value = '';
+}
+
+/* ———————————— dictado por voz (pulsar y mantener, como un walkie-talkie) ———————————— */
+const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognizer = null;
+let listening = false;
+let micStream = null; // pista de audio ya autorizada, para no volver a pedir permiso cada vez
+
+function esAppInstalada(){
+  return (window.navigator.standalone === true) || (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+}
+
+function setupVoice(){
+  const btn=$('voiceBtn');
+  if(!SpeechRecognitionAPI){
+    btn.title='Dictado no disponible en este navegador';
+    btn.onpointerdown=e=>{e.preventDefault();showFeedback('El dictado por voz no está disponible aquí. Prueba a abrir GRACCUS en Safari (no en la app instalada) y vuelve a intentarlo.','warn');};
+    return;
+  }
+  let voiceBuffer = '';
+
+  // Algunos navegadores (sobre todo Safari/iOS) dejan de disparar onresult si
+  // se reutiliza la misma instancia de SpeechRecognition en sesiones
+  // sucesivas: por eso funcionaba "solo una vez". Se crea una instancia nueva
+  // cada vez que se pulsa el micrófono. Además, con interimResults activado
+  // se va escribiendo lo reconocido mientras se habla (no solo al final), así
+  // que si el usuario suelta el botón nada más terminar de hablar, el texto
+  // ya está escrito aunque el resultado "final" no llegue a tiempo.
+  function crearRecognizer(){
+    const r = new SpeechRecognitionAPI();
+    r.lang='es-ES'; r.interimResults=true; r.continuous=true; r.maxAlternatives=1;
+    r.onstart=()=>{listening=true;voiceBuffer='';btn.classList.add('listening');showFeedback('Escuchando… suelta el micrófono cuando termines.','ok');};
+    r.onresult=e=>{
+      let texto='';
+      for(let i=0;i<e.results.length;i++){ texto += e.results[i][0].transcript; }
+      voiceBuffer = texto;
+      $('phrase').value = texto;
+    };
+    r.onerror=e=>{
+      listening=false;btn.classList.remove('listening');
+      const code=e&&e.error;
+      const sugerenciaApp = esAppInstalada() ? ' Como la tienes instalada en la pantalla de inicio, prueba primero a abrirla en Safari normal (no la app instalada), concede el permiso ahí y luego vuelve a la app instalada.' : '';
+      if(code==='not-allowed'||code==='service-not-allowed') showFeedback('El micrófono está bloqueado.' + sugerenciaApp + ' Revisa Ajustes → Safari → Micrófono (o Ajustes de la propia app) en el iPhone.','error');
+      else if(code==='audio-capture') showFeedback('No se detecta el micrófono. Comprueba los permisos.' + sugerenciaApp,'error');
+      else if(code==='no-speech') showFeedback('No he detectado voz. Mantén pulsado el micrófono y habla.','warn');
+      else showFeedback('No se ha podido iniciar el dictado.' + sugerenciaApp,'error');
+    };
+    r.onend=()=>{
+      listening=false;btn.classList.remove('listening');
+      if(voiceBuffer.trim()){
+        $('phrase').value = voiceBuffer.trim();
+        $('phrase').focus();
+        showFeedback('Dictado recibido. Pulsa ↵ para registrarlo.','ok');
+      }
+      recognizer=null; // se crea uno nuevo en el próximo start()
+    };
+    return r;
+  }
+
+  // En iOS, pedir el micrófono explícitamente con getUserMedia antes de arrancar el
+  // reconocimiento ayuda a que aparezca de verdad el aviso de permiso del sistema
+  // (a veces SpeechRecognition por sí solo no lo dispara correctamente en Safari/PWA).
+  function start(){
+    if(listening) return;
+    recognizer = crearRecognizer();
+    if(micStream){ try{ recognizer.start(); }catch(e){} return; }
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+      navigator.mediaDevices.getUserMedia({ audio:true }).then(stream => {
+        micStream = stream;
+        try{ recognizer.start(); }catch(e){ showFeedback('No se ha podido iniciar el micrófono. Suelta y vuelve a pulsar.','error'); }
+      }).catch(err => {
+        const sugerenciaApp = esAppInstalada() ? ' Prueba primero desde Safari normal (no la app instalada de la pantalla de inicio): abre la misma dirección en Safari, permite el micrófono cuando lo pida, y luego ya funcionará también en la app instalada.' : '';
+        showFeedback('No se ha concedido permiso de micrófono.' + sugerenciaApp + ' En el iPhone: Ajustes → Safari → Micrófono → Permitir.', 'error');
+      });
+    } else {
+      try{ recognizer.start(); }catch(e){ showFeedback('No se ha podido iniciar el micrófono. Suelta y vuelve a pulsar.','error'); }
+    }
+  }
+  function stop(){if(!listening)return;try{recognizer.stop();}catch(e){}}
+  btn.onpointerdown=e=>{e.preventDefault();start();};
+  btn.onpointerup=e=>{e.preventDefault();stop();};
+  btn.onpointercancel=()=>stop(); btn.onpointerleave=()=>{if(listening)stop();};
+  btn.oncontextmenu=e=>e.preventDefault();
+}
+
+/* ———————————— UI: helpers ———————————— */
+const $ = id => document.getElementById(id);
+let feedbackTimer = null;
+function showFeedback(msg, kind){
+  const el = $('feedback');
+  el.textContent = msg;
+  el.className = 'feedback ' + (kind || 'ok');
+  clearTimeout(feedbackTimer);
+  feedbackTimer = setTimeout(() => { el.textContent = ''; el.className = 'feedback'; }, 4500);
+}
+function tagClass(r){ if(r.tipo==='puntos') return 'positive'; if(r.tipo==='falta') return 'absent'; if(r.tipo==='incidencia' || r.tipo==='vueltas') return 'incident'; return ''; }
+function tagLabel(r){ if(r.tipo==='puntos') return (r.puntos>0?'+':'') + r.puntos + ' pts'; if(r.tipo==='falta') return r.justificada ? 'Falta justificada' : 'Falta injustificada'; if(r.tipo==='vueltas') return `🏃 ${r.vueltas} vuelta${r.vueltas===1?'':'s'}${r.trote?' (trote)':''}`; if(r.tipo==='incidencia') return (ICONOS_CATEGORIA[r.categoria]||'') + ' Incidencia · ' + r.categoria; return (ICONOS_CATEGORIA[r.categoria]||'') + ' Observación · ' + r.categoria; }
+
+/* ———————————— avatar / foto del alumno ———————————— */
+// Si el alumno tiene foto (sincronizada o subida a mano) se muestra esa imagen;
+// si no, se usan las iniciales con el color del grupo, como hasta ahora.
+function avatarHtml(alumno, size){
+  const cls = size ? ' ' + size : '';
+  if(alumno && alumno.foto){
+    return `<img src="${alumno.foto}" class="avatar-img${cls}" alt="${alumno.nombre}">`;
+  }
+  const c = groupColor(alumno ? alumno.grupoId : null);
+  return `<div class="avatar${cls}" style="background:${c.bg};color:${c.fg}">${alumno ? initials(alumno.nombre) : '?'}</div>`;
+}
+
+function setAlumnoFoto(alumnoId, dataUrl){
+  const a = data.alumnos.find(x => x.id === alumnoId);
+  if(!a) return;
+  a.foto = dataUrl;
+  saveData();
+}
+function setAlumnoNotas(alumnoId, notas){
+  const a = data.alumnos.find(x => x.id === alumnoId);
+  if(!a) return;
+  a.notasPrivadas = notas;
+  saveData();
+}
+
+// Importa de una vez las fotos y notas privadas desde un archivo JSON que el
+// profesor guarda en su propio dispositivo (nunca en GitHub): un objeto
+// {alumnoId: {foto, notasPrivadas}}. Así no hace falta rellenar cada ficha a
+// mano. Solo actualiza los alumnos que ya existen (mismo id); si la plantilla
+// de alumnado cambia de id en el futuro, esos quedarán sin actualizar y se
+// avisa cuántos.
+// Copia de seguridad completa: descarga TODO lo que tienes guardado
+// (registros, puntos, faltas, calendario, grupos guardados, fotos y notas)
+// en un único archivo. Sirve para restaurarlo en este mismo dispositivo tras
+// un borrado accidental, o para pasarlo a otro dispositivo.
+function exportarCopiaSeguridad(){
+  const blob = new Blob([JSON.stringify(data)], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const fecha = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = `graccus_copia_${fecha}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showFeedback('Copia de seguridad descargada.', 'ok');
+}
+
+// Restaura una copia de seguridad exportada con exportarCopiaSeguridad(). Pide
+// confirmación porque SUSTITUYE todo lo que haya ahora mismo en este
+// dispositivo por lo que traiga el archivo.
+function restaurarCopiaSeguridad(file){
+  if(!file) return;
+  if(!confirm('Esto sustituirá TODOS los datos actuales de este dispositivo por los de la copia de seguridad. ¿Continuar?')) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    let restaurado;
+    try{ restaurado = JSON.parse(reader.result); }
+    catch(e){ showFeedback('El archivo no es una copia de seguridad válida.', 'error'); return; }
+    if(!restaurado || !Array.isArray(restaurado.alumnos) || !Array.isArray(restaurado.registros)){
+      showFeedback('El archivo no parece una copia de seguridad de GRACCUS.', 'error'); return;
+    }
+    data = restaurado;
+    saveData();
+    renderAll();
+    showFeedback(`Copia restaurada: ${data.registros.length} registros recuperados.`, 'ok');
+  };
+  reader.onerror = () => showFeedback('No se ha podido leer el archivo.', 'error');
+  reader.readAsText(file);
+}
+
+function importarDatosPrivados(file){
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    let datos;
+    try{ datos = JSON.parse(reader.result); }
+    catch(e){ showFeedback('El archivo no es un JSON válido.', 'error'); return; }
+    let aplicados = 0, noEncontrados = 0;
+    Object.keys(datos).forEach(alumnoId => {
+      const a = data.alumnos.find(x => x.id === alumnoId);
+      if(!a){ noEncontrados++; return; }
+      const entrada = datos[alumnoId];
+      if(entrada.foto) a.foto = entrada.foto;
+      if(entrada.notasPrivadas) a.notasPrivadas = entrada.notasPrivadas;
+      aplicados++;
+    });
+    saveData();
+    renderAll();
+    showFeedback(`Importado: ${aplicados} alumnos actualizados${noEncontrados ? `, ${noEncontrados} no encontrados en la plantilla actual` : ''}.`, 'ok');
+  };
+  reader.onerror = () => showFeedback('No se ha podido leer el archivo.', 'error');
+  reader.readAsText(file);
+}
+// Amplía la foto tocándola (aunque pierda calidad al agrandarse); para cambiarla
+// hay que tocar el icono de la cámara, no la propia foto.
+function openPhotoLightbox(alumnoId){
+  const a = data.alumnos.find(x => x.id === alumnoId);
+  if(!a || !a.foto) return;
+  $('photoLightboxImg').src = a.foto;
+  $('photoLightbox').classList.add('active');
+}
+// Recorta la imagen a un cuadrado y la reduce de tamaño antes de guardarla,
+// para que 25 fotos por clase no llenen el almacenamiento del navegador.
+function handleFotoUpload(alumnoId, inputEl){
+  const file = inputEl.files && inputEl.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const size = 160;
+      const canvas = document.createElement('canvas');
+      canvas.width = size; canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      const s = Math.min(img.width, img.height);
+      const sx = (img.width - s) / 2, sy = (img.height - s) / 2;
+      ctx.drawImage(img, sx, sy, s, s, 0, 0, size, size);
+      setAlumnoFoto(alumnoId, canvas.toDataURL('image/jpeg', 0.85));
+      openStudentDetail(alumnoId);
+      renderClasses(); renderToday();
+    };
+    img.src = reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ———————————— deshacer / rehacer ———————————— */
+// Historial en memoria (se reinicia al recargar la página, como es habitual
+// en deshacer/rehacer). Cada entrada guarda los registros afectados, así que
+// deshacer y rehacer son simétricos: mover la misma entrada entre las pilas.
+let undoStack = [];
+let modalRefresh = null; // si hay un modal (ficha de alumno/clase) abierto, esta función lo vuelve a pintar tras cada cambio
+let redoStack = [];
+function updateUndoRedoButtons(){
+  $('undoBtn').disabled = undoStack.length === 0;
+  $('redoBtn').disabled = redoStack.length === 0;
+}
+function performUndo(){
+  const entry = undoStack.pop();
+  if(!entry) return;
+  if(entry.action === 'add'){
+    const ids = new Set(entry.records.map(r => r.id));
+    data.registros = data.registros.filter(r => !ids.has(r.id));
+  } else if(entry.action === 'clear'){
+    data.registros = entry.records.slice();
+  }
+  redoStack.push(entry);
+  saveData(); renderAll();
+  showFeedback('Deshecho', 'ok');
+}
+function performRedo(){
+  const entry = redoStack.pop();
+  if(!entry) return;
+  if(entry.action === 'add'){
+    data.registros = [...entry.records, ...data.registros];
+  } else if(entry.action === 'clear'){
+    data.registros = [];
+  }
+  undoStack.push(entry);
+  saveData(); renderAll();
+  showFeedback('Rehecho', 'ok');
+}
+
+/* ———————————— render: contexto y "Hoy" ———————————— */
+function renderDailyClasses(effectiveCtx){
+  const day = effectiveCtx.day;
+  const dayEntries = data.horario
+    .filter(h => h.dia === day && h.lectivo && h.grupoId)
+    .sort((a,b) => a.inicio.localeCompare(b.inicio));
+  const el = $('contextPills');
+  if(!dayEntries.length){
+    el.innerHTML = `<div class="daily-classes"><span class="pill muted">Sin clases programadas hoy</span></div>`;
+    return;
+  }
+  const real = getCurrentContext();
+  // Martes y jueves tienen 6 clases (3 antes del recreo, 3 después): se
+  // reparten en 2 filas de 3 para que todo quepa en pantalla sin desplazarse.
+  // El resto de días, todas las clases van en una sola fila, con tantas
+  // columnas como clases haya.
+  const esDobleFila = (day === 'martes' || day === 'jueves') && dayEntries.length > 3;
+  const filas = esDobleFila ? [dayEntries.slice(0, 3), dayEntries.slice(3)] : [dayEntries];
+
+  function renderFila(entries, offsetIdx){
+    return `<div class="daily-classes" style="grid-template-columns:repeat(${entries.length},minmax(0,1fr))">${
+      entries.map((h, i) => {
+        const idx = offsetIdx + i;
+        const g = data.grupos.find(x => x.id === h.grupoId);
+        if(!g) return '';
+        const isNow = real.entry === h;
+        const selected = !!effectiveCtx.overridden && effectiveCtx.entry === h;
+        const c = groupColor(h.grupoId);
+        return `<div class="daily-class-wrap${selected?' selected':''}">
+          <button class="daily-class${isNow?' current':''}${selected?' selected':''}" data-idx="${idx}" title="${selected ? 'Registrando aquí' : 'Registrar en ' + g.nombre + ' (' + h.inicio + '–' + h.fin + ')'}">
+            <small>${h.inicio}–${h.fin}</small>
+            <b style="color:${(isNow||selected) ? c.fg : ''}">${g.nombre}</b>
+          </button>
+          <button class="daily-class-roster" data-idx="${idx}" title="Ver alumnado de ${g.nombre}">👥</button>
+        </div>`;
+      }).join('')
+    }</div>`;
+  }
+
+  let offset = 0;
+  el.innerHTML = filas.map(fila => { const html = renderFila(fila, offset); offset += fila.length; return html; }).join('');
+
+  el.querySelectorAll('.daily-class').forEach(btn => {
+    btn.onclick = () => seleccionarClaseParaRegistrar(dayEntries[Number(btn.dataset.idx)]);
+  });
+  el.querySelectorAll('.daily-class-roster').forEach(btn => {
+    btn.onclick = () => {
+      const entry = dayEntries[Number(btn.dataset.idx)];
+      if(entry) switchToClassesAndOpen(entry.grupoId);
+    };
+  });
+}
+
+function updateContextUI(){
+  const real = getCurrentContext(); // hora real, se usa para saber qué clase resaltar como "ahora"
+  const ctx = getEffectiveContext(); // clase que se usará al registrar (puede estar fijada a mano)
+
+  renderDailyClasses(ctx);
+
+  $('entryHint').innerHTML = ctx.groupId
+    ? (ctx.overridden
+        ? `Registrando en ${ctx.groupName} (${ctx.entry.inicio}–${ctx.entry.fin}), no en la clase actual. GRACCUS reconocerá al alumno de ese grupo. Pulsa de nuevo la clase de ahora, o <a href="#" id="volverAhoraLink" style="color:inherit;text-decoration:underline">vuelve a ahora</a>, para dejar de fijar esta clase.`
+        : `Escribe una frase natural. GRACCUS reconocerá al alumno de ${ctx.groupName}, o indica otro grupo (p. ej. "de 3B") para registrar fuera de esta clase.`)
+    : ctx.kind === 'no-lectivo'
+      ? `Ahora mismo tienes «${ctx.groupName}». Indica el grupo en la frase (p. ej. "Luis 5 puntos de 3B") para registrar igualmente.`
+      : 'Fuera de horario lectivo. Indica el grupo en la frase (p. ej. "Luis 5 puntos de 3B"), o pulsa una clase anterior del día.';
+  const volverLink = document.getElementById('volverAhoraLink');
+  if(volverLink) volverLink.onclick = (e) => { e.preventDefault(); volverAAhoraParaRegistrar(); };
+  return ctx;
+}
+
+function renderNotes(){
+  const today = new Date().toISOString().slice(0,10);
+  const notes = data.registros.filter(r => r.fecha === today && r.tipo === 'observación');
+  $('notesList').innerHTML = notes.length ? notes.map(r => {
+    const alumno = data.alumnos.find(a => a.id === r.alumnoId);
+    const grupo = data.grupos.find(g => g.id === r.grupoId);
+    return `<div class="record"><div class="record-main"><b>${alumno ? alumno.nombre : 'Alumno eliminado'}</b><div>${r.textoInterpretado || r.textoOriginal}</div><div class="record-meta">${r.hora} · ${grupo ? grupo.nombre : ''} · ${r.categoria || 'general'}</div></div><span class="tag">${r.categoria || 'Anotación'}</span></div>`;
+  }).join('') : '<div class="empty">No hay anotaciones hoy.</div>';
+}
+
+function renderToday(){
+  const today = new Date().toISOString().slice(0,10);
+  const todays = data.registros.filter(r => r.fecha === today);
+  $('points').textContent = todays.filter(r => r.tipo==='puntos').reduce((a,r) => a + (r.puntos||0), 0);
+  $('absences').textContent = todays.filter(r => r.tipo==='falta').length;
+  $('observations').textContent = todays.filter(r => r.tipo==='observación').length;
+  $('incidents').textContent = todays.filter(r => r.tipo==='incidencia').length;
+  $('laps').textContent = todays.filter(r => r.tipo==='vueltas').reduce((a,r) => a + (r.vueltas||0), 0);
+  $('review').textContent = todays.filter(r => r.tipo==='revisar').length;
+
+  $('recent').innerHTML = data.registros.length ? data.registros.slice(0,8).map(r => {
+    if(r.tipo === 'revisar'){
+      const grupo = data.grupos.find(g => g.id === r.grupoId);
+      return `<div class="record record-review" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')"><span class="review-x" title="Sin identificar">❌</span><div class="record-main"><b>Sin identificar${grupo ? ' · ' + grupo.nombre : ''}</b><div class="record-summary">«${r.textoOriginal}»</div></div><span class="record-time">${r.hora}</span></div>`;
+    }
+    const alumno = data.alumnos.find(a => a.id === r.alumnoId);
+    const resumen = r.textoInterpretado || r.textoOriginal;
+    return `<div class="record" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')">${avatarHtml(alumno)}<div class="record-main"><b>${alumno ? alumno.nombre : 'Alumno eliminado'}</b><div class="record-summary">${resumen}</div></div><span class="record-time">${r.hora}</span></div>`;
+  }).join('') : '<div class="empty">Todavía no hay registros. Prueba con «Luis 5 puntos».</div>';
+
+}
+
+/* ———————————— render: Clases ———————————— */
+function renderClasses(){
+  $('classList').innerHTML = data.grupos.map(g => {
+    const n = data.alumnos.filter(a => a.grupoId === g.id).length;
+    const c = groupColor(g.id);
+    return `<div class="row class-row" data-id="${g.id}" style="cursor:pointer"><div class="row-info"><div class="avatar" style="background:${c.bg};color:${c.fg}">${initials(g.nombre)}</div><div><b>${g.nombre}</b><small>${n} alumnos</small></div></div></div>`;
+  }).join('');
+  document.querySelectorAll('.class-row').forEach(el => el.onclick = () => openClassRoster(el.dataset.id));
+}
+
+function fechaLocal(){
+  const d=new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function toggleAbsence(grupoId, alumnoId){
+  // Ciclo: sin falta -> injustificada -> justificada -> sin falta.
+  const hoy=fechaLocal();
+  const idx=data.registros.findIndex(r=>r.alumnoId===alumnoId && r.grupoId===grupoId && r.fecha===hoy && r.tipo==='falta');
+  const a=data.alumnos.find(x=>x.id===alumnoId);
+  if(idx<0){
+    data.registros.unshift({id:'r_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),timestamp:Date.now(),fecha:hoy,hora:new Date().toTimeString().slice(0,5),grupoId,alumnoId,unidadId:null,tipo:'falta',categoria:null,puntos:null,vueltas:null,trote:false,justificada:false,textoOriginal:'Ausencia',textoInterpretado:`Falta injustificada de ${a?a.nombre.split(' ')[0]:'alumno'}`,manual:true});
+    showFeedback('Falta injustificada registrada','ok');
+  } else if(!data.registros[idx].justificada){
+    data.registros[idx].justificada = true;
+    data.registros[idx].textoInterpretado = `Falta justificada de ${a?a.nombre.split(' ')[0]:'alumno'}`;
+    showFeedback('Marcada como justificada','ok');
+  } else {
+    data.registros.splice(idx,1);
+    showFeedback('Ausencia quitada','ok');
+  }
+  saveData(); renderAll(); openClassRoster(grupoId);
+}
+function estadoFaltaHoy(grupoId, alumnoId){
+  const hoy=fechaLocal();
+  const r=data.registros.find(x=>x.alumnoId===alumnoId && x.grupoId===grupoId && x.fecha===hoy && x.tipo==='falta');
+  if(!r) return null;
+  return r.justificada ? 'justificada' : 'injustificada';
+}
+function crearGruposTrabajo(grupoId, tamano, mixtos, incluirAusentes){
+  const roster=data.alumnos.filter(a=>a.grupoId===grupoId);
+  const hoy=fechaLocal();
+  const ausentes=new Set(data.registros.filter(r=>r.grupoId===grupoId&&r.fecha===hoy&&r.tipo==='falta').map(r=>r.alumnoId));
+  let pool=(incluirAusentes?roster:roster.filter(a=>!ausentes.has(a.id))).slice();
+  if(!pool.length) return [];
+  // Mezcla reproducible usando una semilla basada en fecha y grupo para que al volver a abrir no cambien solos.
+  let seed=Array.from(grupoId+hoy).reduce((a,c)=>a+c.charCodeAt(0),0);
+  pool.sort((a,b)=>{ seed=(seed*9301+49297)%233280; const ra=seed/233280; seed=(seed*9301+49297)%233280; const rb=seed/233280; return ra-rb; });
+  const grupos=[];
+  for(let i=0;i<pool.length;i+=tamano) grupos.push(pool.slice(i,i+tamano));
+  if(mixtos){
+    // Si existen datos de sexo en el alumnado, intercambiamos miembros para equilibrar los grupos.
+    const conSexo=pool.every(a=>a.sexo);
+    if(conSexo){
+      for(let i=0;i<grupos.length-1;i++){
+        const tipos=new Set(grupos[i].map(a=>a.sexo));
+        if(tipos.size===1){ const j=grupos.findIndex((g,k)=>k>i&&g.some(a=>a.sexo!==[...tipos][0])); if(j>=0){ const objetivo=[...tipos][0]; const idx=grupos[j].findIndex(a=>a.sexo!==objetivo); if(idx>=0) [grupos[i][0],grupos[j][idx]]=[grupos[j][idx],grupos[i][0]]; } }
+      }
+    }
+  }
+  return grupos;
+}
+
+/* ———————————— grupos de trabajo guardados (para usar durante toda una unidad) ———————————— */
+function getGruposGuardados(grupoId){
+  return (data.gruposGuardados && data.gruposGuardados[grupoId]) || [];
+}
+function guardarGrupoTrabajo(grupoId, nombre, grupos){
+  if(!data.gruposGuardados) data.gruposGuardados = {};
+  if(!data.gruposGuardados[grupoId]) data.gruposGuardados[grupoId] = [];
+  data.gruposGuardados[grupoId].push({
+    id: 'wg_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+    nombre: nombre || ('Grupos ' + new Date().toLocaleDateString('es-ES')),
+    grupos: grupos.map(g => g.map(a => a.id)),
+    creado: fechaLocal()
+  });
+  saveData();
+}
+function eliminarGrupoGuardado(grupoId, id){
+  if(!data.gruposGuardados || !data.gruposGuardados[grupoId]) return;
+  data.gruposGuardados[grupoId] = data.gruposGuardados[grupoId].filter(x => x.id !== id);
+  saveData();
+  openWorkGroups(grupoId);
+}
+function verGrupoGuardado(grupoId, id){
+  const guardado = getGruposGuardados(grupoId).find(x => x.id === id);
+  if(!guardado) return;
+  const alumnos = data.alumnos.filter(a => a.grupoId === grupoId);
+  const grupos = guardado.grupos.map(ids => ids.map(aid => alumnos.find(a => a.id === aid)).filter(Boolean));
+  pintarResultadoGrupos(grupos, { guardadoNombre: guardado.nombre });
+}
+function pintarResultadoGrupos(gs, opts){
+  opts = opts || {};
+  const cabecera = opts.guardadoNombre ? `<h3>${opts.guardadoNombre}</h3>` : '<h3>GUARDAR ESTOS GRUPOS</h3>';
+  const guardarUI = opts.guardadoNombre ? '' : `
+    <div style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="text" id="wgSaveName" placeholder="Ej.: Grupos Acrosport" style="flex:1"><button class="square-toggle" id="wgSaveBtn" title="Guardar estos grupos">💾</button></div>
+  `;
+  $('wgResult').innerHTML = gs.length
+    ? `<div class="work-groups">${cabecera}${gs.map((x,i)=>`<div class="work-group"><b>Grupo ${i+1}</b><div>${x.map(a=>a.nombre.split(' ')[0]).join(' · ')}</div><small>${x.length} personas</small></div>`).join('')}${guardarUI}</div>`
+    : '<div class="empty">No hay alumnado disponible para agrupar.</div>';
+  if(!opts.guardadoNombre && gs.length){
+    $('wgSaveBtn').onclick = () => {
+      guardarGrupoTrabajo(opts.grupoId, $('wgSaveName').value.trim(), gs);
+      openWorkGroups(opts.grupoId);
+    };
+  }
+}
+function openWorkGroups(grupoId){
+  const g=data.grupos.find(x=>x.id===grupoId); if(!g) return;
+  const hoy=fechaLocal();
+  const ausentes=new Set(data.registros.filter(r=>r.grupoId===grupoId&&r.fecha===hoy&&r.tipo==='falta').map(r=>r.alumnoId));
+  const guardados = getGruposGuardados(grupoId);
+  $('modalContent').innerHTML=`<div class="eyebrow">Trabajo cooperativo</div><h2 style="margin-top:7px">Grupos de trabajo · ${g.nombre}</h2><p class="sub">Crea agrupamientos temporales, o guárdalos con un nombre para reutilizarlos durante toda una unidad.</p>
+  ${guardados.length ? `<div class="section-head" style="margin:16px 0 8px"><h2 style="margin:0;font-size:15px">Grupos guardados</h2></div><div class="list">${guardados.map(gd => `<div class="row" style="padding:10px 12px"><div><b>${gd.nombre}</b><small>${gd.grupos.length} grupos · ${gd.creado}</small></div><div style="display:flex;gap:6px"><button class="simbtn" onclick="verGrupoGuardado('${grupoId}','${gd.id}')">Ver</button><button class="simbtn" style="color:var(--danger)" onclick="eliminarGrupoGuardado('${grupoId}','${gd.id}')">🗑</button></div></div>`).join('')}</div>` : ''}
+  <div class="section-head" style="margin:18px 0 8px"><h2 style="margin:0;font-size:15px">Crear grupos nuevos</h2></div>
+  <div class="field"><label style="font-size:14px;color:var(--ink);font-weight:800">Personas por grupo</label><select id="wgSize" style="font-size:16px;font-weight:800;padding:12px">${[2,3,4,5,6,7,8].map(n=>`<option value="${n}">${n}</option>`).join('')}</select></div>
+  <div class="switch-row"><span><b>Grupos mixtos</b></span><input type="checkbox" id="wgMixed"></div>
+  <div class="switch-row"><span><b>Incluir ausentes</b></span><input type="checkbox" id="wgAbsent"></div>
+  <div class="modal-actions"><button class="primary" id="wgCreate" style="height:44px;flex:1">Crear grupos</button></div>
+  <div id="wgResult"></div>`;
+  $('modal').style.display='grid';
+  modalRefresh = () => openWorkGroups(grupoId);
+  $('wgCreate').onclick=()=>{
+    const gs=crearGruposTrabajo(grupoId,parseInt($('wgSize').value,10),$('wgMixed').checked,$('wgAbsent').checked);
+    pintarResultadoGrupos(gs, { grupoId });
+  };
+}
+
+/* ———————————— render: Clasificación (puntos por clase, con empates agrupados) ———————————— */
+// Trimestres calculados sobre el curso actual (empieza en septiembre), para
+// poder ver el avance "de un vistazo" sin que 25 filas hagan la vista ilegible.
+function anioEscolarInicio(){
+  const now = new Date();
+  return now.getMonth() >= 8 ? now.getFullYear() : now.getFullYear() - 1;
+}
+function getTrimestres(){
+  const y = anioEscolarInicio();
+  return [
+    { id:'t1', nombre:'1er trimestre', inicio:`${y}-09-01`, fin:`${y}-12-22` },
+    { id:'t2', nombre:'2º trimestre', inicio:`${y+1}-01-08`, fin:`${y+1}-04-01` },
+    { id:'t3', nombre:'3er trimestre', inicio:`${y+1}-04-02`, fin:`${y+1}-06-22` }
+  ];
+}
+let raceGroupId = null;
+let raceTrimestre = 'todo';
+let raceMetric = 'puntos';
+function renderRace(){
+  if(raceGroupId !== 'ALL' && (!raceGroupId || !data.grupos.find(g => g.id === raceGroupId))){
+    // Por defecto, la clase que tengas activa ahora mismo según el horario;
+    // si no hay ninguna, la primera de la lista.
+    const ctx = getCurrentContext();
+    raceGroupId = (ctx.groupId && data.grupos.find(g => g.id === ctx.groupId)) ? ctx.groupId : (data.grupos[0] ? data.grupos[0].id : null);
+  }
+  if(!raceGroupId){ $('raceControls').innerHTML = ''; $('raceTrack').innerHTML = '<div class="empty">No hay grupos todavía.</div>'; return; }
+
+  const trimestres = getTrimestres();
+  $('raceControls').innerHTML = `
+    <div class="field" style="flex:1;min-width:160px"><label>Clase</label><select id="raceGrupoSel"><option value="ALL" ${raceGroupId==='ALL'?'selected':''}>Total · todas mis clases</option>${data.grupos.map(g => `<option value="${g.id}" ${g.id===raceGroupId?'selected':''}>${g.nombre}</option>`).join('')}</select></div>
+    <div class="field" style="flex:1;min-width:160px"><label>Periodo</label><select id="raceTrimSel">${trimestres.map(t => `<option value="${t.id}" ${t.id===raceTrimestre?'selected':''}>${t.nombre}</option>`).join('')}<option value="todo" ${raceTrimestre==='todo'?'selected':''}>Curso completo</option></select></div>
+    <div class="field" style="flex:1;min-width:160px"><label>Clasificar por</label><select id="raceMetricSel"><option value="puntos" ${raceMetric==='puntos'?'selected':''}>Puntos</option><option value="faltas" ${raceMetric==='faltas'?'selected':''}>Faltas</option><option value="calificacion" disabled>Calificación (próximamente)</option></select></div>
+  `;
+  $('raceGrupoSel').onchange = e => { raceGroupId = e.target.value; renderRace(); };
+  $('raceTrimSel').onchange = e => { raceTrimestre = e.target.value; renderRace(); };
+  $('raceMetricSel').onchange = e => { raceMetric = e.target.value; renderRace(); };
+
+  const trim = trimestres.find(t => t.id === raceTrimestre);
+  const roster = raceGroupId === 'ALL' ? data.alumnos.slice() : data.alumnos.filter(a => a.grupoId === raceGroupId);
+  const enPeriodo = r => raceTrimestre === 'todo' || (r.fecha >= trim.inicio && r.fecha <= trim.fin);
+  const valorPorAlumno = roster.map(a => {
+    let val;
+    if(raceMetric === 'faltas'){
+      val = data.registros.filter(r => r.alumnoId === a.id && r.tipo === 'falta' && enPeriodo(r)).length;
+    } else {
+      val = data.registros.filter(r => r.alumnoId === a.id && r.tipo === 'puntos' && enPeriodo(r)).reduce((s,r) => s + (r.puntos||0), 0);
+    }
+    return { alumno:a, val };
+  });
+  const maxVal = Math.max(1, ...valorPorAlumno.map(x => x.val));
+  const unidad = raceMetric === 'faltas' ? 'faltas' : 'pts';
+
+  const grupos = {};
+  valorPorAlumno.forEach(({alumno, val}) => { (grupos[val] = grupos[val] || []).push(alumno); });
+  const carriles = Object.entries(grupos).map(([val, alumnos]) => ({ val:Number(val), alumnos })).sort((a,b) => b.val - a.val);
+
+  $('raceTrack').innerHTML = carriles.length ? carriles.map(c => {
+    const pct = Math.min(96, (c.val / maxVal) * 96);
+    const nombres = c.alumnos.map(a => a.nombre.split(' ')[0]).join(', ');
+    return `<div class="race-lane">
+      <div class="race-line"><div class="race-camel" style="left:${pct}%">🐪</div><div class="race-flag">🏁</div></div>
+      <div class="race-label"><b>${c.val} ${unidad}</b> — ${nombres}</div>
+    </div>`;
+  }).join('') : '<div class="empty">No hay alumnos que mostrar.</div>';
+}
+
+function openMaterialPanel(grupoId){
+  const g = data.grupos.find(x => x.id === grupoId); if(!g) return;
+  const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+  const encargados = getEncargadosSemana(grupoId);
+  const encargadosIds = new Set(encargados.map(a => a.id));
+  const rotacion = g.rotacionMaterial === 'clase' ? 'clase' : 'semana';
+  $('modalContent').innerHTML = `
+    <button class="link" onclick="openClassRoster('${grupoId}')">← Volver</button>
+    <div class="eyebrow" style="margin-top:10px">Material · ${g.nombre}</div>
+    <h2 style="margin-top:7px">📦 Encargados de material</h2>
+    <p class="sub">Ahora mismo: ${encargados.length ? encargados.map(a=>a.nombre).join(', ') : 'sin asignar'}</p>
+    <div class="field"><label>Rotación</label><select onchange="cambiarRotacionMaterial('${grupoId}', this.value)"><option value="semana" ${rotacion==='semana'?'selected':''}>Cada semana</option><option value="clase" ${rotacion==='clase'?'selected':''}>Cada clase</option></select></div>
+    <div class="hint">Toca un alumno para asignarle o quitarle el material.</div>
+    <div class="list" style="margin-top:12px">${roster.map(a => `<div class="row" style="cursor:pointer;padding:10px 12px" onclick="toggleMaterial('${grupoId}','${a.id}')"><div class="row-info">${avatarHtml(a,'sm')}<b style="font-size:13px">${a.nombre}</b></div>${encargadosIds.has(a.id) ? '<span class="tag" style="background:#fdf0cf;color:#9a6b0a">📦 Asignado</span>' : ''}</div>`).join('')}</div>
+  `;
+  $('modal').style.display = 'grid';
+  modalRefresh = () => openMaterialPanel(grupoId);
+}
+function openDelegadoPanel(grupoId){
+  const g = data.grupos.find(x => x.id === grupoId); if(!g) return;
+  const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+  $('modalContent').innerHTML = `
+    <button class="link" onclick="openClassRoster('${grupoId}')">← Volver</button>
+    <div class="eyebrow" style="margin-top:10px">Delegado/a · ${g.nombre}</div>
+    <h2 style="margin-top:7px">🅲 Elegir delegado/a</h2>
+    <div class="list" style="margin-top:12px">${roster.map(a => `<div class="row" style="cursor:pointer;padding:10px 12px" onclick="setDelegadoClase('${grupoId}','${a.id}')"><div class="row-info">${avatarHtml(a,'sm')}<b style="font-size:13px">${a.nombre}</b></div>${g.delegadoId===a.id ? '<span class="tag" style="background:#e4edfb;color:#2f5fa8">🅲 Delegado/a</span>' : ''}</div>`).join('')}</div>
+    ${g.delegadoId ? `<button class="link" style="margin-top:10px" onclick="setDelegadoClase('${grupoId}','')">Quitar delegado/a</button>` : ''}
+  `;
+  $('modal').style.display = 'grid';
+  modalRefresh = () => openDelegadoPanel(grupoId);
+}
+
+function openClassRoster(grupoId){
+  const g = data.grupos.find(x => x.id === grupoId);
+  if(!g) return;
+  const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+  const encargados = getEncargadosSemana(grupoId);
+  const encargadosIds = new Set(encargados.map(a => a.id));
+
+  // Si dos alumnos comparten nombre de pila, mostramos también el primer
+  // apellido para poder distinguirlos de un vistazo.
+  const conteoNombres = {};
+  roster.forEach(a => { const k = stripAccents(nombrePilaDe(a).toLowerCase()); conteoNombres[k] = (conteoNombres[k]||0) + 1; });
+
+  $('modalContent').innerHTML = `
+    <div class="eyebrow">Clase</div>
+    <h2 style="margin-top:7px">${g.nombre}</h2>
+    <p class="sub">${roster.length} alumnos</p>
+    <div class="modal-actions" style="margin-top:12px">
+      <button class="simbtn" onclick="openWorkGroups('${grupoId}')">👥 Crear grupos de trabajo</button>
+      <button class="square-toggle" title="Material" onclick="openMaterialPanel('${grupoId}')">📦</button>
+      <button class="square-toggle" title="Delegado/a" onclick="openDelegadoPanel('${grupoId}')">🅲</button>
+    </div>
+    <div class="hint" style="margin-top:14px">Toca a un alumno para marcar o quitar su falta de hoy (injustificada → justificada → sin falta). Toca los ⋮ para ver su ficha.</div>
+    <div class="sen-grid">${roster.map(a => {
+      const estado = estadoFaltaHoy(grupoId, a.id);
+      const esMaterial = encargadosIds.has(a.id);
+      const esDelegado = g.delegadoId === a.id;
+      const necesitaApellido = conteoNombres[stripAccents(nombrePilaDe(a).toLowerCase())] > 1;
+      return `<div class="sen-card" data-id="${a.id}">
+        <div class="sen-photo-wrap">
+          ${avatarHtml(a,'xl')}
+          <button class="sen-dots" onclick="event.stopPropagation(); openStudentDetail('${a.id}')">⋮</button>
+          ${esMaterial ? '<span class="sen-badge sen-badge-material">📦</span>' : ''}
+          ${esDelegado ? '<span class="sen-badge sen-badge-delegado">C</span>' : ''}
+        </div>
+        <div class="sen-name">${nombrePilaDe(a)}${necesitaApellido ? ' ' + primerApellido(a) : ''}</div>
+        ${estado ? `<span class="sen-falta-tag ${estado}">${estado==='injustificada'?'Injustificada':'Justificada'}</span>` : ''}
+        <span class="sen-points">${alumnoPuntos(a.id)} pts</span>
+      </div>`;
+    }).join('')}</div>
+  `;
+  $('modal').style.display = 'grid';
+  document.querySelectorAll('.sen-card').forEach(el => el.onclick = () => toggleAbsence(grupoId, el.dataset.id));
+  modalRefresh = () => openClassRoster(grupoId);
+}
+
+/* ———————————— render: Horario (rejilla semanal, de un vistazo) ———————————— */
+function renderSchedule(){
+  const days = ['lunes','martes','miercoles','jueves','viernes'];
+  const slots = [...new Set(data.horario.map(h => h.inicio + '|' + h.fin))]
+    .map(s => { const [inicio,fin] = s.split('|'); return { inicio, fin }; })
+    .sort((a,b) => a.inicio.localeCompare(b.inicio));
+
+  const ctx = getCurrentContext();
+
+  const header = `<tr><th></th>${days.map(d => `<th>${DAY_LABELS[d]}</th>`).join('')}</tr>`;
+
+  const rows = slots.map(slot => {
+    const cells = days.map(d => {
+      const h = data.horario.find(x => x.dia === d && x.inicio === slot.inicio && x.fin === slot.fin);
+      const isNow = h && ctx.entry && ctx.entry === h;
+      if(!h) return `<td><div class="sched-cell empty">—</div></td>`;
+      if(h.lectivo === false){
+        return `<td><div class="sched-cell${isNow?' now':''}" style="background:${NO_LECTIVO_COLOR.bg};color:${NO_LECTIVO_COLOR.fg}">${h.materia}</div></td>`;
+      }
+      const g = data.grupos.find(x => x.id === h.grupoId);
+      const c = groupColor(h.grupoId);
+      return `<td><div class="sched-cell${isNow?' now':''}${h.pabellon?' pabellon':''}" data-group="${g ? g.id : ''}" style="background:${c.bg};color:${c.fg};cursor:${g?'pointer':'default'}">${h.materia}<small>${g ? g.nombre : '—'}</small></div></td>`;
+    }).join('');
+    return `<tr><td class="sched-time">${slot.inicio}–${slot.fin}</td>${cells}</tr>`;
+  }).join('');
+
+  $('scheduleGrid').innerHTML = `<table class="sched-table">${header}${rows}</table>`;
+  document.querySelectorAll('#scheduleGrid .sched-cell[data-group]').forEach(el => {
+    el.onclick = () => el.dataset.group && switchToClassesAndOpen(el.dataset.group);
+  });
+}
+
+/* ———————————— render: Calendario del curso ———————————— */
+let calMonthOffset = 0;
+const MES_NOMBRES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const FESTIVOS_ANDALUCIA = new Set([
+  // 2026
+  '2026-10-12','2026-11-02','2026-12-07','2026-12-08','2026-12-25',
+  // 2027
+  '2027-01-01','2027-01-06','2027-03-01','2027-03-25','2027-03-26',
+  '2027-05-01','2027-08-16','2027-10-12','2027-11-01','2027-12-06',
+  '2027-12-08','2027-12-25'
+]);
+// Añade aquí los dos festivos locales de tu municipio cuando quieras.
+function isWeekendDate(year, month, day){ const d = new Date(year,month,day).getDay(); return d===0 || d===6; }
+
+
+function calFechaBase(){
+  const d = new Date();
+  d.setDate(1);
+  d.setMonth(d.getMonth() + calMonthOffset);
+  return d;
+}
+function renderCalendar(){
+  const base=calFechaBase(), year=base.getFullYear(), month=base.getMonth();
+  const startWeekday=(new Date(year,month,1).getDay()+6)%7;
+  const daysInMonth=new Date(year,month+1,0).getDate();
+  $('calTitle').textContent=MES_NOMBRES[month].charAt(0).toUpperCase()+MES_NOMBRES[month].slice(1)+' '+year;
+  const todayStr=fechaLocal(); let html='<div class="cal-grid">';
+  ['L','M','X','J','V','S','D'].forEach(d=>html+=`<div class="cal-head">${d}</div>`);
+  for(let i=0;i<startWeekday;i++)html+='<div class="cal-cell empty"></div>';
+  for(let day=1;day<=daysInMonth;day++){
+    const dateStr=`${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    const eventos=data.calendario.filter(e=>e.fecha===dateStr), isToday=dateStr===todayStr, weekend=isWeekendDate(year,month,day), holiday=FESTIVOS_ANDALUCIA.has(dateStr);
+    html+=`<div class="cal-cell${isToday?' today':''}${eventos.length?' has-event':''}${weekend?' weekend':''}${holiday?' holiday':''}" data-date="${dateStr}" title="${eventos.map(e=>e.titulo).join(', ')}${holiday?' · Festivo':weekend?' · Fin de semana':''}"><span>${day}</span>${eventos.length?'<div class="cal-dot"></div>':''}</div>`;
+  }
+  html+='</div>'; $('calGrid').innerHTML=html;
+  document.querySelectorAll('.cal-cell:not(.empty)').forEach(el=>el.onclick=()=>openCalendarDay(el.dataset.date));
+  const proximos=data.calendario.filter(e=>e.fecha>=todayStr).sort((a,b)=>a.fecha.localeCompare(b.fecha)).slice(0,8);
+  $('calUpcoming').innerHTML=proximos.length?proximos.map(e=>`<div class="row"><div><b>${e.titulo}</b><small>${e.fecha}</small></div></div>`).join(''):'<div class="empty">No hay eventos próximos anotados.</div>';
+}
+
+function openCalendarDay(dateStr){
+  const eventos = data.calendario.filter(e => e.fecha === dateStr);
+  $('modalContent').innerHTML = `
+    <div class="eyebrow">Calendario</div>
+    <h2 style="margin-top:7px">${dateStr}</h2>
+    <div class="list" style="margin-top:12px">${eventos.length ? eventos.map(e => `<div class="row"><div><b>${e.titulo}</b></div><button class="link" onclick="deleteCalEvent('${e.id}','${dateStr}')">Quitar</button></div>`).join('') : '<div class="empty">Sin eventos este día.</div>'}</div>
+    <div class="field" style="margin-top:16px"><label>Añadir evento</label><input type="text" id="calNewTitle" placeholder="Ej.: Excursión a la piscina"></div>
+    <div class="modal-actions"><button class="primary" style="height:44px;flex:1" onclick="addCalEvent('${dateStr}')">Añadir</button></div>
+  `;
+  $('modal').style.display = 'grid';
+  $('calNewTitle').onkeydown = e => { if(e.key === 'Enter') addCalEvent(dateStr); };
+}
+function addCalEvent(dateStr){
+  const input = $('calNewTitle');
+  const titulo = input.value.trim();
+  if(!titulo) return;
+  data.calendario.push({ id:'c_' + Date.now() + '_' + Math.random().toString(36).slice(2,7), fecha:dateStr, titulo });
+  saveData();
+  renderCalendar();
+  openCalendarDay(dateStr);
+}
+function deleteCalEvent(id, dateStr){
+  data.calendario = data.calendario.filter(e => e.id !== id);
+  saveData();
+  renderCalendar();
+  openCalendarDay(dateStr);
+}
+
+/* ———————————— render: Unidades (catálogo de contenidos) ———————————— */
+function renderUnits(){
+  $('unitList').innerHTML = data.unidades.map(u => {
+    const g = data.grupos.find(x => x.id === u.grupoId);
+    return `<div class="row"><div class="row-info"><span style="font-size:20px">📁</span><div><b>${u.nombre}</b><small>${g ? g.nombre : 'Catálogo general · sin asignar a una clase'}</small></div></div></div>`;
+  }).join('');
+}
+
+/* ———————————— render: Alumnos ———————————— */
+// La pestaña "Alumnos" se ha retirado: ahora se accede a cada alumno desde
+// la ficha de su grupo, en "Grupos y alumnos" (openClassRoster).
+
+function deleteRecord(id){
+  const idx=data.registros.findIndex(r=>r.id===id); if(idx<0) return;
+  const [removed]=data.registros.splice(idx,1);
+  undoStack.push({action:'add',records:[removed]}); redoStack=[];
+  saveData(); renderAll(); $('modal').style.display='none'; modalRefresh=null; showFeedback('Registro eliminado','ok');
+}
+function openRecordDetail(id){
+  const r = data.registros.find(x => x.id === id);
+  if(!r) return;
+  const esRevisar = r.tipo === 'revisar';
+  const alumno = data.alumnos.find(a => a.id === r.alumnoId);
+  const grupo = data.grupos.find(g => g.id === r.grupoId);
+  $('modalContent').innerHTML = `
+    <div class="eyebrow">Registro</div>
+    <h2 style="margin:6px 0 2px">${esRevisar ? '❌ Sin identificar' : (alumno ? alumno.nombre : 'Alumno eliminado')}</h2>
+    <p class="sub">${grupo ? grupo.nombre : (esRevisar ? 'Sin grupo identificado' : '')}</p>
+    <div class="card" style="margin-top:18px;background:#fbfcfc">
+      <h3>${esRevisar ? `«${r.textoOriginal}»` : (r.textoInterpretado || r.textoOriginal)}</h3>
+      <div class="record-meta" style="margin-top:8px">${r.fecha} · ${r.hora}</div>
+      ${esRevisar
+        ? `<div class="record-meta" style="margin-top:10px">${r.textoInterpretado || ''}</div>`
+        : (r.textoOriginal && r.textoOriginal !== r.textoInterpretado ? `<div class="record-meta" style="margin-top:10px;font-style:italic">Original: «${r.textoOriginal}»</div>` : '')}
+    </div>
+    <div class="record-actions">
+      ${alumno ? `<button class="simbtn" onclick="openStudentDetail('${alumno.id}')">👤 Ir al alumno</button>` : ''}
+      <button class="simbtn" style="color:var(--danger)" onclick="deleteRecord('${r.id}')">🗑 Eliminar registro</button>
+    </div>`;
+  $('modal').style.display = 'grid';
+  modalRefresh = () => openRecordDetail(id);
+}
+
+function openStudentDetail(id){
+  const a = data.alumnos.find(x => x.id === id);
+  if(!a) return;
+  const g = data.grupos.find(x => x.id === a.grupoId);
+  const historial = alumnoHistorial(id);
+
+  $('modalContent').innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="position:relative">
+        <div ${a.foto ? `onclick="openPhotoLightbox('${a.id}')" style="cursor:zoom-in"` : ''}>${avatarHtml(a,'lg')}</div>
+        <label class="photo-upload-badge" title="Cambiar foto">📷<input type="file" accept="image/*" onchange="handleFotoUpload('${a.id}', this)"></label>
+      </div>
+      <div><div class="eyebrow">Ficha individual</div><h2 style="margin:2px 0 0">${nombrePilaDe(a)}</h2><small style="color:var(--muted)">${apellidosDe(a)}</small></div>
+    </div>
+    <p class="sub" style="margin-top:10px">${g ? g.nombre : ''} · ${alumnoPuntos(id)} puntos acumulados</p>
+    ${a.correo ? `<p class="sub" style="font-size:12px;margin-top:4px">✉️ ${a.correo}</p>` : ''}
+
+    <div class="field"><label>Registrar algo para ${nombrePilaDe(a)}</label><div style="display:flex;gap:8px"><input type="text" id="quickEntry_${a.id}" placeholder="Ej.: 5 puntos, se esfuerza, falta…"><button class="primary" style="padding:0 16px" onclick="handleQuickEntry('${a.id}')">↵</button></div></div>
+
+    <div class="field"><label>Notas privadas</label><textarea id="notasPriv_${a.id}" rows="3" placeholder="Solo para ti: nunca aparece en el historial ni en ningún informe." onchange="setAlumnoNotas('${a.id}', this.value)">${a.notasPrivadas || ''}</textarea><div class="hint" style="margin-top:4px">Privadas: no se muestran en el historial de registros ni saldrán en ningún informe.</div></div>
+
+    <div class="section-head"><h2 style="margin:0">Historial de registros</h2></div>
+    <div>${historial.length ? historial.map(r => `<div class="record"><div class="record-main"><b>${r.textoInterpretado || r.textoOriginal}</b>${r.textoInterpretado && r.textoInterpretado !== r.textoOriginal ? `<div class="record-meta" style="font-style:italic">Nota original: «${r.textoOriginal}»</div>` : ''}<div class="record-meta">${r.fecha} · ${r.hora} · ${tagLabel(r)}</div></div></div>`).join('') : '<div class="empty">Sin historial todavía.</div>'}</div>`;
+  $('modal').style.display = 'grid';
+  $('quickEntry_' + a.id).onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); handleQuickEntry(a.id); } };
+  modalRefresh = () => openStudentDetail(id);
+}
+
+/* ———————————— render maestro ———————————— */
+// Cada sección se pinta en su propio try/catch: si una diera un error puntual,
+// no debe impedir que las demás (puntos, clasificación, etc.) se actualicen igualmente.
+function renderAll(){
+  try{ updateContextUI(); }catch(e){ console.error('updateContextUI', e); }
+  try{ renderToday(); }catch(e){ console.error('renderToday', e); }
+  try{ renderClasses(); }catch(e){ console.error('renderClasses', e); }
+  try{ renderRace(); }catch(e){ console.error('renderRace', e); }
+  try{ renderSchedule(); }catch(e){ console.error('renderSchedule', e); }
+  try{ renderCalendar(); }catch(e){ console.error('renderCalendar', e); }
+  try{ renderUnits(); }catch(e){ console.error('renderUnits', e); }
+  try{ updateUndoRedoButtons(); }catch(e){ console.error('updateUndoRedoButtons', e); }
+  // Si hay una ficha de alumno o de clase abierta, se vuelve a pintar con los
+  // datos frescos (para que dar puntos con la ficha abierta se note al momento).
+  if($('modal').style.display === 'grid' && modalRefresh){
+    try{ modalRefresh(); }catch(e){ console.error('modalRefresh', e); }
+  }
+}
+
+function switchToView(viewId){
+  // Cambiar de pestaña siempre cierra cualquier ficha abierta (alumno, clase...),
+  // para que "Inicio" (o cualquier otra pestaña) funcione siempre, sin tener
+  // que pulsar fuera de la ficha primero.
+  $('modal').style.display = 'none'; modalRefresh = null;
+  document.querySelectorAll('.nav button').forEach(x => x.classList.toggle('active', x.dataset.view === viewId));
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  $(viewId).classList.add('active');
+  document.body.classList.toggle('secondary-view', viewId !== 'today');
+}
+function switchToClassesAndOpen(grupoId){
+  switchToView('classes');
+  openClassRoster(grupoId);
+}
+/* ———————————— eventos ———————————— */
+document.querySelectorAll('.nav button').forEach(b => b.onclick = () => switchToView(b.dataset.view));
+$('phrase').onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); handleAdd(); } }; $('sendBtn').onclick = handleAdd;
+$('undoBtn').onclick = performUndo;
+$('redoBtn').onclick = performRedo;
+$('close').onclick = () => { $('modal').style.display = 'none'; modalRefresh = null; };
+$('modal').onclick = e => { if(e.target.id === 'modal'){ $('modal').style.display = 'none'; modalRefresh = null; } };
+$('photoLightbox').onclick = () => $('photoLightbox').classList.remove('active');
+document.getElementById('importPrivadoInput').onchange = e => importarDatosPrivados(e.target.files[0]);
+document.getElementById('importPrivadoInputMobile').onchange = e => importarDatosPrivados(e.target.files[0]);
+document.getElementById('exportarCopiaMobile').onclick = exportarCopiaSeguridad;
+document.getElementById('exportarCopiaDesktop').onclick = e => { e.preventDefault(); exportarCopiaSeguridad(); };
+document.getElementById('restaurarCopiaInputMobile').onchange = e => restaurarCopiaSeguridad(e.target.files[0]);
+document.getElementById('restaurarCopiaInputDesktop').onchange = e => restaurarCopiaSeguridad(e.target.files[0]);
+$('calPrev').onclick = () => { calMonthOffset--; renderCalendar(); };
+$('calNext').onclick = () => { calMonthOffset++; renderCalendar(); };
+
+$('date').textContent = new Date().toLocaleDateString('es-ES', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+setupVoice();
+renderAll();
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js', {scope:'./'})
+      .catch(err => console.warn('GRACCUS: service worker no disponible', err));
+  });
+}
+</script>
+
+</body></html>
