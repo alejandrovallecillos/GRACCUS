@@ -1,29 +1,34 @@
-GRACCUS 0.24
+GRACCUS 0.26
 
 Cambios en esta versión:
-- Completado el grupo "Actividad Física 4º ESO": ya son los 104 alumnos (antes
-  solo había 50, faltaban las páginas 2 y 3 del listado). Todos con foto y
-  correo.
-- Corregida una nota privada que se había asignado de forma provisional: el
-  apunte "repetidor, cuadro depresivo" estaba puesto en Jesús Falcón Roldán
-  (una suposición, por el 2º apellido, al no tener aún el listado completo).
-  Ahora que aparece Jesús Roldán Jiménez, encaja mucho mejor con el apellido
-  indicado en la nota original, así que se ha trasladado a él.
-- Añadidas 8 notas privadas más que antes no se podían enlazar con seguridad
-  (Guillermo Sánchez Jiménez, Jesús Sánchez Moreno, Javier Ponce Bonilla,
-  Fabiola Santoja Moreno, Carmen Rocío Pinelo Bonilla, Lucía López Pineda,
-  Adrián León Soto, Juan Pablo Martín Morillo). En total, 16 fichas de este
-  grupo llevan ya nota privada.
-- Sigue pendiente sin enlazar la nota "Luis Ángel Patiño: madre fallecida por
-  violencia de género..." — no hay ningún alumno con ese apellido en el
-  listado completo de 4º ESO; podría tratarse de una confusión de curso en el
-  documento original (si hay un alumno de 3º con ese nombre, no es la misma
-  persona, así que no se ha asignado por precaución).
 
-Sobre la lista larga de cambios que volviste a pegar en este mensaje: ya
-estaba todo aplicado desde la 0.21/0.22 (motor de nombres, faltas
-justificadas, rejilla estilo Séneca, grupos de trabajo, medallas, iconos...).
-Lo único que cambió después fue el color de los iconos, que se quedó en color
-(no en gris) porque me lo pediste así en un mensaje posterior.
+1) Ningún registro se pierde ya. Si escribes o dictas una frase y GRACCUS no
+   consigue identificar de quién hablas (o no sabe en qué grupo registrarlo:
+   por ejemplo, fuera de horario y sin indicar nombre completo ni clase), la
+   frase YA NO se descarta. Se guarda igualmente en "Registros recientes",
+   marcada con una ❌ roja y el texto tal cual la escribiste, para que la
+   revises con calma más tarde (hay un contador nuevo "❌ Sin identificar" en
+   el resumen del día). Pulsando sobre ese registro puedes ver por qué no se
+   entendió, o eliminarlo si ya no hace falta.
+   (Los avisos de puntos fuera de rango, o de un alumno que ya se ha sentado
+   dos veces, siguen bloqueándose como hasta ahora: eso sí es una regla
+   deliberada, no un fallo de comprensión.)
 
-Para probarla en GitHub Pages, abre la raíz del repositorio. El index.html apunta a esta versión.
+2) Palabrotas. GRACCUS reconoce ahora una lista de palabrotas e insultos
+   habituales (puto, puta, cabrón, mierda, hijo de puta, gilipollas, joder,
+   subnormal...) y las registra como incidencia aunque solo escribas el
+   nombre y la palabra suelta: "Alejandro cabrón" se guarda igual que
+   "Alejandro dice cabrón". Si hace falta añadir o quitar alguna palabra de la
+   lista, dime cuáles y las ajusto.
+
+3) "Baño" con más variantes: además de "baño", "aseo", "wc" y "váter", ahora
+   también reconoce "servicio" y "lavabo".
+
+4) Reconocimiento de "3X" reforzado para las 5 clases de 3º (A, B, C, D, E):
+   ya funcionaban "3A", "3ºA", "3º ESO A", "3eso a"... para todas las letras,
+   no solo alguna; esta versión lo confirma con pruebas automáticas y añade
+   tolerancia también al símbolo de grado (°) por si el teclado lo autocorrige
+   en vez de "º".
+
+Para probarla en GitHub Pages, abre la raíz del repositorio. El index.html
+apunta a esta versión.
