@@ -123,10 +123,10 @@ body{-webkit-tap-highlight-color:transparent}
 .home-dot{border:0!important;box-shadow:none!important;width:9px;height:9px;right:4px;top:4px;}
 .voice{width:50px!important;font-size:21px!important;opacity:.68;touch-action:none;-webkit-touch-callout:none;}
 .voice.listening{opacity:1;}
-.daily-classes{margin-top:14px;margin-bottom:5px;gap:3px}
+.daily-classes{margin-top:14px;margin-bottom:5px;gap:3px;width:100%}
 .daily-classes+.daily-classes{margin-top:3px}
 .day-nav{display:flex;align-items:center;gap:10px;margin-top:2px}
-.day-nav h1{margin:0}
+.day-nav h1{margin:0;font-size:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
 .day-nav button{width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:15px;cursor:pointer;flex:0 0 auto}
 .day-nav button:active{background:#f0f2f3}
 .daily-class-wrap{flex:1 1 0;min-width:0;gap:1px}
@@ -738,6 +738,16 @@ function saveData(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
 
 let data = loadData();
 
+// Índice de todas las palabras de apellido que existen en TODO el centro
+// (no solo en un grupo), para poder distinguir "solo hay un Jesús en esta
+// clase" de "el apellido que ha escrito es el de OTRO Jesús de otra clase".
+const TODOS_APELLIDOS_PALABRAS = new Set();
+data.alumnos.forEach(a => {
+  stripAccents(apellidosDe(a).toLowerCase()).split(/\s+/).filter(Boolean).forEach(p => {
+    if(p.length >= 4) TODOS_APELLIDOS_PALABRAS.add(p);
+  });
+});
+
 /* ———————————— utilidades de texto ———————————— */
 function stripAccents(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
 function initials(n){ return n.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase(); }
@@ -794,7 +804,8 @@ function diaSemanaDeISO(fecha){ const [y,m,d] = fecha.split('-').map(Number); re
 function etiquetaFechaISO(fecha){
   const [y,m,d] = fecha.split('-').map(Number);
   const dt = new Date(y, m-1, d);
-  return `${DAY_LABELS[DAY_KEYS[dt.getDay()]]} ${d} de ${dt.toLocaleDateString('es-ES',{month:'long'})}`;
+  const MESES_CORTOS = ['ene','feb','mar','abr','may','jun','jul','ago','sept','oct','nov','dic'];
+  return `${DAY_LABELS[DAY_KEYS[dt.getDay()]]} ${d} ${MESES_CORTOS[m-1]}`;
 }
 let fechaSeleccionada = hoyISO();
 function irADia(delta){
@@ -1240,7 +1251,21 @@ function resolverAlumnoEnGrupo(text, students){
   // Cristina" no se confunde con otra "María" que no tenga también "Cristina").
   const maxMatch = Math.max(...candidatos.map(c => c.matchCount));
   const mejores = candidatos.filter(c => c.matchCount === maxMatch);
-  if(mejores.length === 1) return { alumno: mejores[0].alumno };
+  if(mejores.length === 1){
+    const unico = mejores[0];
+    if(!unico.matchApellido){
+      // Solo hay un alumno con ese nombre de pila EN ESTA CLASE, pero si en
+      // la frase hay una palabra que es el apellido real de OTRA persona del
+      // centro (no de este alumno), lo más probable es que el profesor se
+      // refiera a esa otra persona, de otra clase — no a este. Mejor no
+      // adivinar: se guarda para revisar en vez de atribuírselo a quien no es.
+      const palabrasPilaUnico = stripAccents(nombrePilaDe(unico.alumno).toLowerCase()).split(/\s+/).filter(Boolean);
+      const tokensSobrantes = tokens.filter(t => !palabrasPilaUnico.some(p => palabraCoincide(t, p)));
+      const pareceApellidoDeOtraPersona = tokensSobrantes.some(t => t.length >= 4 && TODOS_APELLIDOS_PALABRAS.has(t));
+      if(pareceApellidoDeOtraPersona) return { error:'not-found' };
+    }
+    return { alumno: unico.alumno };
+  }
   const conApellido = mejores.filter(c => c.matchApellido);
   if(conApellido.length === 1) return { alumno: conApellido[0].alumno };
   if(conApellido.length > 1){
@@ -1716,6 +1741,15 @@ function performRedo(){
 }
 
 /* ———————————— render: contexto y "Hoy" ———————————— */
+// Nombre corto para las pastillas de "clases del día": el nombre completo de
+// Actividad Física ("Actividad Física 3º ESO") no cabe y se corta con
+// puntos suspensivos; aquí sí importa que se lea entero de un vistazo.
+function nombreCortoGrupo(g){
+  if(g.id === 'g_af3') return 'AF 3º ESO';
+  if(g.id === 'g_af4') return 'AF 4º ESO';
+  return g.nombre;
+}
+
 function renderDailyClasses(effectiveCtx){
   const day = effectiveCtx.day;
   const dayEntries = data.horario
@@ -1747,7 +1781,7 @@ function renderDailyClasses(effectiveCtx){
         return `<div class="daily-class-wrap${selected?' selected':''}">
           <button class="daily-class${isNow?' current':''}${selected?' selected':''}" data-idx="${idx}" title="${selected ? 'Registrando aquí' : 'Registrar en ' + g.nombre + ' (' + h.inicio + '–' + h.fin + ')'}">
             <small>${h.inicio}–${h.fin}</small>
-            <b style="color:${(isNow||selected) ? c.fg : ''}">${g.nombre}</b>
+            <b style="color:${(isNow||selected) ? c.fg : ''}">${nombreCortoGrupo(g)}</b>
           </button>
           <button class="daily-class-roster" data-idx="${idx}" title="Ver alumnado de ${g.nombre}">👥</button>
         </div>`;
@@ -1774,11 +1808,6 @@ function updateContextUI(){
 
   const esHoy = fechaSeleccionada === hoyISO();
   $('diaTitulo').textContent = esHoy ? 'Hoy' : etiquetaFechaISO(fechaSeleccionada);
-  $('diaSub').innerHTML = esHoy
-    ? 'Registra lo que ocurre, sin interrumpir la clase.'
-    : `Viendo otro día. <a href="#" id="volverHoyLink" style="color:inherit;text-decoration:underline">Volver a hoy</a>`;
-  const volverHoyLink = document.getElementById('volverHoyLink');
-  if(volverHoyLink) volverHoyLink.onclick = (e) => { e.preventDefault(); volverAHoyDia(); };
 
   renderDailyClasses(ctx);
 
