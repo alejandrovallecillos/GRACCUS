@@ -143,6 +143,12 @@ body{-webkit-tap-highlight-color:transparent}
 .work-groups{margin-top:18px;padding-top:18px;border-top:1px solid var(--line);}
 .work-group{padding:10px 12px;background:#fbfcfc;border:1px solid var(--line);border-radius:9px;margin-top:8px;font-size:13px;}
 .work-group small{color:var(--muted);display:block;margin-top:3px;}
+.notas-privadas-oculto{filter:blur(5px);user-select:none;pointer-events:none;background:#f3f4f5;}
+
+/* ———— icono de tipo de registro, sobre el avatar ———— */
+.record-avatar-wrap{position:relative;flex-shrink:0}
+.record-icon-badge{position:absolute;right:-4px;bottom:-4px;background:#fff;border:1px solid var(--line);border-radius:50%;width:17px;height:17px;font-size:10px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);line-height:1}
+@media(max-width:760px){.record-icon-badge{width:15px;height:15px;font-size:9px;right:-3px;bottom:-3px}}
 
 /* ———— buscador de alumnos (Alumnado + página de inicio) ———— */
 .student-search{position:relative}
@@ -176,7 +182,7 @@ body{-webkit-tap-highlight-color:transparent}
 <body><div class="app"><aside class="sidebar"><div class="brand"><strong>GRACCUS</strong><small>Registro docente inteligente</small><span class="brand-subject">Educación Física</span></div><nav class="nav"><button data-view="classes"><b class="nav-students" aria-label="Alumnado"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M6 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="4.5" cy="9" r="2.4"/><path d="M0.5 19c0-2.6 1.8-4.6 4-5"/><circle cx="19.5" cy="9" r="2.4"/><path d="M23.5 19c0-2.6-1.8-4.6-4-5"/></svg></b><span>Alumnado</span></button><button data-view="schedule"><b class="nav-clock" aria-label="Horario"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5"></circle><path d="M16 9v7l5 3"></path></svg></b><span>Horario</span></button><button class="home-nav active" data-view="today"><b><img class="home-g-mark" src="./g-mark.png" alt="G"><i class="home-dot"></i></b></button><button data-view="calendar"><b class="nav-calendar">🗓️</b><span>Calendario</span></button><button data-view="race"><b>🐪</b><span>Clasificación</span></button></nav><div class="sidebar-footer">GRACCUS<br>Datos guardados en este dispositivo<br><label style="color:#bfe8e0;cursor:pointer;text-decoration:underline">📥 Importar datos privados<input type="file" accept="application/json" id="importPrivadoInput" style="display:none"></label><br><a href="#" id="exportarCopiaDesktop" style="color:#bfe8e0;text-decoration:underline">💾 Copia de seguridad</a><br><label style="color:#e8b0b0;cursor:pointer;text-decoration:underline">♻️ Restaurar copia<input type="file" accept="application/json" id="restaurarCopiaInputDesktop" style="display:none"></label></div></aside><main class="main">
 <div class="topbar"><div><div class="eyebrow">Panel docente</div><div class="date" id="date"></div></div></div>
 
-<section id="today" class="view active"><div class="day-nav"><button id="diaPrev" title="Día anterior">◀</button><h1 id="diaTitulo">Hoy</h1><button id="diaNext" title="Día siguiente">▶</button></div><p class="sub" id="diaSub">Registra lo que ocurre, sin interrumpir la clase.</p><div class="context" id="contextPills"></div><div class="grid"><div><div class="card entry-card"><div class="home-search-row" style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px"><h2 style="margin:0">¿Qué ha ocurrido?</h2><div class="student-search student-search-compact"><div class="student-search-field"><span class="student-search-icon">🔍</span><input type="text" id="studentSearchHome" placeholder="Buscar alumno…" autocomplete="off"></div><div class="student-search-results" id="studentSearchHomeResults"></div></div></div><div class="entry"><div class="input-shell"><input id="phrase" placeholder="Ej.: Luis 5 puntos o Daniela se esfuerza" autocomplete="off"><button class="voice" id="voiceBtn" title="Dictar">🎙</button></div><button class="primary send-entry" id="sendBtn" title="Registrar (Intro)">↵</button></div><div class="hint" id="entryHint">Escribe una frase y pulsa Intro para registrar. GRACCUS reconocerá al alumno del grupo actual (o su nombre y apellido completos, aunque sea fuera de horario) y el tipo de registro.</div><div class="feedback" id="feedback"></div></div><div class="section-head"><h2>Registros recientes</h2><div style="display:flex;gap:6px"><button class="link" id="undoBtn" disabled>↺ Deshacer</button><button class="link" id="redoBtn" disabled>↻ Rehacer</button></div></div><div class="card" id="recent"></div></div><div class="right-card"><div class="card"><h2>Resumen del día</h2><div class="metrics"><div class="metric"><strong id="points">0</strong><span>Puntos</span></div><div class="metric"><strong id="absences">0</strong><span>Faltas</span></div><div class="metric"><strong id="observations">0</strong><span>Observaciones</span></div><div class="metric"><strong id="incidents">0</strong><span>Incidencias</span></div><div class="metric"><strong id="laps">0</strong><span>Vueltas</span></div><div class="metric"><strong id="review">0</strong><span>❌ Sin identificar</span></div></div></div></div></div></section>
+<section id="today" class="view active"><div class="day-nav"><button id="diaPrev" title="Día anterior">◀</button><h1 id="diaTitulo">Hoy</h1><button id="diaNext" title="Día siguiente">▶</button></div><p class="sub" id="diaSub">Registra lo que ocurre, sin interrumpir la clase.</p><div class="home-search-row" style="margin:14px 0 4px"><div class="student-search" style="max-width:380px"><div class="student-search-field"><span class="student-search-icon">🔍</span><input type="text" id="studentSearchHome" placeholder="Buscar alumno…" autocomplete="off"></div><div class="student-search-results" id="studentSearchHomeResults"></div></div></div><div class="context" id="contextPills"></div><div class="grid"><div><div class="card entry-card"><h2 style="margin:0 0 16px">¿Qué ha ocurrido?</h2><div class="entry"><div class="input-shell"><input id="phrase" placeholder="Ej.: Luis 5 puntos o Daniela se esfuerza" autocomplete="off"><button class="voice" id="voiceBtn" title="Dictar">🎙</button></div><button class="primary send-entry" id="sendBtn" title="Registrar (Intro)">↵</button></div><div class="hint" id="entryHint">Escribe una frase y pulsa Intro para registrar. GRACCUS reconocerá al alumno del grupo actual (o su nombre y apellido completos, aunque sea fuera de horario) y el tipo de registro.</div><div class="feedback" id="feedback"></div></div><div class="section-head"><h2>Registros recientes</h2><div style="display:flex;gap:6px"><button class="link" id="undoBtn" disabled>↺ Deshacer</button><button class="link" id="redoBtn" disabled>↻ Rehacer</button></div></div><div class="card" id="recent"></div></div><div class="right-card"><div class="card"><h2>Resumen del día</h2><div class="metrics"><div class="metric"><strong id="points">0</strong><span>Puntos</span></div><div class="metric"><strong id="absences">0</strong><span>Faltas</span></div><div class="metric"><strong id="observations">0</strong><span>Observaciones</span></div><div class="metric"><strong id="incidents">0</strong><span>Incidencias</span></div><div class="metric"><strong id="laps">0</strong><span>Vueltas</span></div><div class="metric"><strong id="review">0</strong><span>❌ Sin identificar</span></div></div></div></div></div></section>
 
 <section id="classes" class="view"><h1>Grupos y alumnos</h1><div class="student-search" style="max-width:380px;margin:6px 0 22px"><div class="student-search-field"><span class="student-search-icon">🔍</span><input type="text" id="studentSearchClasses" placeholder="Buscar alumno por nombre…" autocomplete="off"></div><div class="student-search-results" id="studentSearchClassesResults"></div></div><div class="list" id="classList"></div><div class="classes-tools" id="classesTools"><div class="classes-tool" data-tool="import"><label class="square-toggle" title="Importar fotos y notas privadas">📥<input type="file" accept="application/json" id="importPrivadoInputMobile" style="display:none"></label><span class="classes-tool-label">Importar fotos y notas privadas</span></div><div class="classes-tool" data-tool="backup"><button class="square-toggle" id="exportarCopiaMobile" title="Descargar copia de seguridad">💾</button><span class="classes-tool-label">Descargar copia de seguridad</span></div><div class="classes-tool" data-tool="restore"><label class="square-toggle" title="Restaurar copia de seguridad" style="color:var(--danger)">♻️<input type="file" accept="application/json" id="restaurarCopiaInputMobile" style="display:none"></label><span class="classes-tool-label">Restaurar copia de seguridad</span></div></div></section>
 <section id="race" class="view"><h1>Clasificación</h1><div class="card"><div style="display:flex;gap:12px;flex-wrap:wrap" id="raceControls"></div><div style="margin-top:18px" id="raceTrack"></div></div></section>
@@ -195,6 +201,11 @@ body{-webkit-tap-highlight-color:transparent}
    ———————————————————————————————————————————— */
 
 const STORAGE_KEY = 'graccus-data';
+// Única fuente de verdad de la versión de la plantilla de datos (grupos,
+// horario, alumnado). Subir este número es lo único que hace falta para que
+// los dispositivos con datos antiguos guardados se actualicen solos,
+// conservando siempre puntos, faltas, fotos y notas ya registrados.
+const DATA_VERSION = 14;
 const DAY_KEYS = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
 const DAY_LABELS = {lunes:'Lunes',martes:'Martes',miercoles:'Miércoles',jueves:'Jueves',viernes:'Viernes',sabado:'Sábado',domingo:'Domingo'};
 
@@ -609,7 +620,7 @@ function defaultData(){
     evaluaciones: {},
     calendario: [],
     gruposGuardados: {},
-    _v: 13
+    _v: DATA_VERSION
   };
 }
 
@@ -622,7 +633,7 @@ function loadData(){
     // Si los datos guardados son de una versión anterior del horario/grupos,
     // se sustituyen por los nuevos datos de demostración pero se conservan
     // los registros ya guardados por el profesor.
-    if(parsed._v !== 13){
+    if(parsed._v !== DATA_VERSION){
       const fresh = defaultData();
       // Todo lo que el profesor haya ido registrando (puntos, faltas, notas,
       // calendario, grupos de trabajo guardados) se conserva siempre,
@@ -954,17 +965,31 @@ function classifyForAlumno(remaining, alumno){
   const nombreCorto = alumno.nombre.split(' ')[0];
   const hoy = new Date().toISOString().slice(0,10);
 
-  // Puntos: "5 puntos", "+5", "3" — con medalla según la cantidad (como en WhatsApp)
-  const pm = remaining.match(/^([+-]?\d+)\s*(?:puntos?)?$/i);
-  if(pm){
+  // Puntos: "5 puntos", "+5", "3" — y también "3 camiseta", "3 fruta", "3 agua"...
+  // El número SIEMPRE manda: si en la frase aparecen a la vez un número y
+  // cualquier otra cosa, se guarda como registro de puntos (con su medalla),
+  // y si esa "otra cosa" es un motivo reconocido (camiseta, fruta, agua,
+  // ayuda a un compañero, baño...) se anota también, visible en el detalle
+  // del registro. Excepción: "2 vueltas" no entra aquí, es el castigo de
+  // vueltas de más abajo.
+  const pm = remaining.match(/^([+-]?\d+)\s*(?:puntos?)?(?:\s+(.+))?$/i);
+  const extraTrasNumero = pm ? stripAccents((pm[2] || '').trim().toLowerCase()) : '';
+  if(pm && !/^vueltas?\b/.test(extraTrasNumero)){
     const val = parseInt(pm[1], 10);
     if(val > 5) return { error:'points-high' };
     if(val < 0) return { error:'points-low' };
     // Aviso automático: si ya se ha sentado 2 o más veces hoy, no puede sumar puntos hoy.
     const vueltasHoy = data.registros.filter(r => r.alumnoId === alumno.id && r.tipo === 'vueltas' && r.fecha === hoy).length;
     if(vueltasHoy >= 2) return { error:'points-blocked', nombre: nombreCorto };
+    let motivo = null;
+    if(extraTrasNumero){
+      for(const [cat, keys] of Object.entries(CATEGORIAS_OBSERVACION)){
+        if(keys.some(k => extraTrasNumero.includes(stripAccents(k)))){ motivo = cat; break; }
+      }
+    }
     const medalla = val >= 4 ? '🥇' : val >= 2 ? '🥈' : val === 1 ? '🥉' : '';
-    return [{ alumno, tipo:'puntos', categoria:null, puntos: val, textoInterpretado:`${medalla ? medalla + ' ' : ''}${nombreCorto} recibe ${val} punto${val===1?'':'s'}` }];
+    const motivoTxt = motivo ? ` · ${ICONOS_CATEGORIA[motivo] || ''} ${motivo}` : '';
+    return [{ alumno, tipo:'puntos', categoria: motivo, puntos: val, textoInterpretado:`${medalla ? medalla + ' ' : ''}${nombreCorto} recibe ${val} punto${val===1?'':'s'}${motivoTxt}` }];
   }
 
   // Vueltas de castigo por sentarse: "2 vueltas por sentarse" / "2 vueltas más"
@@ -981,6 +1006,11 @@ function classifyForAlumno(remaining, alumno){
   // Falta singular
   if(/\b(falta|ausente|no ha venido|no vino)\b/.test(remainingNoAcc)){
     return [{ alumno, tipo:'falta', categoria:null, puntos:null, textoInterpretado:`Falta de ${nombreCorto}` }];
+  }
+
+  // Expulsión de clase
+  if(/\bexpuls/.test(remainingNoAcc)){
+    return [{ alumno, tipo:'expulsion', categoria:null, puntos:null, textoInterpretado:`🟥 Expulsión de ${nombreCorto}` }];
   }
 
   // Palabrota / lenguaje soez: se comprueba antes que cualquier otra cosa,
@@ -1001,39 +1031,50 @@ function classifyForAlumno(remaining, alumno){
 
   // Observación, clasificada por palabras clave — incluye motivos habituales para
   // no querer hacer EF (dolencias, cansancio, regla, virus...), cada una con su icono.
-  const obsDict = {
-    'malestar': ['tripa','barriga','estomago','vomito','mareo','mareado','mareada'],
-    'menstruación': ['regla','menstruacion','menstruo','periodo'],
-    'enfermedad': ['virus','fiebre','enfermo','enferma','resfriado','resfriada','gripe'],
-    'cansancio': ['cansancio','cansado','cansada','agotado','agotada','sueno'],
-    'agujetas': ['agujetas'],
-    'baño': ['bano','aseo','wc','vater','servicio','lavabo'],
-    'cooperación': ['ayuda','ayudar','companero','compañera','colabora','colaborar'],
-    'esfuerzo': ['esfuerza','esfuerzo','trabaja'],
-    'participación': ['participa'],
-    'atención': ['distraid'],
-    'comportamiento': ['comportamiento','conducta']
-  };
   let categoria = 'general';
-  for(const [cat, keys] of Object.entries(obsDict)){
+  for(const [cat, keys] of Object.entries(CATEGORIAS_OBSERVACION)){
     if(keys.some(k => remainingNoAcc.includes(stripAccents(k)))){ categoria = cat; break; }
   }
   // Para motivos de salud escritos muy telegráficamente ("tripa", "regla"...),
   // añadimos una plantilla para que quede una frase completa, no solo la palabra suelta.
-  const YA_TIENE_VERBO = /\b(duele|duelen|tiene|tengo|esta|está|siente|encuentra)\b/;
-  const PLANTILLA_CATEGORIA = {
-    'malestar':'le duele', 'menstruación':'tiene', 'enfermedad':'está', 'cansancio':'está', 'agujetas':'tiene', 'baño':'necesita ir'
-  };
+  const YA_TIENE_VERBO = /\b(duele|duelen|tiene|tengo|esta|está|siente|encuentra|trae|trajo)\b/;
   let cuerpoObs = remaining;
   if(PLANTILLA_CATEGORIA[categoria] && !YA_TIENE_VERBO.test(remainingNoAcc) && remaining.trim().split(/\s+/).length <= 3){
     cuerpoObs = `${PLANTILLA_CATEGORIA[categoria]} ${remaining.trim()}`;
   }
   return [{ alumno, tipo:'observación', categoria, puntos:null, textoInterpretado: formalizarNota(nombreCorto, cuerpoObs) }];
 }
+// Categorías reconocidas en cualquier frase (con o sin puntos delante), cada
+// una con su lista de palabras clave. Se usa tanto para observaciones sueltas
+// ("Rubén tiene agujetas") como para el motivo que acompaña a unos puntos
+// ("Rebeca 3 camiseta" → 3 puntos, motivo: camiseta).
+const CATEGORIAS_OBSERVACION = {
+  'malestar': ['tripa','barriga','estomago','vomito','mareo','mareado','mareada'],
+  'menstruación': ['regla','menstruacion','menstruo','periodo'],
+  'enfermedad': ['virus','fiebre','enfermo','enferma','resfriado','resfriada','gripe'],
+  'cansancio': ['cansancio','cansado','cansada','agotado','agotada','sueno'],
+  'agujetas': ['agujetas'],
+  'baño': ['bano','aseo','wc','vater','servicio','lavabo','pipi','pis'],
+  'cooperación': ['ayuda','ayudar','companero','compañera','colabora','colaborar'],
+  'esfuerzo': ['esfuerza','esfuerzo','trabaja'],
+  'participación': ['participa'],
+  'atención': ['distraid'],
+  'comportamiento': ['comportamiento','conducta'],
+  'fruta': ['fruta','manzana','platano','plátano','pera','naranja','mandarina'],
+  'agua': ['agua','botella'],
+  'camiseta': ['camiseta']
+};
+// Plantilla para completar en frase las categorías escritas muy telegráficamente
+// ("Rubén fruta" → "Rubén trae fruta.")
+const PLANTILLA_CATEGORIA = {
+  'malestar':'le duele', 'menstruación':'tiene', 'enfermedad':'está', 'cansancio':'está', 'agujetas':'tiene', 'baño':'necesita ir',
+  'fruta':'trae', 'agua':'trae', 'camiseta':'trae'
+};
 const ICONOS_CATEGORIA = {
-  'malestar':'🤢','menstruación':'🩸','enfermedad':'🤒','cansancio':'😴','agujetas':'🦵','baño':'🚻',
+  'malestar':'🤢','menstruación':'🩸','enfermedad':'🤒','cansancio':'😴','agujetas':'🦵','baño':'🚾',
   'cooperación':'🤝','esfuerzo':'💪','participación':'🙌','atención':'👀','comportamiento':'⚠️',
-  'material':'📦','sentarse':'🏃','general':'📝','palabrota':'🤬'
+  'material':'📦','sentarse':'🏃','general':'📝','palabrota':'🟨',
+  'fruta':'🍎','agua':'💧','camiseta':'👕','expulsión':'🟥'
 };
 
 // Palabrotas e insultos habituales que GRACCUS reconoce en cualquier frase,
@@ -1217,13 +1258,27 @@ function matchStudentToken(tok, students){
 }
 function parseEntry(text, students, forcedAlumno){
   if(forcedAlumno) return classifyForAlumno(text, forcedAlumno);
-  const sharedPoints=text.match(/^(.+?)\s+([1-5])\s*(?:puntos?)?$/i);
+  const sharedPoints=text.match(/^(.+?)\s+([1-5])\s*(?:puntos?)?(?:\s+(.+))?$/i);
   if(sharedPoints){
     const nombresTexto=sharedPoints[1].trim();
-    const tokens=nombresTexto.match(/[\p{L}]+/gu)||[];
-    const candidatos=[]; const vistos=new Set();
-    for(const tokRaw of tokens){ const alumno=matchStudentToken(tokRaw,students); if(alumno&&!vistos.has(alumno.id)){candidatos.push(alumno);vistos.add(alumno.id);} }
-    if(candidatos.length>=2){ const puntos=parseInt(sharedPoints[2],10); return candidatos.map(alumno=>({alumno,tipo:'puntos',categoria:null,puntos,textoInterpretado:`${alumno.nombre.split(' ')[0]} recibe ${puntos} punto${puntos===1?'':'s'}`})); }
+    const extraTexto=stripAccents((sharedPoints[3]||'').trim().toLowerCase());
+    if(!/^vueltas?\b/.test(extraTexto)){
+      const tokens=nombresTexto.match(/[\p{L}]+/gu)||[];
+      const candidatos=[]; const vistos=new Set();
+      for(const tokRaw of tokens){ const alumno=matchStudentToken(tokRaw,students); if(alumno&&!vistos.has(alumno.id)){candidatos.push(alumno);vistos.add(alumno.id);} }
+      if(candidatos.length>=2){
+        const puntos=parseInt(sharedPoints[2],10);
+        let motivo=null;
+        if(extraTexto){
+          for(const [cat, keys] of Object.entries(CATEGORIAS_OBSERVACION)){
+            if(keys.some(k => extraTexto.includes(stripAccents(k)))){ motivo = cat; break; }
+          }
+        }
+        const medalla = puntos >= 4 ? '🥇' : puntos >= 2 ? '🥈' : puntos === 1 ? '🥉' : '';
+        const motivoTxt = motivo ? ` · ${ICONOS_CATEGORIA[motivo] || ''} ${motivo}` : '';
+        return candidatos.map(alumno=>({alumno,tipo:'puntos',categoria:motivo,puntos,textoInterpretado:`${medalla?medalla+' ':''}${alumno.nombre.split(' ')[0]} recibe ${puntos} punto${puntos===1?'':'s'}${motivoTxt}`}));
+      }
+    }
   }
   const lowerNoAcc=stripAccents(text.toLowerCase());
   const aliasWords=(text.match(/[\p{L}]+/gu)||[]);
@@ -1501,8 +1556,26 @@ function showFeedback(msg, kind){
     feedbackTimer = setTimeout(() => { el.textContent = ''; el.className = 'feedback'; }, 4500);
   }
 }
-function tagClass(r){ if(r.tipo==='puntos') return 'positive'; if(r.tipo==='falta') return 'absent'; if(r.tipo==='incidencia' || r.tipo==='vueltas') return 'incident'; return ''; }
-function tagLabel(r){ if(r.tipo==='puntos') return (r.puntos>0?'+':'') + r.puntos + ' pts'; if(r.tipo==='falta') return r.justificada ? 'Falta justificada' : 'Falta injustificada'; if(r.tipo==='vueltas') return `🏃 ${r.vueltas} vuelta${r.vueltas===1?'':'s'}${r.trote?' (trote)':''}`; if(r.tipo==='incidencia') return (ICONOS_CATEGORIA[r.categoria]||'') + ' Incidencia · ' + r.categoria; return (ICONOS_CATEGORIA[r.categoria]||'') + ' Observación · ' + r.categoria; }
+function tagClass(r){ if(r.tipo==='puntos') return 'positive'; if(r.tipo==='falta' || r.tipo==='expulsion') return 'absent'; if(r.tipo==='incidencia' || r.tipo==='vueltas') return 'incident'; return ''; }
+function tagLabel(r){ if(r.tipo==='puntos') return (r.puntos>0?'+':'') + r.puntos + ' pts' + (r.categoria ? ' · ' + (ICONOS_CATEGORIA[r.categoria]||'') + ' ' + r.categoria : ''); if(r.tipo==='falta') return r.justificada ? 'Falta justificada' : 'Falta injustificada'; if(r.tipo==='expulsion') return '🟥 Expulsión'; if(r.tipo==='vueltas') return `🏃 ${r.vueltas} vuelta${r.vueltas===1?'':'s'}${r.trote?' (trote)':''}`; if(r.tipo==='incidencia') return (ICONOS_CATEGORIA[r.categoria]||'') + ' Incidencia · ' + r.categoria; return (ICONOS_CATEGORIA[r.categoria]||'') + ' Observación · ' + r.categoria; }
+// Icono que representa cada registro en las listas (recientes, historial del
+// alumno): wc para baño, medalla para puntos (según cantidad), tarjeta roja
+// para expulsión, tarjeta amarilla para palabrota/falta de respeto, mano de
+// acuerdo para cooperación, fruta/agua/camiseta con su propio símbolo.
+function iconoRegistro(r){
+  if(r.tipo === 'puntos'){
+    const val = r.puntos || 0;
+    if(val < 0) return '⚠️';
+    return val >= 4 ? '🥇' : val >= 2 ? '🥈' : '🥉';
+  }
+  if(r.tipo === 'expulsion') return '🟥';
+  if(r.tipo === 'falta') return '📋';
+  if(r.tipo === 'vueltas') return '🏃';
+  if(r.tipo === 'incidencia') return r.categoria === 'palabrota' ? '🟨' : (ICONOS_CATEGORIA[r.categoria] || '⚠️');
+  if(r.tipo === 'observación') return ICONOS_CATEGORIA[r.categoria] || '📝';
+  if(r.tipo === 'revisar') return '❌';
+  return '📝';
+}
 
 /* ———————————— avatar / foto del alumno ———————————— */
 // Si el alumno tiene foto (sincronizada o subida a mano) se muestra esa imagen;
@@ -1527,6 +1600,16 @@ function setAlumnoNotas(alumnoId, notas){
   if(!a) return;
   a.notasPrivadas = notas;
   saveData();
+}
+// Las notas privadas aparecen tapadas (difuminadas) por defecto al abrir la
+// ficha del alumno, para poder proyectar el móvil en pantalla sin riesgo de
+// que un alumno las lea sin querer. Un botón las destapa bajo demanda.
+function togglePrivateNotes(alumnoId){
+  const ta = $('notasPriv_' + alumnoId);
+  const btn = $('toggleNotasPriv_' + alumnoId);
+  if(!ta) return;
+  const oculto = ta.classList.toggle('notas-privadas-oculto');
+  if(btn) btn.textContent = oculto ? '👁 Ver notas' : '🙈 Ocultar notas';
 }
 
 // Importa de una vez las fotos y notas privadas desde un archivo JSON que el
@@ -1780,8 +1863,11 @@ function renderToday(){
       return `<div class="record record-review" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')"><span class="review-x" title="Sin identificar">❌</span><div class="record-main"><b>Sin identificar${grupo ? ' · ' + grupo.nombre : ''}</b><div class="record-summary">«${r.textoOriginal}»</div></div><span class="record-time">${r.hora}</span></div>`;
     }
     const alumno = data.alumnos.find(a => a.id === r.alumnoId);
+    const grupo = alumno ? data.grupos.find(g => g.id === alumno.grupoId) : null;
     const resumen = r.textoInterpretado || r.textoOriginal;
-    return `<div class="record" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')">${avatarHtml(alumno)}<div class="record-main"><b>${alumno ? alumno.nombre : 'Alumno eliminado'}</b><div class="record-summary">${resumen}</div></div><span class="record-time">${r.hora}</span></div>`;
+    const nombreLista = alumno ? `${nombrePilaDe(alumno)} ${primerApellido(alumno)}`.trim() : 'Alumno eliminado';
+    const cursoTxt = grupo ? nombreCortoGrupo(grupo) : '';
+    return `<div class="record" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')"><div class="record-avatar-wrap">${avatarHtml(alumno)}<span class="record-icon-badge">${iconoRegistro(r)}</span></div><div class="record-main"><b>${nombreLista}</b><div class="record-summary">${resumen}</div><div class="record-meta">${cursoTxt}${(cursoTxt && r.hora) ? ' · ' : ''}${r.hora || ''}</div></div></div>`;
   }).join('') : '<div class="empty">Todavía no hay registros. Prueba con «Luis 5 puntos».</div>';
 
 }
@@ -2218,10 +2304,17 @@ function openStudentDetail(id){
 
     <div class="field"><label>Registrar algo para ${nombrePilaDe(a)}</label><div style="display:flex;gap:8px"><input type="text" id="quickEntry_${a.id}" placeholder="Ej.: 5 puntos, se esfuerza, falta…"><button class="primary" style="padding:0 16px" onclick="handleQuickEntry('${a.id}')">↵</button></div></div>
 
-    <div class="field"><label>Notas privadas</label><textarea id="notasPriv_${a.id}" rows="3" placeholder="Solo para ti: nunca aparece en el historial ni en ningún informe." onchange="setAlumnoNotas('${a.id}', this.value)">${a.notasPrivadas || ''}</textarea><div class="hint" style="margin-top:4px">Privadas: no se muestran en el historial de registros ni saldrán en ningún informe.</div></div>
+    <div class="field">
+      <label style="display:flex;align-items:center;justify-content:space-between;gap:8px;text-transform:none">
+        <span style="text-transform:uppercase;letter-spacing:.05em">Notas privadas</span>
+        <button type="button" class="link" id="toggleNotasPriv_${a.id}" style="font-size:12px" onclick="togglePrivateNotes('${a.id}')">👁 Ver notas</button>
+      </label>
+      <textarea id="notasPriv_${a.id}" rows="3" class="notas-privadas-oculto" placeholder="Solo para ti: nunca aparece en el historial ni en ningún informe." onchange="setAlumnoNotas('${a.id}', this.value)">${a.notasPrivadas || ''}</textarea>
+      <div class="hint" style="margin-top:4px">Privadas: no se muestran en el historial de registros ni saldrán en ningún informe. Se muestran tapadas por defecto, por si proyectas la pantalla.</div>
+    </div>
 
     <div class="section-head"><h2 style="margin:0">Historial de registros</h2></div>
-    <div>${historial.length ? historial.map(r => `<div class="record"><div class="record-main"><b>${r.textoInterpretado || r.textoOriginal}</b>${r.textoInterpretado && r.textoInterpretado !== r.textoOriginal ? `<div class="record-meta" style="font-style:italic">Nota original: «${r.textoOriginal}»</div>` : ''}<div class="record-meta">${r.fecha} · ${r.hora} · ${tagLabel(r)}</div></div></div>`).join('') : '<div class="empty">Sin historial todavía.</div>'}</div>`;
+    <div>${historial.length ? historial.map(r => `<div class="record"><div class="record-main"><b>${iconoRegistro(r)} ${r.textoInterpretado || r.textoOriginal}</b>${r.textoInterpretado && r.textoInterpretado !== r.textoOriginal ? `<div class="record-meta" style="font-style:italic">Nota original: «${r.textoOriginal}»</div>` : ''}<div class="record-meta">${r.fecha} · ${r.hora} · ${tagLabel(r)}</div></div></div>`).join('') : '<div class="empty">Sin historial todavía.</div>'}</div>`;
   $('modal').style.display = 'grid';
   $('quickEntry_' + a.id).onkeydown = e => { if(e.key === 'Enter'){ e.preventDefault(); handleQuickEntry(a.id); } };
   modalRefresh = () => openStudentDetail(id);
