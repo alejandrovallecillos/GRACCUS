@@ -1689,13 +1689,21 @@ function restaurarCopiaSeguridad(file){
 function normalizaNombreImport(s){ return stripAccents((s||'').toLowerCase()).replace(/\s+/g,' ').trim(); }
 function resolverAlumnoImport(alumnoId, entrada){
   const nombreEntrada = entrada && (entrada.nombre || entrada.nombreCompleto);
+  const porId = data.alumnos.find(x => x.id === alumnoId);
+  // Si el id ya existe y (no se ha dado nombre, o el nombre coincide con ese
+  // alumno) nos fiamos del id directamente: es la vía normal y evita falsos
+  // "ambiguos" cuando dos alumnos de otra clase comparten nombre y apellidos.
+  if(porId && (!nombreEntrada || normalizaNombreImport(porId.nombre) === normalizaNombreImport(nombreEntrada))){
+    return { alumno: porId };
+  }
+  // El id ya no corresponde a quien debería (plantilla reordenada): el nombre
+  // es el único rescate posible, y solo si identifica a un único alumno.
   if(nombreEntrada){
     const buscado = normalizaNombreImport(nombreEntrada);
     const porNombre = data.alumnos.filter(a => normalizaNombreImport(a.nombre) === buscado);
     if(porNombre.length === 1) return { alumno: porNombre[0] };
     if(porNombre.length > 1) return { error:'ambiguo' };
   }
-  const porId = data.alumnos.find(x => x.id === alumnoId);
   return porId ? { alumno: porId } : { error:'no-encontrado' };
 }
 function importarDatosPrivados(file){
