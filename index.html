@@ -22,6 +22,14 @@
 .daily-class-roster{border:1px solid var(--line);background:#fff;border-radius:9px;padding:0 8px;cursor:pointer;box-shadow:var(--shadow);font-size:13px}
 .daily-class-roster:hover{border-color:var(--accent)}
 .send-entry{font-size:25px;display:flex;align-items:center;justify-content:center}
+.dept-table{border-spacing:5px}
+.dept-cell{display:flex;flex-direction:column;gap:4px;min-width:98px}
+.dept-chip{background:#f4f6f7;border:1px solid var(--line);border-radius:7px;padding:4px 7px;line-height:1.2}
+.dept-chip b{display:block;font-size:11px}
+.dept-chip small{display:block;color:var(--muted);font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dept-chip-tu{background:var(--accent-soft);border-color:var(--accent)}
+.dept-chip-tu b,.dept-chip-tu small{color:var(--accent)}
+@media(max-width:760px){.dept-cell{min-width:78px}.dept-chip b{font-size:10px}.dept-chip small{font-size:8.5px}}
 .cal-cell.weekend,.cal-cell.holiday{background:#eceff1;color:#8b959d;border-color:#e0e4e7;cursor:default}
 .cal-cell.weekend:hover,.cal-cell.holiday:hover{border-color:#e0e4e7}
 .cal-cell.holiday{box-shadow:inset 0 0 0 1px #d8dde0}
@@ -44,7 +52,7 @@ body{-webkit-tap-highlight-color:transparent}
 .nav-clock{color:#d53b3b !important;font-size:28px !important;font-weight:900 !important;line-height:1}
 .home-nav b{width:42px !important;height:42px;border-radius:50%;background:var(--accent);color:#fff;display:grid !important;place-items:center;font-size:22px !important;letter-spacing:-.04em}
 .input-shell{position:relative;flex:1;min-width:0}.input-shell input{width:100%;padding-right:58px}.input-shell .voice{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:8px;background:transparent}.input-shell .voice.listening{background:var(--danger);color:#fff;transform:translateY(-50%)}
-.record{cursor:pointer;align-items:center;padding:11px 0}.record:hover{background:#fbfcfc}.record-main{min-width:0}.record-main>b{display:block}.record-summary{margin-top:2px;font-weight:700}.record-meta{font-size:11px}.record-time{font-size:11px;color:var(--muted);white-space:nowrap;margin-left:8px}
+.record{cursor:pointer;align-items:center;padding:11px 0}.record:hover{background:#fbfcfc}.record-main{min-width:0}.record-main>b{display:block}.record-summary{margin-top:2px;font-weight:400;color:var(--ink)}.record-meta{font-size:11px}.record-time{font-size:11px;color:var(--muted);white-space:nowrap;margin-left:8px}
 .record .tag{display:none}
 .record-review{background:#fdeeee}
 .record-review:hover{background:#fbe2e2}
@@ -75,7 +83,7 @@ body{-webkit-tap-highlight-color:transparent}
 .nav-students{font-size:24px !important;filter:saturate(.78) brightness(1.16);}.nav-students svg{width:26px;height:26px;display:block;fill:currentColor;stroke:none;}
 /* En el nav móvil el fondo activo es blanco, así que el icono ya no puede
    ponerse blanco (desaparecería); se mantiene en un tono visible siempre. */
-.nav button.active .nav-students,.nav button:hover .nav-students{color:var(--accent) !important;}
+.nav-students{color:var(--accent) !important;}
 .nav-clock{width:30px !important;height:30px !important;color:#d53b3b !important;}
 .nav-clock svg{width:28px;height:28px;display:block;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
 .nav-calendar{font-size:23px !important;filter:saturate(.92) brightness(1.02);}
@@ -145,10 +153,9 @@ body{-webkit-tap-highlight-color:transparent}
 .work-group small{color:var(--muted);display:block;margin-top:3px;}
 .notas-privadas-oculto{filter:blur(5px);user-select:none;pointer-events:none;background:#f3f4f5;}
 
-/* ———— icono de tipo de registro, sobre el avatar ———— */
-.record-avatar-wrap{position:relative;flex-shrink:0}
-.record-icon-badge{position:absolute;right:-4px;bottom:-4px;background:#fff;border:1px solid var(--line);border-radius:50%;width:17px;height:17px;font-size:10px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);line-height:1}
-@media(max-width:760px){.record-icon-badge{width:15px;height:15px;font-size:9px;right:-3px;bottom:-3px}}
+/* ———— icono de tipo de registro: uno solo, grande, a la derecha ———— */
+.record-side-icon{flex:0 0 auto;font-size:26px;line-height:1;display:flex;align-items:center;justify-content:center;min-width:34px;margin-left:4px}
+@media(max-width:760px){.record-side-icon{font-size:22px;min-width:28px}}
 
 /* ———— buscador de alumnos (Alumnado + página de inicio) ———— */
 .student-search{position:relative}
@@ -186,7 +193,13 @@ body{-webkit-tap-highlight-color:transparent}
 
 <section id="classes" class="view"><h1>Grupos y alumnos</h1><div class="student-search" style="max-width:380px;margin:6px 0 22px"><div class="student-search-field"><span class="student-search-icon">🔍</span><input type="text" id="studentSearchClasses" placeholder="Buscar alumno por nombre…" autocomplete="off"></div><div class="student-search-results" id="studentSearchClassesResults"></div></div><div class="list" id="classList"></div><div class="classes-tools" id="classesTools"><div class="classes-tool" data-tool="import"><label class="square-toggle" title="Importar fotos y notas privadas">📥<input type="file" accept="application/json" id="importPrivadoInputMobile" style="display:none"></label><span class="classes-tool-label">Importar fotos y notas privadas</span></div><div class="classes-tool" data-tool="backup"><button class="square-toggle" id="exportarCopiaMobile" title="Descargar copia de seguridad">💾</button><span class="classes-tool-label">Descargar copia de seguridad</span></div><div class="classes-tool" data-tool="restore"><label class="square-toggle" title="Restaurar copia de seguridad" style="color:var(--danger)">♻️<input type="file" accept="application/json" id="restaurarCopiaInputMobile" style="display:none"></label><span class="classes-tool-label">Restaurar copia de seguridad</span></div></div></section>
 <section id="race" class="view"><h1>Clasificación</h1><div class="card"><div style="display:flex;gap:12px;flex-wrap:wrap" id="raceControls"></div><div style="margin-top:18px" id="raceTrack"></div></div></section>
-<section id="schedule" class="view"><h1>Horario</h1><div class="card" style="overflow:auto"><div id="scheduleGrid"></div></div></section>
+<section id="schedule" class="view"><h1>Horario</h1><div class="card" style="overflow:auto"><div id="scheduleGrid"></div></div>
+<div class="section-head"><h2 style="margin:0">Horario del departamento</h2></div>
+<p class="sub" style="margin-top:-6px">De un vistazo: quién más da clase a la misma hora que tú, para saber si el gimnasio o el aula exterior están libres.</p>
+<div class="card" style="overflow:auto;margin-top:14px"><div id="scheduleDeptGrid"></div>
+<div class="hint" id="scheduleDeptLegend" style="margin-top:12px"></div>
+</div>
+</section>
 <section id="calendar" class="view"><h1>Calendario</h1><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><button class="simbtn" id="calPrev">←</button><h2 style="margin:0" id="calTitle">—</h2><button class="simbtn" id="calNext">→</button></div><div id="calGrid"></div></div><div class="section-head"><h2>Próximos eventos</h2></div><div class="card" id="calUpcoming"></div></section>
 <section id="units" class="view"><h1>Unidades</h1><div class="list" id="unitList"></div></section>
 </main></div>
@@ -987,9 +1000,8 @@ function classifyForAlumno(remaining, alumno){
         if(keys.some(k => extraTrasNumero.includes(stripAccents(k)))){ motivo = cat; break; }
       }
     }
-    const medalla = val >= 4 ? '🥇' : val >= 2 ? '🥈' : val === 1 ? '🥉' : '';
     const motivoTxt = motivo ? ` · ${ICONOS_CATEGORIA[motivo] || ''} ${motivo}` : '';
-    return [{ alumno, tipo:'puntos', categoria: motivo, puntos: val, textoInterpretado:`${medalla ? medalla + ' ' : ''}${nombreCorto} recibe ${val} punto${val===1?'':'s'}${motivoTxt}` }];
+    return [{ alumno, tipo:'puntos', categoria: motivo, puntos: val, textoInterpretado:`${nombreCorto} recibe ${val} punto${val===1?'':'s'}${motivoTxt}` }];
   }
 
   // Vueltas de castigo por sentarse: "2 vueltas por sentarse" / "2 vueltas más"
@@ -1010,7 +1022,7 @@ function classifyForAlumno(remaining, alumno){
 
   // Expulsión de clase
   if(/\bexpuls/.test(remainingNoAcc)){
-    return [{ alumno, tipo:'expulsion', categoria:null, puntos:null, textoInterpretado:`🟥 Expulsión de ${nombreCorto}` }];
+    return [{ alumno, tipo:'expulsion', categoria:null, puntos:null, textoInterpretado:`Expulsión de ${nombreCorto}` }];
   }
 
   // Palabrota / lenguaje soez: se comprueba antes que cualquier otra cosa,
@@ -1274,9 +1286,8 @@ function parseEntry(text, students, forcedAlumno){
             if(keys.some(k => extraTexto.includes(stripAccents(k)))){ motivo = cat; break; }
           }
         }
-        const medalla = puntos >= 4 ? '🥇' : puntos >= 2 ? '🥈' : puntos === 1 ? '🥉' : '';
         const motivoTxt = motivo ? ` · ${ICONOS_CATEGORIA[motivo] || ''} ${motivo}` : '';
-        return candidatos.map(alumno=>({alumno,tipo:'puntos',categoria:motivo,puntos,textoInterpretado:`${medalla?medalla+' ':''}${alumno.nombre.split(' ')[0]} recibe ${puntos} punto${puntos===1?'':'s'}${motivoTxt}`}));
+        return candidatos.map(alumno=>({alumno,tipo:'puntos',categoria:motivo,puntos,textoInterpretado:`${alumno.nombre.split(' ')[0]} recibe ${puntos} punto${puntos===1?'':'s'}${motivoTxt}`}));
       }
     }
   }
@@ -1556,6 +1567,16 @@ function showFeedback(msg, kind){
     feedbackTimer = setTimeout(() => { el.textContent = ''; el.className = 'feedback'; }, 4500);
   }
 }
+// Los textos interpretados empiezan por el nombre de pila ("Rubén recibe 3
+// puntos"), lo cual es correcto para el histórico en bruto, pero es
+// redundante cuando ya se muestra el nombre como título en la misma tarjeta.
+// Esto quita ese nombre inicial solo a efectos de visualización.
+function quitarNombreDelInicio(texto, alumno){
+  if(!alumno || !texto) return texto;
+  const nombreCorto = alumno.nombre.split(' ')[0];
+  const re = new RegExp('^' + nombreCorto.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\s+', 'i');
+  return texto.replace(re, '');
+}
 function tagClass(r){ if(r.tipo==='puntos') return 'positive'; if(r.tipo==='falta' || r.tipo==='expulsion') return 'absent'; if(r.tipo==='incidencia' || r.tipo==='vueltas') return 'incident'; return ''; }
 function tagLabel(r){ if(r.tipo==='puntos') return (r.puntos>0?'+':'') + r.puntos + ' pts' + (r.categoria ? ' · ' + (ICONOS_CATEGORIA[r.categoria]||'') + ' ' + r.categoria : ''); if(r.tipo==='falta') return r.justificada ? 'Falta justificada' : 'Falta injustificada'; if(r.tipo==='expulsion') return '🟥 Expulsión'; if(r.tipo==='vueltas') return `🏃 ${r.vueltas} vuelta${r.vueltas===1?'':'s'}${r.trote?' (trote)':''}`; if(r.tipo==='incidencia') return (ICONOS_CATEGORIA[r.categoria]||'') + ' Incidencia · ' + r.categoria; return (ICONOS_CATEGORIA[r.categoria]||'') + ' Observación · ' + r.categoria; }
 // Icono que representa cada registro en las listas (recientes, historial del
@@ -1659,6 +1680,24 @@ function restaurarCopiaSeguridad(file){
   reader.readAsText(file);
 }
 
+// Empareja una entrada del JSON importado con el alumno real. El id
+// ("g_af4_a7") es POSICIONAL: si la lista de una clase cambia de orden o de
+// tamaño (como al recortar Actividad Física de 104 a 25), el mismo id pasa a
+// señalar a otra persona y las fotos/notas se cuelan en el alumno equivocado.
+// Por eso, si la entrada trae un nombre, se empareja por nombre completo
+// (más estable) y solo se usa el id como último recurso.
+function normalizaNombreImport(s){ return stripAccents((s||'').toLowerCase()).replace(/\s+/g,' ').trim(); }
+function resolverAlumnoImport(alumnoId, entrada){
+  const nombreEntrada = entrada && (entrada.nombre || entrada.nombreCompleto);
+  if(nombreEntrada){
+    const buscado = normalizaNombreImport(nombreEntrada);
+    const porNombre = data.alumnos.filter(a => normalizaNombreImport(a.nombre) === buscado);
+    if(porNombre.length === 1) return { alumno: porNombre[0] };
+    if(porNombre.length > 1) return { error:'ambiguo' };
+  }
+  const porId = data.alumnos.find(x => x.id === alumnoId);
+  return porId ? { alumno: porId } : { error:'no-encontrado' };
+}
 function importarDatosPrivados(file){
   if(!file) return;
   const reader = new FileReader();
@@ -1666,18 +1705,23 @@ function importarDatosPrivados(file){
     let datos;
     try{ datos = JSON.parse(reader.result); }
     catch(e){ showFeedback('El archivo no es un JSON válido.', 'error'); return; }
-    let aplicados = 0, noEncontrados = 0;
+    let aplicados = 0, noEncontrados = 0, ambiguos = 0;
     Object.keys(datos).forEach(alumnoId => {
-      const a = data.alumnos.find(x => x.id === alumnoId);
-      if(!a){ noEncontrados++; return; }
       const entrada = datos[alumnoId];
+      const resuelto = resolverAlumnoImport(alumnoId, entrada);
+      if(resuelto.error === 'ambiguo'){ ambiguos++; return; }
+      if(resuelto.error === 'no-encontrado'){ noEncontrados++; return; }
+      const a = resuelto.alumno;
       if(entrada.foto) a.foto = entrada.foto;
       if(entrada.notasPrivadas) a.notasPrivadas = entrada.notasPrivadas;
       aplicados++;
     });
     saveData();
     renderAll();
-    showFeedback(`Importado: ${aplicados} alumnos actualizados${noEncontrados ? `, ${noEncontrados} no encontrados en la plantilla actual` : ''}.`, 'ok');
+    let msg = `Importado: ${aplicados} alumnos actualizados`;
+    if(noEncontrados) msg += `, ${noEncontrados} no encontrados en la plantilla actual`;
+    if(ambiguos) msg += `, ${ambiguos} con nombre repetido (revísalos a mano)`;
+    showFeedback(msg + '.', 'ok');
   };
   reader.onerror = () => showFeedback('No se ha podido leer el archivo.', 'error');
   reader.readAsText(file);
@@ -1864,10 +1908,10 @@ function renderToday(){
     }
     const alumno = data.alumnos.find(a => a.id === r.alumnoId);
     const grupo = alumno ? data.grupos.find(g => g.id === alumno.grupoId) : null;
-    const resumen = r.textoInterpretado || r.textoOriginal;
+    const resumen = quitarNombreDelInicio(r.textoInterpretado || r.textoOriginal, alumno);
     const nombreLista = alumno ? `${nombrePilaDe(alumno)} ${primerApellido(alumno)}`.trim() : 'Alumno eliminado';
     const cursoTxt = grupo ? nombreCortoGrupo(grupo) : '';
-    return `<div class="record" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')"><div class="record-avatar-wrap">${avatarHtml(alumno)}<span class="record-icon-badge">${iconoRegistro(r)}</span></div><div class="record-main"><b>${nombreLista}</b><div class="record-summary">${resumen}</div><div class="record-meta">${cursoTxt}${(cursoTxt && r.hora) ? ' · ' : ''}${r.hora || ''}</div></div></div>`;
+    return `<div class="record" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')">${avatarHtml(alumno)}<div class="record-main"><b>${nombreLista}</b><div class="record-summary">${resumen}</div><div class="record-meta">${cursoTxt}${(cursoTxt && r.hora) ? ' · ' : ''}${r.hora || ''}</div></div><span class="record-side-icon">${iconoRegistro(r)}</span></div>`;
   }).join('') : '<div class="empty">Todavía no hay registros. Prueba con «Luis 5 puntos».</div>';
 
 }
@@ -2100,7 +2144,7 @@ function openDelegadoPanel(grupoId){
 function openClassRoster(grupoId){
   const g = data.grupos.find(x => x.id === grupoId);
   if(!g) return;
-  const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+  const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => apellidosDe(a).localeCompare(apellidosDe(b), 'es') || nombrePilaDe(a).localeCompare(nombrePilaDe(b), 'es'));
   const encargados = getEncargadosSemana(grupoId);
   const encargadosIds = new Set(encargados.map(a => a.id));
 
@@ -2133,7 +2177,7 @@ function openClassRoster(grupoId){
         </div>
         <div class="sen-name">${nombrePilaDe(a)}${necesitaApellido ? ' ' + primerApellido(a) : ''}</div>
         ${estado ? `<span class="sen-falta-tag ${estado}">${estado==='injustificada'?'Injustificada':'Justificada'}</span>` : ''}
-        <span class="sen-points">${alumnoPuntos(a.id)} pts</span>
+        ${necesitaApellido ? '' : `<span class="sen-points">${primerApellido(a)}</span>`}
       </div>`;
     }).join('')}</div>
   `;
@@ -2172,6 +2216,81 @@ function renderSchedule(){
   document.querySelectorAll('#scheduleGrid .sched-cell[data-group]').forEach(el => {
     el.onclick = () => el.dataset.group && switchToClassesAndOpen(el.dataset.group);
   });
+}
+
+/* ———————————— render: Horario del departamento (todo el profesorado) ———————————— */
+// Horario semanal de TODO el departamento de EF, tal como llega en el PDF
+// oficial del centro (curso 2026/27). "TU" marca las clases del propio
+// profesor (Alejandro) para que resalten entre las de sus compañeros.
+const PROFES_DEPARTAMENTO = {
+  'MJ': 'Romero Jiménez, María José',
+  'Alejandro': 'Vallecillos Portillo, Alejandro',
+  'Marta': 'Rodríguez Vergara, Marta',
+  'Sebas': 'Pozo García, Sebastián',
+  'Carlos': 'De Trinidad Rebollo, Carlos',
+  'Esther': 'Escribano Hernández, Esther'
+};
+const PROFESOR_ACTUAL = 'Alejandro';
+const HORARIO_DEPARTAMENTO = [
+  { inicio:'08:00', fin:'09:00', dias:{
+    lunes:[['1W','MJ']], martes:[['3EB','Alejandro']], miercoles:[['1X','MJ']],
+    jueves:[['3EE','Alejandro'],['1EB','MJ']], viernes:[['1EB','MJ']]
+  }},
+  { inicio:'09:00', fin:'10:00', dias:{
+    lunes:[['2 BACH AF','Marta'],['3 ACT DE','MJ']],
+    martes:[['2EE','Alejandro'],['2EA','Sebas']],
+    miercoles:[['3 ACT BC','MJ'],['3 ACT AC','Alejandro'],['4EC','Esther']],
+    jueves:[['1EA','Sebas'],['2EE','Alejandro'],['2 BACH AF','Marta']],
+    viernes:[['3E ACT BC','MJ'],['3E ACT AC','Alejandro'],['2EB','Sebas']]
+  }},
+  { inicio:'10:00', fin:'11:00', dias:{
+    lunes:[['2EA','Sebas'],['4EA','Esther']],
+    martes:[['4 ACT','Marta'],['4 ACT','Carlos'],['4 ACT','Esther'],['4 ACT','Alejandro']],
+    miercoles:[['1EB','MJ'],['2EB','Sebas']],
+    jueves:[['4 ACT','Marta'],['4 ACT','Carlos'],['4 ACT','Esther'],['4 ACT','Alejandro']],
+    viernes:[['2ED','Sebas'],['2 BACH AF','Marta']]
+  }},
+  { inicio:'11:30', fin:'12:30', dias:{
+    lunes:[['1Y','MJ'],['3EA','Alejandro'],['4EB','Esther']],
+    martes:[['3ED','Alejandro'],['4EA','Esther']],
+    miercoles:[['1EE','Marta'],['1EF','Marta']],
+    jueves:[['1Z','MJ'],['3EC','Alejandro'],['4ED','Esther']],
+    viernes:[['3ED','Alejandro'],['1EC','Marta'],['4EE','Esther']]
+  }},
+  { inicio:'12:30', fin:'13:30', dias:{
+    lunes:[['1Z','MJ'],['1EA','Sebas'],['1EC','Marta']],
+    martes:[['3EE','Alejandro'],['2 BACH AF','Marta'],['2EC','Sebas']],
+    miercoles:[['1EE','Marta'],['1EA','Sebas']],
+    jueves:[['1Y','MJ'],['1ED','Marta'],['3 ACT DE','MJ'],['2ED','Sebas'],['3EB','Alejandro']],
+    viernes:[['1W','MJ'],['2EC','Sebas'],['1EE','Marta']]
+  }},
+  { inicio:'13:30', fin:'14:30', dias:{
+    lunes:[['1EF','Marta'],['3ESO C','Alejandro'],['4EE','Esther']],
+    martes:[['1V','Alejandro'],['1EC','Marta'],['4ED','Esther']],
+    miercoles:[['1ED','Marta'],['4EB','Esther']],
+    jueves:[['1EF','Marta'],['3EA','Alejandro'],['4EC','Esther']],
+    viernes:[['1V','Alejandro'],['1X','MJ'],['1ED','Marta']]
+  }}
+];
+function renderHorarioDepartamento(){
+  const el = $('scheduleDeptGrid');
+  if(!el) return;
+  const days = ['lunes','martes','miercoles','jueves','viernes'];
+  const header = `<tr><th></th>${days.map(d => `<th>${DAY_LABELS[d]}</th>`).join('')}</tr>`;
+  const rows = HORARIO_DEPARTAMENTO.map(slot => {
+    const cells = days.map(d => {
+      const clases = slot.dias[d] || [];
+      if(!clases.length) return `<td><div class="sched-cell empty">—</div></td>`;
+      const chips = clases.map(([codigo, prof]) => {
+        const esTu = prof === PROFESOR_ACTUAL;
+        return `<div class="dept-chip${esTu ? ' dept-chip-tu' : ''}"><b>${codigo}</b><small>${prof}</small></div>`;
+      }).join('');
+      return `<td><div class="dept-cell">${chips}</div></td>`;
+    }).join('');
+    return `<tr><td class="sched-time">${slot.inicio}–${slot.fin}</td>${cells}</tr>`;
+  }).join('');
+  el.innerHTML = `<table class="sched-table dept-table">${header}${rows}</table>`;
+  $('scheduleDeptLegend').innerHTML = 'Profesorado: ' + Object.entries(PROFES_DEPARTAMENTO).map(([sigla, nombre]) => `<b>${sigla}</b> ${nombre}${sigla === PROFESOR_ACTUAL ? ' (tú)' : ''}`).join(' · ');
 }
 
 /* ———————————— render: Calendario del curso ———————————— */
@@ -2271,7 +2390,7 @@ function openRecordDetail(id){
     <h2 style="margin:6px 0 2px">${esRevisar ? '❌ Sin identificar' : (alumno ? alumno.nombre : 'Alumno eliminado')}</h2>
     <p class="sub">${grupo ? grupo.nombre : (esRevisar ? 'Sin grupo identificado' : '')}</p>
     <div class="card" style="margin-top:18px;background:#fbfcfc">
-      <h3>${esRevisar ? `«${r.textoOriginal}»` : (r.textoInterpretado || r.textoOriginal)}</h3>
+      <h3>${esRevisar ? `«${r.textoOriginal}»` : quitarNombreDelInicio(r.textoInterpretado || r.textoOriginal, alumno)}</h3>
       <div class="record-meta" style="margin-top:8px">${r.fecha} · ${r.hora}</div>
       ${esRevisar
         ? `<div class="record-meta" style="margin-top:10px">${r.textoInterpretado || ''}</div>`
@@ -2382,6 +2501,7 @@ function renderAll(){
   try{ renderClasses(); }catch(e){ console.error('renderClasses', e); }
   try{ renderRace(); }catch(e){ console.error('renderRace', e); }
   try{ renderSchedule(); }catch(e){ console.error('renderSchedule', e); }
+  try{ renderHorarioDepartamento(); }catch(e){ console.error('renderHorarioDepartamento', e); }
   try{ renderCalendar(); }catch(e){ console.error('renderCalendar', e); }
   try{ renderUnits(); }catch(e){ console.error('renderUnits', e); }
   try{ updateUndoRedoButtons(); }catch(e){ console.error('updateUndoRedoButtons', e); }
@@ -2403,8 +2523,12 @@ function switchToView(viewId){
   $(viewId).classList.add('active');
   document.body.classList.toggle('secondary-view', viewId !== 'today');
 }
+// Se usa desde botones que abren la ficha de una clase SIN salir de la
+// pestaña en la que ya estás (p. ej. el 👥 de la distribución de clases del
+// día, en Inicio): al cerrar el modal, sigues donde estabas. Si en vez de eso
+// entras a una clase desde la propia pestaña "Grupos y alumnos", ese flujo no
+// pasa por aquí, así que al cerrar te quedas lógicamente en esa pestaña.
 function switchToClassesAndOpen(grupoId){
-  switchToView('classes');
   openClassRoster(grupoId);
 }
 /* ———————————— eventos ———————————— */
