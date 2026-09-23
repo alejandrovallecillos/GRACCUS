@@ -184,6 +184,18 @@ body{-webkit-tap-highlight-color:transparent}
 .classes-tool.revealed .classes-tool-label{display:inline-block}
 .classes-tool .square-toggle{font-size:16px}
 @media(max-width:760px){.sidebar{height:calc(60px + env(safe-area-inset-bottom));}.nav{height:56px}.nav button{height:52px}.home-nav b{width:44px!important;height:44px!important}.home-g-mark{width:18px!important}.home-dot{width:8px;height:8px;right:3px;top:3px}.main{padding-bottom:calc(70px + env(safe-area-inset-bottom))!important}.voice{width:42px!important;font-size:19px!important}.entry{grid-template-columns:1fr 50px 50px!important}}
+
+/* ———— pabellón / instalación (horario propio y del departamento) ———— */
+.record-day-sep{height:1px;background:var(--line);margin:8px 0;opacity:.55}
+.dept-chip-pabellon{border-left:3px solid #c0392b}
+.dept-chip-pabellon b,.dept-chip-pabellon small{color:#c0392b}
+.dept-chip-pistas{border-left:3px solid #2f5fa8}
+.dept-chip-pistas b,.dept-chip-pistas small{color:#2f5fa8}
+.dept-chip-compartido{border-left:3px solid #12202d;background:#eef0f1}
+.dept-chip-compartido b,.dept-chip-compartido small{color:#12202d}
+.dept-chip-tu.dept-chip-pabellon,.dept-chip-tu.dept-chip-pistas,.dept-chip-tu.dept-chip-compartido{background:var(--accent-soft)}
+.wg-manual-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px}
+.wg-manual-row select{width:auto;min-width:110px}
 </style>
 </head>
 <body><div class="app"><aside class="sidebar"><div class="brand"><strong>GRACCUS</strong><small>Registro docente inteligente</small><span class="brand-subject">Educación Física</span></div><nav class="nav"><button data-view="classes"><b class="nav-students" aria-label="Alumnado"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M6 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="4.5" cy="9" r="2.4"/><path d="M0.5 19c0-2.6 1.8-4.6 4-5"/><circle cx="19.5" cy="9" r="2.4"/><path d="M23.5 19c0-2.6-1.8-4.6-4-5"/></svg></b><span>Alumnado</span></button><button data-view="schedule"><b class="nav-clock" aria-label="Horario"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5"></circle><path d="M16 9v7l5 3"></path></svg></b><span>Horario</span></button><button class="home-nav active" data-view="today"><b><img class="home-g-mark" src="./g-mark.png" alt="G"><i class="home-dot"></i></b></button><button data-view="calendar"><b class="nav-calendar">🗓️</b><span>Calendario</span></button><button data-view="race"><b>🐪</b><span>Clasificación</span></button></nav><div class="sidebar-footer">GRACCUS<br>Datos guardados en este dispositivo<br><label style="color:#bfe8e0;cursor:pointer;text-decoration:underline">📥 Importar datos privados<input type="file" accept="application/json" id="importPrivadoInput" style="display:none"></label><br><a href="#" id="exportarCopiaDesktop" style="color:#bfe8e0;text-decoration:underline">💾 Copia de seguridad</a><br><label style="color:#e8b0b0;cursor:pointer;text-decoration:underline">♻️ Restaurar copia<input type="file" accept="application/json" id="restaurarCopiaInputDesktop" style="display:none"></label></div></aside><main class="main">
@@ -209,7 +221,7 @@ body{-webkit-tap-highlight-color:transparent}
 
 <script>
 /* ————————————————————————————————————————————
-   GRACCUS 0.24 — motor de contexto
+   GRACCUS 0.25 — motor de contexto
    Filosofía: ABRIR → ESCRIBIR/DECIR → CONTINUAR CON LA CLASE
    ———————————————————————————————————————————— */
 
@@ -218,7 +230,7 @@ const STORAGE_KEY = 'graccus-data';
 // horario, alumnado). Subir este número es lo único que hace falta para que
 // los dispositivos con datos antiguos guardados se actualicen solos,
 // conservando siempre puntos, faltas, fotos y notas ya registrados.
-const DATA_VERSION = 14;
+const DATA_VERSION = 15;
 const DAY_KEYS = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
 const DAY_LABELS = {lunes:'Lunes',martes:'Martes',miercoles:'Miércoles',jueves:'Jueves',viernes:'Viernes',sabado:'Sábado',domingo:'Domingo'};
 
@@ -337,7 +349,6 @@ const ALUMNOS_REALES = {
     { id:"g3a_a11", nombrePila:"Sara", apellidos:"Hbidi", correo:"shbi0209@g.educaand.es", sexo:"F" },
     { id:"g3a_a12", nombrePila:"Nolasco", apellidos:"Jiménez Barrera", correo:"njimbar2108@g.educaand.es", sexo:"M" },
     { id:"g3a_a13", nombrePila:"Óscar", apellidos:"Jiménez González", correo:"ojimgon2408@g.educaand.es", sexo:"M" },
-    { id:"g3a_a14", nombrePila:"Ángel", apellidos:"Jiménez Guerrero", correo:"ajimgue0611@g.educaand.es", sexo:"M" },
     { id:"g3a_a15", nombrePila:"Paula Valentina", apellidos:"Jiménez Ruiz", correo:"pjimrui529@g.educaand.es", sexo:"F" },
     { id:"g3a_a16", nombrePila:"Martín", apellidos:"López Coca", correo:"mlopcoc0802@g.educaand.es", sexo:"M" },
     { id:"g3a_a17", nombrePila:"Carmen", apellidos:"Marchena Fernández", correo:"cmarfer2909@g.educaand.es", sexo:"F" },
@@ -354,6 +365,7 @@ const ALUMNOS_REALES = {
     { id:"g3a_a28", nombrePila:"Lucía", apellidos:"Serralbo Falcón", correo:"lserfal1304@g.educaand.es", sexo:"F" },
     { id:"g3a_a29", nombrePila:"Nayara", apellidos:"Vallejo Roldán", correo:"nvalrol0410@g.educaand.es", sexo:"F" },
     { id:"g3a_a30", nombrePila:"Ainhoa", apellidos:"Vega Macías", correo:"avegmac0905@g.educaand.es", sexo:"F" },
+    { id:"g3e_a14", nombrePila:"Jimena", apellidos:"León Sánchez", correo:"jleosan0211@g.educaand.es", sexo:"F" },
   ],
   g3b: [
     { id:"g3b_a1", nombrePila:"Doha", apellidos:"Aboulibada Fakkar", correo:"dabofak605@g.educaand.es", sexo:"F" },
@@ -463,7 +475,7 @@ const ALUMNOS_REALES = {
     { id:"g3e_a11", nombrePila:"Jesús Miguel", apellidos:"Guerra Benítez", correo:"jgueben0510@g.educaand.es", sexo:"M" },
     { id:"g3e_a12", nombrePila:"Darío", apellidos:"Huertas Roldán", correo:"dhuerol0511@g.educaand.es", sexo:"M" },
     { id:"g3e_a13", nombrePila:"Alejandra", apellidos:"Jiménez Sánchez", correo:"ajimsan0107@g.educaand.es", sexo:"F" },
-    { id:"g3e_a14", nombrePila:"Jimena", apellidos:"León Sánchez", correo:"jleosan0211@g.educaand.es", sexo:"F" },
+    { id:"g3a_a14", nombrePila:"Ángel", apellidos:"Jiménez Guerrero", correo:"ajimgue0611@g.educaand.es", sexo:"M" },
     { id:"g3e_a15", nombrePila:"Óscar", apellidos:"Maldonado Rodríguez", correo:"omalrod2611@g.educaand.es", sexo:"M" },
     { id:"g3e_a16", nombrePila:"Carmen", apellidos:"Márquez García", correo:"cmargar1404@g.educaand.es", sexo:"F" },
     { id:"g3e_a17", nombrePila:"Aitana", apellidos:"Mejías Bonilla", correo:"amejbon1809@g.educaand.es", sexo:"F" },
@@ -573,33 +585,37 @@ function defaultData(){
 
   /*
    * Horario definitivo 2026/27, con el aula de cada grupo ya fijada.
+   * `instalacion` refleja el reparto oficial del departamento (ver PDF):
+   * 'pabellon' = pabellón para ti solo, 'compartido' = pabellón a repartir
+   * entre los profes implicados, 'pistas' = pistas exteriores. Tanto
+   * 'pabellon' como 'compartido' cuentan como «tener pabellón» esa hora.
    */
   const AULAS = { g2e:'B5', g3a:'A1', g3b:'A8', g3c:'B6', g3d:'B7', g3e:'B8', gbach:'C11', g_af4:'B13', g_af3:'A4' };
   const horarioReal = [
     // LUNES
-    { dia:'lunes', inicio:'11:30', fin:'12:30', grupoId:'g3a', materia:'Educación Física', aula:AULAS.g3a, lectivo:true },
-    { dia:'lunes', inicio:'13:30', fin:'14:30', grupoId:'g3c', materia:'Educación Física', aula:AULAS.g3c, lectivo:true },
+    { dia:'lunes', inicio:'11:30', fin:'12:30', grupoId:'g3a', materia:'Educación Física', aula:AULAS.g3a, lectivo:true, instalacion:'pistas' },
+    { dia:'lunes', inicio:'13:30', fin:'14:30', grupoId:'g3c', materia:'Educación Física', aula:AULAS.g3c, lectivo:true, instalacion:'pistas' },
     // MARTES
-    { dia:'martes', inicio:'08:00', fin:'09:00', grupoId:'g3b', materia:'Educación Física', aula:AULAS.g3b, lectivo:true },
-    { dia:'martes', inicio:'09:00', fin:'10:00', grupoId:'g2e', materia:'Educación Física', aula:AULAS.g2e, lectivo:true },
-    { dia:'martes', inicio:'10:00', fin:'11:00', grupoId:'g_af4', materia:'Actividad Física', aula:AULAS.g_af4, lectivo:true },
-    { dia:'martes', inicio:'11:30', fin:'12:30', grupoId:'g3d', materia:'Educación Física', aula:AULAS.g3d, lectivo:true },
-    { dia:'martes', inicio:'12:30', fin:'13:30', grupoId:'g3e', materia:'Educación Física', aula:AULAS.g3e, lectivo:true },
-    { dia:'martes', inicio:'13:30', fin:'14:30', grupoId:'gbach', materia:'Educación Física', aula:AULAS.gbach, lectivo:true },
+    { dia:'martes', inicio:'08:00', fin:'09:00', grupoId:'g3b', materia:'Educación Física', aula:AULAS.g3b, lectivo:true, instalacion:'pabellon' },
+    { dia:'martes', inicio:'09:00', fin:'10:00', grupoId:'g2e', materia:'Educación Física', aula:AULAS.g2e, lectivo:true, instalacion:'pabellon' },
+    { dia:'martes', inicio:'10:00', fin:'11:00', grupoId:'g_af4', materia:'Actividad Física', aula:AULAS.g_af4, lectivo:true, instalacion:'compartido' },
+    { dia:'martes', inicio:'11:30', fin:'12:30', grupoId:'g3d', materia:'Educación Física', aula:AULAS.g3d, lectivo:true, instalacion:'pabellon' },
+    { dia:'martes', inicio:'12:30', fin:'13:30', grupoId:'g3e', materia:'Educación Física', aula:AULAS.g3e, lectivo:true, instalacion:'pistas' },
+    { dia:'martes', inicio:'13:30', fin:'14:30', grupoId:'gbach', materia:'Educación Física', aula:AULAS.gbach, lectivo:true, instalacion:'pistas' },
     // MIÉRCOLES
-    { dia:'miercoles', inicio:'09:00', fin:'10:00', grupoId:'g_af3', materia:'Actividad Física', aula:AULAS.g_af3, lectivo:true },
+    { dia:'miercoles', inicio:'09:00', fin:'10:00', grupoId:'g_af3', materia:'Actividad Física', aula:AULAS.g_af3, lectivo:true, instalacion:'pistas' },
     // JUEVES
-    { dia:'jueves', inicio:'08:00', fin:'09:00', grupoId:'g3e', materia:'Educación Física', aula:AULAS.g3e, lectivo:true },
-    { dia:'jueves', inicio:'09:00', fin:'10:00', grupoId:'g2e', materia:'Educación Física', aula:AULAS.g2e, lectivo:true },
-    { dia:'jueves', inicio:'10:00', fin:'11:00', grupoId:'g_af4', materia:'Actividad Física', aula:AULAS.g_af4, lectivo:true },
-    { dia:'jueves', inicio:'11:30', fin:'12:30', grupoId:'g3c', materia:'Educación Física', aula:AULAS.g3c, lectivo:true },
-    { dia:'jueves', inicio:'12:30', fin:'13:30', grupoId:'g3b', materia:'Educación Física', aula:AULAS.g3b, lectivo:true },
-    { dia:'jueves', inicio:'13:30', fin:'14:30', grupoId:'g3a', materia:'Educación Física', aula:AULAS.g3a, lectivo:true },
+    { dia:'jueves', inicio:'08:00', fin:'09:00', grupoId:'g3e', materia:'Educación Física', aula:AULAS.g3e, lectivo:true, instalacion:'pabellon' },
+    { dia:'jueves', inicio:'09:00', fin:'10:00', grupoId:'g2e', materia:'Educación Física', aula:AULAS.g2e, lectivo:true, instalacion:'pabellon' },
+    { dia:'jueves', inicio:'10:00', fin:'11:00', grupoId:'g_af4', materia:'Actividad Física', aula:AULAS.g_af4, lectivo:true, instalacion:'compartido' },
+    { dia:'jueves', inicio:'11:30', fin:'12:30', grupoId:'g3c', materia:'Educación Física', aula:AULAS.g3c, lectivo:true, instalacion:'pabellon' },
+    { dia:'jueves', inicio:'12:30', fin:'13:30', grupoId:'g3b', materia:'Educación Física', aula:AULAS.g3b, lectivo:true, instalacion:'pistas' },
+    { dia:'jueves', inicio:'13:30', fin:'14:30', grupoId:'g3a', materia:'Educación Física', aula:AULAS.g3a, lectivo:true, instalacion:'pabellon' },
     // VIERNES
-    { dia:'viernes', inicio:'09:00', fin:'10:00', grupoId:'g_af3', materia:'Actividad Física', aula:AULAS.g_af3, lectivo:true },
-    { dia:'viernes', inicio:'11:30', fin:'12:30', grupoId:'g3d', materia:'Educación Física', aula:AULAS.g3d, lectivo:true },
+    { dia:'viernes', inicio:'09:00', fin:'10:00', grupoId:'g_af3', materia:'Actividad Física', aula:AULAS.g_af3, lectivo:true, instalacion:'compartido' },
+    { dia:'viernes', inicio:'11:30', fin:'12:30', grupoId:'g3d', materia:'Educación Física', aula:AULAS.g3d, lectivo:true, instalacion:'pabellon' },
     { dia:'viernes', inicio:'12:30', fin:'13:30', grupoId:null, materia:'Guardia', aula:'', lectivo:false },
-    { dia:'viernes', inicio:'13:30', fin:'14:30', grupoId:'gbach', materia:'Educación Física', aula:AULAS.gbach, lectivo:true }
+    { dia:'viernes', inicio:'13:30', fin:'14:30', grupoId:'gbach', materia:'Educación Física', aula:AULAS.gbach, lectivo:true, instalacion:'pabellon' }
   ];
 
   return {
@@ -917,6 +933,10 @@ function cambiarRotacionMaterial(grupoId, valor){
   const g = data.grupos.find(x => x.id === grupoId);
   if(!g) return;
   g.rotacionMaterial = valor;
+  // Al cambiar el tipo de rotación, se recalcula desde cero para el periodo
+  // nuevo (semana o clase), en vez de arrastrar la selección manual anterior.
+  g.materialPeriodo = undefined;
+  g.materialIdsSemana = undefined;
   saveData();
   openMaterialPanel(grupoId);
 }
@@ -1899,6 +1919,7 @@ function renderNotes(){
   }).join('') : '<div class="empty">No hay anotaciones hoy.</div>';
 }
 
+let recentLimit = 8;
 function renderToday(){
   const today = new Date().toISOString().slice(0,10);
   const todays = data.registros.filter(r => r.fecha === today);
@@ -1909,19 +1930,27 @@ function renderToday(){
   $('laps').textContent = todays.filter(r => r.tipo==='vueltas').reduce((a,r) => a + (r.vueltas||0), 0);
   $('review').textContent = todays.filter(r => r.tipo==='revisar').length;
 
-  $('recent').innerHTML = data.registros.length ? data.registros.slice(0,8).map(r => {
+  const visibles = data.registros.slice(0, recentLimit);
+  let lastFecha = null;
+  const filas = visibles.map(r => {
+    const separador = (lastFecha !== null && r.fecha !== lastFecha) ? '<div class="record-day-sep"></div>' : '';
+    lastFecha = r.fecha;
     if(r.tipo === 'revisar'){
       const grupo = data.grupos.find(g => g.id === r.grupoId);
-      return `<div class="record record-review" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')"><span class="review-x" title="Sin identificar">❌</span><div class="record-main"><b>Sin identificar${grupo ? ' · ' + grupo.nombre : ''}</b><div class="record-summary">«${r.textoOriginal}»</div></div><span class="record-time">${r.hora}</span></div>`;
+      return separador + `<div class="record record-review" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')"><span class="review-x" title="Sin identificar">❌</span><div class="record-main"><b>Sin identificar${grupo ? ' · ' + grupo.nombre : ''}</b><div class="record-summary">«${r.textoOriginal}»</div></div><span class="record-time">${r.hora}</span></div>`;
     }
     const alumno = data.alumnos.find(a => a.id === r.alumnoId);
     const grupo = alumno ? data.grupos.find(g => g.id === alumno.grupoId) : null;
     const resumen = quitarNombreDelInicio(r.textoInterpretado || r.textoOriginal, alumno);
     const nombreLista = alumno ? `${nombrePilaDe(alumno)} ${primerApellido(alumno)}`.trim() : 'Alumno eliminado';
     const cursoTxt = grupo ? nombreCortoGrupo(grupo) : '';
-    return `<div class="record" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')">${avatarHtml(alumno)}<div class="record-main"><b>${nombreLista}</b><div class="record-summary">${resumen}</div><div class="record-meta">${cursoTxt}${(cursoTxt && r.hora) ? ' · ' : ''}${r.hora || ''}</div></div><span class="record-side-icon">${iconoRegistro(r)}</span></div>`;
-  }).join('') : '<div class="empty">Todavía no hay registros. Prueba con «Luis 5 puntos».</div>';
+    return separador + `<div class="record" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')">${avatarHtml(alumno)}<div class="record-main"><b>${nombreLista}</b><div class="record-summary">${resumen}</div><div class="record-meta">${cursoTxt}${(cursoTxt && r.hora) ? ' · ' : ''}${r.hora || ''}</div></div><span class="record-side-icon">${iconoRegistro(r)}</span></div>`;
+  }).join('');
 
+  const verMas = data.registros.length > recentLimit ? `<button class="link" id="verMasBtn" style="margin-top:6px">Ver más registros</button>` : '';
+  $('recent').innerHTML = data.registros.length ? (filas + verMas) : '<div class="empty">Todavía no hay registros. Prueba con «Luis 5 puntos».</div>';
+  const verMasBtn = $('verMasBtn');
+  if(verMasBtn) verMasBtn.onclick = () => { recentLimit += 8; renderToday(); };
 }
 
 /* ———————————— render: Clases ———————————— */
@@ -2030,25 +2059,87 @@ function pintarResultadoGrupos(gs, opts){
     };
   }
 }
+
+/* ———— grupos de trabajo: modo manual (el profesor elige quién va en cada grupo) ———— */
+let wgManualAssign = {}; // alumnoId -> nº de grupo (1..N), o ausente = sin asignar
+let wgManualN = 4;
+function wgSetMode(grupoId, modo){
+  $('wgRandomOptions').style.display = modo === 'random' ? '' : 'none';
+  $('wgManualOptions').style.display = modo === 'manual' ? '' : 'none';
+  if(modo === 'manual') renderWgManual(grupoId);
+}
+function renderWgManual(grupoId){
+  const roster = data.alumnos.filter(a => a.grupoId === grupoId).sort((a,b) => a.nombre.localeCompare(b.nombre, 'es'));
+  $('wgManualList').innerHTML = roster.map(a => {
+    const asignado = wgManualAssign[a.id] || '';
+    const opts = ['<option value="">Sin asignar</option>'].concat(
+      Array.from({length: wgManualN}, (_,i) => i+1).map(n => `<option value="${n}" ${Number(asignado)===n?'selected':''}>Grupo ${n}</option>`)
+    ).join('');
+    return `<div class="wg-manual-row"><span style="font-size:13px">${a.nombre}</span><select data-alumno="${a.id}">${opts}</select></div>`;
+  }).join('');
+  $('wgManualList').querySelectorAll('select').forEach(sel => {
+    sel.onchange = () => {
+      const v = sel.value;
+      if(v) wgManualAssign[sel.dataset.alumno] = Number(v);
+      else delete wgManualAssign[sel.dataset.alumno];
+    };
+  });
+}
+function wgManualChangeN(grupoId, delta){
+  wgManualN = Math.max(2, Math.min(12, wgManualN + delta));
+  $('wgManualNLabel').textContent = wgManualN;
+  renderWgManual(grupoId);
+}
+function crearGruposManual(grupoId){
+  const roster = data.alumnos.filter(a => a.grupoId === grupoId);
+  const grupos = Array.from({length: wgManualN}, () => []);
+  roster.forEach(a => {
+    const n = wgManualAssign[a.id];
+    if(n && n >= 1 && n <= wgManualN) grupos[n-1].push(a);
+  });
+  const noAsignados = roster.filter(a => !wgManualAssign[a.id]);
+  pintarResultadoGrupos(grupos.filter(g => g.length), { grupoId });
+  if(noAsignados.length){
+    showFeedback(`${noAsignados.length} alumno(s) sin asignar a ningún grupo.`, 'warn');
+  }
+}
 function openWorkGroups(grupoId){
   const g=data.grupos.find(x=>x.id===grupoId); if(!g) return;
   const hoy=fechaLocal();
   const ausentes=new Set(data.registros.filter(r=>r.grupoId===grupoId&&r.fecha===hoy&&r.tipo==='falta').map(r=>r.alumnoId));
   const guardados = getGruposGuardados(grupoId);
-  $('modalContent').innerHTML=`<div class="eyebrow">Trabajo cooperativo</div><h2 style="margin-top:7px">Grupos de trabajo · ${g.nombre}</h2><p class="sub">Crea agrupamientos temporales, o guárdalos con un nombre para reutilizarlos durante toda una unidad.</p>
+  wgManualAssign = {};
+  $('modalContent').innerHTML=`<div class="eyebrow">Trabajo cooperativo</div><h2 style="margin-top:7px">Grupos de trabajo · ${g.nombre}</h2><p class="sub">Crea agrupamientos aleatorios, o elige tú mismo quién va en cada grupo — y guárdalos con un nombre para reutilizarlos durante toda una unidad.</p>
   ${guardados.length ? `<div class="section-head" style="margin:16px 0 8px"><h2 style="margin:0;font-size:15px">Grupos guardados</h2></div><div class="list">${guardados.map(gd => `<div class="row" style="padding:10px 12px"><div><b>${gd.nombre}</b><small>${gd.grupos.length} grupos · ${gd.creado}</small></div><div style="display:flex;gap:6px"><button class="simbtn" onclick="verGrupoGuardado('${grupoId}','${gd.id}')">Ver</button><button class="simbtn" style="color:var(--danger)" onclick="eliminarGrupoGuardado('${grupoId}','${gd.id}')">🗑</button></div></div>`).join('')}</div>` : ''}
   <div class="section-head" style="margin:18px 0 8px"><h2 style="margin:0;font-size:15px">Crear grupos nuevos</h2></div>
-  <div class="field"><label style="font-size:14px;color:var(--ink);font-weight:800">Personas por grupo</label><select id="wgSize" style="font-size:16px;font-weight:800;padding:12px">${[2,3,4,5,6,7,8].map(n=>`<option value="${n}">${n}</option>`).join('')}</select></div>
-  <div class="switch-row"><span><b>Grupos mixtos</b></span><input type="checkbox" id="wgMixed"></div>
-  <div class="switch-row"><span><b>Incluir ausentes</b></span><input type="checkbox" id="wgAbsent"></div>
-  <div class="modal-actions"><button class="primary" id="wgCreate" style="height:44px;flex:1">Crear grupos</button></div>
+  <div class="field"><label>Modo</label><select id="wgModeSel"><option value="random">Aleatorio</option><option value="manual">Los elijo yo</option></select></div>
+  <div id="wgRandomOptions">
+    <div class="field"><label style="font-size:14px;color:var(--ink);font-weight:800">Personas por grupo</label><select id="wgSize" style="font-size:16px;font-weight:800;padding:12px">${[2,3,4,5,6,7,8].map(n=>`<option value="${n}">${n}</option>`).join('')}</select></div>
+    <div class="switch-row"><span><b>Grupos mixtos</b></span><input type="checkbox" id="wgMixed"></div>
+    <div class="switch-row"><span><b>Incluir ausentes</b></span><input type="checkbox" id="wgAbsent"></div>
+    <div class="modal-actions"><button class="primary" id="wgCreate" style="height:44px;flex:1">Crear grupos</button></div>
+  </div>
+  <div id="wgManualOptions" style="display:none">
+    <div class="field"><label>Número de grupos</label>
+      <div style="display:flex;align-items:center;gap:10px">
+        <button class="square-toggle" onclick="wgManualChangeN('${grupoId}',-1)">−</button>
+        <b id="wgManualNLabel" style="font-size:16px;min-width:20px;text-align:center">${wgManualN}</b>
+        <button class="square-toggle" onclick="wgManualChangeN('${grupoId}',1)">+</button>
+      </div>
+    </div>
+    <div class="hint">Elige el número de grupo para cada alumno. Los que dejes en «Sin asignar» quedarán fuera.</div>
+    <div id="wgManualList" style="margin-top:10px;max-height:320px;overflow:auto"></div>
+    <div class="modal-actions"><button class="primary" id="wgCreateManual" style="height:44px;flex:1">Formar estos grupos</button></div>
+  </div>
   <div id="wgResult"></div>`;
   $('modal').style.display='grid';
   modalRefresh = () => openWorkGroups(grupoId);
+  $('wgModeSel').onchange = () => wgSetMode(grupoId, $('wgModeSel').value);
   $('wgCreate').onclick=()=>{
     const gs=crearGruposTrabajo(grupoId,parseInt($('wgSize').value,10),$('wgMixed').checked,$('wgAbsent').checked);
     pintarResultadoGrupos(gs, { grupoId });
   };
+  $('wgCreateManual').onclick = () => crearGruposManual(grupoId);
 }
 
 /* ———————————— render: Clasificación (puntos por clase, con empates agrupados) ———————————— */
@@ -2129,7 +2220,8 @@ function openMaterialPanel(grupoId){
     <h2 style="margin-top:7px">📦 Encargados de material</h2>
     <p class="sub">Ahora mismo: ${encargados.length ? encargados.map(a=>a.nombre).join(', ') : 'sin asignar'}</p>
     <div class="field"><label>Rotación</label><select onchange="cambiarRotacionMaterial('${grupoId}', this.value)"><option value="semana" ${rotacion==='semana'?'selected':''}>Cada semana</option><option value="clase" ${rotacion==='clase'?'selected':''}>Cada clase</option></select></div>
-    <div class="hint">Toca un alumno para asignarle o quitarle el material.</div>
+    <p class="hint" style="margin-top:-4px">Rota automáticamente hacia abajo en la lista alfabética (por nombre de pila), empezando por la A. Al cambiar de semana o clase, avanza sola sin que tengas que hacer nada.</p>
+    <div class="hint">Toca un alumno para asignarle o quitarle el material manualmente (por ejemplo, si alguien falta ese día).</div>
     <div class="list" style="margin-top:12px">${roster.map(a => `<div class="row" style="cursor:pointer;padding:10px 12px" onclick="toggleMaterial('${grupoId}','${a.id}')"><div class="row-info">${avatarHtml(a,'sm')}<b style="font-size:13px">${a.nombre}</b></div>${encargadosIds.has(a.id) ? '<span class="tag" style="background:#fdf0cf;color:#9a6b0a">📦 Asignado</span>' : ''}</div>`).join('')}</div>
   `;
   $('modal').style.display = 'grid';
@@ -2215,12 +2307,13 @@ function renderSchedule(){
       }
       const g = data.grupos.find(x => x.id === h.grupoId);
       const c = groupColor(h.grupoId);
-      return `<td><div class="sched-cell${isNow?' now':''}${h.pabellon?' pabellon':''}" data-group="${g ? g.id : ''}" style="background:${c.bg};color:${c.fg};cursor:${g?'pointer':'default'}">${h.materia}<small>${g ? g.nombre : '—'}</small></div></td>`;
+      const tienePabellon = h.instalacion === 'pabellon' || h.instalacion === 'compartido';
+      return `<td><div class="sched-cell${isNow?' now':''}${tienePabellon?' pabellon':''}" data-group="${g ? g.id : ''}" title="${tienePabellon ? (h.instalacion==='compartido' ? 'Pabellón a repartir' : 'Pabellón') : (h.instalacion==='pistas' ? 'Pistas exteriores' : '')}" style="background:${c.bg};color:${c.fg};cursor:${g?'pointer':'default'}">${h.materia}<small>${g ? g.nombre : '—'}</small></div></td>`;
     }).join('');
     return `<tr><td class="sched-time">${slot.inicio}–${slot.fin}</td>${cells}</tr>`;
   }).join('');
 
-  $('scheduleGrid').innerHTML = `<table class="sched-table">${header}${rows}</table>`;
+  $('scheduleGrid').innerHTML = `<table class="sched-table">${header}${rows}</table>` + `<div class="hint" style="margin-top:10px">🟧 Borde naranja = tienes pabellón esa hora (incluye el pabellón a repartir con otro profesor).</div>`;
   document.querySelectorAll('#scheduleGrid .sched-cell[data-group]').forEach(el => {
     el.onclick = () => el.dataset.group && switchToClassesAndOpen(el.dataset.group);
   });
@@ -2229,7 +2322,10 @@ function renderSchedule(){
 /* ———————————— render: Horario del departamento (todo el profesorado) ———————————— */
 // Horario semanal de TODO el departamento de EF, tal como llega en el PDF
 // oficial del centro (curso 2026/27). "TU" marca las clases del propio
-// profesor (Alejandro) para que resalten entre las de sus compañeros.
+// profesor (Alejandro) para que resalten entre las de sus compañeros. El
+// tercer valor de cada clase indica la instalación, tal como el PDF la
+// distingue por color: 'p' = pabellón (rojo), 'x' = pistas exteriores
+// (azul), 'c' = pabellón a repartir entre los profes implicados (negro).
 const PROFES_DEPARTAMENTO = {
   'MJ': 'Romero Jiménez, María José',
   'Alejandro': 'Vallecillos Portillo, Alejandro',
@@ -2241,45 +2337,50 @@ const PROFES_DEPARTAMENTO = {
 const PROFESOR_ACTUAL = 'Alejandro';
 const HORARIO_DEPARTAMENTO = [
   { inicio:'08:00', fin:'09:00', dias:{
-    lunes:[['1W','MJ']], martes:[['3EB','Alejandro']], miercoles:[['1X','MJ']],
-    jueves:[['3EE','Alejandro'],['1EB','MJ']], viernes:[['1EB','MJ']]
+    lunes:[['1W','MJ','p']], martes:[['3EB','Alejandro','p']], miercoles:[['1X','MJ','p']],
+    jueves:[['3EE','Alejandro','p'],['1EB','MJ','x']], viernes:[['1EB','MJ','p']]
   }},
   { inicio:'09:00', fin:'10:00', dias:{
-    lunes:[['2 BACH AF','Marta'],['3 ACT DE','MJ']],
-    martes:[['2EE','Alejandro'],['2EA','Sebas']],
-    miercoles:[['3 ACT BC','MJ'],['3 ACT AC','Alejandro'],['4EC','Esther']],
-    jueves:[['1EA','Sebas'],['2EE','Alejandro'],['2 BACH AF','Marta']],
-    viernes:[['3E ACT BC','MJ'],['3E ACT AC','Alejandro'],['2EB','Sebas']]
+    lunes:[['2 BACH AF','Marta','p']],
+    martes:[['3 ACT DE','MJ','x'],['2EE','Alejandro','p'],['2EA','Sebas','p']],
+    miercoles:[['3 ACT BC','MJ','x'],['3 ACT AC','Alejandro','x'],['4EC','Esther','p']],
+    jueves:[['1EA','Sebas','x'],['2EE','Alejandro','p'],['2 BACH AF','Marta','x']],
+    viernes:[['3E ACT BC','MJ','c'],['3E ACT AC','Alejandro','c'],['2EB','Sebas','x']]
   }},
   { inicio:'10:00', fin:'11:00', dias:{
-    lunes:[['2EA','Sebas'],['4EA','Esther']],
-    martes:[['4 ACT','Marta'],['4 ACT','Carlos'],['4 ACT','Esther'],['4 ACT','Alejandro']],
-    miercoles:[['1EB','MJ'],['2EB','Sebas']],
-    jueves:[['4 ACT','Marta'],['4 ACT','Carlos'],['4 ACT','Esther'],['4 ACT','Alejandro']],
-    viernes:[['2ED','Sebas'],['2 BACH AF','Marta']]
+    lunes:[['2EA','Sebas','x'],['4EA','Esther','p']],
+    martes:[['4 ACT','Marta','c'],['4 ACT','Carlos','c'],['4 ACT','Esther','c'],['4 ACT','Alejandro','c']],
+    miercoles:[['1EB','MJ','x'],['2EB','Sebas','p']],
+    jueves:[['4 ACT','Marta','c'],['4 ACT','Carlos','c'],['4 ACT','Esther','c'],['4 ACT','Alejandro','c']],
+    viernes:[['2ED','Sebas','p'],['2 BACH AF','Marta','x']]
   }},
   { inicio:'11:30', fin:'12:30', dias:{
-    lunes:[['1Y','MJ'],['3EA','Alejandro'],['4EB','Esther']],
-    martes:[['3ED','Alejandro'],['4EA','Esther']],
-    miercoles:[['1EE','Marta'],['1EF','Marta']],
-    jueves:[['1Z','MJ'],['3EC','Alejandro'],['4ED','Esther']],
-    viernes:[['3ED','Alejandro'],['1EC','Marta'],['4EE','Esther']]
+    lunes:[['1Y','MJ','p'],['3EA','Alejandro','x'],['4EB','Esther','x']],
+    martes:[['3ED','Alejandro','p'],['4EA','Esther','x'],['1EE','Marta','x']],
+    miercoles:[['1EF','Marta','p'],['1Z','MJ','x']],
+    jueves:[['3EC','Alejandro','p'],['4ED','Esther','x']],
+    viernes:[['3ED','Alejandro','p'],['1EC','Marta','p'],['4EE','Esther','x']]
   }},
   { inicio:'12:30', fin:'13:30', dias:{
-    lunes:[['1Z','MJ'],['1EA','Sebas'],['1EC','Marta']],
-    martes:[['3EE','Alejandro'],['2 BACH AF','Marta'],['2EC','Sebas']],
-    miercoles:[['1EE','Marta'],['1EA','Sebas']],
-    jueves:[['1Y','MJ'],['1ED','Marta'],['3 ACT DE','MJ'],['2ED','Sebas'],['3EB','Alejandro']],
-    viernes:[['1W','MJ'],['2EC','Sebas'],['1EE','Marta']]
+    lunes:[['1Z','MJ','p'],['1EA','Sebas','x'],['1EC','Marta','x']],
+    martes:[['3EE','Alejandro','x'],['2 BACH AF','Marta','c'],['2EC','Sebas','p']],
+    miercoles:[['1EE','Marta','x'],['1EA','Sebas','p']],
+    jueves:[['1ED','Marta','p'],['3 ACT DE','MJ','x'],['2ED','Sebas','x'],['3EB','Alejandro','x']],
+    viernes:[['1W','MJ','x'],['2EC','Sebas','x'],['1EE','Marta','p']]
   }},
   { inicio:'13:30', fin:'14:30', dias:{
-    lunes:[['1EF','Marta'],['3ESO C','Alejandro'],['4EE','Esther']],
-    martes:[['1V','Alejandro'],['1EC','Marta'],['4ED','Esther']],
-    miercoles:[['1ED','Marta'],['4EB','Esther']],
-    jueves:[['1EF','Marta'],['3EA','Alejandro'],['4EC','Esther']],
-    viernes:[['1V','Alejandro'],['1X','MJ'],['1ED','Marta']]
+    lunes:[['1EF','Marta','p'],['3ESO C','Alejandro','x'],['4EE','Esther','p']],
+    martes:[['1V','Alejandro','x'],['1EC','Marta','x'],['4ED','Esther','p']],
+    miercoles:[['1ED','Marta','x'],['4EB','Esther','p']],
+    jueves:[['1EF','Marta','p'],['3EA','Alejandro','p'],['4EC','Esther','x']],
+    viernes:[['1V','Alejandro','p'],['1X','MJ','x'],['1ED','Marta','x']]
   }}
 ];
+const INSTALACION_INFO = {
+  p: { clase:'dept-chip-pabellon', nombre:'Pabellón' },
+  x: { clase:'dept-chip-pistas', nombre:'Pistas exteriores' },
+  c: { clase:'dept-chip-compartido', nombre:'Pabellón a repartir' }
+};
 function renderHorarioDepartamento(){
   const el = $('scheduleDeptGrid');
   if(!el) return;
@@ -2289,16 +2390,17 @@ function renderHorarioDepartamento(){
     const cells = days.map(d => {
       const clases = slot.dias[d] || [];
       if(!clases.length) return `<td><div class="sched-cell empty">—</div></td>`;
-      const chips = clases.map(([codigo, prof]) => {
+      const chips = clases.map(([codigo, prof, inst]) => {
         const esTu = prof === PROFESOR_ACTUAL;
-        return `<div class="dept-chip${esTu ? ' dept-chip-tu' : ''}"><b>${codigo}</b><small>${prof}</small></div>`;
+        const info = INSTALACION_INFO[inst] || {};
+        return `<div class="dept-chip${esTu ? ' dept-chip-tu' : ''}${info.clase ? ' ' + info.clase : ''}" title="${info.nombre || ''}"><b>${codigo}</b><small>${prof}</small></div>`;
       }).join('');
       return `<td><div class="dept-cell">${chips}</div></td>`;
     }).join('');
     return `<tr><td class="sched-time">${slot.inicio}–${slot.fin}</td>${cells}</tr>`;
   }).join('');
   el.innerHTML = `<table class="sched-table dept-table">${header}${rows}</table>`;
-  $('scheduleDeptLegend').innerHTML = 'Profesorado: ' + Object.entries(PROFES_DEPARTAMENTO).map(([sigla, nombre]) => `<b>${sigla}</b> ${nombre}${sigla === PROFESOR_ACTUAL ? ' (tú)' : ''}`).join(' · ');
+  $('scheduleDeptLegend').innerHTML = '🟥 Pabellón &nbsp; 🟦 Pistas exteriores &nbsp; ⬛ Pabellón a repartir<br>Profesorado: ' + Object.entries(PROFES_DEPARTAMENTO).map(([sigla, nombre]) => `<b>${sigla}</b> ${nombre}${sigla === PROFESOR_ACTUAL ? ' (tú)' : ''}`).join(' · ');
 }
 
 /* ———————————— render: Calendario del curso ———————————— */
