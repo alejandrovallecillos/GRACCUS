@@ -196,6 +196,7 @@ body{-webkit-tap-highlight-color:transparent}
 .dept-chip-tu.dept-chip-pabellon,.dept-chip-tu.dept-chip-pistas,.dept-chip-tu.dept-chip-compartido{background:var(--accent-soft)}
 .wg-manual-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px}
 .wg-manual-row select{width:auto;min-width:110px}
+.sched-extra{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.aula-tag{font-size:10.5px;font-weight:800;background:#ffffffb3;border-radius:5px;padding:1px 5px;color:var(--ink)}.inst-tag{font-size:10px;font-weight:800;border-radius:5px;padding:1px 5px;color:#fff;white-space:nowrap}.inst-p{background:#c0392b}.inst-x{background:#2f5fa8}.inst-c{background:#12202d}.daily-aula{display:block;font-size:9px;font-weight:800;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 </head>
 <body><div class="app"><aside class="sidebar"><div class="brand"><strong>GRACCUS</strong><small>Registro docente inteligente</small><span class="brand-subject">Educación Física</span></div><nav class="nav"><button data-view="classes"><b class="nav-students" aria-label="Alumnado"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M6 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="4.5" cy="9" r="2.4"/><path d="M0.5 19c0-2.6 1.8-4.6 4-5"/><circle cx="19.5" cy="9" r="2.4"/><path d="M23.5 19c0-2.6-1.8-4.6-4-5"/></svg></b><span>Alumnado</span></button><button data-view="schedule"><b class="nav-clock" aria-label="Horario"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5"></circle><path d="M16 9v7l5 3"></path></svg></b><span>Horario</span></button><button class="home-nav active" data-view="today"><b><img class="home-g-mark" src="./g-mark.png" alt="G"><i class="home-dot"></i></b></button><button data-view="calendar"><b class="nav-calendar">🗓️</b><span>Calendario</span></button><button data-view="race"><b>🐪</b><span>Clasificación</span></button></nav><div class="sidebar-footer">GRACCUS<br>Datos guardados en este dispositivo<br><label style="color:#bfe8e0;cursor:pointer;text-decoration:underline">📥 Importar datos privados<input type="file" accept="application/json" id="importPrivadoInput" style="display:none"></label><br><a href="#" id="exportarCopiaDesktop" style="color:#bfe8e0;text-decoration:underline">💾 Copia de seguridad</a><br><label style="color:#e8b0b0;cursor:pointer;text-decoration:underline">♻️ Restaurar copia<input type="file" accept="application/json" id="restaurarCopiaInputDesktop" style="display:none"></label></div></aside><main class="main">
@@ -230,7 +231,7 @@ const STORAGE_KEY = 'graccus-data';
 // horario, alumnado). Subir este número es lo único que hace falta para que
 // los dispositivos con datos antiguos guardados se actualicen solos,
 // conservando siempre puntos, faltas, fotos y notas ya registrados.
-const DATA_VERSION = 15;
+const DATA_VERSION = 16;
 const DAY_KEYS = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
 const DAY_LABELS = {lunes:'Lunes',martes:'Martes',miercoles:'Miércoles',jueves:'Jueves',viernes:'Viernes',sabado:'Sábado',domingo:'Domingo'};
 
@@ -597,7 +598,7 @@ function defaultData(){
     { dia:'lunes', inicio:'13:30', fin:'14:30', grupoId:'g3c', materia:'Educación Física', aula:AULAS.g3c, lectivo:true, instalacion:'pistas' },
     // MARTES
     { dia:'martes', inicio:'08:00', fin:'09:00', grupoId:'g3b', materia:'Educación Física', aula:AULAS.g3b, lectivo:true, instalacion:'pabellon' },
-    { dia:'martes', inicio:'09:00', fin:'10:00', grupoId:'g2e', materia:'Educación Física', aula:AULAS.g2e, lectivo:true, instalacion:'pabellon' },
+    { dia:'martes', inicio:'09:00', fin:'10:00', grupoId:'g2e', materia:'Educación Física', aula:AULAS.g2e, lectivo:true, instalacion:'pistas' },
     { dia:'martes', inicio:'10:00', fin:'11:00', grupoId:'g_af4', materia:'Actividad Física', aula:AULAS.g_af4, lectivo:true, instalacion:'compartido' },
     { dia:'martes', inicio:'11:30', fin:'12:30', grupoId:'g3d', materia:'Educación Física', aula:AULAS.g3d, lectivo:true, instalacion:'pabellon' },
     { dia:'martes', inicio:'12:30', fin:'13:30', grupoId:'g3e', materia:'Educación Física', aula:AULAS.g3e, lectivo:true, instalacion:'pistas' },
@@ -613,7 +614,7 @@ function defaultData(){
     { dia:'jueves', inicio:'13:30', fin:'14:30', grupoId:'g3a', materia:'Educación Física', aula:AULAS.g3a, lectivo:true, instalacion:'pabellon' },
     // VIERNES
     { dia:'viernes', inicio:'09:00', fin:'10:00', grupoId:'g_af3', materia:'Actividad Física', aula:AULAS.g_af3, lectivo:true, instalacion:'compartido' },
-    { dia:'viernes', inicio:'11:30', fin:'12:30', grupoId:'g3d', materia:'Educación Física', aula:AULAS.g3d, lectivo:true, instalacion:'pabellon' },
+    { dia:'viernes', inicio:'11:30', fin:'12:30', grupoId:'g3d', materia:'Educación Física', aula:AULAS.g3d, lectivo:true, instalacion:'pistas' },
     { dia:'viernes', inicio:'12:30', fin:'13:30', grupoId:null, materia:'Guardia', aula:'', lectivo:false },
     { dia:'viernes', inicio:'13:30', fin:'14:30', grupoId:'gbach', materia:'Educación Física', aula:AULAS.gbach, lectivo:true, instalacion:'pabellon' }
   ];
@@ -994,6 +995,10 @@ function formalizarNota(nombreCorto, remaining){
 // Clasifica el tipo de registro (puntos/falta/incidencia/observación) para un
 // alumno ya identificado, a partir del texto restante tras quitar su nombre.
 function classifyForAlumno(remaining, alumno){
+  // Puntuación final del dictado ("5.") y números en letra ("cinco puntos").
+  remaining = remaining.replace(/[.!?¡¿]+\s*$/,'').trim();
+  const numLetra = remaining.match(/^(uno|una|un|dos|tres|cuatro|cinco|cero)(?=\s+puntos?\b|\s*$)/i);
+  if(numLetra) remaining = NUMEROS_PALABRA[numLetra[1].toLowerCase()] + remaining.slice(numLetra[0].length);
   const remainingNoAcc = stripAccents(remaining.toLowerCase());
   const nombreCorto = alumno.nombre.split(' ')[0];
   const hoy = new Date().toISOString().slice(0,10);
@@ -1288,29 +1293,161 @@ function matchStudentToken(tok, students){
   }
   return null;
 }
-function parseEntry(text, students, forcedAlumno){
-  if(forcedAlumno) return classifyForAlumno(text, forcedAlumno);
-  const sharedPoints=text.match(/^(.+?)\s+([1-5])\s*(?:puntos?)?(?:\s+(.+))?$/i);
-  if(sharedPoints){
-    const nombresTexto=sharedPoints[1].trim();
-    const extraTexto=stripAccents((sharedPoints[3]||'').trim().toLowerCase());
-    if(!/^vueltas?\b/.test(extraTexto)){
-      const tokens=nombresTexto.match(/[\p{L}]+/gu)||[];
-      const candidatos=[]; const vistos=new Set();
-      for(const tokRaw of tokens){ const alumno=matchStudentToken(tokRaw,students); if(alumno&&!vistos.has(alumno.id)){candidatos.push(alumno);vistos.add(alumno.id);} }
-      if(candidatos.length>=2){
-        const puntos=parseInt(sharedPoints[2],10);
-        let motivo=null;
-        if(extraTexto){
-          for(const [cat, keys] of Object.entries(CATEGORIAS_OBSERVACION)){
-            if(keys.some(k => extraTexto.includes(stripAccents(k)))){ motivo = cat; break; }
-          }
-        }
-        const motivoTxt = motivo ? ` · ${ICONOS_CATEGORIA[motivo] || ''} ${motivo}` : '';
-        return candidatos.map(alumno=>({alumno,tipo:'puntos',categoria:motivo,puntos,textoInterpretado:`${alumno.nombre.split(' ')[0]} recibe ${puntos} punto${puntos===1?'':'s'}${motivoTxt}`}));
-      }
-    }
+/* ———— puntos para varios alumnos a la vez ———— */
+// Busca en la frase la cantidad de puntos, esté donde esté: "Luis y Ana 5",
+// "Luis, Ana 5 puntos", "5 Luis Ana", "Luis y Ana cinco puntos." (dictado)...
+// Devuelve { puntos, antes, despues } o null si no hay puntos en la frase.
+const NUMEROS_PALABRA = { un:1, uno:1, una:1, dos:2, tres:3, cuatro:4, cinco:5, cero:0 };
+function extraerPuntos(text){
+  const t = text.replace(/[.!?¡¿]+\s*$/,'').trim();
+  // 1) Cifras: la primera que aparezca ("Luis y Ana 5 por la camiseta").
+  const reNum = /(^|[\s,;:])([+-]?\d+)(?:\s*(?:puntos?|pts?\.?))?(?=$|[\s,;:.])/gi;
+  let m;
+  while((m = reNum.exec(t))){
+    const ini = m.index + m[1].length, fin = m.index + m[0].length;
+    const despues = t.slice(fin).trim();
+    if(/^vueltas?\b/i.test(stripAccents(despues.toLowerCase()))) return null; // "2 vueltas" es otra cosa
+    return { puntos: parseInt(m[2], 10), antes: t.slice(0, ini).trim(), despues };
   }
+  // 2) Número dictado en letra: "cinco puntos", o "cinco" al final de la frase.
+  const reTxt = /(^|\s)(uno|una|un|dos|tres|cuatro|cinco|cero)(\s+puntos?\b|\s*$)/i;
+  const mt = t.match(reTxt);
+  if(mt){
+    const ini = mt.index + mt[1].length, fin = mt.index + mt[0].length;
+    return { puntos: NUMEROS_PALABRA[mt[2].toLowerCase()], antes: t.slice(0, ini).trim(), despues: t.slice(fin).trim() };
+  }
+  return null;
+}
+function motivoDePuntos(extra){
+  const e = stripAccents((extra || '').toLowerCase());
+  if(!e) return null;
+  for(const [cat, keys] of Object.entries(CATEGORIAS_OBSERVACION)){
+    if(keys.some(k => e.includes(stripAccents(k)))) return cat;
+  }
+  return null;
+}
+// Parte un texto con varios nombres en "menciones", una por alumno:
+// "Lola Anaya, Álvaro y Claudia Roldán" → ["Lola Anaya", "Álvaro", "Claudia Roldán"].
+// Funciona con comas, "y", o sin nada entre medias (como suele dictarse): un
+// apellido se une al nombre que tiene delante si es de ese mismo alumno.
+const PALABRAS_ENLACE = new Set(['de','del','la','las','el','los','a','al','y','e','o','con','por','para']);
+function segmentarMenciones(text, students){
+  const piezas = text.match(/[\p{L}]+|[,;\/+&]/gu) || [];
+  const palabrasDe = a => [
+    ...stripAccents(nombrePilaDe(a).toLowerCase()).split(/\s+/),
+    ...stripAccents(apellidosDe(a).toLowerCase()).split(/\s+/)
+  ].filter(Boolean);
+  const menciones = [];
+  let actual = null; // { palabras:[], candidatos:[] }
+  for(const raw of piezas){
+    const tok = stripAccents(raw.toLowerCase());
+    if(/^[,;\/+&]$/.test(tok) || tok === 'y' || tok === 'e'){ actual = null; continue; }
+    // ¿Sigue siendo el mismo alumno? (segundo nombre o apellido)
+    if(actual){
+      const siguen = actual.candidatos.filter(a => palabrasDe(a).some(p => palabraCoincide(tok, p)));
+      if(siguen.length){ actual.palabras.push(raw); actual.candidatos = siguen; continue; }
+    }
+    if(PALABRAS_ENLACE.has(tok)) continue; // "de", "la"... solo cuentan como parte de un nombre ya empezado
+    const candidatos = students.filter(a => palabrasDe(a).some(p => palabraCoincide(tok, p)));
+    if(!candidatos.length) continue; // palabra que no es de ningún alumno ("muy", "bien"...)
+    actual = { palabras:[raw], candidatos };
+    menciones.push(actual);
+  }
+  return menciones.map(m => m.palabras.join(' '));
+}
+// Resuelve cada mención a un alumno. Devuelve { alumnos, problemas }.
+function resolverMenciones(menciones, students){
+  const alumnos = [], problemas = [], vistos = new Set();
+  for(const men of menciones){
+    const r = resolverAlumnoEnGrupo(men, students);
+    if(r.alumno){ if(!vistos.has(r.alumno.id)){ vistos.add(r.alumno.id); alumnos.push(r.alumno); } }
+    else if(r.error === 'ambiguous') problemas.push(`«${men}»: ¿${r.opciones.join(' o ')}?`);
+    else problemas.push(`«${men}»: no lo encuentro en el grupo`);
+  }
+  return { alumnos, problemas };
+}
+function vueltasHoyDe(alumnoId){
+  const hoy = new Date().toISOString().slice(0,10);
+  return data.registros.filter(r => r.alumnoId === alumnoId && r.tipo === 'vueltas' && r.fecha === hoy).length;
+}
+// Crea los registros de puntos para una lista de alumnos, respetando la
+// regla de siempre: quien se ha sentado 2 o más veces hoy no suma puntos.
+function registrosPuntosVarios(alumnos, puntos, motivo, sufijo){
+  if(puntos > 5) return { error:'points-high' };
+  if(puntos < 0) return { error:'points-low' };
+  const bloqueados = alumnos.filter(a => vueltasHoyDe(a.id) >= 2);
+  const reciben = alumnos.filter(a => !bloqueados.includes(a));
+  const motivoTxt = motivo ? ` · ${ICONOS_CATEGORIA[motivo] || ''} ${motivo}` : '';
+  const res = reciben.map(alumno => ({ alumno, tipo:'puntos', categoria:motivo, puntos,
+    textoInterpretado:`${alumno.nombre.split(' ')[0]} recibe ${puntos} punto${puntos===1?'':'s'}${motivoTxt}${sufijo || ''}` }));
+  res.bloqueados = bloqueados.map(a => nombrePilaDe(a));
+  return res;
+}
+
+// "Luis, Ana y Pablo 5" / "Lola Anaya Álvaro Bonilla 3 camiseta"
+function parseListaPuntos(text, students){
+  const p = extraerPuntos(text);
+  if(!p) return null;
+  const numeroDelante = !p.antes;
+  const textoNombres = numeroDelante ? p.despues : p.antes;
+  const menciones = segmentarMenciones(textoNombres, students);
+  if(menciones.length < 2) return null; // un solo alumno: lo gestiona el flujo normal
+  const { alumnos, problemas } = resolverMenciones(menciones, students);
+  if(!alumnos.length) return { error:'lista-sin-identificar', problemas };
+  const res = registrosPuntosVarios(alumnos, p.puntos, motivoDePuntos(p.despues), '');
+  if(res.error) return res;
+  res.pendientes = problemas;
+  return res;
+}
+
+// "Todos 5", "Todos 3 puntos camiseta", "Todos menos Luis y Ana 5",
+// "Todos 5 menos Luis", "Toda la clase 2"... Solo reciben los puntos los
+// alumnos PRESENTES ese día (sin falta registrada en esa fecha).
+function parseTodos(text, students, fecha){
+  const norm = stripAccents(text.toLowerCase()).trim();
+  const m = norm.match(/^(?:a\s+)?(todos|todas|toda la clase|todo el grupo|la clase entera|el grupo entero)\b/);
+  if(!m) return null;
+  const resto = text.trim().slice(m[0].length); // misma longitud: stripAccents no cambia posiciones
+  const p = extraerPuntos(resto);
+  if(!p) return null;
+  // Exclusiones: lo que va detrás de "menos / excepto / salvo / quitando / sin"
+  let textoExcluidos = '';
+  const reExc = /\b(menos|excepto|salvo|quitando|sin contar|sin)\b/i;
+  const excAntes = stripAccents(p.antes.toLowerCase()).match(reExc);
+  const excDespues = stripAccents(p.despues.toLowerCase()).match(reExc);
+  let extra = p.despues;
+  if(excAntes){
+    textoExcluidos = p.antes.slice(excAntes.index + excAntes[0].length);
+  } else if(excDespues){
+    textoExcluidos = p.despues.slice(excDespues.index + excDespues[0].length);
+    extra = p.despues.slice(0, excDespues.index);
+  }
+  let excluidos = [], problemas = [];
+  if(textoExcluidos.trim()){
+    const r = resolverMenciones(segmentarMenciones(textoExcluidos, students), students);
+    excluidos = r.alumnos; problemas = r.problemas;
+    // Si no se sabe con seguridad a quién excluir, mejor no dar puntos a nadie.
+    if(problemas.length) return { error:'todos-excluidos', problemas };
+  }
+  const ausentes = new Set(data.registros.filter(r => r.tipo === 'falta' && r.fecha === fecha).map(r => r.alumnoId));
+  const presentes = students.filter(a => !ausentes.has(a.id));
+  const reciben = presentes.filter(a => !excluidos.some(e => e.id === a.id));
+  if(!reciben.length) return { error:'todos-vacio' };
+  const res = registrosPuntosVarios(reciben, p.puntos, motivoDePuntos(extra), ' (toda la clase)');
+  if(res.error) return res;
+  const partes = [`${res.length} alumno${res.length===1?'':'s'} +${p.puntos}`];
+  if(ausentes.size){ const n = students.filter(a => ausentes.has(a.id)).length; if(n) partes.push(`${n} ausente${n===1?'':'s'} sin puntos`); }
+  if(excluidos.length) partes.push(`excluidos: ${excluidos.map(a => nombrePilaDe(a)).join(', ')}`);
+  res.resumen = partes.join(' · ');
+  return res;
+}
+
+function parseEntry(text, students, forcedAlumno, fecha){
+  if(forcedAlumno) return classifyForAlumno(text, forcedAlumno);
+  const todos = parseTodos(text, students, fecha || new Date().toISOString().slice(0,10));
+  if(todos) return todos;
+  const lista = parseListaPuntos(text, students);
+  if(lista) return lista;
   const lowerNoAcc=stripAccents(text.toLowerCase());
   const aliasWords=(text.match(/[\p{L}]+/gu)||[]);
   if(/\bfaltan\b/.test(lowerNoAcc)||lowerNoAcc.includes('no han venido')||lowerNoAcc.includes('no vinieron')){
@@ -1352,7 +1489,8 @@ function handleAdd(){
   // 3) Si tampoco, se usa el grupo que marca el horario (o el que hayas
   //    seleccionado a mano) en este momento.
   const ctx = getEffectiveContext(); // trae también la fecha del día que estés viendo (hoy u otro)
-  const fullNameMatch = findUniqueFullNameMatch(text);
+  const esTodos = /^\s*(?:a\s+)?(todos|todas|toda la clase|todo el grupo|la clase entera|el grupo entero)\b/i.test(stripAccents(text));
+  const fullNameMatch = esTodos ? null : findUniqueFullNameMatch(text);
   const mention = fullNameMatch ? null : findGroupMention(text);
   let targetGroupId, targetGroupName, unitId, textForParsing, manual = false, forcedAlumno = null;
 
@@ -1388,7 +1526,7 @@ function handleAdd(){
   }
 
   const groupStudents = data.alumnos.filter(a => a.grupoId === targetGroupId);
-  const result = parseEntry(textForParsing, groupStudents, forcedAlumno);
+  const result = parseEntry(textForParsing, groupStudents, forcedAlumno, ctx.fecha);
   const hora = ctx.entry ? ctx.entry.inicio : new Date().toTimeString().slice(0,5);
   const ok = commitParseResult(result, targetGroupId, targetGroupName, unitId, text, manual, ctx.fecha, hora);
   if(ok) input.value = '';
@@ -1443,6 +1581,17 @@ function commitParseResult(result, targetGroupId, targetGroupName, unitId, texto
   if(result.error === 'points-high'){ showFeedback('El máximo de puntos por registro es 5. No se ha guardado.', 'error'); return false; }
   if(result.error === 'points-low'){ showFeedback('Los puntos no pueden ser negativos. No se ha guardado.', 'error'); return false; }
   if(result.error === 'points-blocked'){ showFeedback(`⚠️ ${result.nombre} no puede sumar puntos hoy: se ha sentado más de una vez.`, 'error'); return false; }
+  if(result.error === 'lista-sin-identificar'){
+    guardarNoIdentificado(textoOriginal, targetGroupId, targetGroupName, `No he podido identificar a nadie: ${result.problemas.join('; ')}. Añade el apellido.`, fecha, hora);
+    return true;
+  }
+  if(result.error === 'todos-excluidos'){ showFeedback(`No sé seguro a quién excluir (${result.problemas.join('; ')}). No se ha guardado nada.`, 'error'); return false; }
+  if(result.error === 'todos-vacio'){ showFeedback('No queda ningún alumno presente al que dar los puntos.', 'warn'); return false; }
+  if(!result.length){
+    const b = (result.bloqueados || []).join(', ');
+    showFeedback(b ? `⚠️ ${b} no puede${result.bloqueados.length>1?'n':''} sumar puntos hoy: se ha${result.bloqueados.length>1?'n':''} sentado más de una vez.` : 'No se ha guardado nada.', 'error');
+    return false;
+  }
 
   const now = new Date();
   result.forEach(r => {
@@ -1465,14 +1614,30 @@ function commitParseResult(result, targetGroupId, targetGroupName, unitId, texto
     });
   });
 
-  const added = data.registros.slice(0, result.length);
+  // Nombres de una enumeración que no se han podido identificar: se guardan
+  // también, con ❌, en el mismo paso (un solo «Deshacer» lo quita todo).
+  let nAdded = result.length;
+  if(result.pendientes && result.pendientes.length){
+    data.registros.unshift({
+      id: 'r_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+      timestamp: Date.now(), fecha: fecha || now.toISOString().slice(0,10), hora: hora || now.toTimeString().slice(0,5),
+      grupoId: targetGroupId, alumnoId: null, unidadId: null, tipo: 'revisar', categoria: null, puntos: null, vueltas: null, trote: false,
+      textoOriginal, textoInterpretado: 'Sin puntos por no identificar: ' + result.pendientes.join('; '), manual: false, needsReview: true
+    });
+    nAdded++;
+  }
+  const added = data.registros.slice(0, nAdded);
   undoStack.push({ action:'add', records: added });
   redoStack = [];
 
   saveData();
   renderAll();
-  const base = result.length > 1 ? `${result.length} registros guardados` : 'Registro guardado';
-  showFeedback(manual ? `${base} en ${targetGroupName}` : base, 'ok');
+  let base = result.resumen || (result.length > 1 ? `${result.length} registros guardados` : 'Registro guardado');
+  if(manual) base += ` en ${targetGroupName}`;
+  const avisos = [];
+  if(result.bloqueados && result.bloqueados.length) avisos.push(`sin puntos por sentarse: ${result.bloqueados.join(', ')}`);
+  if(result.pendientes && result.pendientes.length) avisos.push(`❌ revisar ${result.pendientes.join('; ')}`);
+  showFeedback(avisos.length ? `${base} · ${avisos.join(' · ')}` : base, avisos.length ? 'warn' : 'ok');
   return true;
 }
 
@@ -1866,6 +2031,7 @@ function renderDailyClasses(effectiveCtx){
           <button class="daily-class${isNow?' current':''}${selected?' selected':''}" data-idx="${idx}" title="${selected ? 'Registrando aquí' : 'Registrar en ' + g.nombre + ' (' + h.inicio + '–' + h.fin + ')'}">
             <small>${h.inicio}–${h.fin}</small>
             <b style="color:${(isNow||selected) ? c.fg : ''}">${nombreCortoGrupo(g)}</b>
+            ${h.aula ? `<span class="daily-aula" title="Aula donde recoger al grupo">📍 ${h.aula}</span>` : ''}
           </button>
           <button class="daily-class-roster" data-idx="${idx}" title="Ver alumnado de ${g.nombre}">👥</button>
         </div>`;
@@ -2287,6 +2453,13 @@ function openClassRoster(grupoId){
 }
 
 /* ———————————— render: Horario (rejilla semanal, de un vistazo) ———————————— */
+// Misma clave de colores que el PDF del departamento: rojo = pabellón,
+// azul = pistas exteriores, negro = pabellón a repartir.
+const INSTALACION_PERSONAL = {
+  pabellon:   { clase:'inst-p', corto:'Pabellón', nombre:'Pabellón (para ti)' },
+  compartido: { clase:'inst-c', corto:'Pab. compartido', nombre:'Pabellón a repartir entre los profes implicados' },
+  pistas:     { clase:'inst-x', corto:'Pistas', nombre:'Pistas exteriores' }
+};
 function renderSchedule(){
   const days = ['lunes','martes','miercoles','jueves','viernes'];
   const slots = [...new Set(data.horario.map(h => h.inicio + '|' + h.fin))]
@@ -2307,13 +2480,13 @@ function renderSchedule(){
       }
       const g = data.grupos.find(x => x.id === h.grupoId);
       const c = groupColor(h.grupoId);
-      const tienePabellon = h.instalacion === 'pabellon' || h.instalacion === 'compartido';
-      return `<td><div class="sched-cell${isNow?' now':''}${tienePabellon?' pabellon':''}" data-group="${g ? g.id : ''}" title="${tienePabellon ? (h.instalacion==='compartido' ? 'Pabellón a repartir' : 'Pabellón') : (h.instalacion==='pistas' ? 'Pistas exteriores' : '')}" style="background:${c.bg};color:${c.fg};cursor:${g?'pointer':'default'}">${h.materia}<small>${g ? g.nombre : '—'}</small></div></td>`;
+      const inst = INSTALACION_PERSONAL[h.instalacion];
+      return `<td><div class="sched-cell${isNow?' now':''}" data-group="${g ? g.id : ''}" title="${inst ? inst.nombre : ''}${h.aula ? ' · Recoger en ' + h.aula : ''}" style="background:${c.bg};color:${c.fg};cursor:${g?'pointer':'default'}">${h.materia}<small>${g ? g.nombre : '—'}</small>${(h.aula || inst) ? `<span class="sched-extra">${h.aula ? `<span class="aula-tag">📍 ${h.aula}</span>` : ''}${inst ? `<span class="inst-tag ${inst.clase}">${inst.corto}</span>` : ''}</span>` : ''}</div></td>`;
     }).join('');
     return `<tr><td class="sched-time">${slot.inicio}–${slot.fin}</td>${cells}</tr>`;
   }).join('');
 
-  $('scheduleGrid').innerHTML = `<table class="sched-table">${header}${rows}</table>` + `<div class="hint" style="margin-top:10px">🟧 Borde naranja = tienes pabellón esa hora (incluye el pabellón a repartir con otro profesor).</div>`;
+  $('scheduleGrid').innerHTML = `<table class="sched-table">${header}${rows}</table>` + `<div class="hint" style="margin-top:10px">📍 Aula donde recoger al grupo &nbsp;·&nbsp; <span class="inst-tag inst-p">Pabellón</span> para ti &nbsp; <span class="inst-tag inst-c">Pabellón a repartir</span> con otros profes &nbsp; <span class="inst-tag inst-x">Pistas</span> exteriores</div>`;
   document.querySelectorAll('#scheduleGrid .sched-cell[data-group]').forEach(el => {
     el.onclick = () => el.dataset.group && switchToClassesAndOpen(el.dataset.group);
   });
@@ -2337,15 +2510,18 @@ const PROFES_DEPARTAMENTO = {
 const PROFESOR_ACTUAL = 'Alejandro';
 const HORARIO_DEPARTAMENTO = [
   { inicio:'08:00', fin:'09:00', dias:{
-    lunes:[['1W','MJ','p']], martes:[['3EB','Alejandro','p']], miercoles:[['1X','MJ','p']],
-    jueves:[['3EE','Alejandro','p'],['1EB','MJ','x']], viernes:[['1EB','MJ','p']]
+    lunes:[['1W','MJ','p']],
+    martes:[['3EB','Alejandro','p']],
+    miercoles:[['1X','MJ','p']],
+    jueves:[['3EE','Alejandro','p'],['1EB','MJ','x']],
+    viernes:[['1EB','MJ','p']]
   }},
   { inicio:'09:00', fin:'10:00', dias:{
     lunes:[['2 BACH AF','Marta','p']],
-    martes:[['3 ACT DE','MJ','x'],['2EE','Alejandro','p'],['2EA','Sebas','p']],
+    martes:[['3 ACT DE','MJ','x'],['2EE','Alejandro','x'],['2EA','Sebas','p']],
     miercoles:[['3 ACT BC','MJ','x'],['3 ACT AC','Alejandro','x'],['4EC','Esther','p']],
     jueves:[['1EA','Sebas','x'],['2EE','Alejandro','p'],['2 BACH AF','Marta','x']],
-    viernes:[['3E ACT BC','MJ','c'],['3E ACT AC','Alejandro','c'],['2EB','Sebas','x']]
+    viernes:[['3 ACT BC','MJ','c'],['3 ACT AC','Alejandro','c'],['2EB','Sebas','x']]
   }},
   { inicio:'10:00', fin:'11:00', dias:{
     lunes:[['2EA','Sebas','x'],['4EA','Esther','p']],
@@ -2359,23 +2535,44 @@ const HORARIO_DEPARTAMENTO = [
     martes:[['3ED','Alejandro','p'],['4EA','Esther','x'],['1EE','Marta','x']],
     miercoles:[['1EF','Marta','p'],['1Z','MJ','x']],
     jueves:[['3EC','Alejandro','p'],['4ED','Esther','x']],
-    viernes:[['3ED','Alejandro','p'],['1EC','Marta','p'],['4EE','Esther','x']]
+    viernes:[['1EC','Marta','p'],['3ED','Alejandro','x'],['4EE','Esther','x']]
   }},
   { inicio:'12:30', fin:'13:30', dias:{
     lunes:[['1Z','MJ','p'],['1EA','Sebas','x'],['1EC','Marta','x']],
-    martes:[['3EE','Alejandro','x'],['2 BACH AF','Marta','c'],['2EC','Sebas','p']],
-    miercoles:[['1EE','Marta','x'],['1EA','Sebas','p']],
+    martes:[['2EC','Sebas','p'],['3EE','Alejandro','x'],['2 BACH AF','Marta','x']],
+    miercoles:[['1EA','Sebas','p'],['1EE','Marta','x'],['1Y','MJ','x']],
     jueves:[['1ED','Marta','p'],['3 ACT DE','MJ','x'],['2ED','Sebas','x'],['3EB','Alejandro','x']],
-    viernes:[['1W','MJ','x'],['2EC','Sebas','x'],['1EE','Marta','p']]
+    viernes:[['1EE','Marta','p'],['1W','MJ','x'],['2EC','Sebas','x']]
   }},
   { inicio:'13:30', fin:'14:30', dias:{
-    lunes:[['1EF','Marta','p'],['3ESO C','Alejandro','x'],['4EE','Esther','p']],
-    martes:[['1V','Alejandro','x'],['1EC','Marta','x'],['4ED','Esther','p']],
-    miercoles:[['1ED','Marta','x'],['4EB','Esther','p']],
-    jueves:[['1EF','Marta','p'],['3EA','Alejandro','p'],['4EC','Esther','x']],
+    lunes:[['4EE','Esther','p'],['1EF','Marta','x'],['3EC','Alejandro','x']],
+    martes:[['4ED','Esther','p'],['1V','Alejandro','x'],['1EC','Marta','x']],
+    miercoles:[['4EB','Esther','p'],['1ED','Marta','x']],
+    jueves:[['3EA','Alejandro','p'],['1EF','Marta','x'],['4EC','Esther','x']],
     viernes:[['1V','Alejandro','p'],['1X','MJ','x'],['1ED','Marta','x']]
   }}
 ];
+
+// Aulas de referencia de cada grupo del centro (infografía «AULAS», IES Blas
+// Infante). Sirve para saber dónde recoger a cada grupo.
+const AULAS_CENTRO = {
+  '1EA':'A2','1EB':'A3','1EC':'A4','1ED':'A5','1EE':'A6','1EF':'A7',
+  '2EA':'B1','2EB':'B2','2EC':'B3','2ED':'B4','2EE':'B5',
+  '3EA':'A1','3EB':'A8','3EC':'B6','3ED':'B7','3EE':'B8',
+  '4EA':'B11','4EB':'B12','4EC':'B10','4ED':'B13','4EE':'B15',
+  '1V':'C11','1W':'C10','1X':'C9','1Y':'D2','1Z':'D5',
+  '2V':'C6','2W':'C1','2X':'C7','2Y':'D3','2Z':'D1',
+  '1APSD':'C8','2APSD':'C4','1ADM':'D8','2ADM':'D7'
+};
+// "3EB" → "A8"; "3 ACT DE" → "B7 / B8" (optativa que junta 3ºD y 3ºE).
+// Si el código no permite saber el grupo (p. ej. "4 ACT"), devuelve ''.
+function aulaDeCodigoDepartamento(codigo){
+  const c = codigo.replace(/\s+/g,' ').trim().toUpperCase();
+  if(AULAS_CENTRO[c.replace(/\s/g,'')]) return AULAS_CENTRO[c.replace(/\s/g,'')];
+  const act = c.match(/^(\d)\s*E?\s*ACT\s+([A-F]+)$/);
+  if(act) return act[2].split('').map(l => AULAS_CENTRO[act[1] + 'E' + l]).filter(Boolean).join(' / ');
+  return '';
+}
 const INSTALACION_INFO = {
   p: { clase:'dept-chip-pabellon', nombre:'Pabellón' },
   x: { clase:'dept-chip-pistas', nombre:'Pistas exteriores' },
@@ -2393,7 +2590,8 @@ function renderHorarioDepartamento(){
       const chips = clases.map(([codigo, prof, inst]) => {
         const esTu = prof === PROFESOR_ACTUAL;
         const info = INSTALACION_INFO[inst] || {};
-        return `<div class="dept-chip${esTu ? ' dept-chip-tu' : ''}${info.clase ? ' ' + info.clase : ''}" title="${info.nombre || ''}"><b>${codigo}</b><small>${prof}</small></div>`;
+        const aula = aulaDeCodigoDepartamento(codigo);
+        return `<div class="dept-chip${esTu ? ' dept-chip-tu' : ''}${info.clase ? ' ' + info.clase : ''}" title="${info.nombre || ''}${aula ? ' · Aula ' + aula : ''}"><b>${codigo}</b><small>${prof}${aula ? ' · 📍' + aula : ''}</small></div>`;
       }).join('');
       return `<td><div class="dept-cell">${chips}</div></td>`;
     }).join('');
