@@ -196,13 +196,28 @@ body{-webkit-tap-highlight-color:transparent}
 .dept-chip-tu.dept-chip-pabellon,.dept-chip-tu.dept-chip-pistas,.dept-chip-tu.dept-chip-compartido{background:var(--accent-soft)}
 .wg-manual-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;margin-bottom:6px}
 .wg-manual-row select{width:auto;min-width:110px}
-.sched-extra{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.aula-tag{font-size:10.5px;font-weight:800;background:#ffffffb3;border-radius:5px;padding:1px 5px;color:var(--ink)}.inst-tag{font-size:10px;font-weight:800;border-radius:5px;padding:1px 5px;color:#fff;white-space:nowrap}.inst-p{background:#c0392b}.inst-x{background:#2f5fa8}.inst-c{background:#12202d}.daily-aula{display:block;font-size:9px;font-weight:800;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sched-extra{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.aula-tag{font-size:10.5px;font-weight:800;background:#ffffffb3;border-radius:5px;padding:1px 5px;color:var(--ink)}.inst-tag{font-size:10px;font-weight:800;border-radius:5px;padding:1px 5px;color:#fff;white-space:nowrap}.inst-p{background:#c0392b}.inst-x{background:#2f5fa8}.inst-c{background:#12202d}.entry-target{display:flex;align-items:center;gap:8px;font-size:12.5px;margin:0 0 10px;padding:6px 9px;border-radius:9px}.entry-target.on{background:var(--accent-soft);color:var(--ink)}.entry-target.off{background:#f3f4f5;color:var(--muted)}.entry-target .avatar.sm{width:24px;height:24px;font-size:10px;flex:0 0 24px}.daily-class.target{border:2px solid var(--accent)!important;background:var(--accent-soft)!important}.daily-class.target b,.daily-class.target small{color:var(--accent)!important}.now-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:3px;vertical-align:middle;animation:pulse 1.4s ease-in-out infinite}.diario-btn{background:#f3f4f5;border:1px solid var(--line);border-radius:9px;padding:6px 10px;font-size:13px;font-weight:800;color:var(--muted);flex-shrink:0}.diario-btn.con-notas{background:#fff6e0;border-color:#f0d998;color:#9a6b0a}.nota-preview{display:block;max-width:52vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#9a6b0a!important}.nota-item{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.nota-item:last-child{border-bottom:0}.detail-photo{cursor:zoom-in;flex-shrink:0}
+.daily-aula{display:block;font-size:9px;font-weight:800;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#splash{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--paper);overflow:hidden;animation:splashOut .35s ease 2.8s forwards}
+#splash.hide{opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
+.splash-box{display:grid;justify-items:center;gap:16px}
+.splash-square{position:relative;width:118px;height:118px;border-radius:28px;background:var(--accent);box-shadow:0 14px 34px #2d7d7340;display:grid;place-items:center;animation:splashPop .35s cubic-bezier(.3,1.5,.6,1) both}
+.splash-g{width:56px;height:auto;display:block;animation:splashDrop .75s cubic-bezier(.3,.9,.45,1.25) .25s both;filter:drop-shadow(0 3px 3px #0002)}
+.splash-g-txt{width:auto;color:#fff;font-size:70px;font-weight:900;line-height:1;letter-spacing:-.05em}
+.splash-ball{position:absolute;top:9px;right:9px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f0a15c,var(--orange) 60%,#a85f22);animation:splashBall .8s cubic-bezier(.3,.9,.45,1.35) .6s both}
+.splash-name{font-weight:900;letter-spacing:.3em;font-size:14px;color:var(--ink);opacity:0;animation:splashFade .4s ease 1.2s forwards}
+@keyframes splashPop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes splashDrop{0%{transform:translateY(-110vh) rotate(-25deg)}75%{transform:translateY(6px) rotate(3deg)}100%{transform:translateY(0) rotate(0)}}
+@keyframes splashBall{0%{transform:translateY(-110vh)}60%{transform:translateY(0)}78%{transform:translateY(-16px)}100%{transform:translateY(0)}}
+@keyframes splashFade{to{opacity:1}}
+@keyframes splashOut{to{opacity:0;visibility:hidden}}
+@media(prefers-reduced-motion:reduce){.splash-square,.splash-g,.splash-ball,.splash-name{animation:none;opacity:1}}
 </style>
 </head>
-<body><div class="app"><aside class="sidebar"><div class="brand"><strong>GRACCUS</strong><small>Registro docente inteligente</small><span class="brand-subject">Educación Física</span></div><nav class="nav"><button data-view="classes"><b class="nav-students" aria-label="Alumnado"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M6 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="4.5" cy="9" r="2.4"/><path d="M0.5 19c0-2.6 1.8-4.6 4-5"/><circle cx="19.5" cy="9" r="2.4"/><path d="M23.5 19c0-2.6-1.8-4.6-4-5"/></svg></b><span>Alumnado</span></button><button data-view="schedule"><b class="nav-clock" aria-label="Horario"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5"></circle><path d="M16 9v7l5 3"></path></svg></b><span>Horario</span></button><button class="home-nav active" data-view="today"><b><img class="home-g-mark" src="./g-mark.png" alt="G"><i class="home-dot"></i></b></button><button data-view="calendar"><b class="nav-calendar">🗓️</b><span>Calendario</span></button><button data-view="race"><b>🐪</b><span>Clasificación</span></button></nav><div class="sidebar-footer">GRACCUS<br>Datos guardados en este dispositivo<br><label style="color:#bfe8e0;cursor:pointer;text-decoration:underline">📥 Importar datos privados<input type="file" accept="application/json" id="importPrivadoInput" style="display:none"></label><br><a href="#" id="exportarCopiaDesktop" style="color:#bfe8e0;text-decoration:underline">💾 Copia de seguridad</a><br><label style="color:#e8b0b0;cursor:pointer;text-decoration:underline">♻️ Restaurar copia<input type="file" accept="application/json" id="restaurarCopiaInputDesktop" style="display:none"></label></div></aside><main class="main">
+<body><div id="splash" aria-hidden="true"><div class="splash-box"><div class="splash-square"><img class="splash-g" src="./g-mark.png" alt="" onerror="this.outerHTML='<b class=&quot;splash-g splash-g-txt&quot;>G</b>'"><i class="splash-ball"></i></div><div class="splash-name">GRACCUS</div></div></div><div class="app"><aside class="sidebar"><div class="brand"><strong>GRACCUS</strong><small>Registro docente inteligente</small><span class="brand-subject">Educación Física</span></div><nav class="nav"><button data-view="classes"><b class="nav-students" aria-label="Alumnado"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"/><path d="M6 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><circle cx="4.5" cy="9" r="2.4"/><path d="M0.5 19c0-2.6 1.8-4.6 4-5"/><circle cx="19.5" cy="9" r="2.4"/><path d="M23.5 19c0-2.6-1.8-4.6-4-5"/></svg></b><span>Alumnado</span></button><button data-view="schedule"><b class="nav-clock" aria-label="Horario"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11.5"></circle><path d="M16 9v7l5 3"></path></svg></b><span>Horario</span></button><button class="home-nav active" data-view="today"><b><img class="home-g-mark" src="./g-mark.png" alt="G"><i class="home-dot"></i></b></button><button data-view="calendar"><b class="nav-calendar">🗓️</b><span>Calendario</span></button><button data-view="race"><b>🐪</b><span>Clasificación</span></button></nav><div class="sidebar-footer">GRACCUS<br>Datos guardados en este dispositivo<br><label style="color:#bfe8e0;cursor:pointer;text-decoration:underline">📥 Importar datos privados<input type="file" accept="application/json" id="importPrivadoInput" style="display:none"></label><br><a href="#" id="exportarCopiaDesktop" style="color:#bfe8e0;text-decoration:underline">💾 Copia de seguridad</a><br><label style="color:#e8b0b0;cursor:pointer;text-decoration:underline">♻️ Restaurar copia<input type="file" accept="application/json" id="restaurarCopiaInputDesktop" style="display:none"></label></div></aside><main class="main">
 <div class="topbar"><div><div class="eyebrow">Panel docente</div><div class="date" id="date"></div></div></div>
 
-<section id="today" class="view active"><div class="day-nav"><button id="diaPrev" title="Día anterior">◀</button><h1 id="diaTitulo">Hoy</h1><button id="diaNext" title="Día siguiente">▶</button></div><p class="sub" id="diaSub">Registra lo que ocurre, sin interrumpir la clase.</p><div class="home-search-row" style="margin:14px 0 4px"><div class="student-search" style="max-width:380px"><div class="student-search-field"><span class="student-search-icon">🔍</span><input type="text" id="studentSearchHome" placeholder="Buscar alumno…" autocomplete="off"></div><div class="student-search-results" id="studentSearchHomeResults"></div></div></div><div class="context" id="contextPills"></div><div class="grid"><div><div class="card entry-card"><h2 style="margin:0 0 16px">¿Qué ha ocurrido?</h2><div class="entry"><div class="input-shell"><input id="phrase" placeholder="Ej.: Luis 5 puntos o Daniela se esfuerza" autocomplete="off"><button class="voice" id="voiceBtn" title="Dictar">🎙</button></div><button class="primary send-entry" id="sendBtn" title="Registrar (Intro)">↵</button></div><div class="hint" id="entryHint">Escribe una frase y pulsa Intro para registrar. GRACCUS reconocerá al alumno del grupo actual (o su nombre y apellido completos, aunque sea fuera de horario) y el tipo de registro.</div><div class="feedback" id="feedback"></div></div><div class="section-head"><h2>Registros recientes</h2><div style="display:flex;gap:6px"><button class="link" id="undoBtn" disabled>↺ Deshacer</button><button class="link" id="redoBtn" disabled>↻ Rehacer</button></div></div><div class="card" id="recent"></div></div><div class="right-card"><div class="card"><h2>Resumen del día</h2><div class="metrics"><div class="metric"><strong id="points">0</strong><span>Puntos</span></div><div class="metric"><strong id="absences">0</strong><span>Faltas</span></div><div class="metric"><strong id="observations">0</strong><span>Observaciones</span></div><div class="metric"><strong id="incidents">0</strong><span>Incidencias</span></div><div class="metric"><strong id="laps">0</strong><span>Vueltas</span></div><div class="metric"><strong id="review">0</strong><span>❌ Sin identificar</span></div></div></div></div></div></section>
+<section id="today" class="view active"><div class="day-nav"><button id="diaPrev" title="Día anterior">◀</button><h1 id="diaTitulo">Hoy</h1><button id="diaNext" title="Día siguiente">▶</button></div><p class="sub" id="diaSub">Registra lo que ocurre, sin interrumpir la clase.</p><div class="home-search-row" style="margin:14px 0 4px"><div class="student-search" style="max-width:380px"><div class="student-search-field"><span class="student-search-icon">🔍</span><input type="text" id="studentSearchHome" placeholder="Buscar alumno…" autocomplete="off"></div><div class="student-search-results" id="studentSearchHomeResults"></div></div></div><div class="context" id="contextPills"></div><div class="grid"><div><div class="card entry-card"><h2 style="margin:0 0 10px">¿Qué ha ocurrido?</h2><div class="entry-target" id="entryTarget"></div><div class="entry"><div class="input-shell"><input id="phrase" placeholder="Ej.: Luis 5 puntos o Daniela se esfuerza" autocomplete="off"><button class="voice" id="voiceBtn" title="Dictar">🎙</button></div><button class="primary send-entry" id="sendBtn" title="Registrar (Intro)">↵</button></div><div class="hint" id="entryHint">Escribe una frase y pulsa Intro para registrar. GRACCUS reconocerá al alumno del grupo actual (o su nombre y apellido completos, aunque sea fuera de horario) y el tipo de registro.</div><div class="feedback" id="feedback"></div></div><div class="section-head"><h2>Registros recientes</h2><div style="display:flex;gap:6px"><button class="link" id="undoBtn" disabled>↺ Deshacer</button><button class="link" id="redoBtn" disabled>↻ Rehacer</button></div></div><div class="card" id="recent"></div></div><div class="right-card"><div class="card"><h2>Resumen del día</h2><div class="metrics"><div class="metric"><strong id="points">0</strong><span>Puntos</span></div><div class="metric"><strong id="absences">0</strong><span>Faltas</span></div><div class="metric"><strong id="observations">0</strong><span>Observaciones</span></div><div class="metric"><strong id="incidents">0</strong><span>Incidencias</span></div><div class="metric"><strong id="laps">0</strong><span>Vueltas</span></div><div class="metric"><strong id="cards">0</strong><span>🟨 Tarjetas</span></div><div class="metric"><strong id="review">0</strong><span>❌ Sin identificar</span></div></div></div></div></div></section>
 
 <section id="classes" class="view"><h1>Grupos y alumnos</h1><div class="student-search" style="max-width:380px;margin:6px 0 22px"><div class="student-search-field"><span class="student-search-icon">🔍</span><input type="text" id="studentSearchClasses" placeholder="Buscar alumno por nombre…" autocomplete="off"></div><div class="student-search-results" id="studentSearchClassesResults"></div></div><div class="list" id="classList"></div><div class="classes-tools" id="classesTools"><div class="classes-tool" data-tool="import"><label class="square-toggle" title="Importar fotos y notas privadas">📥<input type="file" accept="application/json" id="importPrivadoInputMobile" style="display:none"></label><span class="classes-tool-label">Importar fotos y notas privadas</span></div><div class="classes-tool" data-tool="backup"><button class="square-toggle" id="exportarCopiaMobile" title="Descargar copia de seguridad">💾</button><span class="classes-tool-label">Descargar copia de seguridad</span></div><div class="classes-tool" data-tool="restore"><label class="square-toggle" title="Restaurar copia de seguridad" style="color:var(--danger)">♻️<input type="file" accept="application/json" id="restaurarCopiaInputMobile" style="display:none"></label><span class="classes-tool-label">Restaurar copia de seguridad</span></div></div></section>
 <section id="race" class="view"><h1>Clasificación</h1><div class="card"><div style="display:flex;gap:12px;flex-wrap:wrap" id="raceControls"></div><div style="margin-top:18px" id="raceTrack"></div></div></section>
@@ -231,7 +246,7 @@ const STORAGE_KEY = 'graccus-data';
 // horario, alumnado). Subir este número es lo único que hace falta para que
 // los dispositivos con datos antiguos guardados se actualicen solos,
 // conservando siempre puntos, faltas, fotos y notas ya registrados.
-const DATA_VERSION = 16;
+const DATA_VERSION = 17;
 const DAY_KEYS = ['domingo','lunes','martes','miercoles','jueves','viernes','sabado'];
 const DAY_LABELS = {lunes:'Lunes',martes:'Martes',miercoles:'Miércoles',jueves:'Jueves',viernes:'Viernes',sabado:'Sábado',domingo:'Domingo'};
 
@@ -263,7 +278,7 @@ const ALUMNOS_GBACH_REAL = [
   { nombrePila:"Leonor", apellidos:"Gómez Jiménez", correo:"lgomjim0412@g.educaand.es", sexo:"F" },
   { nombrePila:"Isabel", apellidos:"Hernández Pulido", correo:"iherpul2807@g.educaand.es", sexo:"F" },
   { nombrePila:"Carolina", apellidos:"Jiménez Morillo", correo:"cjimmor184@g.educaand.es", sexo:"F" },
-  { nombrePila:"Ángela de la Cruz", apellidos:"Jiménez Pineda", correo:"ajimpin0901@g.educaand.es", sexo:"F" },
+  { nombrePila:"Ángela", apellidos:"Jiménez Pineda", correo:"ajimpin0901@g.educaand.es", sexo:"F" },
   { nombrePila:"Manuel", apellidos:"León Borreguero", correo:"mleobor1305@g.educaand.es", sexo:"M" },
   { nombrePila:"Christian", apellidos:"León Sánchez", correo:"cleosan734@g.educaand.es", sexo:"M" },
   { nombrePila:"Claudia", apellidos:"Liébana Benítez", correo:"clieben1412@g.educaand.es", sexo:"F" },
@@ -272,8 +287,8 @@ const ALUMNOS_GBACH_REAL = [
   { nombrePila:"Sonia María", apellidos:"Pineda Bonilla", correo:"spinbon2508@g.educaand.es", sexo:"F" },
   { nombrePila:"Rubén", apellidos:"Pineda Pérez", correo:"rpinper0206@g.educaand.es", sexo:"M" },
   { nombrePila:"Martina", apellidos:"Rodrígues Jiménez", correo:"mrodjim2504@g.educaand.es", sexo:"F" },
-  { nombrePila:"Angélica Joanna", apellidos:"Rogel Cantos", correo:"arogcan1008@g.educaand.es", sexo:"F" },
-  { nombrePila:"Carlota del Pilar", apellidos:"Roldán García", correo:"crolgar0210@g.educaand.es", sexo:"F" },
+  { nombrePila:"Angélica", apellidos:"Rogel Cantos", correo:"arogcan1008@g.educaand.es", sexo:"F" },
+  { nombrePila:"Carlota", apellidos:"Roldán García", correo:"crolgar0210@g.educaand.es", sexo:"F" },
   { nombrePila:"Curro", apellidos:"Roldán Martín", correo:"crolmar2503@g.educaand.es", sexo:"M" },
   { nombrePila:"Claudia", apellidos:"Roldán Romero", correo:"crolrom0509@g.educaand.es", sexo:"F" },
   { nombrePila:"Andrea", apellidos:"Roldán Santos", correo:"arolsan0706@g.educaand.es", sexo:"F" },
@@ -283,7 +298,7 @@ const ALUMNOS_GBACH_REAL = [
   { nombrePila:"Gloria", apellidos:"Ruiz Mateos", correo:"gruimat1309@g.educaand.es", sexo:"F" },
   { nombrePila:"Lola", apellidos:"Sánchez Jiménez", correo:"lsanjim0703@g.educaand.es", sexo:"F" },
   { nombrePila:"Andrea", apellidos:"Sánchez Rodríguez", correo:"asanrod0606@g.educaand.es", sexo:"F" },
-  { nombrePila:"María Cristina", apellidos:"Topal", correo:"mtop0408@g.educaand.es", sexo:"F" },
+  { nombrePila:"María", apellidos:"Topal", correo:"mtop0408@g.educaand.es", sexo:"F" },
   { nombrePila:"Hugo", apellidos:"Valle Soto", correo:"hvalsot1802@g.educaand.es", sexo:"M" },
   { nombrePila:"Mirian", apellidos:"Zapata Martín", correo:"mzapmar0303@g.educaand.es", sexo:"F" },
 ];
@@ -385,7 +400,7 @@ const ALUMNOS_REALES = {
     { id:"g3b_a14", nombrePila:"Ángela", apellidos:"González López", correo:"agonlop1211@g.educaand.es", sexo:"F" },
     { id:"g3b_a15", nombrePila:"Estrella", apellidos:"González López", correo:"egonlop1211@g.educaand.es", sexo:"F" },
     { id:"g3b_a16", nombrePila:"Rayane", apellidos:"Hammani", correo:"rham314@g.educaand.es", sexo:"F" },
-    { id:"g3b_a17", nombrePila:"Alba María", apellidos:"Lagarda Bonilla", correo:"alagbon0901@g.educaand.es", sexo:"F" },
+    { id:"g3b_a17", nombrePila:"Alba", apellidos:"Lagarda Bonilla", correo:"alagbon0901@g.educaand.es", sexo:"F" },
     { id:"g3b_a18", nombrePila:"Víctor Manuel", apellidos:"López Sánchez", correo:"vlopsan0302@g.educaand.es", sexo:"M" },
     { id:"g3b_a19", nombrePila:"Naoual", apellidos:"Louali", correo:"nlou086@g.educaand.es", sexo:"F" },
     { id:"g3b_a20", nombrePila:"Martina", apellidos:"Morillo García", correo:"mmorgar0111@g.educaand.es", sexo:"F" },
@@ -531,9 +546,10 @@ const ALUMNOS_REALES = {
     { id:"g_af4_a6", nombrePila:"Borja", apellidos:"Castro Ruiz", correo:"bcasrui1606@g.educaand.es", sexo:"M" },
     { id:"g_af4_a7", nombrePila:"Alba", apellidos:"Cordero Carrión", correo:"acorcar1312@g.educaand.es", sexo:"F" },
     { id:"g_af4_a8", nombrePila:"Jesús", apellidos:"De los Santos Jiménez", correo:"jlosjim2106@g.educaand.es", sexo:"M" },
-    { id:"g_af4_a9", nombrePila:"Adriana", apellidos:"Delgado Falcón", correo:"adelfal0105@g.educaand.es", sexo:"F" },
     { id:"g_af4_a10", nombrePila:"Owen Stick", apellidos:"Delgado Jiménez", correo:"odeljim171@g.educaand.es", sexo:"M" },
     { id:"g_af4_a11", nombrePila:"Antonio", apellidos:"Falcón González", correo:"afalgon2808@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a26", nombrePila:"Ángela", apellidos:"Fernández Jiménez", correo:"aferjim2603@g.educaand.es", sexo:"F" },
+    { id:"g_af4_a27", nombrePila:"Pedro", apellidos:"Franco Espinosa", correo:"pfraesp0304@g.educaand.es", sexo:"M" },
     { id:"g_af4_a12", nombrePila:"Álvaro", apellidos:"García García", correo:"agargar186b@g.educaand.es", sexo:"M" },
     { id:"g_af4_a13", nombrePila:"José Manuel", apellidos:"Jiménez Pineda", correo:"jjimpin2811@g.educaand.es", sexo:"M" },
     { id:"g_af4_a14", nombrePila:"Adrián", apellidos:"León Soto", correo:"aleosot1311@g.educaand.es", sexo:"M" },
@@ -541,9 +557,9 @@ const ALUMNOS_REALES = {
     { id:"g_af4_a16", nombrePila:"Juan Pablo", apellidos:"Martín Morillo", correo:"jmarmor0402@g.educaand.es", sexo:"M" },
     { id:"g_af4_a17", nombrePila:"Alejandro Tomás", apellidos:"Moreno Sánchez", correo:"amorsan0309c@g.educaand.es", sexo:"M" },
     { id:"g_af4_a18", nombrePila:"Álvaro", apellidos:"Morillo Escribano", correo:"amoresc2310@g.educaand.es", sexo:"M" },
-    { id:"g_af4_a19", nombrePila:"Luis Ángel", apellidos:"Patiño Toro", correo:"lpattor435@g.educaand.es", sexo:"M" },
     { id:"g_af4_a20", nombrePila:"Carmen Rocío", apellidos:"Pinelo Bonilla", correo:"cpinbon2602@g.educaand.es", sexo:"F" },
     { id:"g_af4_a21", nombrePila:"Javier", apellidos:"Ponce Bonilla", correo:"jponbon0907@g.educaand.es", sexo:"M" },
+    { id:"g_af4_a28", nombrePila:"Jesús", apellidos:"Roldán Jiménez", correo:"jroljim0803@g.educaand.es", sexo:"M" },
     { id:"g_af4_a22", nombrePila:"Guillermo", apellidos:"Sánchez Jiménez", correo:"gsanjim0210@g.educaand.es", sexo:"M" },
     { id:"g_af4_a23", nombrePila:"Jesús", apellidos:"Sánchez Moreno", correo:"jsanmor0209@g.educaand.es", sexo:"M" },
     { id:"g_af4_a24", nombrePila:"Fabiola", apellidos:"Santoja Moreno", correo:"fsanmor2812@g.educaand.es", sexo:"F" },
@@ -673,6 +689,7 @@ function loadData(){
       fresh.calendario = parsed.calendario || [];
       fresh.gruposGuardados = parsed.gruposGuardados || {};
       fresh.profesor = parsed.profesor || fresh.profesor;
+      if(parsed.datosPrivadosVersion) fresh.datosPrivadosVersion = parsed.datosPrivadosVersion;
 
       // Fotos y notas privadas añadidas a mano desde la propia app (no desde
       // el listado de fábrica): si el alumno sigue existiendo con el mismo id
@@ -682,7 +699,10 @@ function loadData(){
       fresh.alumnos.forEach(a => {
         const prev = alumnosPrevios[a.id];
         if(!prev) return;
-        if(prev.foto && !a.foto) a.foto = prev.foto;
+        // Hasta la v17, las fotos de 4º ESO Actividad Física estaban
+        // descuadradas: no se arrastran (se recuperan importando el JSON v2).
+        const fotoDescuadrada = a.grupoId === 'g_af4' && (parsed._v || 0) < 17;
+        if(prev.foto && !a.foto && !fotoDescuadrada) a.foto = prev.foto;
         if(prev.notasPrivadas && !a.notasPrivadas) a.notasPrivadas = prev.notasPrivadas;
       });
 
@@ -851,6 +871,53 @@ function getEffectiveContext(){
   }
   return { ...getCurrentContext(), overridden: false, fecha: hoyISO() };
 }
+// Hora que se guarda en un registro: la hora EXACTA si se registra en el
+// momento (hoy y dentro del tramo de esa clase); la hora de inicio de la
+// clase solo si se registra a posteriori (otra clase elegida a mano u otro día).
+function horaParaRegistro(ctx){
+  const ahora = new Date().toTimeString().slice(0,5);
+  if(!ctx || !ctx.entry) return ahora;
+  if(ctx.fecha === hoyISO() && ahora >= ctx.entry.inicio && ahora < ctx.entry.fin) return ahora;
+  return ctx.entry.inicio;
+}
+
+// La clase activa se recalcula sola: cada 20 s, al volver a la app y al
+// cambiar de tramo. Una clase elegida a mano caduca en cuanto empieza otra
+// clase (o pasa el día), y si la app vuelve de estar en segundo plano más de
+// 10 minutos, se vuelve siempre a «hoy, ahora».
+let ultimoHoyVisto = hoyISO();
+let ultimaEntradaReal = null;
+let ocultaDesde = null;
+function comprobarContextoVigente(forzar){
+  const hoy = hoyISO();
+  let cambio = !!forzar;
+  if(hoy !== ultimoHoyVisto){
+    ultimoHoyVisto = hoy; fechaSeleccionada = hoy; contextOverrideEntry = null; cambio = true;
+    const dateEl = document.getElementById('date');
+    if(dateEl) dateEl.textContent = new Date().toLocaleDateString('es-ES', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  }
+  const real = getCurrentContext().entry;
+  if(real !== ultimaEntradaReal){
+    ultimaEntradaReal = real;
+    if(fechaSeleccionada === hoy) contextOverrideEntry = null;
+    cambio = true;
+  }
+  if(cambio){
+    try{ updateContextUI(); }catch(e){ console.error(e); }
+    try{ renderSchedule(); }catch(e){ console.error(e); }
+  }
+}
+setInterval(() => comprobarContextoVigente(false), 20000);
+document.addEventListener('visibilitychange', () => {
+  if(document.hidden){ ocultaDesde = Date.now(); return; }
+  if(ocultaDesde && Date.now() - ocultaDesde > 10 * 60 * 1000){
+    fechaSeleccionada = hoyISO(); contextOverrideEntry = null;
+  }
+  ocultaDesde = null;
+  comprobarContextoVigente(true);
+});
+window.addEventListener('pageshow', () => comprobarContextoVigente(true));
+
 function seleccionarClaseParaRegistrar(entry){
   // Si se vuelve a pulsar la clase que ya toca ahora (y es hoy), quitamos la
   // selección manual (volvemos a "ahora mismo" automáticamente).
@@ -994,6 +1061,23 @@ function formalizarNota(nombreCorto, remaining){
 /* ———————————— intérprete de lenguaje natural ———————————— */
 // Clasifica el tipo de registro (puntos/falta/incidencia/observación) para un
 // alumno ya identificado, a partir del texto restante tras quitar su nombre.
+/* ———— tarjetas (llamadas de atención) ———— */
+const RE_TARJETA = /\b(tarjeta|amarilla|amonest\w*|aviso|avisad[oa]|advertencia|advertid[oa]|negativo|llamada de atencion|llamo la atencion|llamar la atencion|llamado la atencion|toque de atencion)\b/;
+function esTarjeta(r){ return r.tipo === 'amarilla' || (r.tipo === 'incidencia' && r.categoria === 'palabrota'); }
+function registroTarjeta(alumno, texto){
+  const noAcc = stripAccents(texto.toLowerCase());
+  const motivo = texto.replace(/\b(tarjeta amarilla|tarjeta|amarilla|amonestaci[oó]n|amonestad[oa]|amonesto|aviso|avisad[oa]|advertencia|advertid[oa]|negativo|llamada de atenci[oó]n|(le )?llamo la atenci[oó]n|llamar la atenci[oó]n|llamado la atenci[oó]n|toque de atenci[oó]n)\b/gi, ' ')
+    .replace(/^\s*(por|de|a|:|,|-)\s+/i, '').replace(/\s+/g, ' ').trim();
+  const pal = detectaPalabrota(noAcc);
+  return { alumno, tipo:'amarilla', categoria: pal ? 'palabrota' : null, puntos:null,
+    textoInterpretado: `${alumno.nombre.split(' ')[0]}: ${motivo ? motivo.charAt(0).toUpperCase() + motivo.slice(1) : 'llamada de atención'}` };
+}
+function etiquetaTarjeta(nivel){
+  if(nivel >= 3) return `📄 Parte (${nivel}ª tarjeta)`;
+  if(nivel === 2) return '🟥 Roja (2ª amarilla) · avisar a la familia';
+  return '🟨 Tarjeta amarilla';
+}
+
 function classifyForAlumno(remaining, alumno){
   // Puntuación final del dictado ("5.") y números en letra ("cinco puntos").
   remaining = remaining.replace(/[.!?¡¿]+\s*$/,'').trim();
@@ -1040,6 +1124,12 @@ function classifyForAlumno(remaining, alumno){
     return [{ alumno, tipo:'vueltas', categoria:'sentarse', puntos:null, vueltas:cantidad, trote, textoInterpretado: texto }];
   }
 
+  // Llamada de atención = tarjeta amarilla (lleva un negativo). En una misma
+  // clase, la 2ª amarilla es roja (avisar a la familia) y la 3ª, parte.
+  if(RE_TARJETA.test(remainingNoAcc) && !/\bexpuls/.test(remainingNoAcc)){
+    return [registroTarjeta(alumno, remaining)];
+  }
+
   // Falta singular
   if(/\b(falta|ausente|no ha venido|no vino)\b/.test(remainingNoAcc)){
     return [{ alumno, tipo:'falta', categoria:null, puntos:null, textoInterpretado:`Falta de ${nombreCorto}` }];
@@ -1057,7 +1147,7 @@ function classifyForAlumno(remaining, alumno){
   // "hijo de puta" por culpa de que "puta" sola ya haría matchear antes).
   const palabrotaDetectada = detectaPalabrota(remainingNoAcc);
   if(palabrotaDetectada){
-    return [{ alumno, tipo:'incidencia', categoria:'palabrota', puntos:null,
+    return [{ alumno, tipo:'amarilla', categoria:'palabrota', puntos:null,
       textoInterpretado: formalizarNota(nombreCorto, `dice ${palabrotaDetectada}`) }];
   }
 
@@ -1206,9 +1296,19 @@ function levenshtein(a,b){
   for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+(a[i-1]===b[j-1]?0:1));
   return dp[m][n];
 }
+// Palabras corrientes que NUNCA deben confundirse con un nombre por culpa de
+// la tolerancia a erratas ("para" no es "Sara", "hora" no es "Nora"...).
+const PALABRAS_COMUNES = new Set(('para pare paro pero pera como coma cama esta este esto estos estas eso esa hora horas media medio todo toda todos todas '+
+  'bien mal mucho mucha poco poca clase clases hace hacer hizo cuando donde porque sobre entre desde hasta mismo misma tiene tienen tenia '+
+  'tener necesita necesitan debe deben falta faltan acabar acaba termina terminar ficha fichas reto retos examen trabajo tarea casa '+
+  'pista pistas balon pelota juego juegos grupo grupos equipo equipos patio chico chica chicos chicas alumno alumna nota notas dia dias '+
+  'semana lunes martes jueves viernes hoy ayer luego antes despues ahora siempre nunca mejor peor otra otro otras otros cada solo sola '+
+  'bajo alto baja alta nada algo aqui alli dice dijo sale sala pone puso viene vino vale dame dale cosa cosas mano manos agua fruta '+
+  'camiseta aviso tarjeta amarilla roja parte negativo llamada atencion vuelta vueltas punto puntos').split(/\s+/));
 function palabraCoincide(tok, palabra){
   if(!tok || !palabra) return false;
   if(tok === palabra) return true;
+  if(PALABRAS_COMUNES.has(tok)) return false;
   if(palabra.length < 4) return false; // nombres muy cortos: exigimos exactitud, para no confundir
   return levenshtein(tok, palabra) <= 1; // tolera una letra de diferencia (typo)
 }
@@ -1254,6 +1354,10 @@ function resolverAlumnoEnGrupo(text, students){
     candidatos.push({ alumno:a, matchCount, matchApellido, matchPrimerApellido });
   }
   if(!candidatos.length) return { error:'not-found' };
+  // Una coincidencia exacta del nombre de pila manda sobre una "casi igual"
+  // (así "Juan" no se confunde con "Juana" si en la clase están los dos).
+  const exactos = candidatos.filter(c => stripAccents(nombrePilaDe(c.alumno).toLowerCase()).split(/\s+/).some(p => tokens.includes(p)));
+  if(exactos.length && exactos.length < candidatos.length) candidatos.splice(0, candidatos.length, ...exactos);
   // Nos quedamos con quien más palabras del nombre de pila coincida (así "María
   // Cristina" no se confunde con otra "María" que no tenga también "Cristina").
   const maxMatch = Math.max(...candidatos.map(c => c.matchCount));
@@ -1330,7 +1434,7 @@ function motivoDePuntos(extra){
 // "Lola Anaya, Álvaro y Claudia Roldán" → ["Lola Anaya", "Álvaro", "Claudia Roldán"].
 // Funciona con comas, "y", o sin nada entre medias (como suele dictarse): un
 // apellido se une al nombre que tiene delante si es de ese mismo alumno.
-const PALABRAS_ENLACE = new Set(['de','del','la','las','el','los','a','al','y','e','o','con','por','para']);
+const PALABRAS_ENLACE = new Set(['de','del','la','las','el','los','a','al','y','e','o','ni','con','por','para']);
 function segmentarMenciones(text, students){
   const piezas = text.match(/[\p{L}]+|[,;\/+&]/gu) || [];
   const palabrasDe = a => [
@@ -1341,7 +1445,7 @@ function segmentarMenciones(text, students){
   let actual = null; // { palabras:[], candidatos:[] }
   for(const raw of piezas){
     const tok = stripAccents(raw.toLowerCase());
-    if(/^[,;\/+&]$/.test(tok) || tok === 'y' || tok === 'e'){ actual = null; continue; }
+    if(/^[,;\/+&]$/.test(tok) || tok === 'y' || tok === 'e' || tok === 'ni'){ actual = null; continue; }
     // ¿Sigue siendo el mismo alumno? (segundo nombre o apellido)
     if(actual){
       const siguen = actual.candidatos.filter(a => palabrasDe(a).some(p => palabraCoincide(tok, p)));
@@ -1403,11 +1507,12 @@ function parseListaPuntos(text, students){
 // "Todos 5", "Todos 3 puntos camiseta", "Todos menos Luis y Ana 5",
 // "Todos 5 menos Luis", "Toda la clase 2"... Solo reciben los puntos los
 // alumnos PRESENTES ese día (sin falta registrada en esa fecha).
+const RE_TODOS = /^(?:a\s+)?(todos|todas|toda la clase|todo el grupo|la clase entera|el grupo entero)\b/;
 function parseTodos(text, students, fecha){
   const norm = stripAccents(text.toLowerCase()).trim();
-  const m = norm.match(/^(?:a\s+)?(todos|todas|toda la clase|todo el grupo|la clase entera|el grupo entero)\b/);
+  const m = norm.match(RE_TODOS);
   if(!m) return null;
-  const resto = text.trim().slice(m[0].length); // misma longitud: stripAccents no cambia posiciones
+  const resto = text.trim().slice(m[0].length);
   const p = extraerPuntos(resto);
   if(!p) return null;
   // Exclusiones: lo que va detrás de "menos / excepto / salvo / quitando / sin"
@@ -1437,7 +1542,7 @@ function parseTodos(text, students, fecha){
   if(res.error) return res;
   const partes = [`${res.length} alumno${res.length===1?'':'s'} +${p.puntos}`];
   if(ausentes.size){ const n = students.filter(a => ausentes.has(a.id)).length; if(n) partes.push(`${n} ausente${n===1?'':'s'} sin puntos`); }
-  if(excluidos.length) partes.push(`excluidos: ${excluidos.map(a => nombrePilaDe(a)).join(', ')}`);
+  if(excluidos.length) partes.push(`sin puntos por excluidos: ${excluidos.map(a => nombrePilaDe(a)).join(', ')}`);
   res.resumen = partes.join(' · ');
   return res;
 }
@@ -1448,6 +1553,18 @@ function parseEntry(text, students, forcedAlumno, fecha){
   if(todos) return todos;
   const lista = parseListaPuntos(text, students);
   if(lista) return lista;
+  if(RE_TARJETA.test(stripAccents(text.toLowerCase()))){
+    const menciones = segmentarMenciones(text, students);
+    if(menciones.length >= 2){
+      const { alumnos, problemas } = resolverMenciones(menciones, students);
+      if(!alumnos.length) return { error:'lista-sin-identificar', problemas };
+      let resto = text;
+      alumnos.forEach(a => { resto = quitarNombreDelTexto(resto, a); });
+      const res = alumnos.map(a => registroTarjeta(a, resto.replace(/^[\s,y]+/i, '')));
+      res.pendientes = problemas;
+      return res;
+    }
+  }
   const lowerNoAcc=stripAccents(text.toLowerCase());
   const aliasWords=(text.match(/[\p{L}]+/gu)||[]);
   if(/\bfaltan\b/.test(lowerNoAcc)||lowerNoAcc.includes('no han venido')||lowerNoAcc.includes('no vinieron')){
@@ -1483,13 +1600,24 @@ function handleAdd(){
     return;
   }
 
+  // 0b) ¿La frase EMPIEZA por un curso o grupo ("3º ESO A necesita media hora
+  //     para retos", "3º ESO tiene que acabar la ficha")? Es una nota para el
+  //     diario de esa clase, sin alumno. Excepción: "3B todos 5" (puntos).
+  const notaGrupo = detectarNotaDeGrupo(text);
+  if(notaGrupo){
+    const ctxN = getEffectiveContext();
+    guardarNotasGrupo(notaGrupo.grupos, notaGrupo.texto, text, ctxN.fecha, horaParaRegistro(ctxN));
+    input.value = '';
+    return;
+  }
+
   // 1) ¿El nombre y apellido completos identifican a un único alumno de todo
   //    el centro? En ese caso no hace falta ni horario ni grupo: se usa siempre.
   // 2) Si no, ¿la frase indica el grupo explícitamente? ("Luis 5 puntos de 3B")
   // 3) Si tampoco, se usa el grupo que marca el horario (o el que hayas
   //    seleccionado a mano) en este momento.
   const ctx = getEffectiveContext(); // trae también la fecha del día que estés viendo (hoy u otro)
-  const esTodos = /^\s*(?:a\s+)?(todos|todas|toda la clase|todo el grupo|la clase entera|el grupo entero)\b/i.test(stripAccents(text));
+  const esTodos = RE_TODOS.test(stripAccents(text.toLowerCase()).trim());
   const fullNameMatch = esTodos ? null : findUniqueFullNameMatch(text);
   const mention = fullNameMatch ? null : findGroupMention(text);
   let targetGroupId, targetGroupName, unitId, textForParsing, manual = false, forcedAlumno = null;
@@ -1527,7 +1655,7 @@ function handleAdd(){
 
   const groupStudents = data.alumnos.filter(a => a.grupoId === targetGroupId);
   const result = parseEntry(textForParsing, groupStudents, forcedAlumno, ctx.fecha);
-  const hora = ctx.entry ? ctx.entry.inicio : new Date().toTimeString().slice(0,5);
+  const hora = horaParaRegistro(ctx);
   const ok = commitParseResult(result, targetGroupId, targetGroupName, unitId, text, manual, ctx.fecha, hora);
   if(ok) input.value = '';
 }
@@ -1541,6 +1669,89 @@ function handleAdd(){
 // de registros, marcada con una ❌ roja, para que el profesor la revise más
 // tarde y decida qué hacer con ella (a diferencia de los avisos de validación
 // de puntos, que si se bloquean).
+/* ———— notas de clase (diario de cada grupo) ———— */
+function detectarNotaDeGrupo(text){
+  const t = text.trim();
+  const tNorm = stripAccents(t.toLowerCase());
+  let grupos = null, resto = '';
+  const m = findGroupMention(t);
+  if(m && m.start === 0){
+    grupos = [m.groupId]; resto = t.slice(m.end);
+  } else {
+    const mc = tNorm.match(/^(?:(?:de|del|en|con|para)\s+)?([1-4])\s*(?:º|°|o)?\s*(?:de\s+)?eso\b/);
+    if(mc){
+      const curso = mc[1] + 'º ESO';
+      grupos = data.grupos.filter(g => g.curso === curso && g.materia === 'Educación Física').map(g => g.id);
+      if(!grupos.length) grupos = data.grupos.filter(g => g.curso === curso).map(g => g.id);
+      resto = t.slice(mc[0].length);
+    }
+  }
+  if(!grupos || !grupos.length) return null;
+  resto = resto.replace(/^[\s:,.;\-–—]+/, '').trim();
+  if(!resto) return null;
+  if(RE_TODOS.test(stripAccents(resto.toLowerCase()))) return null; // "3B todos 5" sigue siendo puntos
+  return { grupos, texto: resto.charAt(0).toUpperCase() + resto.slice(1) };
+}
+function guardarNotasGrupo(grupoIds, texto, textoOriginal, fecha, hora){
+  const now = new Date();
+  const nuevos = grupoIds.map(gid => ({
+    id: 'r_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+    timestamp: Date.now(), fecha: fecha || now.toISOString().slice(0,10), hora: hora || now.toTimeString().slice(0,5),
+    grupoId: gid, alumnoId: null, unidadId: null, tipo: 'nota', categoria: null, puntos: null, vueltas: null, trote: false,
+    textoOriginal, textoInterpretado: texto, manual: true
+  }));
+  data.registros.unshift(...nuevos);
+  undoStack.push({ action:'add', records: nuevos }); redoStack = [];
+  saveData(); renderAll();
+  const nombres = grupoIds.map(id => { const g = data.grupos.find(x => x.id === id); return g ? nombreCortoGrupo(g) : id; });
+  showFeedback(`📌 Nota guardada en el diario de ${nombres.join(', ')}`, 'ok');
+}
+// Sigla corta de un grupo para su insignia: "3º ESO A" → "3A", "1º Bachillerato V" → "1V", AF 4º → "AF4".
+function siglaGrupo(g){
+  if(!g) return '?';
+  let m = g.nombre.match(/(\d)º\s*ESO\s+([A-Z])$/i); if(m) return m[1] + m[2].toUpperCase();
+  m = g.nombre.match(/(\d)º\s*Bach\w*\s+([A-Z])$/i); if(m) return m[1] + m[2].toUpperCase();
+  m = g.nombre.match(/Actividad F[ií]sica\s+(\d)/i); if(m) return 'AF' + m[1];
+  return initials(g.nombre);
+}
+function grupoBadgeHtml(g, size){
+  const c = groupColor(g ? g.id : null);
+  return `<div class="avatar${size ? ' ' + size : ''}" style="background:${c.bg};color:${c.fg}">${siglaGrupo(g)}</div>`;
+}
+function openDiarioGrupo(grupoId){
+  const g = data.grupos.find(x => x.id === grupoId);
+  if(!g) return;
+  const notas = data.registros.filter(r => r.tipo === 'nota' && r.grupoId === grupoId);
+  $('modalContent').innerHTML = `
+    <div class="eyebrow">Diario de clase</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:8px">${grupoBadgeHtml(g,'lg')}<div><h2 style="margin:0">${g.nombre}</h2><p class="sub">${notas.length ? notas.length + ' nota' + (notas.length===1?'':'s') : 'Sin notas'}</p></div></div>
+    <div class="entry" style="margin-top:16px"><input id="diarioNuevaNota" placeholder="Nueva nota para ${nombreCortoGrupo(g)}…" autocomplete="off"><button class="primary" id="diarioAnadir" title="Añadir">＋</button></div>
+    <div style="margin-top:14px">${notas.length ? notas.map(r => `
+      <div class="nota-item"><div class="record-main"><div>${r.textoInterpretado}</div><div class="record-meta">${etiquetaFechaISO(r.fecha)} · ${r.hora}</div></div>
+      <button class="square-toggle" title="Borrar nota" onclick="borrarNota('${r.id}')">🗑</button></div>`).join('') : '<div class="empty">Todavía no hay notas. También puedes empezar una frase en la barra principal por el curso: «3º ESO A tiene que acabar la ficha».</div>'}</div>
+    ${notas.length > 1 ? `<div class="modal-actions"><button class="simbtn" style="color:var(--danger)" onclick="borrarTodasNotas('${grupoId}')">🗑 Borrar todas</button></div>` : ''}`;
+  $('modal').style.display = 'grid';
+  const inp = $('diarioNuevaNota');
+  const anadir = () => { const v = inp.value.trim(); if(!v) return; guardarNotasGrupo([grupoId], v.charAt(0).toUpperCase() + v.slice(1), v, hoyISO(), new Date().toTimeString().slice(0,5)); };
+  $('diarioAnadir').onclick = anadir;
+  inp.onkeydown = e => { if(e.key === 'Enter') anadir(); };
+  modalRefresh = () => openDiarioGrupo(grupoId);
+}
+function borrarRegistrosDeshacibles(ids, msg){
+  const set = new Set(ids);
+  const quitados = data.registros.filter(r => set.has(r.id));
+  if(!quitados.length) return;
+  data.registros = data.registros.filter(r => !set.has(r.id));
+  undoStack.push({ action:'delete', records: quitados }); redoStack = [];
+  saveData(); renderAll();
+  showFeedback(msg + ' (↺ Deshacer para recuperar)', 'ok');
+}
+function borrarNota(id){ borrarRegistrosDeshacibles([id], 'Nota borrada'); }
+function borrarTodasNotas(grupoId){
+  if(!confirm('¿Borrar todas las notas de esta clase?')) return;
+  borrarRegistrosDeshacibles(data.registros.filter(r => r.tipo === 'nota' && r.grupoId === grupoId).map(r => r.id), 'Notas borradas');
+}
+
 function guardarNoIdentificado(texto, grupoId, grupoNombre, motivo, fecha, hora){
   const now = new Date();
   const registro = {
@@ -1594,7 +1805,17 @@ function commitParseResult(result, targetGroupId, targetGroupName, unitId, texto
   }
 
   const now = new Date();
+  const avisosTarjeta = [];
   result.forEach(r => {
+    if(r.tipo === 'amarilla'){
+      const f = fecha || now.toISOString().slice(0,10);
+      const previas = data.registros.filter(x => x.alumnoId === r.alumno.id && x.grupoId === targetGroupId && x.fecha === f && esTarjeta(x)).length;
+      r.nivel = previas + 1;
+      const nom = nombrePilaDe(r.alumno);
+      if(r.nivel >= 3){ avisosTarjeta.push(`📄 ${nom}: ${r.nivel}ª tarjeta en esta clase → PARTE`); result.tarjetaGrave = true; }
+      else if(r.nivel === 2){ avisosTarjeta.push(`🟥 ${nom}: 2ª amarilla = ROJA → avisar a la familia`); result.tarjetaGrave = true; }
+      else avisosTarjeta.push(`🟨 Amarilla a ${nom}`);
+    }
     data.registros.unshift({
       id: 'r_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
       timestamp: Date.now(),
@@ -1610,9 +1831,11 @@ function commitParseResult(result, targetGroupId, targetGroupName, unitId, texto
       trote: r.trote || false,
       textoOriginal,
       textoInterpretado: r.textoInterpretado,
+      ...(r.nivel ? { nivel: r.nivel } : {}),
       manual
     });
   });
+  if(avisosTarjeta.length) result.avisoTarjeta = avisosTarjeta.join(' · ');
 
   // Nombres de una enumeración que no se han podido identificar: se guardan
   // también, con ❌, en el mismo paso (un solo «Deshacer» lo quita todo).
@@ -1635,9 +1858,10 @@ function commitParseResult(result, targetGroupId, targetGroupName, unitId, texto
   let base = result.resumen || (result.length > 1 ? `${result.length} registros guardados` : 'Registro guardado');
   if(manual) base += ` en ${targetGroupName}`;
   const avisos = [];
+  if(result.avisoTarjeta) avisos.push(result.avisoTarjeta);
   if(result.bloqueados && result.bloqueados.length) avisos.push(`sin puntos por sentarse: ${result.bloqueados.join(', ')}`);
   if(result.pendientes && result.pendientes.length) avisos.push(`❌ revisar ${result.pendientes.join('; ')}`);
-  showFeedback(avisos.length ? `${base} · ${avisos.join(' · ')}` : base, avisos.length ? 'warn' : 'ok');
+  showFeedback(avisos.length ? `${base} · ${avisos.join(' · ')}` : base, result.tarjetaGrave ? 'error' : (avisos.length ? 'warn' : 'ok'));
   return true;
 }
 
@@ -1759,11 +1983,11 @@ function showFeedback(msg, kind){
 function quitarNombreDelInicio(texto, alumno){
   if(!alumno || !texto) return texto;
   const nombreCorto = alumno.nombre.split(' ')[0];
-  const re = new RegExp('^' + nombreCorto.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '\\s+', 'i');
+  const re = new RegExp('^' + nombreCorto.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + '[\\s:·,]+', 'i');
   return texto.replace(re, '');
 }
-function tagClass(r){ if(r.tipo==='puntos') return 'positive'; if(r.tipo==='falta' || r.tipo==='expulsion') return 'absent'; if(r.tipo==='incidencia' || r.tipo==='vueltas') return 'incident'; return ''; }
-function tagLabel(r){ if(r.tipo==='puntos') return (r.puntos>0?'+':'') + r.puntos + ' pts' + (r.categoria ? ' · ' + (ICONOS_CATEGORIA[r.categoria]||'') + ' ' + r.categoria : ''); if(r.tipo==='falta') return r.justificada ? 'Falta justificada' : 'Falta injustificada'; if(r.tipo==='expulsion') return '🟥 Expulsión'; if(r.tipo==='vueltas') return `🏃 ${r.vueltas} vuelta${r.vueltas===1?'':'s'}${r.trote?' (trote)':''}`; if(r.tipo==='incidencia') return (ICONOS_CATEGORIA[r.categoria]||'') + ' Incidencia · ' + r.categoria; return (ICONOS_CATEGORIA[r.categoria]||'') + ' Observación · ' + r.categoria; }
+function tagClass(r){ if(r.tipo==='amarilla') return 'incident'; if(r.tipo==='puntos') return 'positive'; if(r.tipo==='falta' || r.tipo==='expulsion') return 'absent'; if(r.tipo==='incidencia' || r.tipo==='vueltas') return 'incident'; return ''; }
+function tagLabel(r){ if(r.tipo==='amarilla') return etiquetaTarjeta(r.nivel || 1); if(r.tipo==='nota') return '📌 Nota de clase'; if(r.tipo==='puntos') return (r.puntos>0?'+':'') + r.puntos + ' pts' + (r.categoria ? ' · ' + (ICONOS_CATEGORIA[r.categoria]||'') + ' ' + r.categoria : ''); if(r.tipo==='falta') return r.justificada ? 'Falta justificada' : 'Falta injustificada'; if(r.tipo==='expulsion') return '🟥 Expulsión'; if(r.tipo==='vueltas') return `🏃 ${r.vueltas} vuelta${r.vueltas===1?'':'s'}${r.trote?' (trote)':''}`; if(r.tipo==='incidencia') return (ICONOS_CATEGORIA[r.categoria]||'') + ' Incidencia · ' + r.categoria; return (ICONOS_CATEGORIA[r.categoria]||'') + ' Observación · ' + r.categoria; }
 // Icono que representa cada registro en las listas (recientes, historial del
 // alumno): wc para baño, medalla para puntos (según cantidad), tarjeta roja
 // para expulsión, tarjeta amarilla para palabrota/falta de respeto, mano de
@@ -1775,6 +1999,8 @@ function iconoRegistro(r){
     return val >= 4 ? '🥇' : val >= 2 ? '🥈' : '🥉';
   }
   if(r.tipo === 'expulsion') return '🟥';
+  if(r.tipo === 'amarilla') return r.nivel >= 3 ? '📄' : r.nivel === 2 ? '🟥' : '🟨';
+  if(r.tipo === 'nota') return '📌';
   if(r.tipo === 'falta') return '📋';
   if(r.tipo === 'vueltas') return '🏃';
   if(r.tipo === 'incidencia') return r.categoria === 'palabrota' ? '🟨' : (ICONOS_CATEGORIA[r.categoria] || '⚠️');
@@ -1899,7 +2125,8 @@ function importarDatosPrivados(file){
     try{ datos = JSON.parse(reader.result); }
     catch(e){ showFeedback('El archivo no es un JSON válido.', 'error'); return; }
     let aplicados = 0, noEncontrados = 0, ambiguos = 0;
-    Object.keys(datos).forEach(alumnoId => {
+    const meta = datos._meta || null;
+    Object.keys(datos).filter(k => !k.startsWith('_')).forEach(alumnoId => {
       const entrada = datos[alumnoId];
       const resuelto = resolverAlumnoImport(alumnoId, entrada);
       if(resuelto.error === 'ambiguo'){ ambiguos++; return; }
@@ -1909,9 +2136,10 @@ function importarDatosPrivados(file){
       if(entrada.notasPrivadas) a.notasPrivadas = entrada.notasPrivadas;
       aplicados++;
     });
+    if(meta) data.datosPrivadosVersion = meta.version;
     saveData();
     renderAll();
-    let msg = `Importado: ${aplicados} alumnos actualizados`;
+    let msg = `Importado${meta && meta.version ? ' (datos v' + meta.version + ')' : ''}: ${aplicados} alumnos actualizados`;
     if(noEncontrados) msg += `, ${noEncontrados} no encontrados en la plantilla actual`;
     if(ambiguos) msg += `, ${ambiguos} con nombre repetido (revísalos a mano)`;
     showFeedback(msg + '.', 'ok');
@@ -1971,6 +2199,8 @@ function performUndo(){
     data.registros = data.registros.filter(r => !ids.has(r.id));
   } else if(entry.action === 'clear'){
     data.registros = entry.records.slice();
+  } else if(entry.action === 'delete'){
+    data.registros = [...entry.records, ...data.registros].sort((a,b) => (b.timestamp||0) - (a.timestamp||0));
   }
   redoStack.push(entry);
   saveData(); renderAll();
@@ -1983,6 +2213,9 @@ function performRedo(){
     data.registros = [...entry.records, ...data.registros];
   } else if(entry.action === 'clear'){
     data.registros = [];
+  } else if(entry.action === 'delete'){
+    const ids = new Set(entry.records.map(r => r.id));
+    data.registros = data.registros.filter(r => !ids.has(r.id));
   }
   undoStack.push(entry);
   saveData(); renderAll();
@@ -2026,12 +2259,14 @@ function renderDailyClasses(effectiveCtx){
         if(!g) return '';
         const isNow = esHoy && real.entry === h;
         const selected = !!effectiveCtx.overridden && effectiveCtx.entry === h;
+        const esDestino = selected || (isNow && !effectiveCtx.overridden);
+        const nNotas = data.registros.filter(r => r.tipo === 'nota' && r.grupoId === h.grupoId).length;
         const c = groupColor(h.grupoId);
         return `<div class="daily-class-wrap${selected?' selected':''}">
-          <button class="daily-class${isNow?' current':''}${selected?' selected':''}" data-idx="${idx}" title="${selected ? 'Registrando aquí' : 'Registrar en ' + g.nombre + ' (' + h.inicio + '–' + h.fin + ')'}">
-            <small>${h.inicio}–${h.fin}</small>
+          <button class="daily-class${isNow?' current':''}${selected?' selected':''}${esDestino?' target':''}" data-idx="${idx}" title="${esDestino ? 'Registrando aquí' : 'Registrar en ' + g.nombre + ' (' + h.inicio + '–' + h.fin + ')'}">
+            <small>${isNow ? '<span class="now-dot"></span>AHORA · ' : ''}${h.inicio}–${h.fin}</small>
             <b style="color:${(isNow||selected) ? c.fg : ''}">${nombreCortoGrupo(g)}</b>
-            ${h.aula ? `<span class="daily-aula" title="Aula donde recoger al grupo">📍 ${h.aula}</span>` : ''}
+            ${(h.aula || nNotas) ? `<span class="daily-aula" title="Aula donde recoger al grupo">${h.aula ? '📍 ' + h.aula : ''}${nNotas ? ' · 📌' + nNotas : ''}</span>` : ''}
           </button>
           <button class="daily-class-roster" data-idx="${idx}" title="Ver alumnado de ${g.nombre}">👥</button>
         </div>`;
@@ -2060,6 +2295,18 @@ function updateContextUI(){
   $('diaTitulo').textContent = esHoy ? 'Hoy' : etiquetaFechaISO(fechaSeleccionada);
 
   renderDailyClasses(ctx);
+  const tgt = $('entryTarget');
+  if(tgt){
+    if(ctx.groupId){
+      const g = data.grupos.find(x => x.id === ctx.groupId);
+      const c = groupColor(ctx.groupId);
+      tgt.className = 'entry-target on';
+      tgt.innerHTML = `<span class="avatar sm" style="background:${c.bg};color:${c.fg}">${siglaGrupo(g)}</span><span>Registrando en <b>${g ? nombreCortoGrupo(g) : ctx.groupName}</b> · ${ctx.overridden ? (esHoy ? 'clase elegida a mano (' + ctx.entry.inicio + ')' : etiquetaFechaISO(fechaSeleccionada) + ', ' + ctx.entry.inicio) : 'ahora, ' + ctx.entry.inicio + '–' + ctx.entry.fin}</span>`;
+    } else {
+      tgt.className = 'entry-target off';
+      tgt.innerHTML = `<span>⚪ Sin clase activa: escribe nombre y apellido, o el grupo («… de 3B»)</span>`;
+    }
+  }
 
   $('entryHint').innerHTML = ctx.groupId
     ? (ctx.overridden
@@ -2095,12 +2342,17 @@ function renderToday(){
   $('incidents').textContent = todays.filter(r => r.tipo==='incidencia').length;
   $('laps').textContent = todays.filter(r => r.tipo==='vueltas').reduce((a,r) => a + (r.vueltas||0), 0);
   $('review').textContent = todays.filter(r => r.tipo==='revisar').length;
+  $('cards').textContent = todays.filter(esTarjeta).length;
 
   const visibles = data.registros.slice(0, recentLimit);
   let lastFecha = null;
   const filas = visibles.map(r => {
     const separador = (lastFecha !== null && r.fecha !== lastFecha) ? '<div class="record-day-sep"></div>' : '';
     lastFecha = r.fecha;
+    if(r.tipo === 'nota'){
+      const grupo = data.grupos.find(g => g.id === r.grupoId);
+      return separador + `<div class="record" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')">${grupoBadgeHtml(grupo)}<div class="record-main"><b>${grupo ? grupo.nombre : 'Clase'}</b><div class="record-summary">${r.textoInterpretado}</div><div class="record-meta">Nota de clase · ${r.hora || ''}</div></div><span class="record-side-icon">📌</span></div>`;
+    }
     if(r.tipo === 'revisar'){
       const grupo = data.grupos.find(g => g.id === r.grupoId);
       return separador + `<div class="record record-review" data-record-id="${r.id}" onclick="openRecordDetail('${r.id}')"><span class="review-x" title="Sin identificar">❌</span><div class="record-main"><b>Sin identificar${grupo ? ' · ' + grupo.nombre : ''}</b><div class="record-summary">«${r.textoOriginal}»</div></div><span class="record-time">${r.hora}</span></div>`;
@@ -2124,9 +2376,12 @@ function renderClasses(){
   $('classList').innerHTML = data.grupos.map(g => {
     const n = data.alumnos.filter(a => a.grupoId === g.id).length;
     const c = groupColor(g.id);
-    return `<div class="row class-row" data-id="${g.id}" style="cursor:pointer"><div class="row-info"><div class="avatar" style="background:${c.bg};color:${c.fg}">${initials(g.nombre)}</div><div><b>${g.nombre}</b><small>${n} alumnos</small></div></div></div>`;
+    const nNotas = data.registros.filter(r => r.tipo === 'nota' && r.grupoId === g.id);
+    const ultima = nNotas[0];
+    return `<div class="row class-row" data-id="${g.id}" style="cursor:pointer"><div class="row-info"><div class="avatar" style="background:${c.bg};color:${c.fg}">${siglaGrupo(g)}</div><div style="min-width:0"><b>${g.nombre}</b><small>${n} alumnos</small>${ultima ? `<small class="nota-preview">📌 ${ultima.textoInterpretado}</small>` : ''}</div></div><button class="diario-btn${nNotas.length ? ' con-notas' : ''}" data-diario="${g.id}" title="Diario de la clase">📌${nNotas.length ? ' ' + nNotas.length : ''}</button></div>`;
   }).join('');
   document.querySelectorAll('.class-row').forEach(el => el.onclick = () => openClassRoster(el.dataset.id));
+  document.querySelectorAll('.diario-btn').forEach(el => el.onclick = e => { e.stopPropagation(); openDiarioGrupo(el.dataset.diario); });
 }
 
 function fechaLocal(){
@@ -2425,6 +2680,7 @@ function openClassRoster(grupoId){
     <p class="sub">${roster.length} alumnos</p>
     <div class="modal-actions" style="margin-top:12px">
       <button class="simbtn" onclick="openWorkGroups('${grupoId}')">👥 Crear grupos de trabajo</button>
+      <button class="square-toggle" title="Diario de la clase" onclick="openDiarioGrupo('${grupoId}')">📌</button>
       <button class="square-toggle" title="Material" onclick="openMaterialPanel('${grupoId}')">📦</button>
       <button class="square-toggle" title="Delegado/a" onclick="openDelegadoPanel('${grupoId}')">🅲</button>
     </div>
@@ -2684,19 +2940,22 @@ function renderUnits(){
 function deleteRecord(id){
   const idx=data.registros.findIndex(r=>r.id===id); if(idx<0) return;
   const [removed]=data.registros.splice(idx,1);
-  undoStack.push({action:'add',records:[removed]}); redoStack=[];
-  saveData(); renderAll(); $('modal').style.display='none'; modalRefresh=null; showFeedback('Registro eliminado','ok');
+  undoStack.push({action:'delete',records:[removed]}); redoStack=[];
+  saveData(); $('modal').style.display='none'; modalRefresh=null; renderAll(); showFeedback('Registro eliminado','ok');
 }
 function openRecordDetail(id){
   const r = data.registros.find(x => x.id === id);
   if(!r) return;
   const esRevisar = r.tipo === 'revisar';
+  const esNota = r.tipo === 'nota';
   const alumno = data.alumnos.find(a => a.id === r.alumnoId);
   const grupo = data.grupos.find(g => g.id === r.grupoId);
+  const cabeceraImg = alumno ? `<span class="detail-photo" ${alumno.foto ? `onclick="openPhotoLightbox('${alumno.id}')"` : ''}>${avatarHtml(alumno, 'xl')}</span>` : grupoBadgeHtml(grupo, 'lg');
   $('modalContent').innerHTML = `
-    <div class="eyebrow">Registro</div>
-    <h2 style="margin:6px 0 2px">${esRevisar ? '❌ Sin identificar' : (alumno ? alumno.nombre : 'Alumno eliminado')}</h2>
-    <p class="sub">${grupo ? grupo.nombre : (esRevisar ? 'Sin grupo identificado' : '')}</p>
+    <div class="eyebrow">${esNota ? 'Nota de clase' : 'Registro'}</div>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:8px">${cabeceraImg}<div style="min-width:0">
+    <h2 style="margin:0 0 2px">${esNota ? (grupo ? grupo.nombre : 'Clase') : esRevisar ? '❌ Sin identificar' : (alumno ? alumno.nombre : 'Alumno eliminado')}</h2>
+    <p class="sub">${esNota ? tagLabel(r) : grupo ? grupo.nombre + (r.tipo === 'amarilla' ? ' · ' + etiquetaTarjeta(r.nivel || 1) : '') : (esRevisar ? 'Sin grupo identificado' : '')}</p></div></div>
     <div class="card" style="margin-top:18px;background:#fbfcfc">
       <h3>${esRevisar ? `«${r.textoOriginal}»` : quitarNombreDelInicio(r.textoInterpretado || r.textoOriginal, alumno)}</h3>
       <div class="record-meta" style="margin-top:8px">${r.fecha} · ${r.hora}</div>
@@ -2706,6 +2965,7 @@ function openRecordDetail(id){
     </div>
     <div class="record-actions">
       ${alumno ? `<button class="simbtn" onclick="openStudentDetail('${alumno.id}')">👤 Ir al alumno</button>` : ''}
+      ${esNota && grupo ? `<button class="simbtn" onclick="openDiarioGrupo('${grupo.id}')">📌 Ver diario</button>` : ''}
       <button class="simbtn" style="color:var(--danger)" onclick="deleteRecord('${r.id}')">🗑 Eliminar registro</button>
     </div>`;
   $('modal').style.display = 'grid';
@@ -2880,6 +3140,12 @@ document.addEventListener('click', e => { if(!e.target.closest('.classes-tool'))
 $('date').textContent = new Date().toLocaleDateString('es-ES', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
 setupVoice();
 renderAll();
+ultimaEntradaReal = getCurrentContext().entry;
+(function ocultarSplash(){
+  const sp = document.getElementById('splash'); if(!sp) return;
+  const quedan = Math.max(0, 1700 - performance.now());
+  setTimeout(() => { sp.classList.add('hide'); setTimeout(() => sp.remove(), 450); }, quedan);
+})();
 </script>
 
 <script>
